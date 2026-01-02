@@ -1,0 +1,14 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="40" height="40" rx="8" fill="#13ec5b"/>
+
+  <g transform="rotate(-45 20 20)">
+      
+    <g fill="#102216">
+        <path d="M10 8H6C5.45 8 5 8.45 5 9V31C5 31.55 5.45 32 6 32H10C10.55 32 11 31.55 11 31V9C11 8.45 10.55 8 10 8Z"/>
+        
+        <path d="M27 18H13V22H27V18Z"/>
+        
+        <path d="M34 8H30C29.45 8 29 8.45 29 9V31C29 31.55 29.45 32 30 32H34C34.55 32 35 31.55 35 31V9C35 8.45 34.55 8 34 8Z"/>
+    </g>
+  </g>
+</svg>
