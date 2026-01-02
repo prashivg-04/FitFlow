@@ -65,18 +65,22 @@ const Welcome = () => {
                         <i class="ri-flashlight-line"></i>
                         PowerFit
                     </div>
+
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
                         <i class="ri-heart-2-line"></i>
                         CardioPulse
                     </div>
+
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
                         <i class="ri-flower-line"></i>
                         ZenYoga
                     </div>
+
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
                         <i class="fa-solid fa-person-running"></i>
                         IronDojo
                     </div>
+                    
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
                         <i class="fa-solid fa-person-swimming"></i>
                         AquaLife
@@ -86,13 +90,54 @@ const Welcome = () => {
         </section>
 
         {/* Features */}
-        <section>Features</section>
+        <section className='bg-[#f7f8f6] py-20'>
+            <div className='mx-auto max-w-7xl'>
+                <div className='text-center mb-16'>
+                    <h2 className='text-3xl font-bold tracking-tight text-slate-900 mb-4'>Everything you need to run your gym</h2>
+                    <p className='text-lg text-slate-600'>Streamline your operations with our comprehensive suite of tools designed for efficiency and growth.</p>
+                </div>
+                <div className='grid grid-cols-3 gap-8'>
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-calendar-2-line text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Smart Scheduling</h3>
+                        <p className='text-slate-600'>Drag-and-drop calendar for classes and PT sessions. Syncs in real-time with member apps to prevent double bookings.</p>
+                    </div>
+
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="fa-solid fa-money-bills text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Automated Billing</h3>
+                        <p className='text-slate-600'>Never chase a payment again. Automated invoicing, recurring memberships, and failed payment retries.</p>
+                    </div>
+
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-group-line text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Member Portal</h3>
+                        <p className='text-slate-600'>Give members control. They can book classes, track progress, and update payment info from a dedicated app.</p>
+                    </div>
+
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-bar-chart-2-fill text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Insightful Reporting</h3>
+                        <p className='text-slate-600'>Know your numbers. Track attendance, retention rates, and revenue growth with beautiful visual reports.</p>
+                    </div>
+
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-store-3-line text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Inventory Management</h3>
+                        <p className='text-slate-600'>Sell supplements and gear easily. Track stock levels and get alerts when it's time to reorder.</p>
+                    </div>
+                    
+                    <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-megaphone-line text-3xl"></i></div>
+                        <h3 className='text-xl font-bold text-slate-900 mb-3'>Marketing Tools</h3>
+                        <p className='text-slate-600'>Built-in email and SMS marketing automation to keep your members engaged and motivated.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         {/* Solutions */}
         <section>Solutions</section>
-
-        {/* Pricing */}
-        <section>Pricing</section>
 
         {/* Reviews */}
         <section>Reviews</section>
