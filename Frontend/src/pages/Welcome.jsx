@@ -1,6 +1,12 @@
 import React from 'react'
 import icon from '../media/icon.png'
 import heroImg from '../media/intro.webp'
+import trainer1 from '../media/trainer1.png'
+import trainer2 from '../media/trainer2.jpg'
+import navjot from '../media/navjotImg.jpeg'
+import shivam from '../media/shivamImg.jpeg'
+import vaibhav from '../media/vaibhavImg.PNG'
+
 
 const Welcome = () => {
   return (
@@ -44,7 +50,7 @@ const Welcome = () => {
 
                     <div className='flex items-center justify-center gap-4 mb-16'>
                         <button className='h-12 px-8 bg-[#15ec5b] rounded-lg text-slate-900 text-base font-bold shadow-lg shadow-primary/25 hover:bg-emerald-400 transitions-color'>Start Free Trial</button>
-                        <button className='h-12 px-8 bg-white rounded-lg border border-slate-200 text-slate-900 text-base font-bold hover:bg-slate-50 transition-colors flex items-center justify-center gap-2'><i className="ri-play-circle-line text-xl"></i>Watch Demo</button>
+                        <button className='h-12 px-8 bg-white rounded-lg border border-slate-200 text-slate-900 text-base font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-2'><i className="ri-play-circle-line text-xl"></i>Watch Demo</button>
                     </div>
 
                     <div className='relative mx-auto max-w-5xl rounded-2xl bg-slate-900/5 p-4 ring-1 ring-inset ring-slate-900/10 shadow-2xl'> 
@@ -80,7 +86,7 @@ const Welcome = () => {
                         <i class="fa-solid fa-person-running"></i>
                         IronDojo
                     </div>
-                    
+
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
                         <i class="fa-solid fa-person-swimming"></i>
                         AquaLife
@@ -89,7 +95,7 @@ const Welcome = () => {
             </div>
         </section>
 
-        {/* Features */}
+        {/* Features Grid*/}
         <section className='bg-[#f7f8f6] py-20'>
             <div className='mx-auto max-w-7xl'>
                 <div className='text-center mb-16'>
@@ -136,14 +142,147 @@ const Welcome = () => {
             </div>
         </section>
 
-        {/* Solutions */}
-        <section>Solutions</section>
+        {/* Role Based Section */}
+        <section className='py-20'>
+            <div className='mx-auto max-w-7xl'>
+                <div className='text-center mb-16'>
+                    <h2 className='text-3xl font-bold tracking-tight text-slate-900'>Built for every role in your gym</h2>
+                </div>
+                <div className='flex flex-col gap-20'>
+                    <div className='flex items-center gap-12'>
+                        <div className='w-1/2'>
+                            <span className='text-[#15ec5b] text-sm font-bold tracking-wide uppercase mb-2 block'>For Owners</span>
+                            <h3 className='text-3xl font-bold text-slate-900 mb-4'>Complete Control & Overview</h3>
+                            <p className='text-lg text-slate-600 mb-6'>Stop juggling spreadsheets. Get a bird's eye view of your business health, revenue streams, and staff performance in one dashboard.</p>
+                            <ul className='space-y-3 mb-8'>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Real-time revenue tracking
+                                </li>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Staff payroll management
+                                </li>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Automated retention workflows
+                                </li>
+                            </ul>
+                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i class="ri-arrow-right-line text-sm"></i></a>
+                        </div>
+                        <div className='w-1/2 bg-slate-100 rounded-2xl p-6 aspect-video flex items-center justify-center overflow-hidden'>
+                            <img className='w-full h-full bg-cover bg-center rounded-lg shadow-lg' src={trainer1} alt="" />
+                        </div>
+                    </div>
+                    <div className='flex flex-row-reverse items-center gap-12'>
+                        <div className='w-1/2'>
+                            <span className='text-[#15ec5b] text-sm font-bold tracking-wide uppercase mb-2 block'>For Trainers</span>
+                            <h3 className='text-3xl font-bold text-slate-900 mb-4'>Focus on Training, Not Admin</h3>
+                            <p className='text-lg text-slate-600 mb-6'>Empower your trainers with tools to manage their schedules and clients without the back-and-forth messaging.</p>
+                            <ul className='space-y-3 mb-8'>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Mobile schedule management
+                                </li>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Client progress tracking
+                                </li>
+                                <li className='flex items-center gap-3 text-slate-700'>
+                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    Easy availability setting
+                                </li>
+                            </ul>
+                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i class="ri-arrow-right-line text-sm"></i></a>
+                        </div>
+                        <div className='w-1/2 bg-slate-100 rounded-2xl p-6 aspect-video flex items-center justify-center overflow-hidden'>
+                            <img className='w-full h-full bg-cover bg-center rounded-lg shadow-lg' src={trainer2} alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        {/* Reviews */}
-        <section>Reviews</section>
+        {/* Testimonials */}
+        <section className='py-20 bg-white border-t border-slate-200'>
+            <div className='mx-auto max-w-7xl'>
+                <h2 className='text-center text-3xl font-bold tracking-tight text-slate-900 mb-12'>Loved by Fitness Professionals</h2>
+                <div className='grid grid-cols-3 gap-8'>
+                    <div className='bg-[#f7f8f6] p-6 rounded-xl'>
+                        <div className='flex text-[#15ec5b] mb-4'>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                        </div>
+                        <p className='text-slate-600 mb-6 italic'>
+                            "GymFlow completely transformed how we manage our studio. The automated billing alone saved us 10 hours a week."
+                        </p>
+                        <div className='flex items-center gap-4 overflow-hidden'>
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={navjot} alt="" />
+                            <div className='ml-1'>
+                                <h4 className='text-sm font-bold text-slate-900'>Navjot Singh</h4>
+                                <p className='text-xs text-slate-500'>Owner, MotionX Calisthenics</p>
+                            </div>
+                        </div>
+                    </div>
 
-        {/* CTA */}
-        <section>Ready?</section>
+                    <div className='bg-[#f7f8f6] p-6 rounded-xl'>
+                        <div className='flex text-[#15ec5b] mb-4'>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                        </div>
+                        <p className='text-slate-600 mb-6 italic'>
+                            "The member app is fantastic. Our clients love being able to book their spots instantly. Retention is up 20%."
+                        </p>
+                        <div className='flex items-center gap-4 overflow-hidden'>
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={shivam} alt="" />
+                            <div className='ml-1'>
+                                <h4 className='text-sm font-bold text-slate-900'>Shivam Thakral</h4>
+                                <p className='text-xs text-slate-500'>Director, InnerStill Studio</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='bg-[#f7f8f6] p-6 rounded-xl'>
+                        <div className='flex text-[#15ec5b] mb-4'>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                            <i class="ri-star-line text-sm"></i>
+                        </div>
+                        <p className='text-slate-600 mb-6 italic'>
+                            "Finally, a software that doesn't feel like it was built in the 90s. Clean, fast, and does exactly what we need." 
+                        </p>
+                        <div className='flex items-center gap-4 overflow-hidden'>
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={vaibhav} alt="" />
+                            <div className='ml-1'>
+                                <h4 className='text-sm font-bold text-slate-900'>Vaibhav Mangla</h4>
+                                <p className='text-xs text-slate-500'>Founder, Atlas Strength Club</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {/* CTA Strip*/}
+        <section className='py-20 bg-[#192b20] relative overflow-hidden before:absolute before:inset-[-50%] before:bg-[radial-gradient(circle,#0506051a_0.8px,transparent_0.8px)] before:bg-size-[4px_4px] before:rotate-45 before:scale-200'>
+            <div className='absolute top-0 right-0 -mr-20 -mt-20 h-75 w-75 rounded-full bg-[#15ec5b]/25 blur-[80px]'></div>
+            <div className='relative mx-auto max-w-4xl text-center px-4'>
+                <h2 className='text-3xl font-bold tracking-tight text-white mb-6'>Ready to transform your gym?</h2>
+                <p className='text-lg text-slate-300 mb-10'>Join 500+ gym owners who are scaling their business with GymFlow. Start your 14-day free trial today.</p>
+                <div className='flex items-center justify-center gap-4'>
+                    <button className='h-12 px-8 rounded-lg bg-[#15ec5b] font-bold text-base hover:bg-emerald-400 transition-colors'>Get Started for Free</button>
+                    <button className='h-12 px-8 rounded-lg bg-transparent border border-slate-600 text-white font-bold text-base hover:bg-white/10 transition-colors'>Schedule a Call</button>
+                </div>
+            </div>
+        </section>
 
         <footer className='bg-[#f7f8f6] border-t border-slate-200 pt-16 pb-8'>
             <div className='px-24 '>
