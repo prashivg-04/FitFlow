@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import navjot from '../media/navjotImg.jpeg'
 import icon from '../media/icon.png'
 import googleLogo from '../media/googleLogo.png'
+import appleLogo from '../media/appleLogo.svg'
+import gymSignup from '../media/gymSignup.jpeg'
 
 const Signup = () => {
 
@@ -13,7 +15,7 @@ const Signup = () => {
       <div className='flex min-h-screen w-full'>
         {/* left */}
         <div className='w-2/5 flex flex-col justify-between p-6 h-full min-h-screen relative z-10 '>
-          <div className='flex items-center gap-3 mb-8 max-w-md w-full mx-auto'>
+          <div className='flex items-center gap-3 my-4 max-w-md w-full mx-auto'>
             <img className='h-8 w-8 rounded-xl shadow-sm' src={icon} alt="Icon" />
             <h1 className=' text-2xl font-bold tracking-tight text-slate-900'>GymFLow</h1>
           </div>
@@ -116,7 +118,7 @@ const Signup = () => {
 
               <div className='flex items-center justify-start gap-3 pt-2'>
                 <div className='flex h-6 items-center'>
-                  <input className='h-5 w-5 rounded border-[#dbe6df] bg-white text-[#15ec5b] focus:ring-[#15ec5b] focus:ring-offset-0 cursor-pointer' type="checkbox" />
+                  <input className='h-5 w-5 rounded border-[#dbe6df] bg-white accent-[#15ec5b] focus:ring-[#15ec5b] focus:ring-offset-0 cursor-pointer' type="checkbox" />
                 </div>
                 <label className='text-sm text-[#61896f] leading-relaxed' htmlFor="">
                   I agree to the 
@@ -144,23 +146,61 @@ const Signup = () => {
                 </button>
 
                 <button className='flex items-center justify-center bg-white w-full h-14 gap-3 rounded-lg border border-[#dbe6df] px-5 text-[#111813] text-base font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors'>
-                  <img className='size-6' src={googleLogo} alt="Google Logo" />
+                  <img className='h-8 w-8' src={appleLogo} alt="Apple Logo" />
                   Apple
                 </button>
               </div>
             </form>
           </div>
 
-          <div className='mt-8'>
+          <div className='mt-12'>
             <p className='text-xs text-center text-[#61896f]'>
-              © 2024 GymManager Inc. All rights reserved.
+              © 2024 GymFlow Inc. All rights reserved.
             </p>
           </div>
         </div>
 
         {/* right */}
-        <div className='bg-amber-100 w-3/5'>
-          Image
+        <div className='relative flex w-3/5 bg-[#122317]'>
+          <div className='absolute h-full'>  
+            <img className="w-full h-full object-cover opacity-50 bg-cover bg-center " src={gymSignup} alt="Gym Signup"  />
+          </div>
+          
+
+          <div className='text-white relative z-10 flex flex-col justify-end p-16 h-full w-full'>
+            <div className='max-w-xl space-y-8'>
+              <div className='flex gap-1.5'>
+                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+              </div>
+
+              <p className='text-3xl font-semibold leading-tight tracking-tight italic'>
+                "GymManager has centralized our operations. Member retention is up 40% and our trainers love the simplified scheduling."
+              </p>
+
+              <div className='flex items-center gap-4 pt-4 border-t border-white/20'>
+                <img className='size-14 rounded-full object-cover border-2 border-[#15ec5b] shadow-lg shadow-[#15ec5b]/30' src={navjot} alt="" />
+                <div className='flex flex-col gap-0.7'>
+                  <p className='text-lg font-bold'>Alex Morgan</p>
+                  <p className='text-sm font-medium text-gray-300'>Owner, IronFit Studio</p>
+                </div>
+              </div>
+
+              <div className='flex items-center gap-8 pt-4 opacity-70'>
+                <div className='flex items-center gap-2'>
+                  <i class="ri-shield-user-fill text-xl"></i>
+                  <p className='text-xs font-semibold uppercase tracking-wider'>Enterprise Security</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                  <i class="ri-verified-badge-line text-xl"></i>
+                  <p className='text-xs font-semibold uppercase tracking-wider'>Verified Partner</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
