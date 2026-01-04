@@ -67,18 +67,21 @@ const Login = () => {
             </div>
 
             <form className='flex flex-col gap-5' action="">
-              <label className='flex flex-col w-full gap-2' htmlFor="">
-                <span className='text-slate-900 text-sm font-medium'>Email Address</span>
-                <input className='form-input flex w-full rounded-lg h-14 text-[#111813] border border-[#dbe6df] bg-white placeholder:text-[#61896f] px-4 text-base font-normal leading-none focus:outline-0 focus:ring-0 focus:border-[#15ec5b] transition-colors' type="email" placeholder='name@company.com' />
-              </label>
-
-              <label className='flex flex-col w-full gap-2' htmlFor="">
-                <span className='text-slate-900 text-sm font-medium'>Password</span>
-                <div className='flex w-full items-stretch rounded-lg relative h-14'>
-                  <input className='form-input w-full flex flex-1 text-[#111813] overflow-hidden rounded-lg bg-white border border-[#dbe6df] border-r-0 rounded-r-none focus:outline-0 focus:ring-0 focus:border-[#15ec5b] transition-colors placeholder:text-[#61896f] px-4 text-base font-normal leading-none' type="password" placeholder='••••••••' />
-                  <i className="ri-eye-line text-[#61896f] flex items-center border border-[#dbe6df] bg-white px-4 rounded-lg rounded-l-none border-l-0 cursor-pointer  hover:text-[#15ec5b] transition-colors"></i>
+              <div className='flex flex-col gap-1.5'>
+                <label className='text-base font-medium leading-normal' htmlFor="">Email</label>
+                <div className='relative group'>
+                  <input className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' type="text" placeholder='john.doe@example.com' />
+                  <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
-              </label>
+              </div>
+
+              <div className='flex flex-col gap-1.5'>
+                <label className='text-base font-medium leading-normal' htmlFor="">Password</label>
+                <div className='relative group'>
+                  <input className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' type="password"  placeholder='Min. 8 characters' />
+                  <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                </div>
+              </div>
 
               <div className='flex justify-end'>
                 <a className='text-sm font-medium text-[#111813] hover:text-[#15ec5b]' href="">Forgot password?</a>
