@@ -59,57 +59,57 @@ const Login = () => {
         </div>
 
         {/* Right */}
-        <div>
-          <div>
-            <div>
-              <h1>Welcome back</h1>
-              <p>Please enter your details to sign in.</p>
+        <div className='w-1/2 p-6 relative flex items-center justify-center'>
+          <div className='w-full flex flex-col max-w-110 gap-6'>
+            <div className='flex flex-col gap-2 mb-2'>
+              <h1 className='text-slate-900 text-[32px] font-bold leading-tight tracking-tight'>Welcome back</h1>
+              <p className='text-slate-400 text-base font-normal'>Please enter your details to sign in.</p>
             </div>
 
-            <form action="">
-              <label htmlFor="">
-                <span>Email Address</span>
-                <input type="email" placeholder='name@company.com' />
+            <form className='flex flex-col gap-5' action="">
+              <label className='flex flex-col w-full gap-2' htmlFor="">
+                <span className='text-slate-900 text-sm font-medium'>Email Address</span>
+                <input className='form-input flex w-full rounded-lg h-14 text-[#111813] border border-[#dbe6df] bg-white placeholder:text-[#61896f] px-4 text-base font-normal leading-none focus:outline-0 focus:ring-0 focus:border-[#15ec5b] transition-colors' type="email" placeholder='name@company.com' />
               </label>
 
-              <label htmlFor="">
-                <span>Password</span>
-                <input type="password" placeholder='••••••••' />
-                <div>
-                  <i class="ri-eye-line"></i>
+              <label className='flex flex-col w-full gap-2' htmlFor="">
+                <span className='text-slate-900 text-sm font-medium'>Password</span>
+                <div className='flex w-full items-stretch rounded-lg relative h-14'>
+                  <input className='form-input w-full flex flex-1 text-[#111813] overflow-hidden rounded-lg bg-white border border-[#dbe6df] border-r-0 rounded-r-none focus:outline-0 focus:ring-0 focus:border-[#15ec5b] transition-colors placeholder:text-[#61896f] px-4 text-base font-normal leading-none' type="password" placeholder='••••••••' />
+                  <i className="ri-eye-line text-[#61896f] flex items-center border border-[#dbe6df] bg-white px-4 rounded-lg rounded-l-none border-l-0 cursor-pointer  hover:text-[#15ec5b] transition-colors"></i>
                 </div>
               </label>
 
-              <div>
-                <a href="">Forgot password?</a>
+              <div className='flex justify-end'>
+                <a className='text-sm font-medium text-[#111813] hover:text-[#15ec5b]' href="">Forgot password?</a>
               </div>
 
-              <button>
+              <button className='flex justify-center items-center text-center rounded-lg w-full bg-[#15ec5b] h-14 text-slate-900 text-base font-bold tracking-wide px-5 shadow-lg shadow-[#15ec5b]/20 hover:bg-[#0fdc53] transition-colors'>
                 Sign in
               </button>
 
-              <div>
-                <div></div>
-                <div>OR</div>
-                <div></div>
+              <div className='relative flex items-center py-2 mt-2'>
+                <div className='grow border-t border-[#dbe6df] '></div>
+                <span className='shrink-0 mx-4 text-xs font-medium uppercase tracking-wider text-[#61896f]'>OR</span>
+                <div className='grow border-t border-[#dbe6df] '></div>
               </div>
 
-              <button>
-                <img src={googleLogo} alt="Google Logo" />
+              <button className='flex items-center justify-center bg-white w-full h-14 gap-3 rounded-lg border border-[#dbe6df] px-5 text-[#111813] text-base font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors'>
+                <img className='size-6' src={googleLogo} alt="Google Logo" />
                 Sign in with Google
               </button>
             </form>
 
-            <div>
-              <p>
+            <div className='text-center mt-4'>
+              <p className='text-[#61896f] text-sm'>
                 Don't have an account? 
-                <a href="">Sign up</a>
+                <a className='text-[#111813] font-bold ml-2 hover:underline' href="">Sign up</a>
               </p>
             </div>
 
-            <div>
-              <p>
-                <span>Note:</span>
+            <div className='mt-8 p-4 bg-[#15ec5b]/10 rounded-lg border border-[#15ec5b]/20 text-center'>
+              <p className='text-xs text-[#61896f] '>
+                <span className='text-[#111813] font-bold mr-1'>Note:</span>
                 Supports Admin, Trainer, and Member login.
               </p>
             </div>
