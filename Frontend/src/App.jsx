@@ -4,6 +4,7 @@ import Welcome from './pages/Welcome'
 import Signup from './pages/SignUp'
 import Login from './pages/Login'
 import OwnerSignup from './pages/owner/OwnerSignup'
+import TrainerSignup from './pages/trainer/TrainerSignup'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/login' element={<Login />} />
         <Route path='/owner/signup' element={<OwnerSignup />} />
+        <Route path='/trainer/signup' element={<TrainerSignup />} />
       </Routes>
     </div>
   )
