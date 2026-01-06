@@ -217,7 +217,9 @@ const OwnerSignup = () => {
 
           {/* Conditions */}
           <p className='text-center text-xs text-gray-400 pb-8'>
-            By clicking "Create Gym", you agree to our Terms of Service.
+            By clicking "Complete Signup", you agree to our
+            <a className='text-[#15ec5b] hover:underline' href=""> Terms of Service</a>
+            .
           </p>
         </div>
       </div>
