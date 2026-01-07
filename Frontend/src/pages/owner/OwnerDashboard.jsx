@@ -65,25 +65,27 @@ const OwnerDashboard = () => {
           </div>
 
           {/* Charts and Graphs */}
-          <div>
-            <div>
-              <div>
+          <div className='grid grid-cols-3 gap-6'>
+            <div className='col-span-2 p-6 rounded-xl bg-white border border-[#dbe6df] shadow-sm flex flex-col'>
+              <div className='flex items-center justify-between mb-6'>
                 <div>
-                  <h3>Revenue Growth</h3>
-                  <p>January - June 2025</p>
+                  <h3 className='text-lg font-bold'>Revenue Growth</h3>
+                  <p className='text-sm text-[#61896f]'>January - June 2025</p>
                 </div>
-                <div>
-                  <p>$145,200</p>
-                  <p>
-                    <i class="ri-arrow-up-long-line"></i>
+                <div className='text-right'>
+                  <p className='text-2xl font-bold'>$145,200</p>
+                  <p className='text-sm text-emerald-600 flex items-center justify-end'>
+                    <i class="ri-arrow-up-long-line text-sm"></i>
                     15% YTD
                   </p>
                 </div>
               </div>
 
-              <div>Charts</div>
+              <div className='flex-1 min-h-62.5 relative w-full pt-4 bg-[#edfdef]'>
+                Charts
+              </div>
 
-              <div>
+              <div className='flex justify-between mt-3 text-xs font-semibold text-[#61896f] px-2'>
                 <span>Jan</span>
                 <span>Feb</span>
                 <span>Mar</span>
@@ -93,143 +95,208 @@ const OwnerDashboard = () => {
               </div>
             </div>
 
-            <div>
-              <h3>Peak Hours</h3>
+            <div className='p-6 rounded-xl bg-white border border-[#dbe6df] shadow-sm flex flex-col'>
+              <h3 className='text-lg font-bold mb-2'>Peak Hours</h3>
 
-              <div>
-                <span>45</span>
-                <span>Avg active users/hr</span>
+              <div className='flex items-center gap-2 mb-6'>
+                <span className='text-3xl font-bold'>45</span>
+                <span className='text-sm text-[#61896f]'>Avg active users/hr</span>
               </div>
 
-              <div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+              <div className='flex-1 flex items-end justify-between gap-2 h-50'>
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b]/20 rounded-t-sm relative transition-all group-hover:bg-[#15ec5b]/40 h-[40%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>6am</span>
                 </div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+              
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b]/20 rounded-t-sm relative transition-all group-hover:bg-[#15ec5b]/40 h-[70%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>9am</span>
                 </div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b]/20 rounded-t-sm relative transition-all group-hover:bg-[#15ec5b]/40 h-[50%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>12pm</span>
                 </div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b]/20 rounded-t-sm relative transition-all group-hover:bg-[#15ec5b]/40 h-[60%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>3pm</span>
                 </div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b] rounded-t-sm relative transition-all h-[95%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>6pm</span>
                 </div>
-                <div>
-                  <div></div>
-                  <span>6am</span>
+
+                <div className='flex flex-col items-center gap-2 w-full h-full justify-end group'>
+                  <div className='w-full bg-[#15ec5b]/20 rounded-t-sm relative transition-all group-hover:bg-[#15ec5b]/40 h-[30%]'></div>
+                  <span className='text-xs font-bold text-[#61896f]'>9pm</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Recent Activities */}
-          <div>
-            <div>
-              <h3>Recent Activity</h3>
-              <button>View All</button>
+          <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
+            <div className='p-6 flex items-center justify-between border-b border-[#f0f4f2]'>
+              <h3 className='text-lg font-bold'>Recent Activity</h3>
+              <button className='text-sm font-medium text-[#15ec5b] hover:text-green-400'>View All</button>
             </div>
 
-            <div>
-              <table>
+            <div className='overflow-x-auto'>
+              <table className='w-full text-left border-collapse'>
                 <thead>
-                  <tr>
-                    <th>Member</th>
-                    <th>Activity Type</th>
-                    <th>Time</th>
-                    <th>Status</th>
+                  <tr className='border-b border-[#f0f4f2] bg-[#fbfdfc]'>
+                    <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide '>Member</th>
+                    <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide '>Activity Type</th>
+                    <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide '>Time</th>
+                    <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide text-right'>Status</th>
                   </tr>
                 </thead>
 
-                <tbody>
-                  <tr>
-                    <td>
-                      <div>
-                        <img className='size-8' src={navjot} alt="" />
+                <tbody className='divide-y divide-[#f0f4f2]'>
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
                         <span>Sarah Jenkins</span>
                       </div>
                     </td>
-                    <td>
-                      <div>
-                        <i class="ri-login-box-line"></i>
-                        <span>Gym Check-in</span>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
                       </div>
                     </td>
-                    <td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
                       Just now
                     </td>
-                    <td>
-                      <span>Confirmed</span>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <div>
-                        <img className='size-8' src={navjot} alt="" />
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
                         <span>Sarah Jenkins</span>
                       </div>
                     </td>
-                    <td>
-                      <div>
-                        <i class="ri-login-box-line"></i>
-                        <span>Gym Check-in</span>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
                       </div>
                     </td>
-                    <td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
                       Just now
                     </td>
-                    <td>
-                      <span>Confirmed</span>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <div>
-                        <img className='size-8' src={navjot} alt="" />
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
                         <span>Sarah Jenkins</span>
                       </div>
                     </td>
-                    <td>
-                      <div>
-                        <i class="ri-login-box-line"></i>
-                        <span>Gym Check-in</span>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
                       </div>
                     </td>
-                    <td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
                       Just now
                     </td>
-                    <td>
-                      <span>Confirmed</span>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
                     </td>
                   </tr>
 
-                  <tr>
-                    <td>
-                      <div>
-                        <img className='size-8' src={navjot} alt="" />
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
                         <span>Sarah Jenkins</span>
                       </div>
                     </td>
-                    <td>
-                      <div>
-                        <i class="ri-login-box-line"></i>
-                        <span>Gym Check-in</span>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
                       </div>
                     </td>
-                    <td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
                       Just now
                     </td>
-                    <td>
-                      <span>Confirmed</span>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
+                    </td>
+                  </tr>
+
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
+                        <span>Sarah Jenkins</span>
+                      </div>
+                    </td>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
+                      </div>
+                    </td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
+                      Just now
+                    </td>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
+                    </td>
+                  </tr>
+
+                  <tr className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
+                        <span>Sarah Jenkins</span>
+                      </div>
+                    </td>
+
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-2'>
+                        <i class="ri-login-box-line text-gray-400 text-4.5"></i>
+                        <span className='text-sm'>Gym Check-in</span>
+                      </div>
+                    </td>
+
+                    <td className='py-4 px-6 text-sm text-[#61896f]'>
+                      Just now
+                    </td>
+
+                    <td className='py-4 px-6 text-right'>
+                      <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
                     </td>
                   </tr>
                 </tbody>
