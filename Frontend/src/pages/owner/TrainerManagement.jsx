@@ -1,16 +1,16 @@
 import React from 'react'
 import OwnerHeader from '../../components/owner/OwnerHeader'
 
-const OwnerDashboard = () => {
+const TrainerManagement = () => {
   return (
     <div className=''>
       <OwnerHeader />
 
       <div className='h-full min-h-screen'>
-        Owner Dashboard Content
+        Trainer Management Content
       </div>
     </div>
   )
 }
 
-export default OwnerDashboard
+export default TrainerManagement
