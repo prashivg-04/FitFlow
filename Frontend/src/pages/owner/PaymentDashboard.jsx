@@ -4,8 +4,6 @@ import OwnerHeader from '../../components/owner/OwnerHeader'
 const PaymentDashboard = () => {
   return (
     <div className=''>
-      <OwnerHeader />
-
       <div className='h-full min-h-screen'>
         Payment Dashboard Content
       </div>

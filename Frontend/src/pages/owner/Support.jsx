@@ -4,8 +4,6 @@ import OwnerHeader from '../../components/owner/OwnerHeader'
 const Support = () => {
   return (
     <div className=''>
-      <OwnerHeader />
-
       <div className='h-full min-h-screen'>
         Support Content
       </div>
