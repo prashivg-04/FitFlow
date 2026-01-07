@@ -6,55 +6,60 @@ const OwnerDashboard = () => {
   return (
     <div className=''>
       <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-        <div>
+        <div className='flex flex-col gap-8 max-w-7xl mx-auto'>
           {/* Page Heading */}
-          <div>
-            <div>
-              <h1>Dashboard Overview</h1>
-              <p>Here is what is happening with your gym today.</p>
-            </div>
+          <div className='flex flex-col items-start justify-center gap-2'>
+            <h1 className='text-4xl font-black tracking-tight'>Dashboard Overview</h1>
+            <p className='text-[#61896f] text-base'>Here is what is happening with your gym today.</p>
           </div>
 
           {/* KPI Cards */}
-          <div>
-            <div>
-              <p>Total Members</p>
-              <div>
-                <h3>425</h3>
+          <div className='grid grid-cols-4 gap-4'>
+            <div className='p-6 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col gap-2 relative overflow-hidden group'>
+              <div className='absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity'>
+                <i class="text-4xl text-[#15ec5b] ri-group-line"></i>
               </div>
-              <div>
+              <p className='text-[#61896f] text-sm font-medium'>Total Members</p>
+              <h3 className='text-3xl font-bold my-1'>425</h3>
+              <div className='flex items-center gap-1 text-emerald-600 text-sm font-medium'>
                 <i class="fa-solid fa-arrow-trend-up"></i>
                 <span>+12 this week</span>
               </div>
             </div>
-            <div>
-              <p>Total Members</p>
-              <div>
-                <h3>425</h3>
+
+            <div className='p-6 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col gap-2 relative overflow-hidden group'>
+              <div className='absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity'>
+                <i class="text-4xl text-[#15ec5b] fa-solid fa-dollar-sign"></i>
               </div>
-              <div>
+              <p className='text-[#61896f] text-sm font-medium'>Monthly Revenue</p>
+              <h3 className='text-3xl font-bold my-1'>$12,450</h3>
+              <div className='flex items-center gap-1 text-emerald-600 text-sm font-medium'>
                 <i class="fa-solid fa-arrow-trend-up"></i>
-                <span>+12 this week</span>
+                <span>+8.5% vs last month</span>
               </div>
             </div>
-            <div>
-              <p>Total Members</p>
-              <div>
-                <h3>425</h3>
+
+            <div className='p-6 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col gap-2 relative overflow-hidden group'>
+              <div className='absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity'>
+                <i class="text-4xl text-[#15ec5b] ri-user-follow-line"></i>
               </div>
-              <div>
-                <i class="fa-solid fa-arrow-trend-up"></i>
-                <span>+12 this week</span>
+              <p className='text-[#61896f] text-sm font-medium'>Active Subscriptions</p>
+              <h3 className='text-3xl font-bold my-1'>380</h3>
+              <div className='flex items-center gap-1 text-emerald-600 text-sm font-medium'>
+                <i class="fa-solid fa-circle text-[#15ec5b] text-[10px]"></i>
+                <span>89% retention rate</span> 
               </div>
             </div>
-            <div>
-              <p>Total Members</p>
-              <div>
-                <h3>425</h3>
+
+            <div className='p-6 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col gap-2 relative overflow-hidden group'>
+              <div className='absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity'>
+                <i class="text-4xl text-[#15ec5b] ri-login-box-line"></i>
               </div>
-              <div>
-                <i class="fa-solid fa-arrow-trend-up"></i>
-                <span>+12 this week</span>
+              <p className='text-[#61896f] text-sm font-medium'>Check-ins Today</p>
+              <h3 className='text-3xl font-bold my-1'>85</h3>
+              <div className='flex items-center gap-1 text-emerald-600 text-sm font-medium'>
+                <i class="fa-regular fa-clock text-xs"></i>
+                <span>Updated 5 mins ago</span>
               </div>
             </div>
           </div>
