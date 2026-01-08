@@ -30,58 +30,57 @@ const OwnerSidebar = (props) => {
                     onClick={() => setActiveMenu('dashboard')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'dashboard' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
-                    }`} 
-                    href=""
+                    }`}
                 >
                     <i class="text-lg ri-dashboard-line"></i>
                     <span className='font-medium'>Dashboard</span>
                 </button>
+
                 <button
                     onClick={() => setActiveMenu('members')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'members' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >
                     <i class="text-lg ri-group-line"></i>
                     <span className='font-medium'>Members</span>
                 </button>
+
                 <button
                     onClick={() => setActiveMenu('trainers')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'trainers' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >
                     <i class="text-lg ri-group-3-line"></i>
                     <span className='font-medium'>Trainers</span>
                 </button>
+
                 <button
                     onClick={() => setActiveMenu('payments')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'payments' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >
                     <i class="text-lg fa-solid fa-money-check"></i>
                     <span className='font-medium'>Payments</span>
                 </button>
+
                 <button
                     onClick={() => setActiveMenu('notifications')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'notifications' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >
                     <i class="text-lg fa-solid fa-bell"></i>
                     <span className='font-medium'>Notifications</span>
@@ -95,22 +94,21 @@ const OwnerSidebar = (props) => {
                     onClick={() => setActiveMenu('settings')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'settings' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >
                     <i class="text-lg ri-settings-4-line"></i>
                     <span className='font-medium'>Settings</span>
                 </button>
+
                 <button
                     onClick={() => setActiveMenu('support')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         activeMenu === 'support' 
-                        ? 'bg-[#edfdef] text-[#15ec5b]' 
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
-                    href=""
                 >                    
                     <i class="text-lg fa-regular fa-circle-question"></i>
                     <span className='font-medium'>Support</span>
