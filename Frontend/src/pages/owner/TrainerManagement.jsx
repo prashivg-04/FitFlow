@@ -95,7 +95,7 @@ const TrainerManagement = () => {
 
                     <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
                       <i class="fa-solid fa-download text-xl"></i>
-                      Filters
+                      Export
                     </button>
                   </div>
                 </div>
