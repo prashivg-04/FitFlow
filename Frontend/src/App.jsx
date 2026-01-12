@@ -7,6 +7,7 @@ import OwnerSignup from './pages/owner/OwnerSignup'
 import TrainerSignup from './pages/trainer/TrainerSignup'
 import MemberSignup from './pages/member/MemberSignup'
 import OwnerHome from './pages/owner/OwnerHome'
+import TrainerHome from './pages/trainer/TrainerHome'
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path='/member/signup' element={<MemberSignup />} />
 
         <Route path='/owner/dashboard' element={<OwnerHome />} />
+
+        <Route path='/trainer/dashboard' element={<TrainerHome />} />
       </Routes>
     </div>
   )
