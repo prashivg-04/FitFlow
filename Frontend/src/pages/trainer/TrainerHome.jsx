@@ -3,6 +3,11 @@ import TrainerHeader from '../../components/trainer/TrainerHeader'
 import TrainerSidebar from '../../components/trainer/TrainerSidebar'
 import TrainerDashboard from './TrainerDashboard'
 import TrainerMemberManagement from './TrainerMemberManagement'
+import TrainerAssignWorkout from './TrainerAssignWorkout'
+import TrainerWorkoutPlans from './TrainerWorkoutPlans'
+import TrainerWorkspace from './TrainerWorkspace'
+import TrainerSettings from './TrainerSettings'
+import TrainerSupport from './TrainerSupport'
 
 const TrainerHome = () => {
 
@@ -26,6 +31,11 @@ const TrainerHome = () => {
           <div>
             {activeMenu === 'dashboard' && <TrainerDashboard />}
             {activeMenu === 'members' && <TrainerMemberManagement />}
+            {activeMenu === 'workoutPlans' && <TrainerWorkoutPlans />}
+            {activeMenu === 'assignWorkouts' && <TrainerAssignWorkout />}
+            {activeMenu === 'workspace' && <TrainerWorkspace />}
+            {activeMenu === 'settings' && <TrainerSettings />}
+            {activeMenu === 'support' && <TrainerSupport />}
           </div>
         </div>
       </div>

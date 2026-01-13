@@ -51,39 +51,39 @@ const TrainerSidebar = (props) => {
                 </button>
 
                 <button
-                    onClick={() => setActiveMenu('trainers')} 
+                    onClick={() => setActiveMenu('workoutPlans')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'trainers' 
+                        activeMenu === 'workoutPlans' 
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-group-3-line"></i>
-                    <span className='font-medium'>Trainers</span>
+                    <i class="text-lg fa-solid fa-dumbbell"></i>
+                    <span className='font-medium'>Workout Plans</span>
                 </button>
 
                 <button
-                    onClick={() => setActiveMenu('payments')} 
+                    onClick={() => setActiveMenu('assignWorkouts')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'payments' 
+                        activeMenu === 'assignWorkouts' 
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-money-check"></i>
-                    <span className='font-medium'>Payments</span>
+                    <i class="text-lg fa-solid fa-square-pen"></i>
+                    <span className='font-medium'>Assign Workout</span>
                 </button>
 
                 <button
-                    onClick={() => setActiveMenu('notifications')} 
+                    onClick={() => setActiveMenu('workspace')} 
                     className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'notifications' 
+                        activeMenu === 'workspace' 
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-bell"></i>
-                    <span className='font-medium'>Notifications</span>
+                    <i class="text-lg ri-booklet-line"></i>
+                    <span className='font-medium'>Workspace</span>
                 </button>
             </div>
 
