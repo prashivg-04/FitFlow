@@ -2,7 +2,7 @@ import React from 'react'
 
 const TrainerHeader = () => {
   return (
-    <div>
+    <div className=''>
       <header className='flex items-center justify-between h-20 px-6 py-4 bg-white border-b border-[#f0f4f2]'>
         <div className='flex flex-col'>
           <h2 className='text-lg font-bold tracking-tight leading-tight'>Power Zone Gym</h2>
