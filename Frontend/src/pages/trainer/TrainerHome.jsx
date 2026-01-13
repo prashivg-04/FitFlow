@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import TrainerHeader from '../../components/trainer/TrainerHeader'
 import TrainerSidebar from '../../components/trainer/TrainerSidebar'
 import TrainerDashboard from './TrainerDashboard'
+import TrainerMemberManagement from './TrainerMemberManagement'
 
 const TrainerHome = () => {
 
@@ -24,6 +25,7 @@ const TrainerHome = () => {
 
           <div>
             {activeMenu === 'dashboard' && <TrainerDashboard />}
+            {activeMenu === 'members' && <TrainerMemberManagement />}
           </div>
         </div>
       </div>
