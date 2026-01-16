@@ -87,7 +87,7 @@ const TrainerWorkspace = () => {
                 <article className='flex gap-4 group'>
                   <div className='flex flex-col items-center pt-1 min-w-10'>
                     <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="Navjot" />
-                    <div className='w-px h-full bg-gray-300 my-2'></div>
+                    <div className='w-px h-full bg-gray-300 mb-6'></div>
                   </div>
 
                   <div className='flex-1 pb-6 border-b border-gray-200 group-last:border-0'>
@@ -97,7 +97,7 @@ const TrainerWorkspace = () => {
                         <span className='inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase border border-blue-200'>Session Log</span>
                         <span className='text-xs text-[#61896f]'>• 2 hours ago</span>
                       </div>
-                      <div className='flex items-center gap-2 opacity-100 group-hover:opacity-100'>
+                      <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
                         <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
                           <i class="ri-pencil-line text-[20px]"></i>
                         </button>
@@ -107,8 +107,9 @@ const TrainerWorkspace = () => {
                       </div>
                     </div>
 
-                    <div className='bg-white border border-[#dbe6df] rounded-lg p-4 shadow-sm relative'>
-                      <div className='absolute -left-3 top-0 size-4 bg-white border-t   border-[#dbe6df] transform rotate-0'></div>
+                    <div className='bg-white border border-[#dbe6df] rounded-tr-lg rounded-b-lg p-4 shadow-sm relative'>
+                      <div className='absolute -left-2 -top-1.5 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-[#dbe6df] border-b-8 border-b-transparent rotate-135'></div>
+  
                       <p className='text-sm leading-relaxed text-gray-600'>Focus on eccentric loading for squats today. He reported knee pain as 2/10, which is an improvement from last week. We kept the weight moderate (185lbs) but increased time under tension (3-0-1 tempo).</p>
                       <div className='flex items-center gap-3 mt-3'>
                         <span className='inline-flex gap-1 items-center px-2 py-1 bg-gray-50 text-xs text-gray-500 border border-gray-200 rounded-md '>
@@ -124,74 +125,66 @@ const TrainerWorkspace = () => {
                   </div>
                 </article>
 
-                <article>
-                  <div>
-                    <img className='size-10' src={navjot} alt="Navjot" />
-                    <div></div>
+                <article className='flex gap-4 group'>
+                  <div className='flex flex-col items-center pt-1 min-w-10'>
+                    <div className='size-10 rounded-full flex items-center justify-center bg-orange-100 border border-orange-200 text-orange-600 shadow-sm object-cover'>
+                      <i class="fa-solid fa-square-poll-horizontal"></i>
+                    </div>
+                    <div className='w-px h-full bg-gray-300 mb-6'></div>
                   </div>
 
-                  <div>
-                    <div>
-                      <div>
-                        <h4>John Doe</h4>
-                        <span>Session Log</span>
-                        <span>• 2 hours ago</span>
+                  <div className='flex-1 pb-6 border-b border-gray-200 group-last:border-0'>
+                    <div className='flex items-center justify-between mb-2'>
+                      <div className='flex items-center gap-2'>
+                        <h4 className='text-md font-bold'>Personal Note</h4>
+                        <span className='inline-flex px-2 py-0.5 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase border border-orange-200'>Reminder</span>
+                        <span className='text-xs text-[#61896f]'>• Yesterday</span>
                       </div>
-                      <div>
-                        <button><i class="ri-pencil-line"></i></button>
-                        <button><i class="fa-regular fa-trash-can"></i></button>
+                      <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
+                        <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
+                          <i class="ri-pencil-line text-[20px]"></i>
+                        </button>
+                        <button className='p-1 rounded text-[#61896f] hover:text-[#e74545]'>
+                          <i class="fa-regular fa-trash-can text-[17px]"></i>
+                        </button>
                       </div>
                     </div>
 
-                    <div>
-                      <div></div>
-                      <p>Focus on eccentric loading for squats today. He reported knee pain as 2/10, which is an improvement from last week. We kept the weight moderate (185lbs) but increased time under tension (3-0-1 tempo).</p>
-                      <div>
-                        <span>
-                          <i className='fa-solid fa-dumbbell'></i>
-                          Squats
-                        </span>
-                        <span>
-                          <i className='fa-solid fa-arrow-trend-up'></i>
-                          Progress
-                        </span>
-                      </div>
+                    <div className='bg-white border border-[#dbe6df] rounded-tr-lg rounded-b-lg p-4 shadow-sm relative'>
+                      <div className='absolute -left-2 -top-1.5 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-[#dbe6df] border-b-8 border-b-transparent rotate-135'></div>
+  
+                      <p className='text-sm leading-relaxed text-gray-600'>Remember to renew CPR certification by Friday. Also, check with the front desk about the new towels for the VIP locker room.</p>
                     </div>
                   </div>
                 </article>
 
-                <article>
-                  <div>
-                    <img className='size-10' src={navjot} alt="Navjot" />
-                    <div></div>
+                <article className='flex gap-4 group'>
+                  <div className='flex flex-col items-center pt-1 min-w-10'>
+                    <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="Navjot" />
+                    <div className='w-px h-full bg-gray-300 mb-6'></div>
                   </div>
 
-                  <div>
-                    <div>
-                      <div>
-                        <h4>John Doe</h4>
-                        <span>Session Log</span>
-                        <span>• 2 hours ago</span>
+                  <div className='flex-1 pb-6 border-b border-gray-200 group-last:border-0'>
+                    <div className='flex items-center justify-between mb-2'>
+                      <div className='flex items-center gap-2'>
+                        <h4 className='text-md font-bold'>Jane Smith</h4>
+                        <span className='inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase border border-blue-200'>Dietary</span>
+                        <span className='text-xs text-[#61896f]'>• Oct 22</span>
                       </div>
-                      <div>
-                        <button><i class="ri-pencil-line"></i></button>
-                        <button><i class="fa-regular fa-trash-can"></i></button>
+                      <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
+                        <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
+                          <i class="ri-pencil-line text-[20px]"></i>
+                        </button>
+                        <button className='p-1 rounded text-[#61896f] hover:text-[#e74545]'>
+                          <i class="fa-regular fa-trash-can text-[17px]"></i>
+                        </button>
                       </div>
                     </div>
 
-                    <div>
-                      <div></div>
-                      <p>Focus on eccentric loading for squats today. He reported knee pain as 2/10, which is an improvement from last week. We kept the weight moderate (185lbs) but increased time under tension (3-0-1 tempo).</p>
-                      <div>
-                        <span>
-                          <i className='fa-solid fa-dumbbell'></i>
-                          Squats
-                        </span>
-                        <span>
-                          <i className='fa-solid fa-arrow-trend-up'></i>
-                          Progress
-                        </span>
-                      </div>
+                    <div className='bg-white border border-[#dbe6df] rounded-tr-lg rounded-b-lg p-4 shadow-sm relative'>
+                      <div className='absolute -left-2 -top-1.5 w-0 h-0 border-t-8 border-t-transparent border-r-8 border-r-[#dbe6df] border-b-8 border-b-transparent rotate-135'></div>
+  
+                      <p className='text-sm leading-relaxed text-gray-600'>Jane is starting a keto cycle next week. Adjusted her cardio plan to low intensity steady state (LISS) for the first 3 days to help with adaptation.</p>
                     </div>
                   </div>
                 </article>
@@ -200,104 +193,98 @@ const TrainerWorkspace = () => {
 
             {/* Right */}
             <div className='col-span-1 flex flex-col gap-8'>
-              <div className=''>
+              <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden flex flex-col h-full max-w-[calc(100vh-140px)] sticky top-24'>
                 {/* Heading */}
-                <div>
-                  <div>
-                    <h3>Notifications</h3>
-                    <span>2 New</span>
+                <div className='p-5 border-b border-gray-100 flex items-center justify-between'>
+                  <div className='flex items-center gap-2'>
+                    <h3 className='text-lg font-bold'>Notifications</h3>
+                    <span className='bg-[#15ec5b] text-[10px] font-bold px-1.5 py-0.5 rounded-md'>2 New</span>
                   </div>
-                  <button>Mark all read</button>
+                  <button className='text-xs font-semibold text-[#15ec5b] hover:text-green-400 transition-colors'>Mark all read</button>
                 </div>
 
                 {/* Notifications */}
-                <div>
-                  <div>
-                    <div>
-                      <button><i className='ri-checkbox-circle-line'></i></button>
+                <div className='overflow-y-auto p-3 space-y-2'>
+                  <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer relative'>
+                    <div className='absolute opacity-0 right-2.5 top-2 group-hover:opacity-100 transition-opacity'>
+                      <button className='text-gray-400 hover:text-[#15ec5b]'>
+                        <i className='ri-checkbox-circle-line text-[14px]'></i>
+                      </button>
                     </div>
-                    <div>
-                      <div>
-                        <i class="ri-user-add-line"></i>
+                    <div className='shrink-0 mt-1'>
+                      <div className='size-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600'>
+                        <i className="ri-user-add-line text-[18px]"></i>
                       </div>
                     </div>
-                    <div>
-                      <p>New Member Assigned</p>
-                      <p>
-                        <span>Sarah Jenkins</span>
+                    <div className='flex-1 pr-6'>
+                      <p className='text-sm font-semibold leading-tight mb-1'>New Member Assigned</p>
+                      <p className='text-xs text-[#61896f] leading-relaxed'>
+                        <span className='font-medium text-gray-700'>Sarah Jenkins </span>
                         was assigned to your roster by the Gym Owner.
                       </p>
-                      <span>2 mins ago</span>
+                      <span className='text-[12px] font-medium text-[#15ec5b] mt-2 inline-block'>2 mins ago</span>
                     </div>
-                    <div></div>
+                    <div className='absolute right-3 top-1/2 -translate-y-1/2 size-2 bg-[#15ec5b] rounded-full'></div>
                   </div>
 
-                  <div>
-                    <div>
-                      <button><i className='ri-checkbox-circle-line'></i></button>
+                  <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer relative'>
+                    <div className='absolute opacity-0 right-2.5 top-2 group-hover:opacity-100 transition-opacity'>
+                      <button className='text-gray-400 hover:text-[#15ec5b]'>
+                        <i className='ri-checkbox-circle-line text-[14px]'></i>
+                      </button>
                     </div>
-                    <div>
-                      <div>
-                        <i class="ri-user-add-line"></i>
+                    <div className='shrink-0 mt-1'>
+                      <div className='size-8 rounded-full bg-red-100 flex items-center justify-center text-red-600'>
+                        <i class="fa-regular fa-calendar-xmark text-[18px]"></i>
                       </div>
                     </div>
-                    <div>
-                      <p>New Member Assigned</p>
-                      <p>
-                        <span>Sarah Jenkins</span>
-                        was assigned to your roster by the Gym Owner.
+                    <div className='flex-1 pr-6'>
+                      <p className='text-sm font-semibold leading-tight mb-1'>Session Canceled</p>
+                      <p className='text-xs text-[#61896f] leading-relaxed'>
+                        <span className='font-medium text-gray-700'>Mike Ross </span>
+                        canceled the 3:00 PM session for today.
                       </p>
-                      <span>2 mins ago</span>
+                      <span className='text-[12px] font-medium text-[#15ec5b] mt-2 inline-block'>2 mins ago</span>
                     </div>
-                    <div></div>
+                    <div className='absolute right-3 top-1/2 -translate-y-1/2 size-2 bg-[#15ec5b] rounded-full'></div>
                   </div>
 
-                  <div>
-                    <div>
-                      <button><i className='ri-checkbox-circle-line'></i></button>
-                    </div>
-                    <div>
-                      <div>
-                        <i class="ri-user-add-line"></i>
+                  <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 opacity-70 hover:opacity-100 transition-all cursor-pointer relative'>
+                    <div className='shrink-0 mt-1'>
+                      <div className='size-8 rounded-full bg-green-100 flex items-center justify-center text-green-600'>
+                        <i class="fa-solid fa-money-bills text-[18px]"></i>
                       </div>
                     </div>
-                    <div>
-                      <p>New Member Assigned</p>
-                      <p>
-                        <span>Sarah Jenkins</span>
-                        was assigned to your roster by the Gym Owner.
+                    <div className='flex-1 pr-6'>
+                      <p className='text-sm font-semibold leading-tight mb-1'>Bonus Received</p>
+                      <p className='text-xs text-[#61896f] leading-relaxed'>
+                        You received a performance bonus for hitting your Q3 targets.
                       </p>
-                      <span>2 mins ago</span>
+                      <span className='text-[12px] font-medium text-gray-400 mt-2 inline-block'>Yesterday</span>
                     </div>
-                    <div></div>
                   </div>
                   
-                  <div>
-                    <div>
-                      <button><i className='ri-checkbox-circle-line'></i></button>
-                    </div>
-                    <div>
-                      <div>
-                        <i class="ri-user-add-line"></i>
+                  <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 opacity-70 hover:opacity-100 transition-all cursor-pointer relative'>
+                    <div className='shrink-0 mt-1'>
+                      <div className='size-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600'>
+                        <i class="ri-information-line text-[18px]"></i>
                       </div>
                     </div>
-                    <div>
-                      <p>New Member Assigned</p>
-                      <p>
-                        <span>Sarah Jenkins</span>
-                        was assigned to your roster by the Gym Owner.
+                    <div className='flex-1 pr-6'>
+                      <p className='text-sm font-semibold leading-tight mb-1'>System Update</p>
+                      <p className='text-xs text-[#61896f] leading-relaxed'>
+                        GymManager will undergo maintenance on Sunday at 2 AM.
                       </p>
-                      <span>2 mins ago</span>
+                      <span className='text-[12px] font-medium text-gray-400 mt-2 inline-block'>Oct 22</span>
                     </div>
-                    <div></div>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div>
-                  <button>
+                <div className='p-3 border-t border-gray-100 text-center'>
+                  <button className='text-sm font-medium text-[#61896f] hover:text-[#15ec5b] transition-colors flex items-center justify-center w-full gap-1 py-1'>
                     View archived
-                    <i class="ri-arrow-right-line"></i>
+                    <i class="ri-arrow-right-line text-[16px]"></i>
                   </button>
                 </div>
               </div>
