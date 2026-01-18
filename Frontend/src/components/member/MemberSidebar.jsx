@@ -46,7 +46,7 @@ const MemberSidebar = (props) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-group-line"></i>
+                    <i class="text-lg fa-solid fa-dumbbell"></i>
                     <span className='font-medium'>Workout Plan</span>
                 </button>
 
