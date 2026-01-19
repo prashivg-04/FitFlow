@@ -58,7 +58,7 @@ const MemberSidebar = (props) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-group-3-line"></i>
+                    <i class="text-lg ri-progress-3-line"></i>
                     <span className='font-medium'>Progress</span>
                 </button>
 
