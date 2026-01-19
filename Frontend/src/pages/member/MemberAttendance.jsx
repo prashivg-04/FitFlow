@@ -83,51 +83,273 @@ const MemberAttendance = () => {
 
         {/* Charts */}
         <div className='grid grid-cols-3 gap-6'>
-          {/* Left */}
-          <div className='col-span-2 bg-white p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
+          {/* Left - Creative Liquid Bar Chart */}
+          <div className='col-span-2 bg-linear-to-br from-slate-50 via-white to-green-50/30 p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
+            {/* Animated Background Blobs */}
+            <div className='absolute -right-20 -top-20 size-40 bg-[#15ec5b]/10 rounded-full blur-3xl animate-pulse'></div>
+            <div className='absolute -left-16 -bottom-16 size-32 bg-blue-500/5 rounded-full blur-2xl'></div>
+            
             <div className='flex items-center justify-between mb-6 relative z-10'>
               <div>
-                <h3 className='text-lg font-bold'>Activity Overview</h3>
-                <p className='text-xs text-[#61896f] mt-1'>Weekly comparison</p>
+                <h3 className='text-lg font-bold bg-linear-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent'>Weekly Energy Flow</h3>
+                <p className='text-xs text-[#61896f] mt-1'>Your training intensity wave</p>
               </div>
-              <div className='flex items-center gap-4'>
-                <div className='flex items-center gap-2 font-semibold'>
-                  <div className='size-2 rounded-full bg-[#15ec5b]'></div>
-                  <span className='text-xs text-[#61896f]'>This Week</span>
+              <div className='flex items-center gap-3'>
+                <div className='px-3 py-1.5 bg-white rounded-full border border-[#dbe6df] shadow-sm'>
+                  <span className='text-[10px] text-slate-500 font-medium'>TOTAL</span>
+                  <span className='text-sm font-bold text-slate-900 ml-1.5'>12.8h</span>
                 </div>
-                <div className='flex items-center gap-2 font-medium'>
-                  <div className='size-2 rounded-full bg-slate-200'></div>
-                  <span className='text-xs text-slate-400'>Last Week</span>
+                <div className='flex items-center gap-1.5 px-2.5 py-1 bg-green-50 rounded-full border border-green-200'>
+                  <i className='ri-arrow-up-line text-green-600 text-xs'></i>
+                  <span className='text-xs font-bold text-green-600'>+18%</span>
                 </div>
               </div>
             </div>
 
-            {/* Chart placeholder */}
-            <div></div>
+            {/* Creative Liquid Fill Chart */}
+            <div className='relative flex-1 flex items-end justify-between gap-8 px-6 pb-8'>
+              {/* Connecting trend line */}
+              <svg className='absolute inset-0 w-full h-full pointer-events-none' style={{top: '20px'}}>
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" style={{stopColor: '#15ec5b', stopOpacity: 0.3}} />
+                    <stop offset="50%" style={{stopColor: '#15ec5b', stopOpacity: 0.6}} />
+                    <stop offset="100%" style={{stopColor: '#15ec5b', stopOpacity: 0.3}} />
+                  </linearGradient>
+                </defs>
+                <path 
+                  d="M 50 80 Q 100 100, 150 140 T 250 110 T 350 60 T 450 100 T 550 30 T 650 120" 
+                  stroke="url(#lineGradient)" 
+                  strokeWidth="2" 
+                  fill="none"
+                  strokeDasharray="5,5"
+                  className='animate-pulse'
+                />
+              </svg>
 
-            {/* Timeline dots */}
-            <div className='flex justify-between items-center mt-4 px-2 relative z-10'>
-              <span className='text-sm font-medium text-slate-500'>Mon</span>
-              <span className='text-sm font-medium text-slate-500'>Tue</span>
-              <span className='text-sm font-medium text-slate-500'>Wed</span>
-              <span className='text-sm font-medium text-slate-500'>Thu</span>
-              <span className='text-sm font-medium text-slate-500'>Fri</span>
-              <span className='text-sm font-medium text-slate-500'>Sat</span>
-              <span className='text-sm font-medium text-slate-500'>Sun</span>
+              {/* Monday */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16' style={{height: '70%'}}>
+                    {/* Liquid fill effect */}
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]/80'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-white/20 to-transparent'></div>
+                    {/* Animated wave */}
+                    <div className='absolute bottom-0 left-0 right-0 h-8 bg-white/30 rounded-full blur-sm animate-pulse'></div>
+                    {/* Value bubble */}
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-12'>
+                      <div className='px-2.5 py-1 bg-slate-900 text-white text-xs font-bold rounded-lg shadow-lg'>
+                        2.0h
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45'></div>
+                      </div>
+                    </div>
+                    {/* Shimmer effect */}
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-slate-700 px-2 py-1 rounded-md group-hover:bg-slate-100 transition-colors'>Mon</span>
+              </div>
+
+              {/* Tuesday */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16' style={{height: '50%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]/80'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-white/20 to-transparent'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-8 bg-white/30 rounded-full blur-sm animate-pulse'></div>
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-12'>
+                      <div className='px-2.5 py-1 bg-slate-900 text-white text-xs font-bold rounded-lg shadow-lg'>
+                        1.5h
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45'></div>
+                      </div>
+                    </div>
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-slate-700 px-2 py-1 rounded-md group-hover:bg-slate-100 transition-colors'>Tue</span>
+              </div>
+
+              {/* Wednesday - Rest Day */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16 border-2 border-dashed border-amber-300' style={{height: '12%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-amber-100 to-amber-50'></div>
+                    <div className='absolute inset-0 flex items-center justify-center'>
+                      <i className='ri-zzz-line text-amber-500 text-lg opacity-60'></i>
+                    </div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-amber-600 px-2 py-1 rounded-md group-hover:bg-amber-50 transition-colors'>Rest</span>
+              </div>
+
+              {/* Thursday */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16' style={{height: '85%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]/80'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-white/20 to-transparent'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-8 bg-white/30 rounded-full blur-sm animate-pulse'></div>
+                    {/* Star badge */}
+                    <div className='absolute top-2 right-2 text-yellow-400 text-xs animate-bounce'>⭐</div>
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-12'>
+                      <div className='px-2.5 py-1 bg-slate-900 text-white text-xs font-bold rounded-lg shadow-lg'>
+                        2.5h
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45'></div>
+                      </div>
+                    </div>
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-slate-700 px-2 py-1 rounded-md group-hover:bg-slate-100 transition-colors'>Thu</span>
+              </div>
+
+              {/* Friday */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16' style={{height: '60%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]/80'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-white/20 to-transparent'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-8 bg-white/30 rounded-full blur-sm animate-pulse'></div>
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-12'>
+                      <div className='px-2.5 py-1 bg-slate-900 text-white text-xs font-bold rounded-lg shadow-lg'>
+                        1.8h
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45'></div>
+                      </div>
+                    </div>
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-slate-700 px-2 py-1 rounded-md group-hover:bg-slate-100 transition-colors'>Fri</span>
+              </div>
+
+              {/* Saturday - Peak Day */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-110 hover:w-16 ring-2 ring-orange-400/50 ring-offset-2' style={{height: '95%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-yellow-200/30 to-transparent'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-12 bg-white/40 rounded-full blur-md animate-pulse'></div>
+                    {/* Fire badge */}
+                    <div className='absolute -top-3 left-1/2 -translate-x-1/2 text-2xl animate-bounce'>
+                      🔥
+                    </div>
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-16'>
+                      <div className='px-2.5 py-1 bg-linear-to-r from-orange-500 to-red-500 text-white text-xs font-bold rounded-lg shadow-xl'>
+                        3.0h 🏆
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-orange-500 rotate-45'></div>
+                      </div>
+                    </div>
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/50 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                    {/* Particles */}
+                    <div className='absolute top-1/4 left-1/4 w-1 h-1 bg-yellow-300 rounded-full animate-ping'></div>
+                    <div className='absolute top-1/3 right-1/4 w-1 h-1 bg-yellow-300 rounded-full animate-ping animation-delay-150'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-orange-600 px-2 py-1 rounded-md bg-orange-50 border border-orange-200'>Sat</span>
+              </div>
+
+              {/* Sunday */}
+              <div className='flex flex-col items-center gap-3 flex-1 group relative z-10'>
+                <div className='w-full flex items-end justify-center h-64'>
+                  <div className='relative w-14 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:w-16' style={{height: '40%'}}>
+                    <div className='absolute inset-0 bg-linear-to-t from-[#15ec5b] via-[#2ef368] to-[#15ec5b]/80'></div>
+                    <div className='absolute inset-0 bg-linear-to-br from-white/20 to-transparent'></div>
+                    <div className='absolute bottom-0 left-0 right-0 h-8 bg-white/30 rounded-full blur-sm animate-pulse'></div>
+                    <div className='absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-top-12'>
+                      <div className='px-2.5 py-1 bg-slate-900 text-white text-xs font-bold rounded-lg shadow-lg'>
+                        1.0h
+                        <div className='absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 rotate-45'></div>
+                      </div>
+                    </div>
+                    <div className='absolute inset-0 bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-12 translate-x-full group-hover:animate-[shimmer_1s_ease-in-out]'></div>
+                  </div>
+                </div>
+                <span className='text-xs font-bold text-slate-700 px-2 py-1 rounded-md group-hover:bg-slate-100 transition-colors'>Sun</span>
+              </div>
+            </div>
+
+            {/* Bottom stats bar */}
+            <div className='relative z-10 flex items-center justify-between px-4 py-3 bg-linear-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-100'>
+              <div className='flex items-center gap-4 text-xs'>
+                <div className='flex items-center gap-1.5'>
+                  <div className='size-2 rounded-full bg-[#15ec5b] animate-pulse'></div>
+                  <span className='text-slate-600'>Active Days: <strong className='text-slate-900'>6</strong></span>
+                </div>
+                <div className='w-px h-4 bg-slate-200'></div>
+                <div className='flex items-center gap-1.5'>
+                  <i className='ri-trophy-line text-yellow-500'></i>
+                  <span className='text-slate-600'>Best: <strong className='text-slate-900'>Saturday</strong></span>
+                </div>
+                <div className='w-px h-4 bg-slate-200'></div>
+                <div className='flex items-center gap-1.5'>
+                  <i className='ri-line-chart-line text-green-500'></i>
+                  <span className='text-green-600 font-semibold'>Trending Up</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right */}
+          {/* Right - GitHub-style Contribution Graph */}
           <div className='bg-white p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col'>
             <h3 className='text-lg font-bold mb-1'>Consistency</h3>
-            <p className='text-sm text-[#61896f] mb-6'>Last 3 Months Activity</p>
-            <div></div>
-            <div className='flex items-center justify-end gap-2 mt-4 text-slate-500'>
-              <span>Less</span>
-              <div className='w-2 h-2 rounded-xs bg-[#15ec5b]/20'></div>
-              <div className='w-2 h-2 rounded-xs bg-[#15ec5b]/50'></div>
-              <div className='w-2 h-2 rounded-xs bg-[#15ec5b]'></div>
-              <span>More</span>
+            <p className='text-sm text-[#61896f] mb-6'>Last 12 Weeks Activity</p>
+            
+            {/* Heatmap Grid */}
+            <div className='flex-1 flex items-center justify-center'>
+              <div className='grid grid-cols-7 gap-1.5'>
+                {/* Week 1-12 (84 days) with varied intensities */}
+                {[
+                  1, 0, 2, 1, 3, 0, 1,  // Week 1
+                  2, 3, 0, 2, 2, 3, 0,  // Week 2
+                  1, 2, 3, 2, 0, 1, 2,  // Week 3
+                  0, 1, 2, 3, 2, 3, 1,  // Week 4
+                  3, 2, 1, 0, 2, 1, 0,  // Week 5
+                  1, 3, 2, 3, 1, 2, 0,  // Week 6
+                  2, 1, 3, 2, 3, 0, 1,  // Week 7
+                  0, 2, 1, 2, 3, 2, 3,  // Week 8
+                  3, 3, 2, 1, 0, 2, 1,  // Week 9
+                  1, 2, 3, 3, 2, 3, 0,  // Week 10
+                  2, 3, 1, 2, 3, 1, 2,  // Week 11
+                  3, 2, 3, 2, 3, 3, 2   // Week 12
+                ].map((intensity, i) => (
+                  <div 
+                    key={i}
+                    className={`w-3.5 h-3.5 rounded-sm transition-all hover:scale-125 hover:shadow-md cursor-pointer ${
+                      intensity === 0 ? 'bg-slate-100 hover:bg-slate-200' :
+                      intensity === 1 ? 'bg-[#15ec5b]/30 hover:bg-[#15ec5b]/40' :
+                      intensity === 2 ? 'bg-[#15ec5b]/60 hover:bg-[#15ec5b]/70' :
+                      'bg-[#15ec5b] hover:bg-[#15ec5b]/90 shadow-sm shadow-[#15ec5b]/30'
+                    }`}
+                    title={`${intensity === 0 ? 'No activity' : intensity === 1 ? '1 workout' : intensity === 2 ? '2 workouts' : '3+ workouts'}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Legend */}
+            <div className='flex items-center justify-between mt-6'>
+              <div className='flex items-center gap-2 text-xs text-slate-500'>
+                <span className='font-medium'>Less</span>
+                <div className='w-3 h-3 rounded-sm bg-slate-100 border border-slate-200'></div>
+                <div className='w-3 h-3 rounded-sm bg-[#15ec5b]/30'></div>
+                <div className='w-3 h-3 rounded-sm bg-[#15ec5b]/60'></div>
+                <div className='w-3 h-3 rounded-sm bg-[#15ec5b] shadow-sm'></div>
+                <span className='font-medium'>More</span>
+              </div>
+            </div>
+
+            {/* Quick stats */}
+            <div className='mt-4 pt-4 border-t border-slate-100 flex flex-col gap-2'>
+              <div className='flex items-center justify-between text-xs'>
+                <span className='text-slate-600'>Longest streak</span>
+                <span className='font-bold text-[#15ec5b] flex items-center gap-1'>
+                  <i className='ri-fire-fill'></i> 12 days
+                </span>
+              </div>
+              <div className='flex items-center justify-between text-xs'>
+                <span className='text-slate-600'>Current streak</span>
+                <span className='font-bold text-slate-900'>5 days</span>
+              </div>
             </div>
           </div>
         </div>
