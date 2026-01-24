@@ -70,7 +70,7 @@ const MemberSidebar = (props) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-money-check"></i>
+                    <i class="text-lg fa-solid fa-circle-check"></i>
                     <span className='font-medium'>Attendance</span>
                 </button>
 
@@ -82,7 +82,7 @@ const MemberSidebar = (props) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-bell"></i>
+                    <i class="text-lg fa-solid fa-money-check"></i>
                     <span className='font-medium'>Subscription</span>
                 </button>
 
