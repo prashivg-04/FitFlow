@@ -31,7 +31,7 @@ const MemberNotification = () => {
           <div className='group relative flex gap-4 p-5 bg-white rounded-xl shadow-sm border-l-4 border-l-amber-500 border-y border-r border-[#dbe6df] hover:shadow-md transition-all'>
             <div className='absolute top-4 right-4 size-2.5 bg-[#15ec5b] rounded-full animate-pulse shadow-[0_0_8px_rgba(19,236,91,0.6)]'></div>
             <div className='size-12 rounded-full bg-amber-100 flex items-center justify-center shrink-0 text-amber-600 '>
-              <i className='fa-solid fa-bell text-[20px]'></i>
+              <i className='ri-megaphone-line text-[20px]'></i>
             </div>
             <div className='flex flex-col flex-1 gap-1'>
               <div className='flex items-start justify-between pr-6'>
@@ -45,7 +45,7 @@ const MemberNotification = () => {
           <div className='group relative flex gap-4 p-5 bg-white rounded-xl shadow-sm border-l-4 border-l-blue-500 border-y border-r border-[#dbe6df] hover:shadow-md transition-all'>
             <div className='absolute top-4 right-4 size-2.5 bg-[#15ec5b] rounded-full animate-pulse shadow-[0_0_8px_rgba(19,236,91,0.6)]'></div>
             <div className='size-12 rounded-full bg-blue-100 flex items-center justify-center shrink-0 text-blue-600 '>
-              <i className='fa-solid fa-bell text-[20px]'></i>
+              <i className='ri-timer-line text-[24px]'></i>
             </div>
             <div className='flex flex-col flex-1 gap-1'>
               <div className='flex items-start justify-between pr-6'>
@@ -64,7 +64,7 @@ const MemberNotification = () => {
 
           <div className='group relative flex gap-4 p-5 bg-white rounded-xl shadow-sm border-l-4 border-l-purple-500 border-y border-r border-[#dbe6df] hover:shadow-md transition-all'>
             <div className='size-12 rounded-full bg-purple-100 flex items-center justify-center shrink-0 text-purple-600 '>
-              <i className='fa-solid fa-bell text-[20px]'></i>
+              <i className='fa-solid fa-trophy text-[20px]'></i>
             </div>
             <div className='flex flex-col flex-1 gap-1'>
               <div className='flex items-start justify-between pr-6'>
@@ -77,7 +77,7 @@ const MemberNotification = () => {
 
           <div className='group relative flex gap-4 p-5 bg-white rounded-xl shadow-sm border-l-4 border-l-gray-500 border-y border-r border-[#dbe6df] hover:shadow-md transition-all'>
             <div className='size-12 rounded-full bg-gray-100 flex items-center justify-center shrink-0 text-gray-600 '>
-              <i className='fa-solid fa-bell text-[20px]'></i>
+              <i className='fa-solid fa-money-check text-[20px]'></i>
             </div>
             <div className='flex flex-col flex-1 gap-1'>
               <div className='flex items-start justify-between pr-6'>
@@ -90,7 +90,7 @@ const MemberNotification = () => {
 
           <div className='group relative flex gap-4 p-5 bg-white rounded-xl shadow-sm border-l-4 border-l-green-500 border-y border-r border-[#dbe6df] hover:shadow-md transition-all'>
             <div className='size-12 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-green-600 '>
-              <i className='fa-solid fa-bell text-[20px]'></i>
+              <i className='ri-checkbox-circle-line text-[24px]'></i>
             </div>
             <div className='flex flex-col flex-1 gap-1'>
               <div className='flex items-start justify-between pr-6'>
