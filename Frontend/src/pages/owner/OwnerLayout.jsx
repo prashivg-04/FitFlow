@@ -11,7 +11,7 @@ import Settings from './Settings'
 import Support from './Support'
 import OwnerHeader from '../../components/owner/OwnerHeader'
 
-const OwnerHome = () => {
+const OwnerLayout = () => {
 
     const [activeMenu, setActiveMenu] = useState('dashboard');
     
@@ -45,4 +45,4 @@ const OwnerHome = () => {
   )
 }
 
-export default OwnerHome
+export default OwnerLayout

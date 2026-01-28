@@ -10,7 +10,7 @@ import MemberNotification from './MemberNotification'
 import MemberSetting from './MemberSetting'
 import MemberSupport from './MemberSupport'
 
-const MemberHome = () => {
+const MemberLayout = () => {
 
     const [activeMenu, setActiveMenu] = useState('dashboard');
 
@@ -45,4 +45,4 @@ const MemberHome = () => {
   )
 }
 
-export default MemberHome
+export default MemberLayout

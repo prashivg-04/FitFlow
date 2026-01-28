@@ -9,7 +9,7 @@ import TrainerWorkspace from './TrainerWorkspace'
 import TrainerSettings from './TrainerSettings'
 import TrainerSupport from './TrainerSupport'
 
-const TrainerHome = () => {
+const TrainerLayout = () => {
 
   const [activeMenu, setActiveMenu] = useState('dashboard');
 
@@ -43,4 +43,4 @@ const TrainerHome = () => {
   )
 }
 
-export default TrainerHome
+export default TrainerLayout

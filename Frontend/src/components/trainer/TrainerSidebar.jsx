@@ -1,6 +1,7 @@
 import React from 'react'
 import icon from '../../assets/icon.svg'
 import navjot from '../../media/navjotImg.jpeg'
+import { Link } from 'react-router-dom'
 
 const TrainerSidebar = (props) => {
 

@@ -6,9 +6,9 @@ import Login from './pages/Login'
 import OwnerSignup from './pages/owner/OwnerSignup'
 import TrainerSignup from './pages/trainer/TrainerSignup'
 import MemberSignup from './pages/member/MemberSignup'
-import OwnerHome from './pages/owner/OwnerHome'
-import TrainerHome from './pages/trainer/TrainerHome'
-import MemberHome from './pages/member/MemberHome'
+import OwnerLayout from './pages/owner/OwnerLayout'
+import TrainerLayout from './pages/trainer/TrainerLayout'
+import MemberLayout from './pages/member/MemberLayout'
 
 function App() {
   return (
@@ -21,12 +21,11 @@ function App() {
         <Route path='/trainer/signup' element={<TrainerSignup />} />
         <Route path='/member/signup' element={<MemberSignup />} />
 
-        <Route path='/owner/dashboard' element={<OwnerHome />} />
+        <Route path='/owner/dashboard' element={<OwnerLayout />} />
 
-        <Route path='/trainer/dashboard' element={<TrainerHome />} />
+        <Route path='/trainer/dashboard' element={<TrainerLayout />} />
 
-        <Route path='/member/dashboard' element={<MemberHome />} />
-
+        <Route path='/member/dashboard' element={<MemberLayout />} />
       </Routes>
     </div>
   )
