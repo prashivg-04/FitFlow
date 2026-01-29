@@ -1,23 +1,15 @@
 import React, { useState } from 'react'
 import TrainerHeader from '../../components/trainer/TrainerHeader'
 import TrainerSidebar from '../../components/trainer/TrainerSidebar'
-import TrainerDashboard from './TrainerDashboard'
-import TrainerMemberManagement from './TrainerMemberManagement'
-import TrainerAssignWorkout from './TrainerAssignWorkout'
-import TrainerWorkoutPlans from './TrainerWorkoutPlans'
-import TrainerWorkspace from './TrainerWorkspace'
-import TrainerSettings from './TrainerSettings'
-import TrainerSupport from './TrainerSupport'
+import { Outlet } from 'react-router-dom'
 
 const TrainerLayout = () => {
-
-  const [activeMenu, setActiveMenu] = useState('dashboard');
 
   return (
     <div className='font-display bg-[#f7f8f6] text-slate-900 antialiased'>
       <div className='flex h-screen w-full overflow-hidden'>
         <div className='shrink-0'>
-          <TrainerSidebar activeMenu={activeMenu} setActiveMenu={setActiveMenu} />
+          <TrainerSidebar />
         </div>
         {/* Sidebar */}
         
@@ -29,13 +21,7 @@ const TrainerLayout = () => {
           </div>
 
           <div>
-            {activeMenu === 'dashboard' && <TrainerDashboard />}
-            {activeMenu === 'members' && <TrainerMemberManagement />}
-            {activeMenu === 'workoutPlans' && <TrainerWorkoutPlans />}
-            {activeMenu === 'assignWorkouts' && <TrainerAssignWorkout />}
-            {activeMenu === 'workspace' && <TrainerWorkspace />}
-            {activeMenu === 'settings' && <TrainerSettings />}
-            {activeMenu === 'support' && <TrainerSupport />}
+            <Outlet />
           </div>
         </div>
       </div>
