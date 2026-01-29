@@ -23,6 +23,14 @@ import TrainerAssignWorkout from './pages/trainer/TrainerAssignWorkout'
 import TrainerWorkspace from './pages/trainer/TrainerWorkspace'
 import TrainerSettings from './pages/trainer/TrainerSettings'
 import TrainerSupport from './pages/trainer/TrainerSupport'
+import MemberDashboard from './pages/member/MemberDashboard'
+import MemberWorkout from './pages/member/MemberWorkout'
+import MemberProgress from './pages/member/MemberProgress'
+import MemberAttendance from './pages/member/MemberAttendance'
+import MemberSubscription from './pages/member/MemberSubscription'
+import MemberNotification from './pages/member/MemberNotification'
+import MemberSettings from './pages/member/MemberSettings'
+import MemberSupport from './pages/member/MemberSupport'
 
 function App() {
   return (
@@ -55,7 +63,16 @@ function App() {
           <Route path='support' element={<TrainerSupport />} />
         </Route>
 
-        <Route path='/member/dashboard' element={<MemberLayout />} />
+        <Route path='/member' element={<MemberLayout />} >
+          <Route path='dashboard' element={<MemberDashboard />} />
+          <Route path='workout' element={<MemberWorkout />} />
+          <Route path='progress' element={<MemberProgress />} />
+          <Route path='attendance' element={<MemberAttendance />} />
+          <Route path='subscription' element={<MemberSubscription />} />
+          <Route path='notifications' element={<MemberNotification />} />
+          <Route path='settings' element={<MemberSettings />} />
+          <Route path='support' element={<MemberSupport />} />
+        </Route>
       </Routes>
     </div>
   )

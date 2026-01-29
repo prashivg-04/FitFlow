@@ -6,7 +6,7 @@ import { Link, NavLink } from 'react-router-dom'
 const TrainerSidebar = () => {
 
   return (
-    <div className='flex flex-col min-h-screen h-full w-72 bg-white border-r border-[#f0f4f2] z-10'>
+    <div className='flex flex-col min-h-screen h-full w-64 bg-white border-r border-[#f0f4f2] z-10'>
         {/* Logo */}
         <div className='h-20 flex items-center px-8 border-b border-[#f0f4f2]'>
             <div className='flex items-center gap-3'>
