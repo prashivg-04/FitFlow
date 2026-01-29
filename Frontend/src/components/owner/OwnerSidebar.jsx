@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import icon from '../../assets/icon.svg'
 import navjot from '../../media/navjotImg.jpeg'
+import { Link, NavLink } from 'react-router-dom'
 
-const OwnerSidebar = (props) => {
-
-    const { activeMenu, setActiveMenu } = props;
-
+const OwnerSidebar = () => {
   return (
-    <div className='flex flex-col min-h-screen h-full w-72 bg-white border-r border-[#f0f4f2] z-10'>
+    <div className='flex flex-col min-h-screen h-full w-64 bg-white border-r border-[#f0f4f2] z-10'>
         {/* Logo */}
         <div className='h-20 flex items-center px-8 border-b border-[#f0f4f2]'>
             <div className='flex items-center gap-3'>
@@ -26,93 +24,93 @@ const OwnerSidebar = (props) => {
             {/* Main Menu */}
             <div className='flex flex-col pt-2'>
                 <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>Main Menu</div>
-                <button
-                    onClick={() => setActiveMenu('dashboard')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'dashboard' 
+                <NavLink 
+                    to='/owner/dashboard'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`}
                 >
                     <i class="text-lg ri-dashboard-line"></i>
                     <span className='font-medium'>Dashboard</span>
-                </button>
+                </NavLink>
 
-                <button
-                    onClick={() => setActiveMenu('members')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'members' 
+                <NavLink
+                    to='/owner/members'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
                     <i class="text-lg ri-group-line"></i>
                     <span className='font-medium'>Members</span>
-                </button>
+                </NavLink>
 
-                <button
-                    onClick={() => setActiveMenu('trainers')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'trainers' 
+                <NavLink
+                    to='/owner/trainers'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
                     <i class="text-lg ri-group-3-line"></i>
                     <span className='font-medium'>Trainers</span>
-                </button>
+                </NavLink>
 
-                <button
-                    onClick={() => setActiveMenu('payments')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'payments' 
+                <NavLink
+                    to='/owner/payments'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
                     <i class="text-lg fa-solid fa-money-check"></i>
                     <span className='font-medium'>Payments</span>
-                </button>
+                </NavLink>
 
-                <button
-                    onClick={() => setActiveMenu('notifications')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'notifications' 
+                <NavLink
+                    to='/owner/notifications'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
                     <i class="text-lg fa-solid fa-bell"></i>
                     <span className='font-medium'>Notifications</span>
-                </button>
+                </NavLink>
             </div>
 
             {/* System Menu */}
             <div className='flex flex-col pt-4 mt-4 border-t border-[#f0f4f2]'>
                 <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
-                <button
-                    onClick={() => setActiveMenu('settings')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'settings' 
+                <NavLink
+                    to='/owner/settings'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
                     <i class="text-lg ri-settings-4-line"></i>
                     <span className='font-medium'>Settings</span>
-                </button>
+                </NavLink>
 
-                <button
-                    onClick={() => setActiveMenu('support')} 
-                    className={`px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
-                        activeMenu === 'support' 
+                <NavLink
+                    to='/owner/support'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >                    
                     <i class="text-lg fa-regular fa-circle-question"></i>
                     <span className='font-medium'>Support</span>
-                </button>
+                </NavLink>
             </div>
         </div>
 

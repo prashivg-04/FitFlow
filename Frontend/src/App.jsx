@@ -9,6 +9,13 @@ import MemberSignup from './pages/member/MemberSignup'
 import OwnerLayout from './pages/owner/OwnerLayout'
 import TrainerLayout from './pages/trainer/TrainerLayout'
 import MemberLayout from './pages/member/MemberLayout'
+import OwnerDashboard from './pages/owner/OwnerDashboard'
+import MemberManagement from './pages/owner/MemberManagement'
+import TrainerManagement from './pages/owner/TrainerManagement'
+import PaymentDashboard from './pages/owner/PaymentDashboard'
+import NotificationDashboard from './pages/owner/NotificationDashboard'
+import Settings from './pages/owner/Settings'
+import Support from './pages/owner/Support'
 
 function App() {
   return (
@@ -21,7 +28,15 @@ function App() {
         <Route path='/trainer/signup' element={<TrainerSignup />} />
         <Route path='/member/signup' element={<MemberSignup />} />
 
-        <Route path='/owner/dashboard' element={<OwnerLayout />} />
+        <Route path='/owner' element={<OwnerLayout />} >
+          <Route path='dashboard' element={<OwnerDashboard />} />
+          <Route path='members' element={<MemberManagement />} />
+          <Route path='trainers' element={<TrainerManagement />} />
+          <Route path='payments' element={<PaymentDashboard />} />
+          <Route path='notifications' element={<NotificationDashboard />} />
+          <Route path='settings' element={<Settings />} />
+          <Route path='support' element={<Support />} />
+        </Route>
 
         <Route path='/trainer/dashboard' element={<TrainerLayout />} />
 
