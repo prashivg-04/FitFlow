@@ -10,6 +10,15 @@ const trainerSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    speicialization: { 
+        type: String, 
+        required: true,
+        enum: ['Strength & Conditioning', 'HIIT & Cardio', 'Yoga & Pilates', 'Rehabilitation']   
+    },
+    experience: { 
+        type: Number, 
+        required: true 
+    },
     assignedMembers: [
         { 
             type: mongoose.Schema.Types.ObjectId, 

@@ -26,7 +26,28 @@ const ownerSchema = new mongoose.Schema({
         contactNumber: { 
             type: String, 
             required: true 
+        },
+        gymEmail: { 
+            type: String, 
+            required: true,
+            unique: true
         }
+    },
+    numberofTrainers: { 
+        type: Number, 
+        default: 0 
+    },
+    numberofMembers: { 
+        type: Number, 
+        default: 0 
+    },
+    openingHours: { 
+        type: String, 
+        required: true 
+    },  
+    closingHours: { 
+        type: String, 
+        required: true 
     },
     membersList: [
         { 

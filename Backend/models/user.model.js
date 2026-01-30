@@ -7,12 +7,9 @@ const jwt = require('jsonwebtoken');
 
 
 const userSchema = new mongoose.Schema({
-    firstname: {
-        type: String,
+    fullname: {
+        type : String,
         required: true,
-    },
-    lastname: {
-        type: String,
     },
     email: {
         type: String,
@@ -24,6 +21,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
+    role: {
+        type: String,
+        enum: ['owner', 'trainer', 'member'],
+        default: 'owner',
+    }
 });
 
 userSchema.methods.generateAuthToken = function() {
