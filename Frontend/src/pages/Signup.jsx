@@ -10,7 +10,6 @@ const Signup = () => {
   const [selectedRole, setSelectedRole] = useState('owner');
 
   return (
-    // bg-[#f7f8f6]
     <div className='font-display bg-[#f7f8f6] text-slate-900 antialiased'> 
       <div className='flex min-h-screen w-full'>
         {/* left */}
@@ -24,8 +23,8 @@ const Signup = () => {
             <div className='space-y-2'>
               <h2 className='text-4xl font-bold tracking-tight leading-tight'>Create your account</h2>
               <p className='text-[#61896f] text-base font-normal leading-normal'>
-                Join the fitness revolution.
-                <a className='font-semibold text-slate-900 ml-1 hover:underline decoration-[#15ec5b] underline-offset-4 decoration-2 transition-all' href="">Log in</a>
+                Already have an account?
+                <a className='font-semibold text-slate-900 ml-1 hover:underline decoration-[#15ec5b] underline-offset-4 decoration-2 transition-all' href="/login">Log in</a>
               </p>
             </div>
 

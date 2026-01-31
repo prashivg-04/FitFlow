@@ -6,9 +6,11 @@ import trainer2 from '../media/trainer2.jpg'
 import navjot from '../media/navjotImg.jpeg'
 import shivam from '../media/shivamImg.jpeg'
 import vaibhav from '../media/vaibhavImg.PNG'
+import { Link, Links } from 'react-router-dom'
 
 
 const Welcome = () => {
+    
   return (
     <div>
         {/* Navbar */}
@@ -28,8 +30,8 @@ const Welcome = () => {
                     <p className='text-sm font-medium text-slate-600 hover:text-[#15ec5b]'>Pricing</p>
                 </div>
                 <div className='flex items-center gap-4'>
-                    <button className='text-sm font-bold text-slate-900 hover:text-[#15ec5b]'>Login</button>
-                    <button className='bg-[#15ec5b] flex items-center justify-center px-4 py-2 rounded-lg text-sm font-bold transition-transform hover:scale-105 active:scale-95 shadow-[0_0_15px_#13ec5b4d]'>Get Started</button>
+                    <Link to="/login" className='text-sm font-bold text-slate-900 hover:text-[#15ec5b]'>Login</Link>
+                    <Link to='/signup' className='bg-[#15ec5b] flex items-center justify-center px-4 py-2 rounded-lg text-sm font-bold transition-transform hover:scale-105 active:scale-95 shadow-[0_0_15px_#13ec5b4d]'>Get Started</Link>
                 </div>
             </div>
         </header>
@@ -49,7 +51,7 @@ const Welcome = () => {
                     </p>
 
                     <div className='flex items-center justify-center gap-4 mb-16'>
-                        <button className='h-12 px-8 bg-[#15ec5b] rounded-lg text-slate-900 text-base font-bold shadow-lg shadow-primary/25 hover:bg-emerald-400 transitions-color'>Start Free Trial</button>
+                        <Link to="/signup" className='h-12 px-8 flex items-center bg-[#15ec5b] rounded-lg text-slate-900 text-base font-bold shadow-lg shadow-primary/25 hover:bg-emerald-400 transitions-color'>Start Free Trial</Link>
                         <button className='h-12 px-8 bg-white rounded-lg border border-slate-200 text-slate-900 text-base font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-2'><i className="ri-play-circle-line text-xl"></i>Watch Demo</button>
                     </div>
 
@@ -278,7 +280,7 @@ const Welcome = () => {
                 <h2 className='text-3xl font-bold tracking-tight text-white mb-6'>Ready to transform your gym?</h2>
                 <p className='text-lg text-slate-300 mb-10'>Join 500+ gym owners who are scaling their business with GymFlow. Start your 14-day free trial today.</p>
                 <div className='flex items-center justify-center gap-4'>
-                    <button className='h-12 px-8 rounded-lg bg-[#15ec5b] font-bold text-base hover:bg-emerald-400 transition-colors'>Get Started for Free</button>
+                    <Link to="/signup" className='h-12 px-8 flex items-center rounded-lg bg-[#15ec5b] font-bold text-base hover:bg-emerald-400 transition-colors'>Get Started for Free</Link>
                     <button className='h-12 px-8 rounded-lg bg-transparent border border-slate-600 text-white font-bold text-base hover:bg-white/10 transition-colors'>Schedule a Call</button>
                 </div>
             </div>
