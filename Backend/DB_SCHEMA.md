@@ -186,6 +186,24 @@ Each Member:
 
 ---
 
+### Trainer–Member Assignment (Join Relationship)
+
+The relationship between Trainers and Members is **many-to-many**.
+
+This is implemented using a **dedicated join table** at the database level
+(e.g., `TrainerMember`), which stores assignment pairs:
+
+- trainerId → references Trainer.id
+- memberId → references Member.id
+
+Each row represents a single trainer–member assignment.
+
+This table is considered an **implementation detail** in the MVP and does not
+contain additional business fields yet. Future versions may extend it with
+fields such as assignment date, status, or notes.
+
+---
+
 ### Notes
 - Age is derived from date of birth, not stored directly.
 - Medical conditions and progress logs are intentionally excluded from MVP.
