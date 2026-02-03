@@ -11,3 +11,114 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum UserRole {
+  OWNER
+  TRAINER
+  MEMBER
+}
+
+model User {
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  role UserRole
+  createdAt DateTime @default(now())
+
+  owner Owner?
+  trainer Trainer?
+  member Member?
+}
+
+model Owner {
+  id String @id @default(uuid())
+  userId String @unique
+
+  gymName String
+  address String
+  city String
+  phone String
+
+  openingTime String
+  closingTime String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  trainers Trainer[]
+  members Member[]
+}
+
+model Trainer {
+  id String @id @default(uuid())
+  userId String @unique
+  ownerId String
+
+  specialization String
+  experienceYears Int
+  preferredDays String
+  startTime String
+  endTime String
+  bio String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  owner Owner @relation(fields: [ownerId], references: [id])
+
+  trainerMembers TrainerMember[]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum FitnessGoal {
+  WEIGHT_LOSS
+  MUSCLE_GAIN
+  ENDURANCE
+  FLEXIBILITY
+  GENERAL_FITNESS
+}
+
+enum ExperienceLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+model Member {
+  id String @id @default(uuid())
+  userId String @unique
+  ownerId String
+
+  dateOfBirth DateTime
+  gender Gender
+  heightCm Float
+  weightKg Float
+  goal FitnessGoal
+  experienceLevel ExperienceLevel
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  owner Owner @relation(fields: [ownerId], references: [id])
+
+  trainerMembers TrainerMember[]
+}
+
+model TrainerMember {
+  trainerId String
+  memberId String
+
+  trainer Trainer @relation(fields: [trainerId], references: [id])
+  member Member @relation(fields: [memberId], references: [id])
+
+  @@id([trainerId, memberId])
+}
