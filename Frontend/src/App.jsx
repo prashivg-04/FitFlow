@@ -31,6 +31,8 @@ import MemberSubscription from './pages/member/MemberSubscription'
 import MemberNotification from './pages/member/MemberNotification'
 import MemberSettings from './pages/member/MemberSettings'
 import MemberSupport from './pages/member/MemberSupport'
+import MemberJoin from './pages/member/MemberJoin'
+import TrainerJoin from './pages/trainer/TrainerJoin'
 
 function App() {
   return (
@@ -41,7 +43,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/owner/signup' element={<OwnerSignup />} />
         <Route path='/trainer/signup' element={<TrainerSignup />} />
+        <Route path='/trainer/join' element={<TrainerJoin />} />
         <Route path='/member/signup' element={<MemberSignup />} />
+        <Route path='/member/join' element={<MemberJoin />} />
 
         <Route path='/owner' element={<OwnerLayout />} >
           <Route path='dashboard' element={<OwnerDashboard />} />
