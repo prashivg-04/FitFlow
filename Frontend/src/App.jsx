@@ -33,8 +33,29 @@ import MemberSettings from './pages/member/MemberSettings'
 import MemberSupport from './pages/member/MemberSupport'
 import MemberJoin from './pages/member/MemberJoin'
 import TrainerJoin from './pages/trainer/TrainerJoin'
+import PrivateRoute from './pages/PrivateRoute'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import api from './api/axios'
+import { loginSuccess, logout } from './store/authSlice'
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const restoreSession = async () => {
+      try {
+        const response = await api.get('/auth/me');
+        dispatch(loginSuccess(response.data.data));
+      } catch(err) {
+        dispatch(logout());
+      }
+    }
+
+    restoreSession();
+  }, [dispatch]);
+
   return (
     <div>
       <Routes>
@@ -43,39 +64,42 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/owner/signup' element={<OwnerSignup />} />
         <Route path='/trainer/signup' element={<TrainerSignup />} />
-        <Route path='/trainer/join' element={<TrainerJoin />} />
-        <Route path='/member/signup' element={<MemberSignup />} />
-        <Route path='/member/join' element={<MemberJoin />} />
 
-        <Route path='/owner' element={<OwnerLayout />} >
-          <Route path='dashboard' element={<OwnerDashboard />} />
-          <Route path='members' element={<MemberManagement />} />
-          <Route path='trainers' element={<TrainerManagement />} />
-          <Route path='payments' element={<PaymentDashboard />} />
-          <Route path='notifications' element={<NotificationDashboard />} />
-          <Route path='settings' element={<Settings />} />
-          <Route path='support' element={<Support />} />
-        </Route>
+        <Route element={<PrivateRoute />}>
+          <Route path='/trainer/join' element={<TrainerJoin />} />
+          <Route path='/member/signup' element={<MemberSignup />} />
+          <Route path='/member/join' element={<MemberJoin />} />
 
-        <Route path='/trainer' element={<TrainerLayout />} >
-          <Route path='dashboard' element={<TrainerDashboard />} />
-          <Route path='members' element={<TrainerMemberManagement />} />
-          <Route path='workouts' element={<TrainerWorkoutPlans />} />
-          <Route path='assignments' element={<TrainerAssignWorkout />} />
-          <Route path='workspace' element={<TrainerWorkspace />} />
-          <Route path='settings' element={<TrainerSettings />} />
-          <Route path='support' element={<TrainerSupport />} />
-        </Route>
+          <Route path='/owner' element={<OwnerLayout />} >
+            <Route path='dashboard' element={<OwnerDashboard />} />
+            <Route path='members' element={<MemberManagement />} />
+            <Route path='trainers' element={<TrainerManagement />} />
+            <Route path='payments' element={<PaymentDashboard />} />
+            <Route path='notifications' element={<NotificationDashboard />} />
+            <Route path='settings' element={<Settings />} />
+            <Route path='support' element={<Support />} />
+          </Route>
 
-        <Route path='/member' element={<MemberLayout />} >
-          <Route path='dashboard' element={<MemberDashboard />} />
-          <Route path='workout' element={<MemberWorkout />} />
-          <Route path='progress' element={<MemberProgress />} />
-          <Route path='attendance' element={<MemberAttendance />} />
-          <Route path='subscription' element={<MemberSubscription />} />
-          <Route path='notifications' element={<MemberNotification />} />
-          <Route path='settings' element={<MemberSettings />} />
-          <Route path='support' element={<MemberSupport />} />
+          <Route path='/trainer' element={<TrainerLayout />} >
+            <Route path='dashboard' element={<TrainerDashboard />} />
+            <Route path='members' element={<TrainerMemberManagement />} />
+            <Route path='workouts' element={<TrainerWorkoutPlans />} />
+            <Route path='assignments' element={<TrainerAssignWorkout />} />
+            <Route path='workspace' element={<TrainerWorkspace />} />
+            <Route path='settings' element={<TrainerSettings />} />
+            <Route path='support' element={<TrainerSupport />} />
+          </Route>
+
+          <Route path='/member' element={<MemberLayout />} >
+            <Route path='dashboard' element={<MemberDashboard />} />
+            <Route path='workout' element={<MemberWorkout />} />
+            <Route path='progress' element={<MemberProgress />} />
+            <Route path='attendance' element={<MemberAttendance />} />
+            <Route path='subscription' element={<MemberSubscription />} />
+            <Route path='notifications' element={<MemberNotification />} />
+            <Route path='settings' element={<MemberSettings />} />
+            <Route path='support' element={<MemberSupport />} />
+          </Route>
         </Route>
       </Routes>
     </div>

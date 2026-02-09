@@ -71,3 +71,10 @@ export const logout = (req, res) => {
         message: "Logged out successfully",
     });
 }
+
+export const me = (req, res) => {
+    res.status(200).json({
+        success: true,
+        data: req.user,
+    });
+};
