@@ -210,6 +210,53 @@ This backend is a Node.js + Express.js REST API for the GymSaaS platform. It han
 
 ---
 
+### GET /api/auth/me
+
+**Purpose**
+- Retrieve the currently authenticated user's basic information.
+
+**Authentication Required**
+- Yes (JWT cookie)
+
+**Request Headers**
+- Cookie: `token=<jwt>`
+
+**Request Body**
+- None
+
+**Success Response (200)**
+```json
+{
+  "success": true,
+  "data": {
+    "userId": "uuid",
+    "role": "OWNER"
+  }
+}
+```
+
+**Error Responses**
+- **401 Unauthorized** (missing or invalid token)
+```json
+{
+  "success": false,
+  "message": "Authentication required"
+}
+```
+
+```json
+{
+  "success": false,
+  "message": "Invalid or expired token"
+}
+```
+
+**Notes / Edge Cases**
+- Returns the user data stored in JWT (`userId` and `role`).
+- Does not fetch full user profile from database; only returns JWT payload.
+
+---
+
 ## 3. Authorization & Middleware Overview
 
 ### `requireAuth`
@@ -259,6 +306,7 @@ This backend is a Node.js + Express.js REST API for the GymSaaS platform. It han
 | `POST /api/auth/signup` | Public | Creates a new user. |
 | `POST /api/auth/login` | Public | Logs in and sets cookie. |
 | `POST /api/auth/logout` | Protected | Requires valid JWT cookie. |
+| `GET /api/auth/me` | Protected | Returns current user info from JWT. |
 
 ---
 
