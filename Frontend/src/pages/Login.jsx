@@ -21,17 +21,29 @@ const Login = () => {
   useEffect(() => {
     if(!isAuthenticated || !user?.role) return;
       
-    switch(user.role) {
-      case 'OWNER':
-        navigate('/owner/dashboard', { replace: true });
-        break;
-      case 'TRAINER': 
+    if(user.role === 'OWNER') {
+      navigate('/owner/dashboard', { replace: true });
+      return;
+    } 
+    
+    if(user.role === 'TRAINER') {
+      if(user.gymStatus === 'ACTIVE') {
+        navigate('/trainer/dashboard', { replace: true });
+      } else {
         navigate('/trainer/join', { replace: true });
-        break;
-      case 'MEMBER':
-        navigate('/member/join', { replace: true });
-        break;  
+      }
+      return;
     }
+
+    if(user.role === 'MEMBER') {
+      if(user.gymStatus === 'ACTIVE') {
+        navigate('/member/dashboard', { replace: true });
+      } else {
+        navigate('/member/join', { replace: true });
+      }
+      return;
+    }
+
   }, [isAuthenticated, user, navigate]);
 
   const handleLogin = async (e) => {
