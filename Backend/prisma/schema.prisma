@@ -29,6 +29,8 @@ model User {
   owner Owner?
   trainer Trainer?
   member Member?
+
+  joinRequests JoinRequest[]
 }
 
 model Owner {
@@ -40,6 +42,8 @@ model Owner {
   city String
   phone String
 
+  gymCode String @unique
+
   openingTime String
   closingTime String
 
@@ -50,6 +54,30 @@ model Owner {
   
   trainers Trainer[]
   members Member[]
+
+  joinRequests JoinRequest[]
+}
+
+enum JoinStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model JoinRequest {
+  id String @id @default(uuid())
+  ownerId String
+  userId String
+  role UserRole
+  status JoinStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  owner Owner @relation(fields: [ownerId], references: [id])
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([ownerId, userId])
 }
 
 enum GymStatus {
