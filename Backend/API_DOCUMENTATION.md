@@ -307,6 +307,9 @@ This backend is a Node.js + Express.js REST API for the GymSaaS platform. It han
 | `POST /api/auth/login` | Public | Logs in and sets cookie. |
 | `POST /api/auth/logout` | Protected | Requires valid JWT cookie. |
 | `GET /api/auth/me` | Protected | Returns current user info from JWT. |
+| `POST /api/join-request` | Protected (TRAINER/MEMBER) | Send join request to gym. |
+| `GET /api/owner/join-requests` | Protected (OWNER) | List pending join requests. |
+| `PATCH /api/owner/join-request/:id` | Protected (OWNER) | Accept/reject join request. |
 
 ---
 
@@ -365,3 +368,296 @@ All error responses follow a consistent shape:
 - Ensure PostgreSQL is running and `DATABASE_URL` is valid.
 - Start backend server on `PORT` (default 8080).
 - The frontend should run at `http://localhost:5173` for cookie-based auth to work.
+
+---
+
+## 7. Join Request APIs
+
+### POST /api/join-request
+
+**Purpose**
+- Create a join request for a trainer or member to join a gym using a gym code.
+
+**Authentication Required**
+- Yes (JWT cookie)
+
+**Required Role**
+- TRAINER or MEMBER
+
+**Request Headers**
+- `Content-Type: application/json`
+- Cookie: `token=<jwt>`
+
+**Request Body**
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| gymCode | string | Yes | Unique gym code from the owner. |
+
+**Example Request Body**
+```json
+{
+  "gymCode": "ABC12345"
+}
+```
+
+**Success Response (200)**
+```json
+{
+  "success": true,
+  "message": "Join request sent successfully"
+}
+```
+
+**Error Responses**
+- **400 Bad Request** (missing gym code)
+```json
+{
+  "success": false,
+  "message": "Gym code is required"
+}
+```
+
+- **400 Bad Request** (already requested or joined)
+```json
+{
+  "success": false,
+  "message": "You have already requested to join a gym or are part of a gym"
+}
+```
+
+- **403 Forbidden** (role not allowed)
+```json
+{
+  "success": false,
+  "message": "Only trainers and members can request to join"
+}
+```
+
+- **404 Not Found** (invalid gym code)
+```json
+{
+  "success": false,
+  "message": "Invalid Gym Code"
+}
+```
+
+- **404 Not Found** (profile not found)
+```json
+{
+  "success": false,
+  "message": "Profile not found"
+}
+```
+
+- **500 Internal Server Error**
+```json
+{
+  "success": false,
+  "message": "Internal Server Error"
+}
+```
+
+**Notes / Edge Cases**
+- User's `gymStatus` is updated to `PENDING` after creating a join request.
+- Only users with `gymStatus: NONE` can send join requests.
+- OWNER role cannot create join requests.
+
+---
+
+## 8. Owner Management APIs
+
+### GET /api/owner/join-requests
+
+**Purpose**
+- Retrieve all pending join requests for the owner's gym.
+
+**Authentication Required**
+- Yes (JWT cookie)
+
+**Required Role**
+- OWNER
+
+**Request Headers**
+- Cookie: `token=<jwt>`
+
+**Request Body**
+- None
+
+**Success Response (200)**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "ownerId": "uuid",
+      "userId": "uuid",
+      "role": "TRAINER",
+      "status": "PENDING",
+      "createdAt": "2026-02-12T10:30:00.000Z",
+      "user": {
+        "name": "John Doe",
+        "email": "john@example.com"
+      }
+    }
+  ]
+}
+```
+
+**Error Responses**
+- **401 Unauthorized** (missing or invalid token)
+```json
+{
+  "success": false,
+  "message": "Authentication required"
+}
+```
+
+- **403 Forbidden** (not an owner)
+```json
+{
+  "success": false,
+  "message": "Owner access required"
+}
+```
+
+- **403 Forbidden** (owner profile not found)
+```json
+{
+  "success": false,
+  "message": "Owner profile not found"
+}
+```
+
+- **500 Internal Server Error**
+```json
+{
+  "success": false,
+  "message": "Internal server error"
+}
+```
+
+**Notes / Edge Cases**
+- Only returns join requests with `status: PENDING`.
+- Includes basic user details (name and email) with each request.
+
+---
+
+### PATCH /api/owner/join-request/:id
+
+**Purpose**
+- Accept or reject a pending join request.
+
+**Authentication Required**
+- Yes (JWT cookie)
+
+**Required Role**
+- OWNER
+
+**Request Headers**
+- `Content-Type: application/json`
+- Cookie: `token=<jwt>`
+
+**URL Parameters**
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| id | string | Yes | Join request ID (UUID). |
+
+**Request Body**
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| action | string | Yes | One of: `ACCEPT`, `REJECT`. |
+
+**Example Request Body**
+```json
+{
+  "action": "ACCEPT"
+}
+```
+
+**Success Response (200)**
+```json
+{
+  "success": true,
+  "message": "Join request accepted successfully"
+}
+```
+
+or
+
+```json
+{
+  "success": true,
+  "message": "Join request rejected successfully"
+}
+```
+
+**Error Responses**
+- **400 Bad Request** (invalid action)
+```json
+{
+  "success": false,
+  "message": "Invalid action"
+}
+```
+
+- **401 Unauthorized** (missing or invalid token)
+```json
+{
+  "success": false,
+  "message": "Authentication required"
+}
+```
+
+- **403 Forbidden** (not an owner)
+```json
+{
+  "success": false,
+  "message": "Owner access required"
+}
+```
+
+- **403 Forbidden** (owner profile not found)
+```json
+{
+  "success": false,
+  "message": "Owner profile not found"
+}
+```
+
+- **404 Not Found** (join request not found)
+```json
+{
+  "success": false,
+  "message": "Join request not found"
+}
+```
+
+- **500 Internal Server Error**
+```json
+{
+  "success": false,
+  "message": "Internal server error"
+}
+```
+
+**Notes / Edge Cases**
+- `ACCEPT`: Sets user's `gymStatus` to `ACTIVE` and links them to the owner's gym.
+- `REJECT`: Sets user's `gymStatus` to `NONE` (allows them to request again).
+- Join request status is updated to `ACCEPTED` or `REJECTED` accordingly.
+- Owner can only manage join requests belonging to their gym.
+
+---
+
+## 9. Additional Middleware
+
+### `requireGymActive`
+- Ensures that trainers and members have an `ACTIVE` gym status before accessing certain routes.
+- OWNER role bypasses this check.
+- On failure:
+  - **403** for TRAINER: `"Trainer is not associated with an active gym."`
+  - **403** for MEMBER: `"Member is not associated with an active gym."`
+- **Planned / Not Implemented** on routes yet, but available for future use.
