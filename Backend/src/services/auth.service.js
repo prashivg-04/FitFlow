@@ -2,6 +2,19 @@ import e from 'express';
 import prisma from '../prisma.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+
+const generateCode = () => {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+
+    for(let i = 0; i < 6; i++) {
+        const randomIdx = crypto.randomInt(0, chars.length);
+        code += chars[randomIdx];
+    }
+
+    return code;
+}
 
 export const signupService = async (data) => {
     const { name, email, password, role, roleData } = data;
@@ -29,6 +42,18 @@ export const signupService = async (data) => {
 
         switch(role) {
             case 'OWNER': 
+                let gymCode;
+                let existingOwner;
+
+                do {    
+                    gymCode = generateCode();
+                    existingOwner = await tx.owner.findUnique({
+                        where: {
+                            gymCode: gymCode,
+                        },
+                    });
+                } while(existingOwner);
+
                 await tx.owner.create({
                     data: {
                         userId: newUser.id,
@@ -36,6 +61,7 @@ export const signupService = async (data) => {
                         address: roleData.address,
                         city: roleData.city,
                         phone: roleData.phone,
+                        gymCode: gymCode,
                         openingTime: roleData.openingTime,
                         closingTime: roleData.closingTime,
                     },
