@@ -1,6 +1,7 @@
 import React from 'react'
 import OwnerHeader from '../../components/owner/OwnerHeader'
 import navjot from '../../media/navjotImg.jpeg'
+import JoinRequests from '../../components/owner/JoinRequests'
 
 const OwnerDashboard = () => {
   return (
@@ -167,6 +168,8 @@ const OwnerDashboard = () => {
               </div>
             </div>
           </div>
+
+          <JoinRequests />
 
           {/* Recent Activities */}
           <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
