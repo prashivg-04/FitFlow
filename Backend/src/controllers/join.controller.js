@@ -39,13 +39,6 @@ export const createJoinRequest = async (req, res) => {
             });
         }
 
-        if(currentProfile.gymStatus !== 'NONE') {
-            return res.status(400).json({
-                success: false,
-                message: 'You have already requested to join a gym or are part of a gym'
-            });
-        }
-
         const owner = await prisma.owner.findUnique({
             where: {
                 gymCode
@@ -56,6 +49,29 @@ export const createJoinRequest = async (req, res) => {
             return res.status(404).json({
                 success: false,
                 message: 'Invalid Gym Code'
+            });
+        }
+
+        const existingRequest = await prisma.joinRequest.findUnique({
+            where: {
+                ownerId_userId: {
+                    ownerId: owner.id,
+                    userId,
+                }
+            }
+        })
+
+        if(existingRequest) {
+            return res.status(400).json({
+                success: false,
+                message: 'You have already requested to join this gym.'      
+            })
+        }
+
+        if(currentProfile.gymStatus !== 'NONE') {
+            return res.status(400).json({
+                success: false,
+                message: 'You have already requested to join a gym or are part of a gym'
             });
         }
 

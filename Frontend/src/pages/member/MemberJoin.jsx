@@ -1,9 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import icon from '../../assets/icon.svg'
 import navjot from '../../media/navjotImg.jpeg'
 import gym from '../../media/gymJoin.png'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import api from '../../api/axios'
+import { loginSuccess } from '../../store/authSlice'
 
 const MemberJoin = () => {
+
+    const { user } = useSelector((state) => state.auth);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(user?.gymStatus === 'ACTIVE') {
+            navigate('/member/dashboard', { replace: true });
+        }
+    }, [user, navigate]);
+
+    const [gymCode, setGymCode] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleJoin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await api.post('/join-request', {
+                gymCode: gymCode
+            });
+            setMessage('Join request sent successfully! Waiting for approval.');
+
+            const meResponse = await api.get('/auth/me');
+            dispatch(loginSuccess(meResponse.data.data));
+        } catch(err) {
+            setMessage(err.response?.data?.message || "Something went wrong");
+        }
+    }
+
   return (
     <div className='bg-[#f7f8f6] min-h-screen'>
       <header className='flex items-center justify-between h-20 px-6 py-4 bg-white border-b border-[#f0f4f2]'>
@@ -51,14 +85,32 @@ const MemberJoin = () => {
                             <h3 className='text-2xl font-bold text-slate-900 font-display'>Join Your Gym</h3>
                             <p className='text-slate-500 '>Enter the unique access code provided by your fitness center to sync your training plans and track your progress.</p>
                         </div>
-                        <div className='space-y-4'>
-                            <div className='relative'>
-                                <i class="ri-key-fill absolute left-4 top-1/2 -translate-y-1/2 text-[24px] text-slate-400"></i>
-                                <input className='w-full pl-12 pr-4 py-4 rounded-xl border-2 border-slate-100 focus:border-[#15ec5b] focus:ring-0 focus:outline-none transition-all font-mono text-lg tracking-widest uppercase' type="text" placeholder='Enter Gym Code' />
+
+                        {/* GymCode */}
+                        {
+                            user?.gymStatus === 'NONE' && 
+                            <form className='space-y-4' onSubmit={handleJoin}>
+                                <div className='relative'>
+                                    <i class="ri-key-fill absolute left-4 top-1/2 -translate-y-1/2 text-[24px] text-slate-400"></i>
+                                    <input 
+                                        value={gymCode}
+                                        onChange={(e) => setGymCode(e.target.value)}
+                                        className='w-full pl-12 pr-4 py-4 rounded-xl border-2 border-slate-100 focus:border-[#15ec5b] focus:ring-0 focus:outline-none transition-all font-mono text-lg tracking-widest uppercase' 
+                                        type="text" 
+                                        placeholder='Enter Gym Code' />
+                                </div>
+                                <button className='w-full py-4 bg-[#15ec5b] font-bold rounded-xl hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#15ec5b]/20 transition-all'>Request to Join</button>
+                                <p className='text-center text-xs text-slate-400'>Can't find your code? Ask your gym administrator for your FitFlow Member Key.</p>
+                            </form>
+                        }
+
+                        {   
+                            user?.gymStatus === 'PENDING' && 
+                            <div className='space-y-4'>
+                                <div className='w-full flex items-center justify-center py-4 bg-[#15ec5b] font-bold rounded-xl hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#15ec5b]/20 transition-all'>Request Sent</div>
+                                <p className='text-center text-xs text-slate-400'>Waiting for owner approval.</p>
                             </div>
-                            <button className='w-full py-4 bg-[#15ec5b] font-bold rounded-xl hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#15ec5b]/20 transition-all'>Request to Join</button>
-                            <p className='text-center text-xs text-slate-400'>Can't find your code? Ask your gym administrator for your FitFlow Member Key.</p>
-                        </div>
+                        }
                     </div>
                 </div>
             </div>
