@@ -34,6 +34,7 @@ import MemberSupport from './pages/member/MemberSupport'
 import MemberJoin from './pages/member/MemberJoin'
 import TrainerJoin from './pages/trainer/TrainerJoin'
 import PrivateRoute from './pages/PrivateRoute'
+import PublicRoute from './pages/PublicRoute'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import api from './api/axios'
@@ -59,11 +60,13 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Welcome />}/>
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/owner/signup' element={<OwnerSignup />} />
-        <Route path='/trainer/signup' element={<TrainerSignup />} />
+        <Route element={<PublicRoute />}>
+          <Route path='/' element={<Welcome />}/>
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/owner/signup' element={<OwnerSignup />} />
+          <Route path='/trainer/signup' element={<TrainerSignup />} />
+        </Route>
 
         <Route element={<PrivateRoute />}>
           <Route path='/trainer/join' element={<TrainerJoin />} />
