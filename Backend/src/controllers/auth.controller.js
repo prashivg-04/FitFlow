@@ -1,13 +1,27 @@
+import { use } from "react";
 import prisma from "../prisma.js";
+import jwt from 'jsonwebtoken';
 import { signupService, loginService } from "../services/auth.service.js";
 
 export const signup = async (req, res) => {
     try {
-        const result = await signupService(req.body);
+        const user = await signupService(req.body);
+
+        const token = jwt.sign(
+            { userId: user.id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: '7d' }
+        );
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'lax',
+            secure: false
+        })
 
         return res.status(201).json({
             success: true,
-            data: result,
+            data: user,
             message: 'User signed up successfully',
         });
     } catch(err) {

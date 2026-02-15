@@ -77,6 +77,7 @@ export const signupService = async (data) => {
                         startTime: roleData.startTime,
                         endTime: roleData.endTime,
                         bio: roleData.bio,
+                        gymStatus: "NONE",
 
                         user: {
                             connect: { id: newUser.id },
@@ -95,6 +96,7 @@ export const signupService = async (data) => {
                         weightKg: roleData.weightKg,
                         goal: roleData.goal,
                         experienceLevel: roleData.experienceLevel,
+                        gymStatus: "NONE",
                     },
                 })
                 break;
@@ -105,10 +107,46 @@ export const signupService = async (data) => {
                 throw error;
         }
 
-        return {
-            userId: newUser.id,
-            role: newUser.role,
-        };
+        const fullUser = await tx.user.findUnique({
+            where: {
+                id: newUser.id
+            },
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                role: true,
+                trainer: {
+                    select: {
+                        gymStatus: true,
+                        ownerId: true
+                    }
+                },
+                member: {
+                    select: {
+                        gymStatus: true,
+                        ownerId: true
+                    }
+                }
+            }
+        })
+
+        let finalUser = {
+            id: fullUser.id,
+            name: fullUser.name,
+            email: fullUser.email,
+            role: fullUser.role
+        }
+
+        if(fullUser.trainer) {
+            finalUser = { ...finalUser, ...fullUser.trainer };
+        }
+
+        if(fullUser.member) {
+            finalUser = { ...finalUser, ...fullUser.member };
+        }
+
+        return finalUser;
     });
 
     return result;

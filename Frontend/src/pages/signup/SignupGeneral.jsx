@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import navjot from '../media/navjotImg.jpeg'
-import icon from '../media/icon.png'
-import googleLogo from '../media/googleLogo.png'
-import appleLogo from '../media/appleLogo.svg'
-import gymSignup from '../media/gymSignup.jpeg'
+import navjot from '../../media/navjotImg.jpeg'
+import icon from '../../media/icon.png'
+import googleLogo from '../../media/googleLogo.png'
+import appleLogo from '../../media/appleLogo.svg'
+import gymSignup from '../../media/gymSignup.jpeg'
 
 const Signup = () => {
 

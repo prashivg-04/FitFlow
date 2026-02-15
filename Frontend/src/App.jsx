@@ -1,11 +1,11 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
 import Welcome from './pages/Welcome'
-import Signup from './pages/SignUp'
+import SignupGeneral from './pages/signup/SignupGeneral'
 import Login from './pages/Login'
-import OwnerSignup from './pages/owner/OwnerSignup'
-import TrainerSignup from './pages/trainer/TrainerSignup'
-import MemberSignup from './pages/member/MemberSignup'
+import OwnerSignup from './pages/signup/OwnerSignup'
+import TrainerSignup from './pages/signup/TrainerSignup'
+import MemberSignup from './pages/signup/MemberSignup'
 import OwnerLayout from './pages/owner/OwnerLayout'
 import TrainerLayout from './pages/trainer/TrainerLayout'
 import MemberLayout from './pages/member/MemberLayout'
@@ -62,10 +62,11 @@ function App() {
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path='/' element={<Welcome />}/>
-          <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<SignupGeneral />} />
           <Route path='/owner/signup' element={<OwnerSignup />} />
           <Route path='/trainer/signup' element={<TrainerSignup />} />
+          <Route path='/member/signup' element={<MemberSignup />} />
         </Route>
 
         <Route element={<PrivateRoute />}>
