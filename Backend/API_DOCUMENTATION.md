@@ -106,6 +106,8 @@ This backend is a Node.js + Express.js REST API for the GymSaaS platform. It han
 ```
 
 **Notes / Edge Cases**
+- On success, a cookie named `token` is set with a 7-day expiry (same as login).
+- Ensure your frontend sends requests with `credentials: "include"` so cookies are stored.
 - If `role` is not one of `OWNER`, `TRAINER`, `MEMBER`, signup fails internally (currently returns **500** due to an unhandled `INVALID_ROLE`).
 - Validation is **Planned / Not Implemented**. Missing or invalid fields may cause server errors.
 
