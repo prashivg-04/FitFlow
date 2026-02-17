@@ -1,13 +1,39 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
 import icon from '../../media/icon.png'
 import googleLogo from '../../media/googleLogo.png'
 import appleLogo from '../../media/appleLogo.svg'
 import gymSignup from '../../media/gymSignup.jpeg'
+import SignupContext from './SignupContext'
+import { useNavigate } from 'react-router-dom'
 
 const Signup = () => {
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [selectedRole, setSelectedRole] = useState('owner');
+
+  const { signupData, setSignupData } = useContext(SignupContext);
+  const navigate = useNavigate();
+  
+  const handleNext = (e) => {
+    e.preventDefault();
+    setSignupData({
+      ...signupData,
+      name,
+      email,
+      password,
+      role: selectedRole
+    });
+    console.log(signupData)
+    setName('');
+    setEmail('');
+    setPassword('');
+    setSelectedRole('owner');
+    navigate(`/signup/${selectedRole.toLowerCase()}`);
+  }
+  
 
   return (
     <div className='font-display bg-[#f7f8f6] text-slate-900 antialiased'> 
@@ -90,31 +116,53 @@ const Signup = () => {
               </div>
             </div>
 
-            <form className='space-y-7' action="">
+            <form className='space-y-7' onSubmit={handleNext}>
+              {/* Name */}
               <div className='flex flex-col gap-1.5'>
                 <label className='text-base font-medium leading-normal' htmlFor="">Full Name</label>
                 <div className='relative group'>
-                  <input className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' type="text" placeholder='John Doe' />
+                  <input 
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
+                    type="text" 
+                    placeholder='John Doe' 
+                  />
                   <i class="ri-user-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
-
+              
+              {/* Email */}
               <div className='flex flex-col gap-1.5'>
                 <label className='text-base font-medium leading-normal' htmlFor="">Work Email</label>
                 <div className='relative group'>
-                  <input className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' type="text" placeholder='john.doe@example.com' />
+                  <input 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
+                    type="text" 
+                    placeholder='john.doe@example.com' 
+                  />
                   <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 
+              {/* Password */}
               <div className='flex flex-col gap-1.5'>
                 <label className='text-base font-medium leading-normal' htmlFor="">Password</label>
                 <div className='relative group'>
-                  <input className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' type="password"  placeholder='Min. 8 characters' />
+                  <input 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
+                    type="password"  
+                    placeholder='Min. 8 characters' 
+                  />
                   <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 
+              {/* Terms */}
               <div className='flex items-center justify-start gap-3 pt-2'>
                 <div className='flex h-6 items-center'>
                   <input className='h-5 w-5 rounded border-[#dbe6df] bg-white accent-[#15ec5b] focus:ring-[#15ec5b] focus:ring-offset-0 cursor-pointer' type="checkbox" />
@@ -128,7 +176,7 @@ const Signup = () => {
                 </label>
               </div>
 
-              <button className='w-full h-14 bg-[#15ec5b] px-4 text-base font-bold rounded-lg shadow-md hover:bg-[#0fd650] hover:shadow-lg hover:-translate-y-0.5 focus:ring-2 focus:outline-none focus:ring-[#15ec5b] focus:ring-offset-2 transition-all transform'>
+              <button type='submit' className='w-full h-14 bg-[#15ec5b] px-4 text-base font-bold rounded-lg shadow-md hover:bg-[#0fd650] hover:shadow-lg hover:-translate-y-0.5 focus:ring-2 focus:outline-none focus:ring-[#15ec5b] focus:ring-offset-2 transition-all transform'>
                 Create Account
               </button>
 

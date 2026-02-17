@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import SignupContext from './SignupContext';
+import { useNavigate } from 'react-router-dom';
 
 const OwnerSignup = () => {
+
+  const { signupData, setSignupData } = useContext(SignupContext);
+
+
   return (
     <div className='bg-[#f7f8f6] font-display text-slate-900 min-h-screen flex flex-col overflow-x-hidden antialiased'>
       <div className='layout-container flex flex-col items-center h-full py-8 px-4'>

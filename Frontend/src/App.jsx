@@ -39,6 +39,7 @@ import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import api from './api/axios'
 import { loginSuccess, logout } from './store/authSlice'
+import SignupLayout from './pages/signup/SignupLayout'
 
 function App() {
 
@@ -63,10 +64,13 @@ function App() {
         <Route element={<PublicRoute />}>
           <Route path='/' element={<Welcome />}/>
           <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignupGeneral />} />
-          <Route path='/owner/signup' element={<OwnerSignup />} />
-          <Route path='/trainer/signup' element={<TrainerSignup />} />
-          <Route path='/member/signup' element={<MemberSignup />} />
+
+          <Route path='/signup' element={<SignupLayout />}>
+            <Route index element={<SignupGeneral />} />
+            <Route path='owner' element={<OwnerSignup />} />
+            <Route path='trainer' element={<TrainerSignup />} />
+            <Route path='member' element={<MemberSignup />} />
+          </Route>
         </Route>
 
         <Route element={<PrivateRoute />}>
