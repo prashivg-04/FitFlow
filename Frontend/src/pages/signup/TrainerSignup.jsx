@@ -1,6 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import SignupContext from './SignupContext';
+import { useNavigate } from 'react-router-dom';
 
 const TrainerSignup = () => {
+
+  const { signupData, setSignupData } = useContext(SignupContext);
+
+  // specialization
+  // experienceYears
+  // preferredDays
+  // startTime
+  // endTime
+  // bio
+
   return (
     <div className='bg-[#f7f8f6] font-display text-slate-900 min-h-screen flex flex-col overflow-x-hidden antialiased'>
       <div className='layout-container flex flex-col items-center h-full py-8 px-4'>
@@ -19,19 +31,18 @@ const TrainerSignup = () => {
                 </p>
               </div>
 
-              <div className='h-2 w-full bg-[#dbe6df] rounded-full overflow-hidden'>
-                <div className='h-full bg-[#15ec5b] w-[90%] rounded-l-full shadow-[0_0_10px_#13ec5b]'></div>
+              <div className='h-0.5 w-full bg-[#15ec5b] rounded-full overflow-hidden'>
               </div>
             </div>
 
             {/* Heading */}
             <div className='flex flex-col gap-2 mt-4'>
               <h1 className='text-4xl font-black leading-tight tracking-tight'>
-                Complete Your Trainer Profile
+                Set Up Your Gym
               </h1>
 
               <p className='text-[#61896f] text-base font-normal leading-normal max-w-lg'>
-                Help gyms understand your expertise so you can get matched with the right clients.
+                Let’s get your gym ready in under 2 minutes. We just need a few details to customize your dashboard.
               </p>
             </div>
           </div>
@@ -93,20 +104,6 @@ const TrainerSignup = () => {
                                 <span className='text-xs text-[#61896f]'>Years</span>
                             </div>
                         </label>
-                    </div>
-                  </label>
-                </div>
-
-                <div className='flex flex-col gap-2'>
-                  <label className='flex flex-col gap-2 flex-1'>
-                    <div className='flex justify-between'>
-                      <p className='text-sm font-medium leading-normal'>Certifications</p>
-                      <span className='text-xs text-gray-400 font-normal'>Optional</span>
-                    </div>
-                    <div className='flex flex-col items-center justify-center h-48 border-2 border-dashed border-[#dbe6df] rounded-lg p-6 bg-[#f7f8f6] hover:border-[#15ec5b]/50 transition-colors cursor-pointer group'>
-                        <i class="ri-upload-cloud-line text-4xl text-[#61896f] mb-2 group-hover:text-[#15ec5b] transition-colors"></i>
-                        <p className='text-sm font-medium'>Click to upload or drag and drop</p>
-                        <p className='text-xs text-[#61896f] mt-1'>PDF, JPG or PNG (max. 5MB)</p>
                     </div>
                   </label>
                 </div>
@@ -198,33 +195,22 @@ const TrainerSignup = () => {
               </div>
             </div>
 
-            {/* Gym Association */}
+            {/* Tell me about yourself - bio */}
             <div className='flex flex-col gap-5'>
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-team-line text-lg text-[#15ec5b]"></i>
+                  <i class="ri-user-line text-lg text-[#15ec5b]"></i>
                 </div>
-                <h2 className='text-lg font-bold leading-tight'>Gym Association</h2>
+                <h2 className='text-lg font-bold leading-tight'>Tell me about yourself</h2>
               </div>
 
               {/* Form */}
               <div className='flex flex-col gap-5'>
                 <div className='flex flex-col gap-2'>
                   <label className='flex flex-col gap-1 flex-1'>
-                    <p className='text-sm font-medium leading-normal'>Gym Code / Invite Code</p>
-                    <div className='relative'>
-                      <i class="ri-key-line absolute left-4 mt-7 -translate-y-1/2 text-[20px] text-[#61896f]"></i>
-                      <input 
-                        className='form-input flex w-full h-12 mt-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 border border-[#dbe6df] bg-white focus:border-[#15ec5b] placeholder:text-[#61896f] pl-11 pr-4 text-base font-normal leading-normal transition-all'
-                        type="text" 
-                        placeholder='e.g. GYM-8821X' 
-                      />
-                    </div>
-                    <p className='text-xs text-[#61896f] flex items-center gap-1 mt-1'>
-                        <i class="ri-information-line"></i>
-                        Enter the 6-digit code provided by your Gym Owner.
-                    </p>
+                    <p className='text-sm font-medium leading-normal'>Bio </p>
+                    <textarea className='form-input flex w-full min-h-30 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] px-4 py-3 text-base font-normal leading-normal transition-all' placeholder='A brief description about you, your training style, and what motivates you as a trainer...'></textarea>
                   </label>
                 </div>
               </div>

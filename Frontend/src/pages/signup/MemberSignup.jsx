@@ -1,8 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import SignupContext from './SignupContext';
+import { useNavigate } from 'react-router-dom';
 
 const MemberSignup = () => {
 
   const [experienceLevel, setExperienceLevel] = useState('beginner');
+
+  const { signupData, setSignupData } = useContext(SignupContext);
+
+  // dateOfBirth
+  // gender
+  // heightCm
+  // weightKg
+  // goal
+  // experienceLevel
 
   return (
     <div className='bg-[#f7f8f6] font-display text-slate-900 min-h-screen flex flex-col overflow-x-hidden antialiased'>
@@ -22,19 +33,18 @@ const MemberSignup = () => {
                 </p>
               </div>
 
-              <div className='h-2 w-full bg-[#dbe6df] rounded-full overflow-hidden'>
-                <div className='h-full bg-[#15ec5b] w-[90%] rounded-l-full shadow-[0_0_10px_#13ec5b]'></div>
+              <div className='h-0.5 w-full bg-[#15ec5b] rounded-full overflow-hidden'>
               </div>
             </div>
 
             {/* Heading */}
             <div className='flex flex-col gap-2 mt-4'>
               <h1 className='text-4xl font-black leading-tight tracking-tight'>
-                Tell Us About Your Fitness Goals
+                Set Up Your Gym
               </h1>
 
-              <p className='text-[#61896f] text-base font-normal leading-normal'>
-                This helps us personalize your experience and recommend the best plans.
+              <p className='text-[#61896f] text-base font-normal leading-normal max-w-lg'>
+                Let’s get your gym ready in under 2 minutes. We just need a few details to customize your dashboard.
               </p>
             </div>
           </div>
@@ -55,8 +65,8 @@ const MemberSignup = () => {
               <div className='grid grid-cols-2 gap-5'>
                 <div>
                   <label className='flex flex-col flex-1 gap-2'>
-                    <p className='text-sm font-medium leading-normal'>Age</p>
-                    <input className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' type="number" placeholder='e.g. 22'/>
+                    <p className='text-sm font-medium leading-normal'>Date of Birth</p>
+                    <input className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' type="date" placeholder='Select your date of birth'/>
                   </label>
                 </div>
 
@@ -211,44 +221,6 @@ const MemberSignup = () => {
                         </div>
                         </label>
                     </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Gym Association */}
-            <div className='bg-[#f7f8f6] p-5 rounded-xl border border-[#dbe6df]'>
-              {/* Heading */}
-              <div className='flex items-center gap-3 pb-3'>
-                <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-team-line text-lg text-[#15ec5b]"></i>
-                </div>
-                <h2 className='text-lg font-bold leading-tight'>Gym Association</h2>
-              </div>
-
-              {/* Form */}
-              <div className='flex flex-col gap-5'>
-                <div className='flex flex-col gap-2'>
-                  <label className='flex flex-col gap-1 flex-1'>
-                    <p className='text-sm text-[#61896f] font-medium leading-normal'>Enter the invite code provided by your gym to link your account.</p>
-                    <div className='flex gap-3'>
-                        <div className='relative flex-1'>
-                        <i class="ri-key-line absolute left-4 mt-7 -translate-y-1/2 text-[20px] text-[#61896f]"></i>
-                        <input 
-                            className='form-input flex w-full h-12 mt-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 border border-[#dbe6df] bg-white focus:border-[#15ec5b] placeholder:text-[#61896f] pl-11 pr-4 text-base font-normal leading-normal transition-all'
-                            type="text" 
-                            placeholder='e.g. GYM-8821X' 
-                        />
-                        </div>
-
-                        <button className='h-12 px-6 bg-slate-900 text-white rounded-lg mt-1 font-semibold hover:opacity-90 transition-opacity whitespace-nowrap'>
-                            Verify Code
-                        </button>
-                    </div>
-                    <p className='text-xs text-[#61896f] flex items-center gap-1 mt-1'>
-                        <i class="ri-information-line"></i>
-                        Enter the 6-digit code provided by your Gym Owner.
-                    </p>
-                  </label>
                 </div>
               </div>
             </div>
