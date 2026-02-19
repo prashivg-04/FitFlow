@@ -12,7 +12,7 @@ const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState('owner');
+  const [selectedRole, setSelectedRole] = useState('OWNER');
 
   const { signupData, setSignupData } = useContext(SignupContext);
   const navigate = useNavigate();
@@ -27,10 +27,7 @@ const Signup = () => {
       role: selectedRole
     });
     console.log(signupData)
-    setName('');
-    setEmail('');
-    setPassword('');
-    setSelectedRole('owner');
+    console.log(selectedRole.toLowerCase())
     navigate(`/signup/${selectedRole.toLowerCase()}`);
   }
   
@@ -62,21 +59,21 @@ const Signup = () => {
                   className='absolute h-[calc(100%-8px)] rounded-md bg-white shadow-[0_0_4px_#0000001a] transition-all duration-300 ease-in-out top-1'
                   style={{
                     width: 'calc(33.333% - 5.33px)',
-                    left: selectedRole === 'owner' ? '4px' : selectedRole === 'trainer' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
+                    left: selectedRole === 'OWNER' ? '4px' : selectedRole === 'TRAINER' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
                   }}
                 />
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'owner'}
+                    checked={selectedRole === 'OWNER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
-                    value="owner"
+                    value="OWNER"
                     onChange={(e) => setSelectedRole(e.target.value)}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'owner' ? 'text-slate-900' : 'text-[#61896f]'
+                    selectedRole === 'OWNER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Gym Owner
                   </div>
@@ -84,15 +81,15 @@ const Signup = () => {
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'trainer'}
+                    checked={selectedRole === 'TRAINER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
-                    value="trainer" 
+                    value="TRAINER" 
                     onChange={(e) => setSelectedRole(e.target.value)}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'trainer' ? 'text-slate-900' : 'text-[#61896f]'
+                    selectedRole === 'TRAINER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Trainer
                   </div>
@@ -100,15 +97,15 @@ const Signup = () => {
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'member'}
+                    checked={selectedRole === 'MEMBER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
-                    value="member" 
+                    value="MEMBER" 
                     onChange={(e) => setSelectedRole(e.target.value)}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'member' ? 'text-slate-900' : 'text-[#61896f]'
+                    selectedRole === 'MEMBER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Member
                   </div>

@@ -1,19 +1,62 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import SignupContext from './SignupContext';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import api from '../../api/axios';
+import { loginSuccess } from '../../store/authSlice';
 
 const MemberSignup = () => {
 
-  const [experienceLevel, setExperienceLevel] = useState('beginner');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { signupData, setSignupData } = useContext(SignupContext);
 
-  // dateOfBirth
-  // gender
-  // heightCm
-  // weightKg
-  // goal
-  // experienceLevel
+  useEffect(() => {
+    if(!signupData.role || signupData.role !== 'MEMBER') {
+      navigate('/signup');
+    }
+  }, []);
+
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [gender, setGender] = useState('');
+  const [heightCm, setHeightCm] = useState('');
+  const [weightKg, setWeightKg] = useState('');
+  const [goal, setGoal] = useState('');
+  const [experienceLevel, setExperienceLevel] = useState('BEGINNER');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const updatedData = {
+      ...signupData,
+      roleData: {
+        dateOfBirth,
+        gender,
+        heightCm: parseFloat(heightCm) || 0,
+        weightKg: parseFloat(weightKg) || 0,
+        goal,
+        experienceLevel
+      }
+    };
+
+    console.log(updatedData);
+
+    try {
+      const response = await api.post('/auth/signup', updatedData)
+      dispatch(loginSuccess(response.data));
+      navigate('/member/join');
+    } catch(err) {
+      console.error('Signup failed:', err);
+    }
+
+    setDateOfBirth('');
+    setGender('');
+    setHeightCm('');
+    setWeightKg('');
+    setGoal('');
+    setExperienceLevel('BEGINNER');
+  }
 
   return (
     <div className='bg-[#f7f8f6] font-display text-slate-900 min-h-screen flex flex-col overflow-x-hidden antialiased'>
@@ -50,7 +93,7 @@ const MemberSignup = () => {
           </div>
 
           {/* Form */}
-          <div className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
+          <form onSubmit={handleSubmit} className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
             {/* Basic Fitness Details */}
             <div className='flex flex-col gap-5'>
               {/* Heading */}
@@ -66,7 +109,13 @@ const MemberSignup = () => {
                 <div>
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Date of Birth</p>
-                    <input className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' type="date" placeholder='Select your date of birth'/>
+                    <input 
+                      value={dateOfBirth}
+                      onChange={(e) => setDateOfBirth(e.target.value)}
+                      className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
+                      type="date" 
+                      placeholder='Select your date of birth'
+                    />
                   </label>
                 </div>
 
@@ -74,11 +123,16 @@ const MemberSignup = () => {
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Gender</p>
                     <div className='relative'>
-                      <select className='form-select w-full h-12 bg-white rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] appearance-none cursor-pointer px-4' name="" id="">
-                        <option disabled selected value>Select Gender</option>
-                        <option>Male</option>
-                        <option>Female</option>
-                        <option>Prefer not to say</option>
+                      <select 
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        className='form-select w-full h-12 bg-white rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] appearance-none cursor-pointer px-4' 
+                        name="gender" id="gender"
+                      >
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value='MALE'>Male</option>
+                        <option value='FEMALE'>Female</option>
+                        <option value='OTHER'>Prefer not to say</option>
                       </select>
                       <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
                         <i class="ri-arrow-down-s-fill text-m"></i>
@@ -91,7 +145,13 @@ const MemberSignup = () => {
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Height</p>
                     <div className='flex items-center relative'>
-                        <input className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' type="number" placeholder='e.g. 175'/>
+                        <input 
+                          value={heightCm}
+                          onChange={(e) => setHeightCm(e.target.value)}
+                          className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
+                          type="number" 
+                          placeholder='e.g. 175'
+                        />
                         <div className='absolute right-2 top-1/2 -translate-y-1/2 flex bg-[#f7f8f6] rounded-md border border-[#dbe6df] p-0.5 text-sm font-medium'>
                             <span className='text-[#7e9f89] rounded bg-white px-2 py-1 cursor-pointer'>cm</span>
                         </div>
@@ -103,7 +163,13 @@ const MemberSignup = () => {
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Weight</p>
                     <div className='flex items-center relative'>
-                        <input className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' type="number" placeholder='e.g. 82'/>
+                        <input 
+                          value={weightKg}
+                          onChange={(e) => setWeightKg(e.target.value)}
+                          className='form-input w-full h-12 rounded-lg border border-[#dbe6df] bg-white px-4 text-base font-normal leading-normal placeholder:text-[#61896f] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
+                          type="number" 
+                          placeholder='e.g. 82'
+                        />
                         <div className='absolute right-2 top-1/2 -translate-y-1/2 flex bg-[#f7f8f6] rounded-md border border-[#dbe6df] p-0.5 text-sm font-medium'>
                             <span className='text-[#7e9f89] rounded bg-white px-2 py-1 cursor-pointer'>kg</span>
                         </div>
@@ -127,36 +193,24 @@ const MemberSignup = () => {
               <div className='flex flex-col items-center gap-5'>
                 <div className='flex flex-col gap-2 w-full'>
                   <label className='flex flex-col gap-2 flex-1'>
-                    <div className='grid grid-cols-3 gap-3'>
-                        <label className='cursor-pointer '>
-                            <input className='peer sr-only' type="radio" name="experience" />
-                            <div className='flex flex-col items-center justify-center p-3 rounded-lg border-2 bg-[#f7f8f6] border-[#dbe6df] peer-checked:border-[#15ec5b] peer-checked:border-2 peer-checked:bg-[#15ec5b]/10 peer-hover:peer-not-checked:bg-gray-50 transition-all gap-3'>
-                                <div className='size-10 rounded-full bg-white flex items-center justify-center text-[#15ec5b] shadow-sm'>
-                                    <i class="fa-solid fa-weight-scale"></i>
-                                </div>
-                                <span className='text-xs text-slate-900 font-semibold '>Weight Loss</span>
-                            </div>
-                        </label>
-
-                        <label className='cursor-pointer '>
-                            <input className='peer sr-only' type="radio" name="experience" />
-                            <div className='flex flex-col items-center justify-center p-3 rounded-lg border-2 bg-[#f7f8f6] border-[#dbe6df] peer-checked:border-[#15ec5b] peer-checked:border-2 peer-checked:bg-[#15ec5b]/10 peer-hover:peer-not-checked:bg-gray-50 transition-all gap-3'>
-                                <div className='size-10 rounded-full bg-white flex items-center justify-center text-[#15ec5b] shadow-sm'>
-                                    <i class="fa-solid fa-dumbbell"></i>
-                                </div>
-                                <span className='text-xs text-slate-900 font-semibold '>Muscle Gain</span>
-                            </div>
-                        </label>
-
-                        <label className='cursor-pointer '>
-                            <input className='peer sr-only' type="radio" name="experience" />
-                            <div className='flex flex-col items-center justify-center p-3 rounded-lg border-2 bg-[#f7f8f6] border-[#dbe6df] peer-checked:border-[#15ec5b] peer-checked:border-2 peer-checked:bg-[#15ec5b]/10 peer-hover:peer-not-checked:bg-gray-50 transition-all gap-3'>
-                                <div className='size-10 rounded-full bg-white flex items-center justify-center text-[#15ec5b] shadow-sm'>
-                                    <i class="fa-solid fa-heart-pulse"></i>
-                                </div>
-                                <span className='text-xs text-slate-900 font-semibold '>Weight Loss</span>
-                            </div>
-                        </label>
+                    <p className='text-sm font-medium leading-normal'>Goal</p>
+                    <div className='relative'>
+                      <select 
+                        value={goal}
+                        onChange={(e) => setGoal(e.target.value)}
+                        className='form-select w-full h-12 bg-white rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] appearance-none cursor-pointer px-4' 
+                        name="goal" id="goal"
+                      >
+                        <option value="" disabled selected>Set your Goal</option>
+                        <option value="WEIGHT_LOSS">Weight Loss</option>
+                        <option value="MUSCLE_GAIN">Muscle Gain</option>
+                        <option value="ENDURANCE">Endurance</option>
+                        <option value="FLEXIBILITY">Flexibility</option>
+                        <option value="GENERAL_FITNESS">General Fitness</option>
+                      </select>
+                      <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
+                        <i class="ri-arrow-down-s-fill text-m"></i>
+                      </div>
                     </div>
                   </label>
                 </div>
@@ -169,21 +223,21 @@ const MemberSignup = () => {
                         className='absolute h-[calc(100%-8px)] rounded-md bg-white shadow-[0_0_4px_#0000001a] transition-all duration-300 ease-in-out top-1'
                         style={{
                             width: 'calc(33.333% - 5.33px)',
-                            left: experienceLevel === 'beginner' ? '4px' : experienceLevel === 'intermediate' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
+                            left: experienceLevel === 'BEGINNER' ? '4px' : experienceLevel === 'INTERMEDIATE' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
                         }}
                         />
 
                         <label className='flex-1 cursor-pointer relative z-10'>
                         <input 
-                            checked={experienceLevel === 'beginner'}
+                            checked={experienceLevel === 'BEGINNER'}
                             className='sr-only' 
                             type="radio" 
                             name='role' 
-                            value="beginner"
+                            value="BEGINNER"
                             onChange={(e) => setExperienceLevel(e.target.value)}
                         />
                         <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            experienceLevel === 'beginner' ? 'text-slate-900' : 'text-[#61896f]'
+                            experienceLevel === 'BEGINNER' ? 'text-slate-900' : 'text-[#61896f]'
                         }`}>
                             Beginner
                         </div>
@@ -191,15 +245,15 @@ const MemberSignup = () => {
 
                         <label className='flex-1 cursor-pointer relative z-10'>
                         <input 
-                            checked={experienceLevel === 'intermediate'}
+                            checked={experienceLevel === 'INTERMEDIATE'}
                             className='sr-only' 
                             type="radio" 
                             name='role' 
-                            value="intermediate" 
+                            value="INTERMEDIATE" 
                             onChange={(e) => setExperienceLevel(e.target.value)}
                         />
                         <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            experienceLevel === 'intermediate' ? 'text-slate-900' : 'text-[#61896f]'
+                            experienceLevel === 'INTERMEDIATE' ? 'text-slate-900' : 'text-[#61896f]'
                         }`}>
                             Intermediate
                         </div>
@@ -207,15 +261,15 @@ const MemberSignup = () => {
 
                         <label className='flex-1 cursor-pointer relative z-10'>
                         <input 
-                            checked={experienceLevel === 'advanced'}
+                            checked={experienceLevel === 'ADVANCED'}
                             className='sr-only' 
                             type="radio" 
                             name='role' 
-                            value="advanced" 
+                            value="ADVANCED" 
                             onChange={(e) => setExperienceLevel(e.target.value)}
                         />
                         <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            experienceLevel === 'advanced' ? 'text-slate-900' : 'text-[#61896f]'
+                            experienceLevel === 'ADVANCED' ? 'text-slate-900' : 'text-[#61896f]'
                         }`}>
                             Advanced
                         </div>
@@ -227,12 +281,12 @@ const MemberSignup = () => {
 
             {/* Actions */}
             <div className='flex items-center justify-between gap-4 pt-2'>
-              <button className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
+              <button type='submit' className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
                 <span>Complete Signup</span>
                 <i class="ri-arrow-right-line text-[20px] font-bold"></i>
               </button>
             </div>
-          </div>
+          </form>
 
           {/* Conditions */}
           <p className='text-center text-xs text-gray-400 pb-8'>

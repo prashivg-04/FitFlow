@@ -93,7 +93,7 @@ model Trainer {
 
   specialization String
   experienceYears Int
-  preferredDays String
+  preferredDays String[]
   startTime String
   endTime String
   bio String
