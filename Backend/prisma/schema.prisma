@@ -154,7 +154,7 @@ model Member {
 
 model TrainerMember {
   trainerId String
-  memberId String
+  memberId String @unique
 
   trainer Trainer @relation(fields: [trainerId], references: [id])
   member Member @relation(fields: [memberId], references: [id])
