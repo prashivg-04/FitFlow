@@ -123,7 +123,7 @@ Each Trainer:
 | ownerId | UUID (Optional, FK) | References Owner.id |
 | specialization | String | Trainer specialization |
 | experienceYears | Int | Years of experience |
-| preferredDays | String | Working days (e.g., "MON,TUE,WED") |
+| preferredDays | String[] | Working days (e.g., "MON,TUE,WED") |
 | startTime | String | Daily start time (e.g., "07:00") |
 | endTime | String | Daily end time (e.g., "11:00") |
 | bio | String | Required professional description |
