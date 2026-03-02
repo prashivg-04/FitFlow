@@ -19,28 +19,28 @@ enum UserRole {
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  role UserRole
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      UserRole
   createdAt DateTime @default(now())
 
-  owner Owner?
+  owner   Owner?
   trainer Trainer?
-  member Member?
+  member  Member?
 
   joinRequests JoinRequest[]
 }
 
 model Owner {
-  id String @id @default(uuid())
+  id     String @id @default(uuid())
   userId String @unique
 
   gymName String
   address String
-  city String
-  phone String
+  city    String
+  phone   String
 
   gymCode String @unique
 
@@ -51,9 +51,9 @@ model Owner {
   updatedAt DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id])
-  
+
   trainers Trainer[]
-  members Member[]
+  members  Member[]
 
   joinRequests JoinRequest[]
 }
@@ -65,17 +65,17 @@ enum JoinStatus {
 }
 
 model JoinRequest {
-  id String @id @default(uuid())
+  id      String     @id @default(uuid())
   ownerId String
-  userId String
-  role UserRole
-  status JoinStatus @default(PENDING)
+  userId  String
+  role    UserRole
+  status  JoinStatus @default(PENDING)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   owner Owner @relation(fields: [ownerId], references: [id])
-  user User @relation(fields: [userId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
 
   @@unique([ownerId, userId])
 }
@@ -87,26 +87,28 @@ enum GymStatus {
 }
 
 model Trainer {
-  id String @id @default(uuid())
-  userId String @unique
+  id      String  @id @default(uuid())
+  userId  String  @unique
   ownerId String?
 
-  specialization String
+  specialization  String
   experienceYears Int
-  preferredDays String[]
-  startTime String
-  endTime String
-  bio String
+  preferredDays   String[]
+  startTime       String
+  endTime         String
+  bio             String
 
   gymStatus GymStatus @default(NONE)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
   owner Owner? @relation(fields: [ownerId], references: [id])
 
   trainerMembers TrainerMember[]
+
+  workoutPrograms WorkoutProgram[]
 }
 
 enum Gender {
@@ -130,15 +132,15 @@ enum ExperienceLevel {
 }
 
 model Member {
-  id String @id @default(uuid())
-  userId String @unique
+  id      String  @id @default(uuid())
+  userId  String  @unique
   ownerId String?
 
-  dateOfBirth DateTime
-  gender Gender
-  heightCm Float
-  weightKg Float
-  goal FitnessGoal
+  dateOfBirth     DateTime
+  gender          Gender
+  heightCm        Float
+  weightKg        Float
+  goal            FitnessGoal
   experienceLevel ExperienceLevel
 
   gymStatus GymStatus @default(NONE)
@@ -146,7 +148,7 @@ model Member {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User @relation(fields: [userId], references: [id])
+  user  User   @relation(fields: [userId], references: [id])
   owner Owner? @relation(fields: [ownerId], references: [id])
 
   trainerMembers TrainerMember[]
@@ -154,10 +156,56 @@ model Member {
 
 model TrainerMember {
   trainerId String
-  memberId String @unique
+  memberId  String @unique
 
   trainer Trainer @relation(fields: [trainerId], references: [id])
-  member Member @relation(fields: [memberId], references: [id])
+  member  Member  @relation(fields: [memberId], references: [id])
 
   @@id([trainerId, memberId])
+}
+
+// workouts
+
+model WorkoutProgram {
+  id        String @id @default(uuid())
+  trainerId String
+
+  title       String
+  description String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  trainer Trainer             @relation(fields: [trainerId], references: [id])
+  days    WorkoutProgramDay[]
+}
+
+model WorkoutProgramDay {
+  id        String @id @default(uuid())
+  programId String
+
+  name       String
+  orderIndex Int
+  isRestDay  Boolean @default(false)
+
+  program   WorkoutProgram    @relation(fields: [programId], references: [id])
+  exercises WorkoutExercise[]
+
+  @@unique([programId, orderIndex])
+}
+
+model WorkoutExercise {
+  id           String @id @default(uuid())
+  programDayId String
+
+  name        String
+  sets        Int
+  reps        String
+  restSeconds Int
+  notes       String?
+  orderIndex  Int
+
+  programDay WorkoutProgramDay @relation(fields: [programDayId], references: [id])
+
+  @@unique([programDayId, orderIndex])
 }
