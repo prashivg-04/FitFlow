@@ -228,7 +228,10 @@ model WorkoutAssignment {
   programId    String
   programDayId String
 
-  assignedAt DateTime
+  assignedDate DateTime
+
+  dayName String
+  isRestDay Boolean
 
   status        AssignmentStatus @default(PENDING)
   completedDate DateTime?
@@ -237,12 +240,12 @@ model WorkoutAssignment {
   program    WorkoutProgram    @relation(fields: [programId], references: [id])
   programDay WorkoutProgramDay @relation(fields: [programDayId], references: [id])
 
-  excercises WorkoutAssignmentExcercise[]
+  exercises WorkoutAssignmentExercise[]
 
-  @@unique([memberId, programDayId])
+  @@unique([memberId, assignedDate])
 }
 
-model WorkoutAssignmentExcercise {
+model WorkoutAssignmentExercise {
   id String @id @default(uuid())
 
   assignmentId String
