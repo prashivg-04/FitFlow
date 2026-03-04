@@ -152,6 +152,8 @@ model Member {
   owner Owner? @relation(fields: [ownerId], references: [id])
 
   trainerMembers TrainerMember[]
+
+  workoutAssignments WorkoutAssignment[]
 }
 
 model TrainerMember {
@@ -178,6 +180,8 @@ model WorkoutProgram {
 
   trainer Trainer             @relation(fields: [trainerId], references: [id])
   days    WorkoutProgramDay[]
+
+  assignments WorkoutAssignment[]
 }
 
 model WorkoutProgramDay {
@@ -190,6 +194,8 @@ model WorkoutProgramDay {
 
   program   WorkoutProgram    @relation(fields: [programId], references: [id])
   exercises WorkoutExercise[]
+
+  assignments WorkoutAssignment[]
 
   @@unique([programId, orderIndex])
 }
@@ -208,4 +214,47 @@ model WorkoutExercise {
   programDay WorkoutProgramDay @relation(fields: [programDayId], references: [id])
 
   @@unique([programDayId, orderIndex])
+}
+
+enum AssignmentStatus {
+  PENDING
+  COMPLETED
+}
+
+model WorkoutAssignment {
+  id String @id @default(uuid())
+
+  memberId     String
+  programId    String
+  programDayId String
+
+  assignedAt DateTime
+
+  status        AssignmentStatus @default(PENDING)
+  completedDate DateTime?
+
+  member     Member            @relation(fields: [memberId], references: [id])
+  program    WorkoutProgram    @relation(fields: [programId], references: [id])
+  programDay WorkoutProgramDay @relation(fields: [programDayId], references: [id])
+
+  excercises WorkoutAssignmentExcercise[]
+
+  @@unique([memberId, programDayId])
+}
+
+model WorkoutAssignmentExcercise {
+  id String @id @default(uuid())
+
+  assignmentId String
+
+  name        String
+  sets        Int
+  reps        String
+  restSeconds Int
+  notes       String?
+  orderIndex  Int
+
+  assignment WorkoutAssignment @relation(fields: [assignmentId], references: [id])
+
+  @@unique([assignmentId, orderIndex])
 }
