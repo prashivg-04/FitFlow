@@ -239,10 +239,15 @@ fields such as assignment date, status, or notes.
 | Owner | ✅ Finalized |
 | Trainer | ✅ Finalized |
 | Member | ✅ Finalized |
+| TrainerMember | ✅ Finalized |
 | JoinRequest | ✅ Finalized |
+| WorkoutProgram | ✅ Finalized |
+| WorkoutProgramDay | ✅ Finalized |
+| WorkoutExercise | ✅ Finalized |
+| WorkoutAssignment | ✅ Finalized |
+| WorkoutAssignmentExercise | ✅ Finalized |
 | Attendance | ⏳ Planned |
 | Payments | ⏳ Planned |
-| Workout Plans | ⏳ Planned |
 
 ---
 
@@ -371,7 +376,51 @@ Each JoinRequest:
 
 ---
 
-## 8. Updated Enums
+## 8. TrainerMember Table
+
+### Purpose
+The `TrainerMember` table represents the **many-to-many relationship between trainers and members**.
+It stores trainer–member assignments, allowing one trainer to manage multiple members and
+restricting each member to a single trainer through a unique constraint.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| trainerId | UUID (FK) | References Trainer.id; part of composite primary key |
+| memberId | UUID (FK, Unique) | References Member.id; part of composite primary key; unique constraint ensures one trainer per member |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| Trainer | Many-to-One |
+| Member | One-to-One |
+
+---
+
+### Constraints
+
+| Constraint Type | Description |
+|----------------|-------------|
+| Composite Primary Key | `@@id([trainerId, memberId])` – Each pair uniquely identifies a trainer-member assignment |
+| Unique Member Reference | `memberId` is unique across all rows – Each member can only have one trainer assigned |
+
+---
+
+### Notes
+- This is a **many-to-one relationship from trainer perspective**: one trainer can have many members.
+- This is a **one-to-one relationship from member perspective**: each member can only be assigned to one trainer.
+- No additional business fields (e.g., assignment date, status) are stored here in the MVP.
+- Future versions may extend this table with assignment metadata.
+
+---
+
+## 9. Updated Enums
 
 ### FitnessGoal (Updated)
 
@@ -414,3 +463,280 @@ The `FitnessGoal` enum has been updated to reflect more specific fitness objecti
 | OWNER | Gym owner with administrative privileges |
 | TRAINER | Fitness trainer employed by a gym |
 | MEMBER | Gym member receiving training |
+
+---
+
+### AssignmentStatus
+
+The `AssignmentStatus` enum tracks the **completion state of workout assignments** for members.
+
+| Value | Description |
+|-------|-------------|
+| PENDING | Workout assignment has been created but not yet completed (default) |
+| COMPLETED | Member has completed the workout assignment |
+
+---
+
+## 10. WorkoutProgram Table
+
+### Purpose
+The `WorkoutProgram` table stores **structured workout programs created by trainers**.
+Each program is a collection of workout days (e.g., chest day, back day, rest day) with
+associated exercises. Programs can be assigned to multiple members to create personalized
+workout schedules.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| id | UUID | Primary key |
+| trainerId | UUID (FK) | References Trainer.id – trainer who created the program |
+| title | String | Program name (e.g., "Upper Body Strength") |
+| description | String (Optional) | Program description or goals |
+| createdAt | DateTime | Program creation timestamp |
+| updatedAt | DateTime | Auto-updated on any change |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| Trainer | Many-to-One |
+| WorkoutProgramDay | One-to-Many |
+| WorkoutAssignment | One-to-Many |
+
+---
+
+### Notes
+- Programs are created by trainers and can be assigned to their members.
+- Each program contains multiple days with exercises.
+- A program can be assigned to multiple members, creating individual assignments.
+- Program metadata (title, description) is immutable once created; changes would typically require creating a new program.
+
+---
+
+## 11. WorkoutProgramDay Table
+
+### Purpose
+The `WorkoutProgramDay` table represents **individual days within a workout program**.
+Each day can either be a workout day (with exercises) or a rest day.
+Days have an order to define the sequence of the program.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| id | UUID | Primary key |
+| programId | UUID (FK) | References WorkoutProgram.id |
+| name | String | Day name (e.g., "Monday Chest", "Rest Day") |
+| orderIndex | Int | Sequence order of this day within the program (1-based) |
+| isRestDay | Boolean | Whether this is a rest day; if true, no exercises are expected (default: false) |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| WorkoutProgram | Many-to-One |
+| WorkoutExercise | One-to-Many |
+| WorkoutAssignment | One-to-Many |
+
+---
+
+### Constraints
+
+| Constraint Type | Description |
+|----------------|-------------|
+| Unique Composite | `@@unique([programId, orderIndex])` – Each program day has a unique order within its program |
+
+---
+
+### Notes
+- `orderIndex` defines the sequence; programs repeat cyclically based on the number of days.
+- Rest days do not have exercises but are still tracked for schedule continuity.
+- When a program is assigned to a member, each program day generates a corresponding assignment.
+
+---
+
+## 12. WorkoutExercise Table
+
+### Purpose
+The `WorkoutExercise` table stores **individual exercises within a program day**.
+It defines the structure of each exercise including sets, reps, and rest intervals.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| id | UUID | Primary key |
+| programDayId | UUID (FK) | References WorkoutProgramDay.id |
+| name | String | Exercise name (e.g., "Bench Press", "Barbell Rows") |
+| sets | Int | Number of sets to perform |
+| reps | String | Repetition range (e.g., "8-12", "10", "5x5") |
+| restSeconds | Int | Rest time in seconds between sets |
+| notes | String (Optional) | Exercise notes or form cues (e.g., "control the descent") |
+| orderIndex | Int | Sequence order of this exercise within the day |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| WorkoutProgramDay | Many-to-One |
+
+---
+
+### Constraints
+
+| Constraint Type | Description |
+|----------------|-------------|
+| Unique Composite | `@@unique([programDayId, orderIndex])` – Each exercise has a unique order within its day |
+
+---
+
+### Notes
+- Exercises are defined once when the program is created.
+- `reps` is stored as a string to allow flexible notation (e.g., "8-12", "10", "AMRAP").
+- `restSeconds` defines the standard rest interval for this exercise.
+- When a program is assigned to a member, exercise details are **snapshot** into `WorkoutAssignmentExercise` for that specific assignment.
+
+---
+
+## 13. WorkoutAssignment Table
+
+### Purpose
+The `WorkoutAssignment` table stores **individual workout day assignments for members**.
+When a trainer assigns a program to a member with a start date, daily assignments are
+created for each day of the program. Members track completion of these assignments.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| id | UUID | Primary key |
+| memberId | UUID (FK) | References Member.id – member assigned this workout |
+| programId | UUID (FK) | References WorkoutProgram.id – the program being assigned |
+| programDayId | UUID (FK) | References WorkoutProgramDay.id – the specific day in the program |
+| assignedDate | DateTime | The calendar date when this workout is scheduled |
+| dayName | String | Snapshot of the program day name (e.g., "Chest Day") |
+| isRestDay | Boolean | Snapshot of whether this day is a rest day |
+| status | Enum (PENDING, COMPLETED) | Completion status (default: PENDING) |
+| completedDate | DateTime (Optional) | Timestamp when member completed the workout |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| Member | Many-to-One |
+| WorkoutProgram | Many-to-One |
+| WorkoutProgramDay | Many-to-One |
+| WorkoutAssignmentExercise | One-to-Many |
+
+---
+
+### Constraints
+
+| Constraint Type | Description |
+|----------------|-------------|
+| Unique Composite | `@@unique([memberId, assignedDate])` – Each member can have at most one assignment per calendar date |
+
+---
+
+### Notes
+- Each day of an assigned program creates one `WorkoutAssignment` record.
+- `dayName` and `isRestDay` are snapshots of the program day at assignment time; they don't change if the program is modified.
+- Members can view their schedule by querying assignments by `memberId`.
+- Trainers can view a member's calendar by querying assignments by `memberId` and `assignedDate` range.
+- Status transitions: `PENDING` → `COMPLETED` (one-way; once completed, cannot be reverted).
+
+---
+
+## 14. WorkoutAssignmentExercise Table
+
+### Purpose
+The `WorkoutAssignmentExercise` table stores **exercise snapshots for specific workout assignments**.
+When an assignment is created, all exercises from the corresponding program day are copied
+(snapshot) into this table. This ensures member data is immutable even if the original
+program is modified.
+
+---
+
+### Fields (Physical Columns)
+
+| Field Name | Type | Description |
+|----------|------|------------|
+| id | UUID | Primary key |
+| assignmentId | UUID (FK) | References WorkoutAssignment.id |
+| name | String | Exercise name snapshot (e.g., "Bench Press") |
+| sets | Int | Number of sets to perform |
+| reps | String | Repetition range |
+| restSeconds | Int | Rest time in seconds between sets |
+| notes | String (Optional) | Exercise notes snapshot |
+| orderIndex | Int | Sequence order of this exercise within the assignment |
+
+---
+
+### Relationships
+
+| Related Entity | Relationship |
+|---------------|-------------|
+| WorkoutAssignment | Many-to-One |
+
+---
+
+### Constraints
+
+| Constraint Type | Description |
+|----------------|-------------|
+| Unique Composite | `@@unique([assignmentId, orderIndex])` – Each exercise has a unique order within its assignment |
+
+---
+
+### Notes
+- This table is a **snapshot** of exercises at the time of assignment.
+- If a trainer modifies the original program, these snapshot records remain unchanged.
+- Members see the exact exercises they were assigned when they performed the workout.
+- Future enhancements could track per-exercise completion (e.g., sets completed, weight used).
+
+---
+
+## 15. Overall Schema Architecture
+
+### Entity Relationships Overview
+
+**Authentication & Access Control**
+- `User` → central authentication
+- `Owner`, `Trainer`, `Member` → role-specific profiles linked to User
+
+**Gym Membership**
+- `Owner` manages Trainers and Members
+- `JoinRequest` handles membership requests
+- `TrainerMember` links trainers to their assigned members
+
+**Workout Management**
+- `Trainer` creates `WorkoutProgram`s
+- `WorkoutProgram` contains `WorkoutProgramDay`s
+- `WorkoutProgramDay` contains `WorkoutExercise`s
+- `WorkoutProgram` is assigned to `Member` via `WorkoutAssignment`
+- Each assignment creates daily `WorkoutAssignment` records
+- Each assignment day includes `WorkoutAssignmentExercise` snapshots
+
+### Data Immutability & Snapshots
+
+- Exercises and day configurations are **snapshot** into assignments when created.
+- Modifying a program does not affect existing member assignments.
+- This ensures members always have access to their original workout specs.
+
