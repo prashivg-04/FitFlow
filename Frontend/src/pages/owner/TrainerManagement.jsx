@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import OwnerHeader from '../../components/owner/OwnerHeader'
 import navjot from '../../media/navjotImg.jpeg'
+import AssignTrainerModal from '../../components/owner/AssignTrainerModal'
+import api from '../../api/axios'
 
 const TrainerManagement = () => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [unassignedMembers, setUnassignedMembers] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  useEffect(() => {
+    const fetchUnassignedMembers = async () => {
+      try {
+        const response = await api.get('/owner/members/unassigned');
+        setUnassignedMembers(response.data.data);
+      } catch(err) {
+        console.log('Failed to fetch unassigned members: ', err);
+      }
+    }
+
+    fetchUnassignedMembers();
+  }, []);
+
   return (
     <div className=''>
       <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
@@ -385,29 +405,33 @@ const TrainerManagement = () => {
           <div className='mt-8'>
             <h3 className='text-lg font-bold mb-4'>Pending Assignments</h3>
             <div className='grid grid-cols-3 gap-4'>
-              <div className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
-                <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
-                  <i class="fa-solid fa-user-plus text-slate-500"></i>
-                </div>
-                <div className='flex-1 min-w-0'>
-                  <h4 className='text-sm font-bold truncate'>New Member: John Doe</h4>
-                  <p className='text-xs text-slate-500 mt-1 mb-3'>Looking for Strength Training coach. Prefer morning sessions.</p>
-                  <button className='w-full text-xs font-bold bg-slate-100 hover:bg-slate-200 py-2 rounded transition'>Assign Trainer</button>
-                </div>
-              </div>
-
-              <div className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
-                <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
-                  <i class="fa-solid fa-user-plus text-slate-500"></i>
-                </div>
-                <div className='flex-1 min-w-0'>
-                  <h4 className='text-sm font-bold truncate'>New Member: John Doe</h4>
-                  <p className='text-xs text-slate-500 mt-1 mb-3'>Looking for Strength Training coach. Prefer morning sessions.</p>
-                  <button className='w-full text-xs font-bold bg-slate-100 hover:bg-slate-200 py-2 rounded transition'>Assign Trainer</button>
-                </div>
-              </div>
+              {unassignedMembers.map(member => {
+                return (
+                  <div key={member.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
+                    <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
+                      <i class="fa-solid fa-user-plus text-slate-500"></i>
+                    </div>
+                    <div className='flex-1 min-w-0'>
+                      <h4 className='text-sm font-bold truncate'>Name : {member.user.name}</h4>
+                      <p className='text-xs text-slate-500 mt-1 capitalize'>Goal : {(member.goal).split('_')[0].toLowerCase() + ' ' + (member.goal).split('_')[1].toLowerCase()}</p>
+                      <p className='text-xs text-slate-500 mt-1 mb-3'>Weight : {member.weightKg} kg</p>
+                      <button 
+                        onClick={() => {
+                          setSelectedMember(member);
+                          setShowModal(true)
+                        }} 
+                        className='w-full text-xs font-bold bg-slate-100 hover:bg-slate-200 py-2 rounded transition'
+                      >
+                        Assign Trainer
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
           </div>
+
+          {showModal && <AssignTrainerModal member={selectedMember} onClose={() => setShowModal(false)} />}
         </div>
       </div>
     </div>
