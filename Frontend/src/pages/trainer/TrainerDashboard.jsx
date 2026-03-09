@@ -1,7 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect, use } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
+import api from '../../api/axios'
 
 const TrainerDashboard = () => {
+
+  const [assignedMembers, setAssignedMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchAssignedMembers = async () => {
+      try {
+        const response = await api.get('/trainer/members');
+        setAssignedMembers(response.data.data);
+      } catch(err) {
+        console.error('Error fetching assigned members:', err);
+      }
+    }
+
+    fetchAssignedMembers();
+  }, [])
+
   return (
     <div className='flex-1 overflow-y-auto p-8 space-y-6'>
       {/* KPI Cards */}
@@ -253,79 +270,27 @@ const TrainerDashboard = () => {
               <thead className='sticky top-0 bg-[#fbfdfc] z-10'>
                 <tr className='border-b border-[#f0f4f2]'>
                   <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Member</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Status</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Plan</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Last Visit</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide text-right'>Progress</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Goal</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Gender</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Height</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Weight</th>
                 </tr>
               </thead>
 
               <tbody className='divide-y divide-[#f0f4f2]'>
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                      <span>Sarah Jenkins</span>
-                    </div>
-                  </td>
-                  <td className='py-4 px-6'>
-                    <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 ring-1 ring-inset ring-green-600/20 text-green-800'>Active</span>
-                  </td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>Weight Loss Program</td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>Today</td>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center justify-end gap-2'>
-                      <span className='text-xs font-medium text-slate-700'>85%</span>
-                      <div className='h-1.5 w-16 rounded-full bg-slate-200'>
-                        <div className='h-1.5 rounded-full bg-green-500 w-[85%]'></div>
+                {assignedMembers.map((member) => (
+                  <tr key={member.id} className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <span>{member.user.name}</span>
                       </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                      <span>Mike Ross</span>
-                    </div>
-                  </td>
-                  <td className='py-4 px-6'>
-                    <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-50 ring-1 ring-inset ring-green-600/20 text-green-800'>Active</span>
-                  </td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>Muscle Build</td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>Yesterday</td>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center justify-end gap-2'>
-                      <span className='text-xs font-medium text-slate-700'>42%</span>
-                      <div className='h-1.5 w-16 rounded-full bg-slate-200'>
-                        <div className='h-1.5 rounded-full bg-yellow-500 w-[42%]'></div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                      <span>Jessica Pearson</span>
-                    </div>
-                  </td>
-                  <td className='py-4 px-6'>
-                    <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-50 ring-1 ring-inset ring-yellow-600/20 text-yellow-800'>Paused</span>
-                  </td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>Cardio Fitness</td>
-                  <td className='py-4 px-6 text-sm text-slate-600'>3 days ago</td>
-                  <td className='py-4 px-6'>
-                    <div className='flex items-center justify-end gap-2'>
-                      <span className='text-xs font-medium text-slate-700'>20%</span>
-                      <div className='h-1.5 w-16 rounded-full bg-slate-200'>
-                        <div className='h-1.5 rounded-full bg-slate-500 w-[20%]'></div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
+                    </td>
+                    <td className='py-4 px-6 text-sm text-slate-600 capitalize'>{member.goal.split('_').join(' ').toLowerCase()}</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.gender}</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.heightCm} cm</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.weightKg} kg</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

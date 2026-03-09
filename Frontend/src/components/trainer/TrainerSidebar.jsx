@@ -58,8 +58,20 @@ const TrainerSidebar = () => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-dumbbell"></i>
+                    <i class="text-lg fa-solid fa-book"></i>
                     <span className='font-medium'>Workout Plans</span>
+                </NavLink>
+
+                <NavLink
+                    to='/trainer/workout-builder'
+                    className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
+                        isActive
+                        ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
+                        : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
+                    }`} 
+                >
+                    <i class="text-lg fa-solid fa-dumbbell"></i>
+                    <span className='font-medium'>Workout Builder</span>
                 </NavLink>
 
                 <NavLink

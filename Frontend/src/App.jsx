@@ -40,6 +40,7 @@ import { useEffect } from 'react'
 import api from './api/axios'
 import { loginSuccess, logout } from './store/authSlice'
 import SignupLayout from './pages/signup/SignupLayout'
+import WorkoutBuilder from './pages/trainer/WorkoutBuilder'
 
 function App() {
 
@@ -92,6 +93,7 @@ function App() {
             <Route path='dashboard' element={<TrainerDashboard />} />
             <Route path='members' element={<TrainerMemberManagement />} />
             <Route path='workouts' element={<TrainerWorkoutPlans />} />
+            <Route path='workout-builder' element={<WorkoutBuilder />} />
             <Route path='assignments' element={<TrainerAssignWorkout />} />
             <Route path='workspace' element={<TrainerWorkspace />} />
             <Route path='settings' element={<TrainerSettings />} />
