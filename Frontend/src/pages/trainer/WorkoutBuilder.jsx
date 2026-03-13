@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
+import api from '../../api/axios'
 
 const WorkoutBuilder = () => {
 
@@ -8,11 +9,11 @@ const WorkoutBuilder = () => {
     description: '',
     days: [
       {
-        name: 'Push Focus',
+        name: '',
         isRestDay: false,
         exercises: [
           {
-            name: 'Barbell Bench Press',
+            name: '',
             sets: '',
             reps: '',
             rest: ''
@@ -118,8 +119,122 @@ const WorkoutBuilder = () => {
   }
 
   const totalExercises = program.days.reduce((total, day) => {
+    if(day.isRestDay) return total;
     return total + day.exercises.length
   }, 0)
+
+
+  // update exercise's fields 
+  const updateExercise = (exerciseIndex, value) => {
+    setProgram((prev) => {
+      const updatedDays = prev.days.map((day, dayIdx) => {
+        if(dayIdx !== activeDayIndex) return day;
+
+        return {
+          ...day, 
+          exercises: day.exercises.map((exercise, idx) => {
+            if(idx !== exerciseIndex) return exercise;
+
+            return {
+              ...exercise,
+              name: value
+            }
+          })
+        }
+      })
+
+      return {
+        ...prev,
+        days: updatedDays
+      }
+    })
+  }
+
+  const updateExerciseField = (exerciseIndex, field, value) => {
+    setProgram((prev) => {
+      const updatedDays = prev.days.map((day, dayIdx) => {
+        if(dayIdx !== activeDayIndex) return day;
+
+        return {
+          ...day,
+          exercises: day.exercises.map((exercise, idx) => {
+            if(idx !== exerciseIndex) return exercise;
+
+            return {
+              ...exercise,
+              [field]: value
+            }
+          })
+        }
+      })
+
+      return {
+        ...prev,
+        days: updatedDays
+      }
+    })
+  }
+
+  const updateDayName = (value) => {
+    setProgram((prev) => {
+      const updatedDays = prev.days.map((day, idx) => {
+        if(idx !== activeDayIndex) return day;
+
+        return {
+          ...day,
+          name: value
+        }
+      })
+
+      return {
+        ...prev,
+        days: updatedDays
+      }
+    })
+  }
+
+  const updateTitle = (value) => {
+    setProgram((prev) => ({
+      ...prev,
+      title: value
+    }))
+  }
+
+  const updateDescription = (value) => {
+    setProgram((prev) => ({
+      ...prev,
+      description: value
+    }))
+  }
+
+
+  // save and publish 
+  const saveProgram = async () => {
+    try {
+      const payload = {
+        ...program,
+        days: program.days.map((day, idx) => ({
+          name: day.name,
+          orderIndex: idx, 
+          isRestDay: day.isRestDay,
+          exercises: day.isRestDay ? [] : day.exercises.map((ex, i) => ({
+            name: ex.name,
+            sets: Number(ex.sets),
+            reps: ex.reps,
+            restSeconds: Number(ex.rest),
+            orderIndex: i
+          }))
+        }))
+      }
+
+      const response = await api.post('/trainer/programs', payload);
+
+      console.log(response.data);
+
+    } catch(err) {
+      console.error("Error saving program: ", err);
+    }
+  }
 
   return (
     <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
@@ -131,7 +246,10 @@ const WorkoutBuilder = () => {
                 <p className='text-[#61896f] text-base'>Design a custom workout plan for your clients.</p>
             </div>
             <div className='flex items-center gap-3'>
-              <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
+              <button 
+                className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'
+                onClick={saveProgram}
+              >
                 <i class="ri-save-2-line text-[20px]"></i>
                 Save & Publish Plan
               </button>
@@ -187,8 +305,9 @@ const WorkoutBuilder = () => {
                   <input 
                     type="text" 
                     value={program.days[activeDayIndex].name}
+                    onChange={(e) => updateDayName(e.target.value)}
                     placeholder='Enter Day Name' 
-                    className='bg-transparent border-b border-[#dbe6df] focus:outline-none focus:border-[#15ec5b] px-1 py-1 text-xl font-bold placeholder-slate-600 transition-colors capitalize' 
+                    className='bg-transparent border-b border-[#dbe6df] focus:outline-none focus:border-b-2 focus:border-[#15ec5b] px-1 py-1 text-xl font-bold placeholder-slate-600 transition-colors capitalize' 
                   />
                 </div>
                 <div className='flex items-center gap-2'>
@@ -214,7 +333,13 @@ const WorkoutBuilder = () => {
                         <div className='flex items-center gap-3 flex-1 min-w-50'>
                           <div className='bg-[#15ec5b]/20 text-sm font-bold px-2 py-1 rounded'>A{idx+1}</div>
                           <div className='relative flex-1'>
-                            <input className='w-full bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:outline-none focus:border-[#15ec5b] px-2 py-1 text-base font-bold placeholder-slate-900 transition-colors' type="text" placeholder='Exercise Name' value={exercise.name} />
+                            <input 
+                              className='w-full bg-transparent border-0 border-b border-transparent hover:border-slate-300 focus:outline-none focus:border-b-2 focus:border-[#15ec5b] px-2 py-1 text-base font-bold placeholder-slate-600 transition-colors' 
+                              type="text" 
+                              placeholder='Exercise Name' 
+                              value={exercise.name} 
+                              onChange={(e) => updateExercise(idx, e.target.value)}
+                            />
                           </div>
                         </div>
                         <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
@@ -228,20 +353,38 @@ const WorkoutBuilder = () => {
                         <div className='space-y-1'>
                           <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Sets</label>
                           <div className='flex items-center bg-slate-50 rounded-lg border border-[#dbe6df] overflow-hidden focus-within:outline-none focus-within:ring-1 focus-within:ring-[#15ec5b] focus-within:border-[#15ec5b]'>
-                            <input className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' type="number" placeholder='4' value={exercise.sets} />
+                            <input 
+                              className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' 
+                              type="number" 
+                              placeholder='4' 
+                              value={exercise.sets} 
+                              onChange={(e) => updateExerciseField(idx, 'sets', e.target.value)}
+                            />
                           </div>
                         </div>
                         <div className='space-y-1'>
-                          <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Reps</label>
+                          <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Reps (Range)</label>
                           <div className='flex items-center bg-slate-50 rounded-lg border border-[#dbe6df] overflow-hidden focus-within:outline-none focus-within:ring-1 focus-within:ring-[#15ec5b] focus-within:border-[#15ec5b]'>
-                            <input className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' type="text" placeholder='8-10' value={exercise.reps} />
+                            <input 
+                              className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' 
+                              type="text" 
+                              placeholder='8-10' 
+                              value={exercise.reps} 
+                              onChange={(e) => updateExerciseField(idx, 'reps', e.target.value)}
+                            />
                           </div>
                         </div>
                         <div className='space-y-1'>
-                          <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Rest</label>
+                          <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Rest (in Seconds)</label>
                           <div className='flex items-center bg-slate-50 rounded-lg border border-[#dbe6df] overflow-hidden focus-within:outline-none focus-within:ring-1 focus-within:ring-[#15ec5b] focus-within:border-[#15ec5b] relative'>
                             <i className='ri-timer-line absolute left-3 text-[16px] font-bold text-[#61896f] '></i>
-                            <input className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' type="text" placeholder='120s' value={exercise.rest} />
+                            <input 
+                              className='w-full bg-transparent border-none text-center text-sm font-semibold p-2 focus:outline-none' 
+                              type="number" 
+                              placeholder='120' 
+                              value={exercise.rest} 
+                              onChange={(e) => updateExerciseField(idx, 'rest', Number(e.target.value))}
+                            />
                           </div>
                         </div>
                       </div>
@@ -280,11 +423,22 @@ const WorkoutBuilder = () => {
               <div className='space-y-5'>
                 <div className='space-y-1.5 flex flex-col'>
                   <label className='text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Title</label>
-                  <input className='w-full px-3 py-2 rounded-lg border border-[#dbe6df] text-sm focus:outline-none focus:ring-2 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Workout Plan Title' />
+                  <input 
+                    className='w-full px-3 py-2 rounded-lg border border-[#dbe6df] text-sm focus:outline-none focus:ring-2 focus:ring-[#15ec5b] transition-all'
+                    type="text" 
+                    placeholder='Workout Plan Title' 
+                    value={program.title}
+                    onChange={(e) => updateTitle(e.target.value)}
+                  />
                 </div>
                 <div className='space-y-1.5 flex flex-col'>
                   <label className='text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Description</label>
-                  <textarea className='w-full px-3 py-2 rounded-lg border border-[#dbe6df] text-sm focus:outline-none focus:ring-2 focus:ring-[#15ec5b] transition-all resize-none' placeholder='Workout Plan Description' />
+                  <textarea 
+                    className='w-full px-3 py-2 rounded-lg border border-[#dbe6df] text-sm focus:outline-none focus:ring-2 focus:ring-[#15ec5b] transition-all resize-none' 
+                    placeholder='Workout Plan Description' 
+                    value={program.description}
+                    onChange={(e) => updateDescription(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
