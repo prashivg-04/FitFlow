@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
+import api from '../../api/axios'
+import AssignWorkoutModal from '../../components/trainer/AssignWorkoutModal';
 
 const TrainerAssignWorkout = () => {
+
+  const [members, setMembers] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [selectedMember, setSelectedMember] = useState(null);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await api.get('/trainer/members');
+        setMembers(response.data.data);
+      } catch(err) {
+        console.error("Error fetching members:", err);
+      }
+    }
+
+    fetchMembers();
+  }, [])
+
   return (
     <div className='relative flex flex-col min-h-screen bg-[#f7f8f6]'>
       {/* Member Selection */}
@@ -33,110 +53,51 @@ const TrainerAssignWorkout = () => {
 
           {/* Member Cards */}
           <div className='flex flex-col gap-4'>
-            <div className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all'>
-              <div className='flex items-center gap-6 flex-1'>
-                <div className='relative'>
-                  <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
-                  <div className='absolute -bottom-0.5 -right-0.5 size-4 bg-green-500 border-2 border-white rounded-full'></div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <h3 className='text-lg font-bold leading-tight'>Sarah Jenkins</h3>
-                    <span className='inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700 border border-green-200'>Active</span>
+            {members?.map((member) => (
+              <div key={member.id} className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all'>
+                <div className='flex items-center gap-6 flex-1'>
+                  <div className='relative'>
+                    <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
                   </div>
-                  <p className='text-[#61896f] text-sm font-medium flex items-center gap-1'>
-                    <i className='fa-solid fa-dumbbell text-[16px] text-[#15ec5b]'></i>
-                    Hypertrophy Phase 2
-                  </p>
-                </div>
-              </div>
-
-              <div className='flex items-center justify-end w-auto'>
-                <button className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'>
-                  <i class="ri-pencil-line text-[18px]"></i>
-                  Change Workout
-                </button>
-              </div>
-            </div>
-
-            <div className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all'>
-              <div className='flex items-center gap-6 flex-1'>
-                <div className='relative'>
-                  <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
-                  <div className='absolute -bottom-0.5 -right-0.5 size-4 bg-red-500 border-2 border-white rounded-full'></div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <h3 className='text-lg font-bold leading-tight'>Mike Ross</h3>
-                    <span className='inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-700 border border-red-200'>No Plan</span>
+                  <div className='flex flex-col gap-1'>
+                    <div className='flex items-center gap-2'>
+                      <h3 className='text-xl font-bold leading-tight capitalize'>{member.user.name}</h3>
+                      <span className='inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-red-100 text-red-700 border border-red-200 capitalize'>{member.goal.split('_').join(' ').toLowerCase()}</span>
+                    </div>
+                    <div className='text-[#61896f] flex items-center gap-2 mt-2'>
+                     <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-medium items-center justify-center capitalize'>
+                      <span className='size-1 rounded-full bg-green-400 inline-block mr-1'></span>
+                      {member.gender.toLowerCase()}
+                     </div>
+                      <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-medium items-center justify-center capitalize'>
+                      <span className='size-1 rounded-full bg-green-400 inline-block mr-1'></span>
+                      {member.weightKg} kg
+                     </div>
+                      <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-medium items-center justify-center capitalize'>
+                      <span className='size-1 rounded-full bg-green-400 inline-block mr-1'></span>
+                      {member.heightCm} cm
+                     </div>
+                    </div>
                   </div>
-                  <p className='text-[#61896f] text-sm font-medium flex items-center gap-1 italic'>
-                    <i className='fa-solid fa-ban text-[14px]'></i>
-                    No active workout plan
-                  </p>
+                </div>
+
+                <div className='flex items-center justify-end w-auto'>
+                  <button 
+                    onClick={() => {
+                      setShowModal(true);
+                      setSelectedMember(member);
+                    }}
+                    className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'
+                  >
+                    <i class="ri-add-circle-line text-[18px]"></i>
+                    Assign Workout
+                  </button>
                 </div>
               </div>
-
-              <div className='flex items-center justify-end w-auto'>
-                <button className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'>
-                  <i class="ri-add-circle-line text-[18px]"></i>
-                  Assign Workout
-                </button>
-              </div>
-            </div>
-
-            <div className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all'>
-              <div className='flex items-center gap-6 flex-1'>
-                <div className='relative'>
-                  <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
-                  <div className='absolute -bottom-0.5 -right-0.5 size-4 bg-green-500 border-2 border-white rounded-full'></div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <h3 className='text-lg font-bold leading-tight'>Elara Vance</h3>
-                    <span className='inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-700 border border-green-200'>Active</span>
-                  </div>
-                  <p className='text-[#61896f] text-sm font-medium flex items-center gap-1'>
-                    <i className='fa-solid fa-person-running text-[16px] text-[#15ec5b]'></i>
-                    Cardio Prep & Conditioning
-                  </p>
-                </div>
-              </div>
-
-              <div className='flex items-center justify-end w-auto'>
-                <button className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'>
-                  <i class="ri-pencil-line text-[18px]"></i>
-                  Change Workout
-                </button>
-              </div>
-            </div>
-
-            <div className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all opacity-70'>
-              <div className='flex items-center gap-6 flex-1'>
-                <div className='relative'>
-                  <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
-                  <div className='absolute -bottom-0.5 -right-0.5 size-4 bg-gray-500 border-2 border-white rounded-full'></div>
-                </div>
-                <div className='flex flex-col gap-1'>
-                  <div className='flex items-center gap-2'>
-                    <h3 className='text-lg font-bold leading-tight'>David Chen</h3>
-                    <span className='inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200'>Paused</span>
-                  </div>
-                  <p className='text-[#61896f] text-sm font-medium flex items-center gap-1'>
-                    <i className='fa-regular fa-circle-pause text-[14px]'></i>
-                    Plan paused (Injury recovery)
-                  </p>
-                </div>
-              </div>
-
-              <div className='flex items-center justify-end w-auto'>
-                <button className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'>
-                  <i class="ri-play-line text-[18px]"></i>
-                  Resume Plan
-                </button>
-              </div>
-            </div>
+            ))}
           </div>
+
+          {showModal && <AssignWorkoutModal onClose={() => setShowModal(false)} member={selectedMember} />}
         </div>
       </div>
     </div>
