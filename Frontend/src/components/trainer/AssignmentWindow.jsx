@@ -73,6 +73,7 @@ const AssignmentWindow = ({member, program, onBack, onAssign}) => {
 
       <button
         disabled={!selectedDate}
+        onClick={() => onAssign(selectedDate)}
         className='mt-6 w-full bg-[#15ec5b] py-3 rounded-lg font-bold disabled:opacity-50'
       >
         Assign Program

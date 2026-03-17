@@ -26,6 +26,19 @@ const AssignWorkoutModal = ({onClose, member}) => {
     }, 0)
     const restDays = (program) => program.days.filter(day => day.isRestDay).length
 
+    const handleAssign = async (date) => {
+        try {
+            await api.post('/trainer/assign-program', {
+                memberId: member.id,
+                programId: selectedProgram.id,
+                startDate: date
+            });
+            onClose();
+        } catch(err) {
+            console.error("Error assigning program: ", err);
+        }
+    }
+
   return (
     <div onClick={onClose} className='fixed inset-0 bg-black/40 z-20 backdrop-blur-xs flex items-center justify-center'>
       <div onClick={(e) => e.stopPropagation()} className='bg-[#f7f8f6] rounded-lg w-120 p-6 relative'>
@@ -65,6 +78,7 @@ const AssignWorkoutModal = ({onClose, member}) => {
                     member={member} 
                     program={selectedProgram} 
                     onBack={() => setSelectedProgram(null)}
+                    onAssign={handleAssign}
                 />
             )}
         </div>
