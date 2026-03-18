@@ -1,4 +1,5 @@
 import prisma from '../prisma.js';
+import { formatDateOnly, startToTodayLocal } from '../utils/date.js';
 
 export const getMemberScheduleService = async (data) => {
     const { userId } = data;
@@ -10,8 +11,7 @@ export const getMemberScheduleService = async (data) => {
         throw new Error('Member profile not found');
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = startToTodayLocal();
 
     const endDate = new Date(today);
     endDate.setDate(today.getDate() + 6);
@@ -34,10 +34,7 @@ export const getMemberScheduleService = async (data) => {
 
     const assignmentMap = new Map();
     assignments.forEach(a => {
-        assignmentMap.set(
-            a.assignedDate.toISOString().split('T')[0],
-            a
-        );
+        assignmentMap.set(formatDateOnly(a.assignedDate), a);
     });
 
     const schedule = [];
@@ -46,7 +43,7 @@ export const getMemberScheduleService = async (data) => {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
 
-        const key = date.toISOString().split('T')[0];
+        const key = formatDateOnly(date);
         const assignment = assignmentMap.get(key);
 
         if(assignment) {
@@ -91,8 +88,7 @@ export const completeWorkoutService = async (data) => {
         throw new Error('Workout assignment not found for this member');
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = startToTodayLocal();
 
     const assignedDate = new Date(assignment.assignedDate);
     assignedDate.setHours(0, 0, 0, 0);

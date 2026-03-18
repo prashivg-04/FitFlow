@@ -1,4 +1,5 @@
 import prisma from '../prisma.js';
+import { parseDateOnly, formatDateOnly, startToTodayLocal } from '../utils/date.js';
 
 export const assignProgramToMemberService = async (data) => {
     const { userId, memberId, programId, startDate } = data;
@@ -39,11 +40,10 @@ export const assignProgramToMemberService = async (data) => {
         throw new Error('Workout program not found');
     }
 
-    const start = new Date(startDate);
+    const start = parseDateOnly(startDate);
     start.setHours(0, 0, 0, 0);
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = startToTodayLocal();
 
     if (start < today) {
         throw new Error('Cannot assign program in the past');
@@ -52,6 +52,7 @@ export const assignProgramToMemberService = async (data) => {
     const dateList = program.days.map((_, index) => {
         const d = new Date(start);
         d.setDate(d.getDate() + index);
+        d.setHours(0, 0, 0, 0);
         return d;
     });
 
