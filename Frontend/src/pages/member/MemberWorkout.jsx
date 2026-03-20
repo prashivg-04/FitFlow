@@ -20,6 +20,28 @@ const MemberWorkout = () => {
     fetchProgram();
   }, []);
 
+  const handleMarkComplete = async () => {
+    try {
+      await api.post('/member/complete-workout', {
+        assignmentId: acitveDay.assignmentId
+      });
+
+      setProgram(prev => 
+        prev.map((day, idx) => {
+          if (idx === activeDayIndex) {
+            return { 
+              ...day, 
+              status: 'COMPLETED' 
+            };
+          }
+          return day;
+        })
+      )
+    } catch(err) {
+      console.log("Error marking workout as complete:", err);
+    }
+  }
+
   const [activeDayIndex, setactiveDayIndex] = useState(0);
   const acitveDay = program[activeDayIndex];
 
@@ -161,6 +183,7 @@ const MemberWorkout = () => {
                       </button>
 
                       <button 
+                        onClick={handleMarkComplete}
                         disabled={isMarkCompleteDisabled}
                         className={`w-full mt-4 py-3 rounded-lg font-bold transition-all ${
                           isMarkCompleteDisabled
@@ -168,7 +191,7 @@ const MemberWorkout = () => {
                             : 'bg-[#15ec5b] hover:bg-green-500 text-black shadow'
                         }`}
                       >
-                        Mark as Completed
+                        {acitveDay?.status === 'COMPLETED' ? 'Workout Completed' : 'Mark Workout as Complete' }
                       </button>
                     </div>
                   </div>
