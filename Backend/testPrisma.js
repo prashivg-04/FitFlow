@@ -4,7 +4,6 @@ import { PrismaPg } from "@prisma/adapter-pg";
 
 const { PrismaClient } = pkg;
 
-// Use the PostgreSQL adapter with your DATABASE_URL
 const connectionString = process.env.DATABASE_URL;
 const adapter = new PrismaPg({ connectionString });
 

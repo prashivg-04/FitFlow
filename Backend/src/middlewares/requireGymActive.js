@@ -46,7 +46,6 @@ export const requireGymActive = async (req, res, next) => {
 
         next();
     } catch(err) {
-        console.log("Gym middleware error: ", err);
         return res.status(500).json({
             success: false,
             message: 'Internal server error',
