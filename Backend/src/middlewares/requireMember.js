@@ -1,11 +1,14 @@
+import AppError from '../utils/AppError.js';
+
 const requireMember = (req, res, next) => {
-    if(req.user?.role !== 'MEMBER') {
-        return res.status(403).json({
-            success: false,
-            message: "Member access required",
-        });
+    if (!req.user) {
+        throw new AppError("Authentication required", 401);
     }
-    next();
+
+    if(req.user?.role !== 'MEMBER') {
+        throw new AppError("Access denied: Members only", 403);
+    }
+    return next();
 }
 
 export default requireMember;

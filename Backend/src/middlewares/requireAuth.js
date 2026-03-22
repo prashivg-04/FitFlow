@@ -1,14 +1,12 @@
 import jwt from 'jsonwebtoken';
+import AppError from '../utils/AppError.js'
 
 const requireAuth = (req, res, next) => {
     try {
         const token = req.cookies?.token;
 
         if(!token) {
-            return res.status(401).json({
-                success: false,
-                message: "Authentication required",
-            });
+            throw new AppError("Authentication required", 401);
         }
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -17,12 +15,9 @@ const requireAuth = (req, res, next) => {
             role: decoded.role,
         };
 
-        next();
+        return next();
     } catch(err) {
-        return res.status(401).json({
-            success: false,
-            message: "Invalid or expired token",
-        })
+        throw new AppError("Invalid or expired token", 401);
     }
 };
 
