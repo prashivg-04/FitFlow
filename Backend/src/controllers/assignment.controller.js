@@ -33,7 +33,7 @@ export const assignTrainer = async (req, res, next) => {
     });
 };
 
-export const unassignTrainer = async (req, res) => {
+export const unassignTrainer = async (req, res, next) => {
     const { userId } = req.user;
     const { memberId } = req.body;
 

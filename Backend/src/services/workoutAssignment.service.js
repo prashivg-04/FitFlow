@@ -1,8 +1,13 @@
 import prisma from '../prisma.js';
+import AppError from '../utils/AppError.js';
 import { parseDateOnly, formatDateOnly, startToTodayLocal } from '../utils/date.js';
 
 export const assignProgramToMemberService = async (data) => {
     const { userId, memberId, programId, startDate } = data;
+
+    if(!memberId || !programId || !startDate) {
+        throw new AppError('Missing required fields: memberId, programId, startDate', 400);
+    }
 
     const trainer = await prisma.trainer.findUnique({
         where: { userId },

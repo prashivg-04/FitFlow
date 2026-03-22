@@ -175,13 +175,89 @@ export const loginService = async (data) => {
         }
     );
 
+    let resData = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+    };
+
+    if (user.role === 'TRAINER') {
+        const trainer = await prisma.trainer.findUnique({
+            where: { userId: user.id },
+            select: {
+                gymStatus: true,
+                ownerId: true,
+            },
+        });
+
+        resData = {
+            ...resData,
+            gymStatus: trainer?.gymStatus || null,
+            ownerId: trainer?.ownerId || null,
+        };
+    }
+
+    if (user.role === 'MEMBER') {
+        const member = await prisma.member.findUnique({
+            where: { userId: user.id },
+            select: {
+                gymStatus: true,
+                ownerId: true,
+            },
+        });
+
+        resData = {
+            ...resData,
+            gymStatus: member?.gymStatus || null,
+            ownerId: member?.ownerId || null,
+        };
+    }
+
     return {
-        token, 
-        user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            role: user.role,
-        },
+        token,
+        user: resData,
     };
 }
+
+export const getMeService = async ({ userId, role }) => {
+
+    let resData = {
+        userId,
+        role,
+    };
+
+    if (role === 'TRAINER') {
+        const trainer = await prisma.trainer.findUnique({
+            where: { userId },
+            select: {
+                gymStatus: true,
+                ownerId: true,
+            },
+        });
+
+        resData = {
+            ...resData,
+            gymStatus: trainer?.gymStatus || null,
+            ownerId: trainer?.ownerId || null,
+        };
+    }
+
+    if (role === 'MEMBER') {
+        const member = await prisma.member.findUnique({
+            where: { userId },
+            select: {
+                gymStatus: true,
+                ownerId: true,
+            },
+        });
+
+        resData = {
+            ...resData,
+            gymStatus: member?.gymStatus || null,
+            ownerId: member?.ownerId || null,
+        };
+    }
+
+    return resData;
+};

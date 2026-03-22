@@ -1,5 +1,6 @@
 import prisma from '../prisma.js';
 import { formatDateOnly, startToTodayLocal } from '../utils/date.js';
+import AppError from '../utils/AppError.js';
 
 export const getMemberScheduleService = async (data) => {
     const { userId } = data;
@@ -73,6 +74,10 @@ export const getMemberScheduleService = async (data) => {
 export const completeWorkoutService = async (data) => {
     
     const { userId, assignmentId } = data;
+
+    if (!assignmentId) {
+        throw new AppError('assignmentId is required', 400);
+    }
 
     const member = await prisma.member.findUnique({
         where: { userId },

@@ -6,17 +6,18 @@ import { createWorkoutProgram, getWorkoutPrograms } from '../controllers/workout
 import { assignProgramToMember } from '../controllers/workoutAssignment.controller.js';
 import { getTrainerMemberCalendar } from '../controllers/trainerCalendar.controller.js';
 import { getTrainerAssignmentWindow } from '../controllers/trainerAssignmentWindow.controller.js';
+import asyncHandler from '../middlewares/asyncHandler.js';
 
 const router = express.Router();
 
-router.get('/members', requireAuth, requireTrainer, getMyMembers);
+router.get('/members', requireAuth, requireTrainer, asyncHandler(getMyMembers));
 
-router.post('/programs', requireAuth, requireTrainer, createWorkoutProgram);
-router.get('/programs', requireAuth, requireTrainer, getWorkoutPrograms);
+router.post('/programs', requireAuth, requireTrainer, asyncHandler(createWorkoutProgram));
+router.get('/programs', requireAuth, requireTrainer, asyncHandler(getWorkoutPrograms));
 
-router.post('/assign-program', requireAuth, requireTrainer, assignProgramToMember);
+router.post('/assign-program', requireAuth, requireTrainer, asyncHandler(assignProgramToMember));
 
-router.get('/member/:memberId/calendar', requireAuth, requireTrainer, getTrainerMemberCalendar);
-router.get('/member/:memberId/assignment-window', requireAuth, requireTrainer, getTrainerAssignmentWindow);
+router.get('/member/:memberId/calendar', requireAuth, requireTrainer, asyncHandler(getTrainerMemberCalendar));
+router.get('/member/:memberId/assignment-window', requireAuth, requireTrainer, asyncHandler(getTrainerAssignmentWindow));
 
 export default router;

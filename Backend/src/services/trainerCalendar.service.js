@@ -1,8 +1,13 @@
 import prisma from '../prisma.js';
+import AppError from '../utils/AppError.js';
 
 export const getTrainerMemberCalendarService = async (data) => {
     
     const { userId, memberId, month } = data;
+
+    if(!month) {
+        throw new AppError('Month query parameter is required in YYYY-MM format', 400);
+    }
     
     const trainer = await prisma.trainer.findUnique({
         where: {
