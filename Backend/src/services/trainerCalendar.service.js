@@ -1,12 +1,19 @@
 import prisma from '../prisma.js';
 import AppError from '../utils/AppError.js';
+import { formatDateOnly, startToTodayLocal } from '../utils/date.js';
 
 export const getTrainerMemberCalendarService = async (data) => {
     
     const { userId, memberId, month } = data;
 
-    if(!month) {
-        throw new AppError('Month query parameter is required in YYYY-MM format', 400);
+    if (!/^\d{4}-\d{2}$/.test(month)) {
+        throw new AppError('Month must be in YYYY-MM format', 400);
+    }
+
+    const [year, monthNum] = month.split('-').map(Number);
+
+    if (monthNum < 1 || monthNum > 12) {
+        throw new AppError('Invalid month value', 400);
     }
     
     const trainer = await prisma.trainer.findUnique({
@@ -15,7 +22,7 @@ export const getTrainerMemberCalendarService = async (data) => {
         }
     });
     if(!trainer) {
-        throw new Error('Trainer profile not found');
+        throw new AppError('Trainer profile not found', 404);
     }
 
     const trainerMember = await prisma.trainerMember.findUnique({
@@ -25,10 +32,9 @@ export const getTrainerMemberCalendarService = async (data) => {
         }
     });
     if(!trainerMember) {
-        throw new Error('Member not assigned to this trainer');
+        throw new AppError('Member not assigned to this trainer', 404);
     }
 
-    const [year, monthNum] = month.split('-').map(Number);
     const monthIndex = monthNum - 1; 
 
     const start = new Date(year, monthIndex, 1);
@@ -52,12 +58,11 @@ export const getTrainerMemberCalendarService = async (data) => {
 
     const assignmentMap = new Map();
     assignments.forEach(a => {
-        const key = new Date(a.assignedDate).toLocaleDateString('en-CA'); 
+        const key = formatDateOnly(new Date(a.assignedDate));
         assignmentMap.set(key, a);
     });
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = startToTodayLocal();
 
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
@@ -67,7 +72,7 @@ export const getTrainerMemberCalendarService = async (data) => {
         const date = new Date(year, monthIndex, day);
         date.setHours(0, 0, 0, 0);
 
-        const key = date.toLocaleDateString('en-CA');
+        const key = formatDateOnly(date);
         const assignment = assignmentMap.get(key);
 
         if(assignment) {

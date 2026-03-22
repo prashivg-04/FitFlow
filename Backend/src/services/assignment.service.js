@@ -1,4 +1,5 @@
 import prisma from "../prisma.js";
+import AppError from '../utils/AppError.js';
 
 export const getUnassignedMembersService = async (data) => {
     const { userId } = data;
@@ -7,7 +8,7 @@ export const getUnassignedMembersService = async (data) => {
         where: { userId },
     })
     if(!owner) {
-        throw new Error("Owner profile not found");
+        throw new AppError("Owner profile not found", 404);
     }
 
     return await prisma.member.findMany({
@@ -37,7 +38,7 @@ export const getTrainersService = async (data) => {
         where: { userId },
     })
     if(!owner) {
-        throw new Error("Owner profile not found");
+        throw new AppError("Owner profile not found", 404);
     }
 
     return await prisma.trainer.findMany({
@@ -69,7 +70,7 @@ export const assignTrainerService  = async (data) => {
         where: { userId },
     })
     if(!owner) {
-        throw new Error("Owner profile not found");
+        throw new AppError("Owner profile not found", 404);
     }
 
     const member = await prisma.member.findUnique({
@@ -84,19 +85,19 @@ export const assignTrainerService  = async (data) => {
     });
 
     if(!trainer || !member) {
-        throw new Error("Trainer or Member not found");
+        throw new AppError("Trainer or Member not found", 404);
     }
 
     if(trainer.ownerId !== owner.id || member.ownerId !== owner.id) {
-        throw new Error("Trainer and Member must belong to your gym");
+        throw new AppError("Trainer and Member must belong to your gym", 400);
     }
 
     if(trainer.gymStatus !== "ACTIVE" || member.gymStatus !== "ACTIVE") {
-        throw new Error("Trainer or Member not active");
+        throw new AppError("Trainer or Member not active", 400);
     }
 
     if(member.trainerMembers.length > 0) {
-        throw new Error("Member is already assigned to a trainer");
+        throw new AppError("Member is already assigned to a trainer", 400);
     }
 
     return await prisma.trainerMember.create({
@@ -114,7 +115,7 @@ export const unassignTrainerService  = async (data) => {
         where: { userId },
     })
     if(!owner) {
-        throw new Error("Owner profile not found");
+        throw new AppError("Owner profile not found", 404);
     }
 
     const member = await prisma.member.findUnique({
@@ -124,16 +125,16 @@ export const unassignTrainerService  = async (data) => {
         }
     });
     if(!member) {
-        throw new Error("Member not found");
+        throw new AppError("Member not found", 404);
     }
     if(member.ownerId !== owner.id) {
-        throw new Error("Member must belong to your gym");
+        throw new AppError("Member must belong to your gym", 400);
     }
     if(member.gymStatus !== "ACTIVE") {
-        throw new Error("Member not active");
+        throw new AppError("Member not active", 400);
     }
     if(member.trainerMembers.length === 0) {
-        throw new Error("Member is not assigned to any trainer");
+        throw new AppError("Member is not assigned to any trainer", 400);
     }
 
     return await prisma.trainerMember.delete({

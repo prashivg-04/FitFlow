@@ -13,7 +13,7 @@ export const assignProgramToMemberService = async (data) => {
         where: { userId },
     });
     if (!trainer) {
-        throw new Error('Trainer profile not found');
+        throw new AppError('Trainer profile not found', 404);
     }
 
     const trainerMember = await prisma.trainerMember.findFirst({
@@ -23,7 +23,7 @@ export const assignProgramToMemberService = async (data) => {
         },
     });
     if (!trainerMember) {
-        throw new Error('Member is not assigned to this trainer');
+        throw new AppError('Member is not assigned to this trainer', 400);
     }
 
     const program = await prisma.workoutProgram.findUnique({
@@ -42,7 +42,7 @@ export const assignProgramToMemberService = async (data) => {
         }
     });
     if (!program) {
-        throw new Error('Workout program not found');
+        throw new AppError('Workout program not found', 404);
     }
 
     const start = parseDateOnly(startDate);
@@ -51,7 +51,7 @@ export const assignProgramToMemberService = async (data) => {
     const today = startToTodayLocal();
 
     if (start < today) {
-        throw new Error('Cannot assign program in the past');
+        throw new AppError('Cannot assign program in the past', 400);
     }
 
     const dateList = program.days.map((_, index) => {
@@ -70,7 +70,7 @@ export const assignProgramToMemberService = async (data) => {
         },
     });
     if (existingAssignments.length > 0) {
-        throw new Error('Assignment overlaps with existing schedule');
+        throw new AppError('Assignment overlaps with existing schedule', 400);
     }
 
     return await prisma.$transaction(async (tx) => {

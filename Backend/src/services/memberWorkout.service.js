@@ -9,7 +9,7 @@ export const getMemberScheduleService = async (data) => {
         where: { userId },
     });
     if(!member) {
-        throw new Error('Member profile not found');
+        throw new AppError('Member profile not found', 404);
     }
 
     const today = startToTodayLocal();
@@ -83,14 +83,14 @@ export const completeWorkoutService = async (data) => {
         where: { userId },
     });
     if(!member) {
-        throw new Error('Member profile not found');
+        throw new AppError('Member profile not found', 404);
     }
 
     const assignment = await prisma.workoutAssignment.findUnique({
         where: { id: assignmentId },
     });
     if(!assignment || assignment.memberId !== member.id) {
-        throw new Error('Workout assignment not found for this member');
+        throw new AppError('Workout assignment not found for this member', 404);
     }
 
     const today = startToTodayLocal();
@@ -99,15 +99,15 @@ export const completeWorkoutService = async (data) => {
     assignedDate.setHours(0, 0, 0, 0);
 
     if(assignedDate.getTime() !== today.getTime()) {
-        throw new Error('You can only complete today\'s workout assignment');
+        throw new AppError('You can only complete today\'s workout assignment', 400);
     }
 
     if(assignment.isRestDay) {
-        throw new Error('Rest day does not require completion');
+        throw new AppError('Rest day does not require completion', 400);
     }
 
     if(assignment.status === 'COMPLETED') {
-        throw new Error('Workout assignment already completed');
+        throw new AppError('Workout assignment already completed', 400);
     }
 
     await prisma.workoutAssignment.update({

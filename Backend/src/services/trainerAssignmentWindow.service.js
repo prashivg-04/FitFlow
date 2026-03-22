@@ -1,4 +1,6 @@
 import prisma from '../prisma.js';
+import AppError from '../utils/AppError.js';
+import { formatDateOnly } from '../utils/date.js';
 
 export const getTrainerAssignmentWindowService = async (data) => {
     
@@ -10,7 +12,7 @@ export const getTrainerAssignmentWindowService = async (data) => {
         }
     });
     if(!trainer) {
-        throw new Error('Trainer profile not found');
+        throw new AppError("Trainer profile not found", 404);
     }
 
     const trainerMember = await prisma.trainerMember.findUnique({
@@ -20,7 +22,7 @@ export const getTrainerAssignmentWindowService = async (data) => {
         }
     });
     if(!trainerMember) {
-        throw new Error('Member not assigned to this trainer');
+        throw new AppError('Member not assigned to this trainer', 400);
     }
 
     const today = new Date();
@@ -45,7 +47,7 @@ export const getTrainerAssignmentWindowService = async (data) => {
 
     const assignmentMap = new Map();
     assignments.forEach(a => {
-        const key = new Date(a.assignedDate).toLocaleDateString('en-CA');
+        const key = formatDateOnly(new Date(a.assignedDate));
         assignmentMap.set(key, a);
     });
 

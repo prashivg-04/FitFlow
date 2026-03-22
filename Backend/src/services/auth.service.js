@@ -19,6 +19,10 @@ const generateCode = () => {
 
 export const signupService = async (data) => {
     const { name, email, password, role, roleData } = data;
+
+    if (!roleData || typeof roleData !== 'object') {
+        throw new AppError('Invalid role data', 400);
+    }
     
     const existingUser = await prisma.user.findUnique({
         where: { email },
@@ -41,6 +45,16 @@ export const signupService = async (data) => {
 
         switch(role) {
             case 'OWNER': 
+                if (
+                    !roleData.gymName ||
+                    !roleData.address ||
+                    !roleData.city ||
+                    !roleData.phone ||
+                    !roleData.openingTime ||
+                    !roleData.closingTime
+                ) {
+                    throw new AppError('Invalid owner data', 400);
+                }
                 let gymCode;
                 let existingOwner;
 
@@ -68,6 +82,16 @@ export const signupService = async (data) => {
                 break;
             
             case 'TRAINER':
+                if (
+                    !roleData.specialization ||
+                    roleData.experienceYears === undefined ||
+                    !Array.isArray(roleData.preferredDays) ||
+                    !roleData.startTime ||
+                    !roleData.endTime ||
+                    !roleData.bio
+                ) {
+                    throw new AppError('Invalid trainer data', 400);
+                }
                 await tx.trainer.create({
                     data: {
                         specialization: roleData.specialization,
@@ -86,10 +110,26 @@ export const signupService = async (data) => {
                 break;
 
             case 'MEMBER':
+                if (
+                    !roleData.dateOfBirth ||
+                    !roleData.gender ||
+                    roleData.heightCm === undefined ||
+                    roleData.weightKg === undefined ||
+                    !roleData.goal ||
+                    !roleData.experienceLevel
+                ) {
+                    throw new AppError('Invalid member data', 400);
+                }
+
+                const dob = new Date(roleData.dateOfBirth);
+                if (isNaN(dob.getTime())) {
+                    throw new AppError('Invalid date of birth', 400);
+                }
+
                 await tx.member.create({
                     data: {
                         userId: newUser.id,
-                        dateOfBirth: new Date(roleData.dateOfBirth),
+                        dateOfBirth: dob,
                         gender: roleData.gender,
                         heightCm: roleData.heightCm,
                         weightKg: roleData.weightKg,

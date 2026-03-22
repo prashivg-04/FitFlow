@@ -1,4 +1,5 @@
 import prisma from "../prisma.js";
+import AppError from "../utils/AppError.js";
 
 export const getMyMembersService = async (data) => {
     const { userId } = data;
@@ -7,7 +8,7 @@ export const getMyMembersService = async (data) => {
         where: { userId },
     })
     if(!trainer) {
-        throw new Error("Trainer profile not found");
+        throw new AppError("Trainer profile not found", 404);
     }
 
     const assignedMembers = await prisma.trainerMember.findMany({
