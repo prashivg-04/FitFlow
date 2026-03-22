@@ -53,3 +53,8 @@ export const signupSchema = z.discriminatedUnion('role', [
     z.object(baseSchema).merge(trainerSchema).strict(),
     z.object(baseSchema).merge(memberSchema).strict(),
 ])
+
+export const loginSchema = z.object({
+    email: z.string().email('Invalid email'),
+    password: z.string().min(1, 'Password is required'),
+}).strict();
