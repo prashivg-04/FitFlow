@@ -3,6 +3,7 @@ import prisma from '../prisma.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import AppError from '../utils/AppError.js';
 
 const generateCode = () => {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -23,9 +24,7 @@ export const signupService = async (data) => {
         where: { email },
     });
     if(existingUser) {
-        const error = new Error('User already exists with this email');
-        error.code = 'EMAIL_EXISTS';
-        throw error;
+        throw new AppError('Email already exists', 409);
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -102,9 +101,7 @@ export const signupService = async (data) => {
                 break;
 
             default:
-                const error = new Error('Invalid role specified');
-                error.code = 'INVALID_ROLE';
-                throw error;
+                throw new AppError('Invalid role specified', 400);
         }
 
         const fullUser = await tx.user.findUnique({
@@ -159,16 +156,12 @@ export const loginService = async (data) => {
         where: { email },
     });
     if(!user) {
-        const error = new Error('Invalid credentials');
-        error.code = 'INVALID_CREDENTIALS';
-        throw error;
+        throw new AppError('Invalid credentials', 401);
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
     if(!isMatch) {
-        const error = new Error('Invalid credentials');
-        error.code = 'INVALID_CREDENTIALS';
-        throw error;
+        throw new AppError('Invalid credentials', 401);
     }
 
     const token = jwt.sign(
