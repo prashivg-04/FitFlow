@@ -1,5 +1,5 @@
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Welcome from './pages/Welcome'
 import SignupGeneral from './pages/signup/SignupGeneral'
 import Login from './pages/Login'
@@ -37,14 +37,16 @@ import PrivateRoute from './pages/PrivateRoute'
 import PublicRoute from './pages/PublicRoute'
 import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
-import api from './api/axios'
+import api, { setUnauthorizedHandler } from './api/axios'
 import { loginSuccess, logout } from './store/authSlice'
 import SignupLayout from './pages/signup/SignupLayout'
 import WorkoutBuilder from './pages/trainer/WorkoutBuilder'
+import { Toaster } from 'sonner'
 
 function App() {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const restoreSession = async () => {
@@ -59,8 +61,17 @@ function App() {
     restoreSession();
   }, [dispatch]);
 
+  useEffect(() => {
+    setUnauthorizedHandler(() => {
+      dispatch(logout());
+      navigate('/login');
+    });
+  }, [dispatch, navigate]);
+
   return (
     <div>
+      <Toaster position='top-right' richColors />
+
       <Routes>
         <Route element={<PublicRoute />}>
           <Route path='/' element={<Welcome />}/>
