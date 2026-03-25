@@ -7,6 +7,7 @@ import api from '../api/axios'
 import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Login = () => {
 
@@ -57,6 +58,7 @@ const Login = () => {
       });
       dispatch(loginSuccess(response.data.data));
       console.log("Login successfull", response.data);
+      toast.success('Login successful!');
     } catch(err) {
       console.error("Login failed", err);
       dispatch(loginFailure(err.response?.data?.message || 'Login failed. Please try again.'));

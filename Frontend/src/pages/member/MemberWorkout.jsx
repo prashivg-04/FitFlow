@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import gymImg from '../../media/gymSignup.jpeg'
 import api from '../../api/axios'
+import { toast } from 'sonner';
 
 const MemberWorkout = () => {
 
@@ -25,7 +26,7 @@ const MemberWorkout = () => {
       await api.post('/member/complete-workout', {
         assignmentId: acitveDay.assignmentId
       });
-
+      toast.success('Workout marked as complete!');
       setProgram(prev => 
         prev.map((day, idx) => {
           if (idx === activeDayIndex) {

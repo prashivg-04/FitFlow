@@ -1,5 +1,6 @@
 import React, { useEffect, useState} from 'react'
 import api from '../../api/axios'
+import { toast } from 'sonner';
 
 const JoinRequests = () => {
 
@@ -25,7 +26,7 @@ const JoinRequests = () => {
     const handleAction = async (id, action) => {
         try {
             await api.patch(`/owner/join-request/${id}`, { action });
-
+            toast.success(`Join request ${action === 'ACCEPT' ? 'approved' : 'rejected'} successfully!`);
             setRequests((prev) => 
                 prev.filter((req) => req.id !== id)
             );

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
 import api from '../../api/axios'
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 const WorkoutBuilder = () => {
 
@@ -22,6 +24,8 @@ const WorkoutBuilder = () => {
       }
     ]
   });
+
+  const navigate = useNavigate();
 
   const [activeDayIndex, setActiveDayIndex] = useState(0);
 
@@ -228,9 +232,8 @@ const WorkoutBuilder = () => {
       }
 
       const response = await api.post('/trainer/programs', payload);
-
-      console.log(response.data);
-
+      toast.success('Workout plan saved successfully!');
+      navigate('/trainer/workouts');
     } catch(err) {
       console.error("Error saving program: ", err);
     }

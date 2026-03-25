@@ -2,6 +2,7 @@ import axios from 'axios';
 import { toast } from 'sonner';
 
 let onUnauthorized = null;
+let isHandlingUnauthorized = false;
 
 export const setUnauthorizedHandler = (handler) => {
     onUnauthorized = handler;
@@ -22,7 +23,13 @@ api.interceptors.response.use(
             error.response?.data?.message ||
             'Something went wrong';
 
-        if(status === 401 && onUnauthorized) {
+        const url = error.config?.url;
+        if(url?.includes('/auth/me')) {
+            return Promise.reject(error);
+        }
+
+        if(status === 401 && onUnauthorized && !isHandlingUnauthorized) {
+            isHandlingUnauthorized = true;
             onUnauthorized?.();
         }
 

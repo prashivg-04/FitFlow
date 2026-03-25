@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../api/axios'
 import AssignmentWindow from './AssignmentWindow';
+import { toast } from 'sonner';
 
 const AssignWorkoutModal = ({onClose, member}) => {
 
@@ -33,6 +34,7 @@ const AssignWorkoutModal = ({onClose, member}) => {
                 programId: selectedProgram.id,
                 startDate: date
             });
+            toast.success('Workout assigned successfully!');
             onClose();
         } catch(err) {
             console.error("Error assigning program: ", err);

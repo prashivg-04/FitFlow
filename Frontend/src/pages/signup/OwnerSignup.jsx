@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import api from '../../api/axios';
 import { loginSuccess } from '../../store/authSlice';
+import { toast } from 'sonner';
 
 const OwnerSignup = () => {
 
@@ -43,6 +44,7 @@ const OwnerSignup = () => {
     try {
       const response = await api.post('/auth/signup', updatedData);
       dispatch(loginSuccess(response.data.data));
+      toast.success('Owner Account Created Successfully!');
       navigate('/owner/dashboard');
     } catch(err) {
       console.error('Signup failed:', err);

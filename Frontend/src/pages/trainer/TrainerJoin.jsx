@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import api from '../../api/axios'
 import { loginSuccess } from '../../store/authSlice'
+import { toast } from 'sonner';
 
 const TrainerJoin = () => {
 
@@ -15,6 +16,7 @@ const TrainerJoin = () => {
 
     useEffect(() => {
         if(user?.gymStatus === 'ACTIVE') {
+            toast.success('Gym joined successfully! Redirecting to dashboard...');
             navigate('/trainer/dashboard', { replace: true });
         }
     }, [user, navigate]);
@@ -29,6 +31,7 @@ const TrainerJoin = () => {
             const response = await api.post('/join-request', {
                 gymCode: gymCode
             });
+            toast.success('Join request sent successfully! Waiting for approval.');
             setMessage('Join request sent successfully! Waiting for approval.');
 
             const meResponse = await api.get('/auth/me');

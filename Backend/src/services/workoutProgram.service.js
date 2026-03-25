@@ -15,11 +15,10 @@ export const createWorkoutProgramService = async ({userId, data}) => {
         throw new AppError("Program must have title and at least one day", 400);
     }
 
-    if (!days || !Array.isArray(days.exercises)) {
-        throw new AppError('Invalid workout program structure', 400);
-    }
-
     for(const day of days) {
+        if (!day || !Array.isArray(day.exercises)) {
+            throw new AppError('Invalid workout program structure', 400);
+        }
         if(day.isRestDay && day.exercises.length > 0) {
             throw new AppError("Rest day cannot have exercises", 400);
         } 

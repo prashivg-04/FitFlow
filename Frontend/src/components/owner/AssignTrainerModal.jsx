@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../api/axios'
+import { toast } from 'sonner';
 
 const AssignTrainerModal = ({member, onClose}) => {
 
@@ -24,6 +25,7 @@ const AssignTrainerModal = ({member, onClose}) => {
                 trainerId,
                 memberId: member.id
             });
+            toast.success('Trainer assigned successfully!');
             onClose();
         } catch(err) {
             console.log('Failed to assign trainer: ', err);

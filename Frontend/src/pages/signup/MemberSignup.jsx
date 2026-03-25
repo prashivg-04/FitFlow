@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import api from '../../api/axios';
 import { loginSuccess } from '../../store/authSlice';
+import { toast } from 'sonner';
 
 const MemberSignup = () => {
 
@@ -45,6 +46,7 @@ const MemberSignup = () => {
     try {
       const response = await api.post('/auth/signup', updatedData)
       dispatch(loginSuccess(response.data));
+      toast.success('Member Account Created Successfully!');
       navigate('/member/join');
     } catch(err) {
       console.error('Signup failed:', err);
