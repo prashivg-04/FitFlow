@@ -42,6 +42,8 @@ import { loginSuccess, logout } from './store/authSlice'
 import SignupLayout from './pages/signup/SignupLayout'
 import WorkoutBuilder from './pages/trainer/WorkoutBuilder'
 import { Toaster } from 'sonner'
+import NotFound from './pages/error/NotFound'
+import ErrorBoundary from './components/ErrorBoundary'
 
 function App() {
 
@@ -69,7 +71,7 @@ function App() {
   }, [dispatch, navigate]);
 
   return (
-    <div>
+    <ErrorBoundary>
       <Toaster position='top-right' richColors />
 
       <Routes>
@@ -122,8 +124,10 @@ function App() {
             <Route path='support' element={<MemberSupport />} />
           </Route>
         </Route>
+
+        <Route path='*' element={<NotFound />} />
       </Routes>
-    </div>
+    </ErrorBoundary>
   )
 }
 

@@ -17,7 +17,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if(!isAuthenticated || !user?.role) return;
@@ -159,8 +159,11 @@ const Login = () => {
                 <a className='text-sm font-medium text-[#111813] hover:text-[#15ec5b]' href="">Forgot password?</a>
               </div>
 
-              <button className='flex justify-center items-center text-center rounded-lg w-full bg-[#15ec5b] h-14 text-slate-900 text-base font-bold tracking-wide px-5 shadow-lg shadow-[#15ec5b]/20 hover:bg-[#0fdc53] transition-colors'>
-                Login
+              <button 
+                disabled={loading}
+                className='flex justify-center items-center text-center rounded-lg w-full bg-[#15ec5b] h-14 text-slate-900 text-base font-bold tracking-wide px-5 shadow-lg shadow-[#15ec5b]/20 hover:bg-[#0fdc53] transition-colors'
+              >
+                {loading ? 'Logging in...' : 'Login'}
               </button>
 
               <div className='relative flex items-center py-2 mt-2'>

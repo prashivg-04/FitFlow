@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react'
 import gymImg from '../../media/gymSignup.jpeg'
 import api from '../../api/axios'
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const MemberWorkout = () => {
 
   const [program, setProgram] = useState([]);
+
+  const { loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const fetchProgram = async () => {
@@ -185,14 +188,14 @@ const MemberWorkout = () => {
 
                       <button 
                         onClick={handleMarkComplete}
-                        disabled={isMarkCompleteDisabled}
+                        disabled={isMarkCompleteDisabled || loading}
                         className={`w-full mt-4 py-3 rounded-lg font-bold transition-all ${
                           isMarkCompleteDisabled
                             ? 'bg-slate-200 text-slate-500 cursor-not-allowed'
                             : 'bg-[#15ec5b] hover:bg-green-500 text-black shadow'
                         }`}
                       >
-                        {acitveDay?.status === 'COMPLETED' ? 'Workout Completed' : 'Mark Workout as Complete' }
+                        {loading ? 'Marking as Complete...' : acitveDay?.status === 'COMPLETED' ? 'Workout Completed' : 'Mark Workout as Complete' }
                       </button>
                     </div>
                   </div>

@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 
 const TrainerJoin = () => {
 
-    const { user } = useSelector((state) => state.auth);
+    const { user, loading } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -102,7 +102,7 @@ const TrainerJoin = () => {
                                             type="text" 
                                             placeholder='Enter Gym Code' />
                                     </div>
-                                    <button className='w-full py-4 bg-[#15ec5b] font-bold rounded-xl hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#15ec5b]/20 transition-all'>Request to Join</button>
+                                    <button disabled={loading} className='w-full py-4 bg-[#15ec5b] font-bold rounded-xl hover:scale-[1.02] active:scale-95 shadow-lg shadow-[#15ec5b]/20 transition-all'>{loading ? 'Sending Request...' : 'Request to Join'}</button>
                                     <p className='text-center text-xs text-slate-400'>Can't find your code? Ask your gym administrator for your FitFlow Member Key.</p>
                                 </form>
                             }

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import api from '../../api/axios'
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const AssignTrainerModal = ({member, onClose}) => {
 
     const [trainers, setTrainers] = useState([]);
+
+    const { loading } = useSelector((state) => state.auth);
 
     useEffect(() => {
         const fetchTrainers = async () => {
@@ -48,7 +51,7 @@ const AssignTrainerModal = ({member, onClose}) => {
                             <p className='font-medium '>{trainer.user.name}</p>
                             <p className='text-sm font-light'>{trainer.specialization}</p>
                         </div>
-                        <button onClick={() => assignTrainer(trainer.id)} className='bg-[#15ec5b] text-black px-4 py-2 rounded-lg hover:bg-[#15ec5b]/80'>Assign</button>
+                        <button onClick={() => assignTrainer(trainer.id)} disabled={loading} className='bg-[#15ec5b] text-black px-4 py-2 rounded-lg hover:bg-[#15ec5b]/80'>{loading ? 'Assigning...' : 'Assign'}</button>
                     </div>
                 )
             })}

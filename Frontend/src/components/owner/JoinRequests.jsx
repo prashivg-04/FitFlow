@@ -1,11 +1,14 @@
 import React, { useEffect, useState} from 'react'
 import api from '../../api/axios'
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const JoinRequests = () => {
 
     const [requests, setRequests] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loadingRequests, setLoadingRequests] = useState(true);
+
+    const { loading } = useSelector((state) => state.auth); 
 
     useEffect(() => {
         const fetchRequests = async () => {
@@ -16,7 +19,7 @@ const JoinRequests = () => {
             } catch(err) {
                 console.log('Failed to fetch join requests: ', err);
             } finally {
-                setLoading(false);
+                setLoadingRequests(false);
             }
         }
 
@@ -39,8 +42,8 @@ const JoinRequests = () => {
     <div className=''>
         <h3 className='text-lg font-bold mb-4'>Pending Assignments</h3>
 
-        {loading && <p className='text-sm text-slate-500'>Loading join requests...</p>}
-        {!loading && requests.length === 0 && <p className='text-sm text-slate-500'>No pending join requests.</p>}
+        {loadingRequests && <p className='text-sm text-slate-500'>Loading join requests...</p>}
+        {!loadingRequests && requests.length === 0 && <p className='text-sm text-slate-500'>No pending join requests.</p>}
 
         <div className='grid grid-cols-3 gap-4'>
             {requests.map((req) => (
@@ -51,8 +54,8 @@ const JoinRequests = () => {
                     <div className='flex-1 min-w-0'>
                         <h4 className='text-md font-bold truncate capitalize'>New {(req.role).toLowerCase()}: {req.user.name}</h4>
                         <div className='flex items-center gap-2 mt-3'>
-                            <button onClick={() => handleAction(req.id, 'ACCEPT')} className='w-full text-sm font-bold bg-green-500 hover:bg-green-600 py-2 rounded transition'>Approve</button>
-                            <button onClick={() => handleAction(req.id, 'REJECT')} className='w-full text-sm font-bold bg-red-500 hover:bg-red-600 py-2 rounded transition'>Reject</button>
+                            <button onClick={() => handleAction(req.id, 'ACCEPT')} disabled={loading} className='w-full text-sm font-bold bg-green-500 hover:bg-green-600 py-2 rounded transition'>{loading ? 'Approving...' : 'Approve'}</button>
+                            <button onClick={() => handleAction(req.id, 'REJECT')} disabled={loading} className='w-full text-sm font-bold bg-red-500 hover:bg-red-600 py-2 rounded transition'>{loading ? 'Rejecting...' : 'Reject'}</button>
                         </div>
                     </div>
                 </div>

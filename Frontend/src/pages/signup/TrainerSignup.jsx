@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import SignupContext from './SignupContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../../store/authSlice';
 import { toast } from 'sonner';
 
@@ -10,6 +10,8 @@ const TrainerSignup = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { loading } = useSelector((state) => state.auth);
 
   const { signupData, setSignupData } = useContext(SignupContext);
 
@@ -281,8 +283,8 @@ const TrainerSignup = () => {
 
             {/* Actions */}
             <div className='flex items-center justify-between gap-4 pt-3'>
-              <button type='submit' className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
-                <span>Join Gym & Continue</span>
+              <button disabled={loading} type='submit' className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
+                <span>{loading ? 'Completing Signup...' : 'Join Gym & Continue'}</span>
                 <i class="ri-arrow-right-line text-[20px] font-bold"></i>
               </button>
             </div>

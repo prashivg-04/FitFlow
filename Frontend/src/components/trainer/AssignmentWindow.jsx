@@ -1,10 +1,14 @@
 import React, { useState, useEffect} from 'react'
 import api from '../../api/axios'
+import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 const AssignmentWindow = ({member, program, onBack, onAssign}) => {
 
     const [assignmenetWindow, setAssignmenetWindow] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
+
+    const { loading } = useSelector((state) => state.auth);
 
     useEffect(() => {
         const fetchWindow = async () => {
@@ -72,11 +76,11 @@ const AssignmentWindow = ({member, program, onBack, onAssign}) => {
       </div>
 
       <button
-        disabled={!selectedDate}
+        disabled={!selectedDate || loading}
         onClick={() => onAssign(selectedDate)}
         className='mt-6 w-full bg-[#15ec5b] py-3 rounded-lg font-bold disabled:opacity-50'
       >
-        Assign Program
+        {loading ? 'Assigning...' : 'Assign Program'}
       </button>
     </div>
   )
