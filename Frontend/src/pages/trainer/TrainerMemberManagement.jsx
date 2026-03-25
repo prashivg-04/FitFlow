@@ -1,8 +1,10 @@
 import React from 'react'
 import navjot from '../../media/navjotImg.jpeg'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerMemberManagement = () => {
     return (
+        <ComingSoonWrapper>
         <div className='relative flex min-h-screen bg-[#f7f8f6]'>
             <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
                 <div className='max-w-300 mx-auto space-y-8 pb-10'>
@@ -513,6 +515,7 @@ const TrainerMemberManagement = () => {
                 </div>
             </div>
         </div>
+        </ComingSoonWrapper>
     )
 }
 

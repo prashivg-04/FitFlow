@@ -2,6 +2,7 @@ import React from 'react'
 import OwnerHeader from '../../components/owner/OwnerHeader'
 import navjot from '../../media/navjotImg.jpeg'
 import JoinRequests from '../../components/owner/JoinRequests'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const OwnerDashboard = () => {
   return (
@@ -14,7 +15,10 @@ const OwnerDashboard = () => {
             <p className='text-[#61896f] text-base'>Here is what is happening with your gym today.</p>
           </div>
 
+          <JoinRequests />
+
           {/* KPI Cards */}
+          <ComingSoonWrapper>
           <div className='grid grid-cols-4 gap-4'>
             <div className='p-6 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col gap-2 relative overflow-hidden group'>
               <div className='absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-40 transition-opacity'>
@@ -169,8 +173,6 @@ const OwnerDashboard = () => {
             </div>
           </div>
 
-          <JoinRequests />
-
           {/* Recent Activities */}
           <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
             <div className='p-6 flex items-center justify-between border-b border-[#f0f4f2]'>
@@ -309,6 +311,7 @@ const OwnerDashboard = () => {
               </div>
             </div>
           </div>
+          </ComingSoonWrapper>
         </div>
       </div>
     </div>

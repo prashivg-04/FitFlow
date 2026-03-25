@@ -1,8 +1,10 @@
 import React from 'react'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberSupport = () => {
   return (
-     <div className=''>
+    <ComingSoonWrapper>
+    <div className=''>
       <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
         <div className='max-w-300 mx-auto space-y-8 pb-10'>
           {/* Heading */}
@@ -160,6 +162,7 @@ const MemberSupport = () => {
         </div>
       </div>
     </div>
+    </ComingSoonWrapper>
   )
 }
 

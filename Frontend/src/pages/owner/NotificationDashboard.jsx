@@ -1,8 +1,10 @@
 import React from 'react'
 import OwnerHeader from '../../components/owner/OwnerHeader'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const NotificationDashboard = () => {
   return (
+    <ComingSoonWrapper>
     <div className=''>
       <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
         <div className='max-w-300 mx-auto space-y-8 pb-10'>
@@ -275,6 +277,7 @@ const NotificationDashboard = () => {
         </div>
       </div>
     </div>
+    </ComingSoonWrapper>
   )
 }
 

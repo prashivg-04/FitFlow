@@ -3,6 +3,7 @@ import navjot from '../../media/navjotImg.jpeg'
 import { useNavigate } from 'react-router-dom'
 import api from '../../api/axios'
 import PlanCard from '../../components/trainer/PlanCard'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerWorkoutPlans = () => {
 
@@ -26,6 +27,7 @@ const TrainerWorkoutPlans = () => {
   return (
     <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
       {/* KPI Cards */}
+      <ComingSoonWrapper>
       <div className='grid grid-cols-3 gap-8 mb-8'>
         <div className='bg-white rounded-xl p-5 border border-[#dbe6df] shadow-sm flex items-center justify-between'>
             <div className=''>
@@ -57,9 +59,10 @@ const TrainerWorkoutPlans = () => {
             </div>
         </div>
       </div>
+      </ComingSoonWrapper>
 
       {/* Workout Plans Table */}
-      <div className='grid grid-cols-3 gap-8'>
+      <div className='grid grid-cols-3 gap-8 mt-6'>
         {/* Library */}
         <div className='col-span-3 space-y-6'>
             {/* Head */}

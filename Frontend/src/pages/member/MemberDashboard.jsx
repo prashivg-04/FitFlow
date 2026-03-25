@@ -1,10 +1,12 @@
 import React from 'react'
 import gymImg from '../../media/gymSignup.jpeg'
 import navjot from '../../media/navjotImg.jpeg'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberDashboard = () => {
 
   return (
+    <ComingSoonWrapper>
     <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
       <div className='max-w-7xl mx-auto space-y-8'>
         {/* Heading */}
@@ -214,6 +216,7 @@ const MemberDashboard = () => {
         </div>
       </div>
     </div>
+    </ComingSoonWrapper>
   )
 }
 

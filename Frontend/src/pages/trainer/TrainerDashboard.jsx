@@ -2,6 +2,7 @@ import React, { useState, useEffect, use } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
 import api from '../../api/axios'
 import { toast } from 'sonner'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerDashboard = () => {
 
@@ -22,7 +23,47 @@ const TrainerDashboard = () => {
 
   return (
     <div className='flex-1 overflow-y-auto p-8 space-y-6'>
+      {/* Assigned Members */}
+      <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
+        <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
+          <h3 className='text-lg font-bold'>Assigned Members</h3>
+        </div>
+
+        <div className='overflow-x-auto'>
+          <div className='max-h-70 overflow-y-auto'>
+            <table className='w-full text-left border-collapse'>
+              <thead className='sticky top-0 bg-[#fbfdfc] z-10'>
+                <tr className='border-b border-[#f0f4f2]'>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Member</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Goal</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Gender</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Height</th>
+                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Weight</th>
+                </tr>
+              </thead>
+
+              <tbody className='divide-y divide-[#f0f4f2]'>
+                {assignedMembers.map((member) => (
+                  <tr key={member.id} className='hover:bg-gray-50 transition-colors'>
+                    <td className='py-4 px-6'>
+                      <div className='flex items-center gap-3'>
+                        <span>{member.user.name}</span>
+                      </div>
+                    </td>
+                    <td className='py-4 px-6 text-sm text-slate-600 capitalize'>{member.goal.split('_').join(' ').toLowerCase()}</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.gender}</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.heightCm} cm</td>
+                    <td className='py-4 px-6 text-sm text-slate-600'>{member.weightKg} kg</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       {/* KPI Cards */}
+      <ComingSoonWrapper>
       <div className='grid grid-cols-3 gap-6'>
         <div className='relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200'>
           <div className='absolute top-5 right-8 bg-blue-50 size-12 flex items-center justify-center rounded-full text-blue-600'>
@@ -81,8 +122,10 @@ const TrainerDashboard = () => {
           </div>
         </div>
       </div>
+      </ComingSoonWrapper>
 
       {/* Schedule */}
+      <ComingSoonWrapper>
       <div className='grid grid-cols-3 gap-6'>
         <div className='col-span-2 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200'>
           {/* Heading */}
@@ -248,55 +291,7 @@ const TrainerDashboard = () => {
           </div>
         </div>
       </div>
-
-      {/* Assigned Members */}
-      <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
-        <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
-          <h3 className='text-lg font-bold'>Assigned Members</h3>
-
-          <div className='flex items-center gap-3 w-auto'>
-            <button className='px-3 py-1 border border-[#dbe6df] rounded-lg text-[#61896f] hover:bg-gray-50 transition-all flex items-center gap-2'>
-              <i class="ri-filter-3-line text-xl"></i>
-            </button>
-
-            <button className='px-3 py-1 border border-[#dbe6df] rounded-lg text-[#61896f] hover:bg-gray-50 transition-all flex items-center gap-2'>
-              <i class="ri-more-2-fill text-xl"></i>
-            </button>
-          </div>
-        </div>
-
-        <div className='overflow-x-auto'>
-          <div className='max-h-70 overflow-y-auto'>
-            <table className='w-full text-left border-collapse'>
-              <thead className='sticky top-0 bg-[#fbfdfc] z-10'>
-                <tr className='border-b border-[#f0f4f2]'>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Member</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Goal</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Gender</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Height</th>
-                  <th className='py-4 px-6 text-xs font-semibold text-[#61896f] uppercase tracking-wide'>Weight</th>
-                </tr>
-              </thead>
-
-              <tbody className='divide-y divide-[#f0f4f2]'>
-                {assignedMembers.map((member) => (
-                  <tr key={member.id} className='hover:bg-gray-50 transition-colors'>
-                    <td className='py-4 px-6'>
-                      <div className='flex items-center gap-3'>
-                        <span>{member.user.name}</span>
-                      </div>
-                    </td>
-                    <td className='py-4 px-6 text-sm text-slate-600 capitalize'>{member.goal.split('_').join(' ').toLowerCase()}</td>
-                    <td className='py-4 px-6 text-sm text-slate-600'>{member.gender}</td>
-                    <td className='py-4 px-6 text-sm text-slate-600'>{member.heightCm} cm</td>
-                    <td className='py-4 px-6 text-sm text-slate-600'>{member.weightKg} kg</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+      </ComingSoonWrapper>
     </div>
   )
 }

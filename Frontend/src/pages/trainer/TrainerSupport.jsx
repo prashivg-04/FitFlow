@@ -1,7 +1,9 @@
 import React from 'react'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerSupport = () => {
   return (
+    <ComingSoonWrapper>
     <div className=''>
       <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
         <div className='max-w-300 mx-auto space-y-8 pb-10'>
@@ -160,6 +162,7 @@ const TrainerSupport = () => {
         </div>
       </div>
     </div>
+    </ComingSoonWrapper>
   )
 }
 

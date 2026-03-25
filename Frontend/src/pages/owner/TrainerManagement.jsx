@@ -3,6 +3,7 @@ import OwnerHeader from '../../components/owner/OwnerHeader'
 import navjot from '../../media/navjotImg.jpeg'
 import AssignTrainerModal from '../../components/owner/AssignTrainerModal'
 import api from '../../api/axios'
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerManagement = () => {
 
@@ -33,15 +34,43 @@ const TrainerManagement = () => {
               <h1 className='text-4xl font-black tracking-tight'>Trainer Management</h1>
               <p className='text-[#61896f] text-base max-w-2xl '>Manage your coaching staff, monitor performance metrics, and assign members to trainers effectively.</p>
             </div>
-            <div>
-              <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                <i class="ri-add-line text-[20px]"></i>
-                Add New Trainer
-              </button>
+          </div>
+
+          {/* Pending Assignments */}
+          <div className='mt-8'>
+            <h3 className='text-lg font-bold mb-4'>Pending Assignments</h3>
+            <div className='grid grid-cols-3 gap-4'>
+              {unassignedMembers.length === 0 ? (
+                <p className='text-slate-500'>No pending assignments.</p>
+              ) : (
+                unassignedMembers.map(member => {
+                  return (
+                    <div key={member.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
+                      <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
+                        <i class="fa-solid fa-user-plus text-slate-500"></i>
+                    </div>
+                    <div className='flex-1 min-w-0'>
+                      <h4 className='text-sm font-bold truncate'>Name : {member.user.name}</h4>
+                      <p className='text-xs text-slate-500 mt-1 capitalize'>Goal : {(member.goal).split('_')[0].toLowerCase() + ' ' + (member.goal).split('_')[1].toLowerCase()}</p>
+                      <p className='text-xs text-slate-500 mt-1 mb-3'>Weight : {member.weightKg} kg</p>
+                      <button 
+                        onClick={() => {
+                          setSelectedMember(member);
+                          setShowModal(true)
+                        }} 
+                        className='w-full text-xs font-bold bg-slate-100 hover:bg-slate-200 py-2 rounded transition'
+                      >
+                        Assign Trainer
+                      </button>
+                    </div>
+                  </div>
+                )
+              }))}
             </div>
           </div>
 
           {/* KPI Cards */}
+          <ComingSoonWrapper>
           <div className='grid grid-cols-4 gap-4'>
             <div className='bg-white p-6 rounded-xl border border-[#dbe6df] shadow-soft flex flex-col justify-between h-32 relative overflow-hidden group'>
               <div className='absolute top-0 right-0 p-4 opacity-10  group-hover:opacity-20 transition-opacity'>
@@ -400,36 +429,7 @@ const TrainerManagement = () => {
               </div>
             </div>
           </div>
-
-          {/* Pending Assignments */}
-          <div className='mt-8'>
-            <h3 className='text-lg font-bold mb-4'>Pending Assignments</h3>
-            <div className='grid grid-cols-3 gap-4'>
-              {unassignedMembers.map(member => {
-                return (
-                  <div key={member.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
-                    <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
-                      <i class="fa-solid fa-user-plus text-slate-500"></i>
-                    </div>
-                    <div className='flex-1 min-w-0'>
-                      <h4 className='text-sm font-bold truncate'>Name : {member.user.name}</h4>
-                      <p className='text-xs text-slate-500 mt-1 capitalize'>Goal : {(member.goal).split('_')[0].toLowerCase() + ' ' + (member.goal).split('_')[1].toLowerCase()}</p>
-                      <p className='text-xs text-slate-500 mt-1 mb-3'>Weight : {member.weightKg} kg</p>
-                      <button 
-                        onClick={() => {
-                          setSelectedMember(member);
-                          setShowModal(true)
-                        }} 
-                        className='w-full text-xs font-bold bg-slate-100 hover:bg-slate-200 py-2 rounded transition'
-                      >
-                        Assign Trainer
-                      </button>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
+          </ComingSoonWrapper>
 
           {showModal && <AssignTrainerModal member={selectedMember} onClose={() => setShowModal(false)} />}
         </div>

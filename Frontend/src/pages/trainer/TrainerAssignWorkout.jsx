@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import navjot from '../../media/navjotImg.jpeg'
 import api from '../../api/axios'
 import AssignWorkoutModal from '../../components/trainer/AssignWorkoutModal';
+import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerAssignWorkout = () => {
 
@@ -32,22 +33,6 @@ const TrainerAssignWorkout = () => {
             <div className='flex flex-col items-start justify-center gap-2'>
               <h1 className='text-4xl font-black tracking-tight'>Select Member</h1>
               <p className='text-[#61896f] text-base'>Choose a member from your assigned list to create a new plan or modify their current routine.</p>
-            </div>
-          </div>
-
-          {/* Filters */}
-          <div className='flex items-center justify-between gap-4'>
-            <div className='relative flex-1 max-w-sm group'>
-              <i className="ri-search-line absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px] group-focus-within:font-bold group-focus-within:text-[#15ec5b] transition-all"></i>
-              <input className='w-full pl-10 pr-4 py-2 bg-white border border-[#dbe6df] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#15ec5b] transition-all placeholder:text-slate-400' type="text" placeholder='Filter by name...' />
-            </div>
-
-            <div className='flex items-center gap-2 text-xs font-medium text-slate-500'>
-              <span>Sort by:</span>
-              <button className='flex items-center gap-1 hover:text-[#15ec5b] transition-colors'>
-                Recent
-                <i className="ri-arrow-down-s-fill text-[16px]"></i>
-              </button>
             </div>
           </div>
 
