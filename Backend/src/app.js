@@ -7,6 +7,7 @@ import joinRoutes from './routes/join.routes.js'
 import ownerRoutes from './routes/owner.routes.js';
 import trainerRoutes from './routes/trainer.routes.js';
 import memberRoutes from './routes/member.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 import errorHandler from './middlewares/error.middleware.js';
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/join-request', joinRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/owner', ownerRoutes);
 app.use('/api/trainer', trainerRoutes);
 app.use('/api/member', memberRoutes);

@@ -4,7 +4,7 @@ import navjot from '../../media/navjotImg.jpeg'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
 
-const TrainerSidebar = () => {
+const TrainerSidebar = ({ username }) => {
 
   return (
     <div className='flex flex-col min-h-screen h-full w-64 bg-white border-r border-[#f0f4f2] z-10'>
@@ -16,7 +16,7 @@ const TrainerSidebar = () => {
                 </div>
                 <div className='flex flex-col'>
                     <h1 className='text-xl font-bold tracking-tight leading-none'>GymFlow</h1>
-                    <p className='text-xs font-medium text-[#61896f] mt-1'>Gym Owner</p>
+                    <p className='text-xs font-medium text-[#61896f] mt-1'>Gym Trainer</p>
                 </div>
             </div>
         </div>
@@ -136,8 +136,8 @@ const TrainerSidebar = () => {
                     <img className='rounded-full w-12 h-12 object-cover border-2 border-[#15ec5b]' src={navjot} alt="" />
                 </div>
                 <div className='flex flex-col'>
-                    <h1 className='text-sm font-bold truncate tracking-tight leading-none'>Alex Johnson</h1>
-                    <p className='text-xs font-medium text-[#61896f] mt-1'>Owner</p>
+                    <h1 className='text-sm font-bold truncate tracking-tight leading-none'>{username}</h1>
+                    <p className='text-xs font-medium text-[#61896f] mt-1'>Trainer</p>
                 </div>
             </a>
         </div>
