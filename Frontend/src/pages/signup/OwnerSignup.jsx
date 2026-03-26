@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import api from '../../api/axios';
 import { loginSuccess } from '../../store/authSlice';
 import { toast } from 'sonner';
+import { ownerSchema } from '../../validations/auth.validation';
 
 const OwnerSignup = () => {
 
@@ -28,8 +29,37 @@ const OwnerSignup = () => {
   const [openingTime, setOpeningTime] = useState('');
   const [closingTime, setClosingTime] = useState('');
 
+  const [formData, setFormData] = useState({
+    gymName: '',
+    city: '',
+    address: '',
+    phone: '',
+    openingTime: '',
+    closingTime: ''
+  });
+
+  const [errors, setErrors] = useState({});
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const result = ownerSchema.safeParse(formData);
+
+    if(!result.success) {
+      const fieldErrors = {};
+
+      result.error.issues.forEach((e) => {
+        fieldErrors[e.path[0]] = e.message;
+      });
+
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setSignupData(prev => ({
+      ...prev,
+      roleData: formData
+    }));
 
     const updatedData = {
       ...signupData,
@@ -52,12 +82,14 @@ const OwnerSignup = () => {
       console.error('Signup failed:', err);
     }
 
-    setGymName('');
-    setCity('');
-    setAddress('');
-    setPhone('');
-    setOpeningTime('');
-    setClosingTime('');
+    setFormData({
+      gymName: '',
+      city: '',
+      address: '',
+      phone: '',
+      openingTime: '',
+      closingTime: ''
+    });
   }
 
   return (
@@ -95,7 +127,7 @@ const OwnerSignup = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
+          <form onSubmit={handleSubmit} name='' className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
             {/* Gym Info */}
             <div className='flex flex-col gap-5'>
               {/* Heading */}
@@ -112,12 +144,13 @@ const OwnerSignup = () => {
                   <label className='flex flex-col gap-1 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Gym Name</p>
                     <input 
-                      value={gymName}
-                      onChange={(e) => setGymName(e.target.value)}
+                      value={formData.gymName}
+                      onChange={(e) => setFormData({...formData, gymName: e.target.value})}
                       className='form-input flex w-full h-12 mt-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 border border-[#dbe6df] bg-white focus:border-[#15ec5b] placeholder:text-[#61896f] px-4 text-base font-normal leading-normal transition-all'
                       type="text" 
                       placeholder='e.g. Iron Paradise Gym'
                     />
+                    {errors?.gymName && <span className='text-xs text-red-500 mt-1'>{errors.gymName}</span>}
                   </label>
                 </div>
 
@@ -128,12 +161,13 @@ const OwnerSignup = () => {
                     <div className='relative'>
                       <i class="ri-map-pin-2-line absolute left-4 mt-7 -translate-y-1/2 text-[20px] text-[#61896f]"></i>
                       <input 
-                        value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        value={formData.address}
+                        onChange={(e) => setFormData({...formData, address: e.target.value})}
                         className='form-input flex w-full h-12 mt-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 border border-[#dbe6df] bg-white focus:border-[#15ec5b] placeholder:text-[#61896f] pl-11 pr-4 text-base font-normal leading-normal transition-all'
                         type="text" 
                         placeholder='123 Fitness Blvd' 
                       />
+                      {errors?.address && <span className='text-xs text-red-500 mt-1'>{errors.address}</span>}
                     </div>
                   </label>
                 </div>
@@ -143,12 +177,13 @@ const OwnerSignup = () => {
                   <label className='flex flex-col gap-2 flex-1'>
                     <p className='text-sm font-medium leading-normal'>City</p>
                     <input 
-                      value={city}
-                      onChange={(e) => setCity(e.target.value)}
+                      value={formData.city}
+                      onChange={(e) => setFormData({...formData, city: e.target.value})}
                       className='form-input flex w-full h-12 overflow-hidden rounded-lg bg-white border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] placeholder:text-[#61896f] px-4 text-base font-normal leading-normal transition-all' 
                       type="text" 
                       placeholder='New York' 
                     />
+                    {errors?.city && <span className='text-xs text-red-500 mt-1'>{errors.city}</span>}
                   </label>
                 </div>
 
@@ -157,12 +192,13 @@ const OwnerSignup = () => {
                   <label className='flex flex-col gap-2 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Contact Number</p>
                     <input 
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
                       className='form-input flex w-full h-12 overflow-hidden rounded-lg bg-white border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] placeholder:text-[#61896f] px-4 text-base font-normal leading-normal transition-all' 
                       type="tel" 
                       placeholder='+1 (555) 000-0000' 
                     />
+                    {errors?.phone && <span className='text-xs text-red-500 mt-1'>{errors.phone}</span>}
                   </label>
                 </div>
               </div>
@@ -185,25 +221,27 @@ const OwnerSignup = () => {
                     <p className='text-sm font-medium leading-normal'>Operating Hours</p>
                     <div className='flex items-center gap-3'>
                       {/* Opening Time */}
-                      <div className='relative flex-1'>
-                        <span className='absolute left-3 top-1/2 -translate-y-1/2 text-[#61896f] text-xs font-semibold uppercase'>OPEN</span>
+                      <div className='flex-1'>
+                        <div className='text-[#61896f] text-xs font-semibold uppercase pl-1 pb-1'>Open</div>
                         <input 
-                          value={openingTime}
-                          onChange={(e) => setOpeningTime(e.target.value)}
-                          className='w-full h-12 bg-white pl-14 pr-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
+                          value={formData.openingTime}
+                          onChange={(e) => setFormData({...formData, openingTime: e.target.value})}
+                          className='w-full h-12 bg-white px-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
                           type="time" 
                         />
+                        {errors?.openingTime && <span className='text-xs text-red-500 mt-1'>{errors.openingTime}</span>}
                       </div>
                       <span>-</span>
                       {/* Closing Time */}
-                      <div className='relative flex-1'>
-                        <span className='absolute left-3 top-1/2 -translate-y-1/2 text-[#61896f] text-xs font-semibold uppercase'>CLOSE</span>
+                      <div className='flex-1'>
+                        <div className='text-[#61896f] text-xs font-semibold uppercase pl-1 pb-1'>Close</div>
                         <input 
-                          value={closingTime}
-                          onChange={(e) => setClosingTime(e.target.value)}
-                          className='w-full h-12 bg-white pl-14 pr-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
+                          value={formData.closingTime}
+                          onChange={(e) => setFormData({...formData, closingTime: e.target.value})}
+                          className='w-full h-12 bg-white px-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
                           type="time"
                         />
+                        {errors?.closingTime && <span className='text-xs text-red-500 mt-1'>{errors.closingTime}</span>}
                       </div>
                     </div>
                   </label>

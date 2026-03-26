@@ -6,29 +6,45 @@ import appleLogo from '../../media/appleLogo.svg'
 import gymSignup from '../../media/gymSignup.jpeg'
 import SignupContext from './SignupContext'
 import { useNavigate } from 'react-router-dom'
+import { baseSignupSchema } from '../../validations/auth.validation'
 
 const Signup = () => {
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [selectedRole, setSelectedRole] = useState('OWNER');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'OWNER',
+  });
+  const [errors, setErrors] = useState({});
 
   const { signupData, setSignupData } = useContext(SignupContext);
   const navigate = useNavigate();
   
   const handleNext = (e) => {
     e.preventDefault();
+
+    const result = baseSignupSchema.safeParse(formData);
+
+    if(!result.success) {
+      const fieldErrors = {};
+
+      result.error.issues.forEach((e) => {
+        fieldErrors[e.path[0]] = e.message;
+      });
+
+      setErrors(fieldErrors);
+      return;
+    }
+
     setSignupData({
       ...signupData,
-      name,
-      email,
-      password,
-      role: selectedRole
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      role: formData.role
     });
-    console.log(signupData)
-    console.log(selectedRole.toLowerCase())
-    navigate(`/signup/${selectedRole.toLowerCase()}`);
+    navigate(`/signup/${formData.role.toLowerCase()}`);
   }
   
 
@@ -59,21 +75,21 @@ const Signup = () => {
                   className='absolute h-[calc(100%-8px)] rounded-md bg-white shadow-[0_0_4px_#0000001a] transition-all duration-300 ease-in-out top-1'
                   style={{
                     width: 'calc(33.333% - 5.33px)',
-                    left: selectedRole === 'OWNER' ? '4px' : selectedRole === 'TRAINER' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
+                    left: formData.role === 'OWNER' ? '4px' : formData.role === 'TRAINER' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
                   }}
                 />
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'OWNER'}
+                    checked={formData.role === 'OWNER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
                     value="OWNER"
-                    onChange={(e) => setSelectedRole(e.target.value)}
+                    onChange={(e) => setFormData({...formData, role: e.target.value})}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'OWNER' ? 'text-slate-900' : 'text-[#61896f]'
+                    formData.role === 'OWNER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Gym Owner
                   </div>
@@ -81,15 +97,15 @@ const Signup = () => {
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'TRAINER'}
+                    checked={formData.role === 'TRAINER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
                     value="TRAINER" 
-                    onChange={(e) => setSelectedRole(e.target.value)}
+                    onChange={(e) => setFormData({...formData, role: e.target.value})}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'TRAINER' ? 'text-slate-900' : 'text-[#61896f]'
+                    formData.role === 'TRAINER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Trainer
                   </div>
@@ -97,34 +113,37 @@ const Signup = () => {
 
                 <label className='flex-1 cursor-pointer relative z-10'>
                   <input 
-                    checked={selectedRole === 'MEMBER'}
+                    checked={formData.role === 'MEMBER'}
                     className='sr-only' 
                     type="radio" 
                     name='role' 
                     value="MEMBER" 
-                    onChange={(e) => setSelectedRole(e.target.value)}
+                    onChange={(e) => setFormData({...formData, role: e.target.value})}
                   />
                   <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                    selectedRole === 'MEMBER' ? 'text-slate-900' : 'text-[#61896f]'
+                    formData.role === 'MEMBER' ? 'text-slate-900' : 'text-[#61896f]'
                   }`}>
                     Member
                   </div>
                 </label>
+                
               </div>
+              {errors.role && <p className='text-red-500 text-sm'>{errors.role}</p>}
             </div>
 
-            <form className='space-y-7' onSubmit={handleNext}>
+            <form className='space-y-7' noValidate onSubmit={handleNext}>
               {/* Name */}
               <div className='flex flex-col gap-1.5'>
                 <label className='text-base font-medium leading-normal' htmlFor="">Full Name</label>
                 <div className='relative group'>
                   <input 
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
                     className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
                     type="text" 
                     placeholder='John Doe' 
                   />
+                  {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name}</p>}
                   <i class="ri-user-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
@@ -134,12 +153,13 @@ const Signup = () => {
                 <label className='text-base font-medium leading-normal' htmlFor="">Work Email</label>
                 <div className='relative group'>
                   <input 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
-                    type="text" 
+                    type="email" 
                     placeholder='john.doe@example.com' 
                   />
+                  {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
                   <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
@@ -149,12 +169,13 @@ const Signup = () => {
                 <label className='text-base font-medium leading-normal' htmlFor="">Password</label>
                 <div className='relative group'>
                   <input 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={formData.password}
+                    onChange={(e) => setFormData({...formData, password: e.target.value})}
                     className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
                     type="password"  
-                    placeholder='Min. 8 characters' 
+                    placeholder='Create a strong password' 
                   />
+                  {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
                   <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>

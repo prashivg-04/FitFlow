@@ -8,11 +8,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginFailure, loginStart, loginSuccess } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { loginSchema } from '../validations/auth.validation'
+import { set } from 'zod'
 
 const Login = () => {
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,10 +57,26 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginStart());
 
+    const result = loginSchema.safeParse(formData);
+    if(!result.success) {
+      const fieldErrors = {};
+
+      result.error.issues.forEach((error) => {
+        const fieldName = error.path[0];
+        fieldErrors[fieldName] = error.message;
+      });
+
+      setErrors(fieldErrors);
+      dispatch(loginFailure('Validation failed. Please check your input.'));
+      return;
+    }
+
+    setErrors({});
+
     try {
       const response = await api.post('/auth/login', {
-        email, 
-        password
+        email: formData.email,
+        password: formData.password
       });
       dispatch(loginSuccess(response.data.data));
       console.log("Login successfull", response.data);
@@ -126,17 +148,18 @@ const Login = () => {
               <p className='text-slate-400 text-base font-normal'>Please enter your details to login.</p>
             </div>
 
-            <form onSubmit={handleLogin} className='flex flex-col gap-5'>
+            <form onSubmit={handleLogin} noValidate className='flex flex-col gap-5'>
               <div className='flex flex-col gap-1.5'>
                 <label className='text-base font-medium leading-normal' htmlFor="">Email</label>
                 <div className='relative group'>
                   <input 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
                     className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
-                    type="text" 
+                    type="email" 
                     placeholder='john.doe@example.com'
                   />
+                  {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
                   <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
@@ -145,12 +168,13 @@ const Login = () => {
                 <label className='text-base font-medium leading-normal' htmlFor="">Password</label>
                 <div className='relative group'>
                   <input 
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={formData.password}
+                    onChange={(e) => setFormData({...formData, password: e.target.value})}
                     className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
                     type="password"  
-                    placeholder='Min. 8 characters' 
+                    placeholder='Enter your password' 
                   />
+                  {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
                   <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>

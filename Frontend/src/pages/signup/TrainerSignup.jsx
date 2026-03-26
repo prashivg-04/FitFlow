@@ -5,6 +5,7 @@ import api from '../../api/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../../store/authSlice';
 import { toast } from 'sonner';
+import { trainerSchema } from '../../validations/auth.validation';
 
 const TrainerSignup = () => {
 
@@ -21,36 +22,61 @@ const TrainerSignup = () => {
     }
   }, []);
 
-  const [specialization, setSpecialization] = useState('');
-  const [experienceYears, setExperienceYears] = useState('');
-  const [preferredDays, setPreferredDays] = useState([]);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
-  const [bio, setBio] = useState('');
+  const [formData, setFormData] = useState({
+    specialization: '',
+    experienceYears: '0',
+    preferredDays: [],
+    startTime: '',
+    endTime: '',
+    bio: ''
+  });
+  const [errors, setErrors] = useState({});
 
-  const selectedDays = preferredDays;
+  const selectedDays = formData.preferredDays;
   const toggleDay = (day) => {
-    setPreferredDays(prev => 
-      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
-    );
+    setFormData(prev => ({
+      ...prev,
+      preferredDays: prev.preferredDays.includes(day) ? prev.preferredDays.filter(d => d !== day) : [...prev.preferredDays, day]
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const parsedData = {
+      ...formData,
+      experienceYears: Number(formData.experienceYears)
+    }
+
+    const result = trainerSchema.safeParse(parsedData);
+
+    if(!result.success) {
+      const fieldErrors = {};
+
+      result.error.issues.forEach((e) => {
+        fieldErrors[e.path[0]] = e.message;
+      });
+
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setSignupData(prev => ({
+      ...prev,
+      roleData: parsedData
+    }));
     
     const updatedData = {
       ...signupData,
       roleData: {
-        specialization,
-        experienceYears : Number(experienceYears),
-        preferredDays,
-        startTime,
-        endTime,
-        bio
+        specialization: parsedData.specialization,
+        experienceYears: parsedData.experienceYears,
+        preferredDays: parsedData.preferredDays,
+        startTime: parsedData.startTime,
+        endTime: parsedData.endTime,
+        bio: parsedData.bio
       }
     };
-
-    console.log(updatedData.roleData);
 
     try {
       const response = await api.post('/auth/signup', updatedData);
@@ -61,12 +87,14 @@ const TrainerSignup = () => {
       console.error('Signup failed:', err);
     }
 
-    setSpecialization('');
-    setExperienceYears('');
-    setPreferredDays([]);
-    setStartTime('');
-    setEndTime('');
-    setBio('');
+    setFormData({
+      specialization: '',
+      experienceYears: '',
+      preferredDays: [],
+      startTime: '',
+      endTime: '',
+      bio: ''
+    });
   }
 
   return (
@@ -104,7 +132,7 @@ const TrainerSignup = () => {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
+          <form onSubmit={handleSubmit} noValidate className='bg-white rounded-2xl shadow-soft border border-transparent p-8 flex flex-col gap-8 mt-2'>
             {/* Professional Information */}
             <div className='flex flex-col gap-5'>
               {/* Heading */}
@@ -123,12 +151,12 @@ const TrainerSignup = () => {
                     <p className='text-sm font-medium leading-normal'>Specialization</p>
                     <div className='relative'>
                       <select 
-                        value={specialization}
-                        onChange={(e) => setSpecialization(e.target.value)}
+                        value={formData.specialization}
+                        onChange={(e) => setFormData({...formData, specialization: e.target.value})}
                         className='form-select w-full h-12 bg-white rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] appearance-none cursor-pointer px-4' 
                         name="specialization" id="specialization"
                       >
-                        <option value="" disabled selected>Select your main expertise...</option>
+                        <option value="" disabled>Select your main expertise...</option>
                         <option>Strength & Conditioning</option>
                         <option>Yoga & Pilates</option>
                         <option>HIIT & Cardio</option>
@@ -137,6 +165,7 @@ const TrainerSignup = () => {
                       <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
                         <i class="ri-arrow-down-s-fill text-m"></i>
                       </div>
+                      {errors.specialization && <p className='text-red-500 text-sm mt-1'>{errors.specialization}</p>}
                     </div>
                   </label>
                 </div>
@@ -147,12 +176,13 @@ const TrainerSignup = () => {
                     <p className='text-sm font-medium leading-normal'>Years of Experience</p>
                     <div className=''>
                         <input 
-                          value={experienceYears}
-                          onChange={(e) => setExperienceYears(e.target.value)}
+                          value={formData.experienceYears}
+                          onChange={(e) => setFormData({...formData, experienceYears: e.target.value})}
                           className='w-full h-12 bg-white px-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all'
                           type="number" 
                           placeholder='Enter years of experience'
                         />
+                        {errors.experienceYears && <p className='text-red-500 text-sm mt-1'>{errors.experienceYears}</p>}
                     </div>
                   </label>
                 </div>
@@ -225,6 +255,7 @@ const TrainerSignup = () => {
                             </div>
                         </label>
                     </div>
+                    {errors.preferredDays && <p className='text-red-500 text-sm mt-1'>{errors.preferredDays}</p>}
                   </label>
                 </div>
 
@@ -234,20 +265,22 @@ const TrainerSignup = () => {
                     <div className='flex items-center gap-3'>
                       <div className='relative flex-1'>
                         <input 
-                          value={startTime}
-                          onChange={(e) => setStartTime(e.target.value)}
+                          value={formData.startTime}
+                          onChange={(e) => setFormData({...formData, startTime: e.target.value})}
                           className='w-full h-12 bg-white px-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
                           type="time" 
                         />
+                        {errors.startTime && <p className='text-red-500 text-sm mt-1'>{errors.startTime}</p>}
                       </div>
                       <span className='text-[#61896f]'>to</span>
                       <div className='relative flex-1'>
                         <input 
-                          value={endTime}
-                          onChange={(e) => setEndTime(e.target.value)}
+                          value={formData.endTime}
+                          onChange={(e) => setFormData({...formData, endTime: e.target.value})}
                           className='w-full h-12 bg-white px-4 rounded-lg border border-[#dbe6df] focus:outline-none focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] transition-all' 
                           type="time"
                         />
+                        {errors.endTime && <p className='text-red-500 text-sm mt-1'>{errors.endTime}</p>}
                       </div>
                     </div>
                   </label>
@@ -271,11 +304,12 @@ const TrainerSignup = () => {
                   <label className='flex flex-col gap-1 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Bio </p>
                     <textarea 
-                      value={bio}
-                      onChange={(e) => setBio(e.target.value)}
+                      value={formData.bio}
+                      onChange={(e) => setFormData({...formData, bio: e.target.value})}
                       className='form-input flex w-full min-h-30 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] px-4 py-3 text-base font-normal leading-normal transition-all' 
                       placeholder='A brief description about you, your training style, and what motivates you as a trainer...'>
                     </textarea>
+                    {errors.bio && <p className='text-red-500 text-sm mt-1'>{errors.bio}</p>}
                   </label>
                 </div>
               </div>
