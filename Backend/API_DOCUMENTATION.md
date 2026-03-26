@@ -2,188 +2,220 @@
 
 ## 1. Project Overview
 
-This backend is a Node.js + Express.js REST API for the GymSaaS platform. It handles authentication, user onboarding, and role-based access control.
+GymSaaS backend is a Node.js + Express REST API with Prisma + PostgreSQL.
 
-**Authentication mechanism**
-- JWT-based authentication.
-- JWT is stored in an **HTTP-only cookie** named `token`.
+- Local base URL: `http://localhost:8080`
+- API prefix: `/api`
+- Authentication: JWT in HTTP-only cookie `token`
+- Roles: `OWNER`, `TRAINER`, `MEMBER`
 
-**Cookie-based auth behavior**
-- Cookie name: `token`
-- `httpOnly: true`
-- `sameSite: lax`
-- `secure: false` (development setting)
-- Max age: **7 days**
+This document is implementation-verified against current routes, controllers, services, and middleware.
 
-**Base API URL**
-- Local development: `http://localhost:8080`
-- All routes are prefixed with `/api`
+JWT is stored in an HTTP-only cookie (`token`) and is automatically sent with requests.
+Frontend must enable `withCredentials: true` for authenticated API calls.
 
 ---
 
-## 2. Authentication APIs
+## 2. System Flow
+
+1. User signs up with role-specific profile data.
+2. Trainer/member sends join request using owner `gymCode`.
+3. Owner approves/rejects join requests.
+4. Owner assigns trainer to member.
+5. Trainer creates workout program and assigns it.
+6. Member follows schedule and completes workouts.
+
+### gymStatus Values
+
+- `NONE` -> User is not part of any gym
+- `PENDING` -> Join request sent but not yet approved
+- `ACTIVE` -> User is part of a gym
+
+---
+
+## 3. Authentication APIs
 
 ### POST /api/auth/signup
 
-**Purpose**
-- Create a new user (OWNER, TRAINER, or MEMBER) and store role-specific data.
+- Purpose: Register user and create role profile.
+- Role: Public
+- Authentication Required: No
 
-**Authentication Required**
-- No
+**Headers**
 
-**Request Headers**
 - `Content-Type: application/json`
+
+**Validation**
+
+- Zod validation middleware is applied.
+- Validation error message is flattened into a single string.
 
 **Request Body**
 
-| Field | Type | Required | Description |
+| Field | Type | Required | Notes |
 | --- | --- | --- | --- |
-| name | string | Yes | User full name. |
-| email | string | Yes | Unique email address. |
-| password | string | Yes | Plain text password (hashed server-side). |
-| role | string | Yes | One of: `OWNER`, `TRAINER`, `MEMBER`. |
-| roleData | object | Yes | Role-specific profile data (see below). |
-
-**Role-specific `roleData`**
+| name | string | Yes | Min 1 |
+| email | string | Yes | Valid email |
+| password | string | Yes | Min 6 |
+| role | enum | Yes | `OWNER` \| `TRAINER` \| `MEMBER` |
+| roleData | object | Yes | Strict by role |
 
 **OWNER roleData**
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| gymName | string | Yes | Gym name. |
-| address | string | Yes | Gym address. |
-| city | string | Yes | Gym city. |
-| phone | string | Yes | Contact phone number. |
-| openingTime | string | Yes | Opening time (string format). |
-| closingTime | string | Yes | Closing time (string format). |
+
+| Field | Type | Required |
+| --- | --- | --- |
+| gymName | string | Yes |
+| address | string | Yes |
+| city | string | Yes |
+| phone | string | Yes |
+| openingTime | string | Yes |
+| closingTime | string | Yes |
 
 **TRAINER roleData**
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| specialization | string | Yes | Trainer specialization. |
-| experienceYears | number | Yes | Years of experience. |
-| preferredDays | string | Yes | Preferred working days. |
-| startTime | string | Yes | Start time (string format). |
-| endTime | string | Yes | End time (string format). |
-| bio | string | Yes | Short trainer bio. |
+
+| Field | Type | Required |
+| --- | --- | --- |
+| specialization | string | Yes |
+| experienceYears | number >= 0 | Yes |
+| preferredDays | string[] (min 1) | Yes |
+| startTime | string | Yes |
+| endTime | string | Yes |
+| bio | string | Yes |
 
 **MEMBER roleData**
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| dateOfBirth | string | Yes | Date of birth (parsable by `new Date()` on server). |
-| gender | string | Yes | One of: `MALE`, `FEMALE`, `OTHER`. |
-| heightCm | number | Yes | Height in centimeters. |
-| weightKg | number | Yes | Weight in kilograms. |
-| goal | string | Yes | One of: `WEIGHT_LOSS`, `MUSCLE_GAIN`, `ENDURANCE`, `FLEXIBILITY`, `GENERAL_FITNESS`. |
-| experienceLevel | string | Yes | One of: `BEGINNER`, `INTERMEDIATE`, `ADVANCED`. |
 
-**Success Response (201)**
+| Field | Type | Required |
+| --- | --- | --- |
+| dateOfBirth | string | Yes |
+| gender | enum | Yes (`MALE`, `FEMALE`, `OTHER`) |
+| heightCm | number > 0 | Yes |
+| weightKg | number > 0 | Yes |
+| goal | enum | Yes |
+| experienceLevel | enum | Yes |
+
+**Example Request**
+
+```json
+{
+  "name": "Aarav Sharma",
+  "email": "aarav.owner@example.com",
+  "password": "secret123",
+  "role": "OWNER",
+  "roleData": {
+    "gymName": "Iron Core Fitness",
+    "address": "12 Main Street",
+    "city": "Delhi",
+    "phone": "9876543210",
+    "openingTime": "06:00",
+    "closingTime": "22:00"
+  }
+}
+```
+
+**Success (201)**
+
 ```json
 {
   "success": true,
   "data": {
-    "userId": "uuid",
+    "id": "uuid",
+    "name": "Aarav Sharma",
+    "email": "aarav.owner@example.com",
     "role": "OWNER"
   },
   "message": "User signed up successfully"
 }
 ```
 
+For `TRAINER` and `MEMBER`, `data` also includes `gymStatus` and `ownerId`.
+
 **Error Responses**
-- **409 Conflict** (email already exists)
-```json
-{
-  "success": false,
-  "message": "Email already exists"
-}
-```
 
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal Server Error"
-}
-```
+| Status | Message (actual) |
+| --- | --- |
+| 400 | Validation messages (for example: `Invalid email`) |
+| 400 | `Invalid owner data` / `Invalid trainer data` / `Invalid member data` |
+| 400 | `Invalid date of birth` |
+| 409 | `Email already exists` |
+| 500 | `Internal Server Error` |
 
-**Notes / Edge Cases**
-- On success, a cookie named `token` is set with a 7-day expiry (same as login).
-- Ensure your frontend sends requests with `credentials: "include"` so cookies are stored.
-- If `role` is not one of `OWNER`, `TRAINER`, `MEMBER`, signup fails internally (currently returns **500** due to an unhandled `INVALID_ROLE`).
-- Validation is **Planned / Not Implemented**. Missing or invalid fields may cause server errors.
+**Notes**
+
+- Signup sets cookie `token`.
+- Cookie settings: `httpOnly`, `sameSite: lax`, `secure: false`.
+- Signup cookie does not set explicit `maxAge`.
 
 ---
 
 ### POST /api/auth/login
 
-**Purpose**
-- Authenticate a user and set a JWT cookie.
+- Purpose: Authenticate and set JWT cookie.
+- Role: Public
+- Authentication Required: No
 
-**Authentication Required**
-- No
+**Headers**
 
-**Request Headers**
 - `Content-Type: application/json`
 
 **Request Body**
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| email | string | Yes | User email address. |
-| password | string | Yes | User password. |
+| Field | Type | Required |
+| --- | --- | --- |
+| email | string (email) | Yes |
+| password | string | Yes |
 
-**Success Response (200)**
+**Example Request**
+
+```json
+{
+  "email": "aarav.owner@example.com",
+  "password": "secret123"
+}
+```
+
+**Success (200)**
+
 ```json
 {
   "success": true,
   "data": {
     "id": "uuid",
-    "name": "Full Name",
-    "email": "user@example.com",
+    "name": "Aarav Sharma",
+    "email": "aarav.owner@example.com",
     "role": "OWNER"
   },
-  "message": "Login successfull"
+  "message": "Login successful"
 }
 ```
+
+For `TRAINER` and `MEMBER`, `data` also includes `gymStatus`, `ownerId`.
 
 **Error Responses**
-- **401 Unauthorized** (invalid credentials)
-```json
-{
-  "success": false,
-  "message": "Invalid credentials"
-}
-```
 
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal Server Error"
-}
-```
+| Status | Message |
+| --- | --- |
+| 400 | Zod validation messages |
+| 401 | `Invalid credentials` |
+| 500 | `Internal Server Error` |
 
-**Notes / Edge Cases**
-- On success, a cookie named `token` is set with a 7-day expiry.
-- Ensure your frontend sends requests with `credentials: "include"` so cookies are stored.
+**Notes**
+
+- Login cookie uses 7-day `maxAge`.
 
 ---
 
 ### POST /api/auth/logout
 
-**Purpose**
-- Clear the authentication cookie.
+- Purpose: Logout user and clear cookie.
+- Role: OWNER, TRAINER, MEMBER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Request Headers**
-- `Content-Type: application/json`
 - Cookie: `token=<jwt>`
 
-**Request Body**
-- None
+**Success (200)**
 
-**Success Response (200)**
 ```json
 {
   "success": true,
@@ -192,218 +224,79 @@ This backend is a Node.js + Express.js REST API for the GymSaaS platform. It han
 ```
 
 **Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
 
-```json
-{
-  "success": false,
-  "message": "Invalid or expired token"
-}
-```
-
-**Notes / Edge Cases**
-- Cookie is cleared with the same options: `httpOnly`, `sameSite: lax`, `secure: false`.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` |
+| 401 | `Invalid or expired token` |
 
 ---
 
 ### GET /api/auth/me
 
-**Purpose**
-- Retrieve the currently authenticated user's basic information.
+- Purpose: Return current authenticated identity context.
+- Role: OWNER, TRAINER, MEMBER
+- Authentication Required: Yes
+- Used by frontend to restore user session on page refresh.
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Request Headers**
 - Cookie: `token=<jwt>`
 
-**Request Body**
-- None
+**Success (200)**
 
-**Success Response (200)**
 ```json
 {
   "success": true,
   "data": {
     "userId": "uuid",
-    "role": "OWNER"
+    "role": "TRAINER",
+    "gymStatus": "ACTIVE",
+    "ownerId": "uuid"
   }
 }
 ```
 
+For owner, only `userId` and `role` are returned.
+
 **Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
 
-```json
-{
-  "success": false,
-  "message": "Invalid or expired token"
-}
-```
-
-**Notes / Edge Cases**
-- Returns the user data stored in JWT (`userId` and `role`).
-- Does not fetch full user profile from database; only returns JWT payload.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` |
+| 401 | `Invalid or expired token` |
 
 ---
 
-## 3. Authorization & Middleware Overview
-
-### `requireAuth`
-- Reads JWT from `req.cookies.token`.
-- Verifies the token using `JWT_SECRET`.
-- On success, adds `req.user = { userId, role }`.
-- On failure:
-  - **401** if no token: `"Authentication required"`
-  - **401** if token invalid/expired: `"Invalid or expired token"`
-
-### Role-based middleware
-- **OWNER**: `requireOwner` — returns **403** if user is not an OWNER.
-- **TRAINER**: `requireTrainer` — returns **403** if user is not a TRAINER.
-- **MEMBER**: `requireMember` — returns **403** if user is not a MEMBER.
-
-**Current usage**
-- Role middleware exists but is **Planned / Not Implemented** on any routes yet.
-
-### Cookie validation
-- JWT is validated via `jwt.verify(token, JWT_SECRET)`.
-
-### Common authorization errors
-- **401 Unauthorized**: Not authenticated or invalid/expired token.
-- **403 Forbidden**: Authenticated but insufficient role.
-
----
-
-## 4. User Roles & Access Rules
-
-**OWNER**
-- Currently no protected OWNER-only routes are implemented.
-- Role middleware exists and can be attached to future routes.
-
-**TRAINER**
-- Currently no protected TRAINER-only routes are implemented.
-- Role middleware exists and can be attached to future routes.
-
-**MEMBER**
-- Currently no protected MEMBER-only routes are implemented.
-- Role middleware exists and can be attached to future routes.
-
-**Public vs Protected Routes**
-
-| Route | Access | Notes |
-| --- | --- | --- |
-| `GET /` | Public | Health-style response. |
-| `POST /api/auth/signup` | Public | Creates a new user. |
-| `POST /api/auth/login` | Public | Logs in and sets cookie. |
-| `POST /api/auth/logout` | Protected | Requires valid JWT cookie. |
-| `GET /api/auth/me` | Protected | Returns current user info from JWT. |
-| `POST /api/join-request` | Protected (TRAINER/MEMBER) | Send join request to gym. |
-| `GET /api/owner/join-requests` | Protected (OWNER) | List pending join requests. |
-| `PATCH /api/owner/join-request/:id` | Protected (OWNER) | Accept/reject join request. |
-
----
-
-## 5. Common Error Response Format
-
-All error responses follow a consistent shape:
-
-```json
-{
-  "success": false,
-  "message": "Human-readable error message"
-}
-```
-
-**Validation errors**
-- **Planned / Not Implemented** (no active request validation).
-
-**Authentication errors**
-- `401 Authentication required`
-- `401 Invalid or expired token`
-
-**Authorization errors**
-- `403 Owner access required`
-- `403 Trainer access required`
-- `403 Member access required`
-
-**Server errors**
-- `500 Internal Server Error`
-
----
-
-## 6. Environment & Setup Notes
-
-### Required environment variables
-| Variable | Purpose | Example |
-| --- | --- | --- |
-| PORT | Express server port | `8080` |
-| JWT_SECRET | JWT signing key | `my-jwt-secret` |
-| DATABASE_URL | PostgreSQL connection string | `postgresql://user@localhost:5432/gymflow` |
-
-> Note: `JWT_EXPIRES_IN` exists in `.env` but is **not used** by the current code.
-
-### Cookie behavior
-- `httpOnly: true`
-- `sameSite: lax`
-- `secure: false`
-- Max age: **7 days**
-
-### CORS expectations
-- CORS is configured to allow:
-  - `origin: http://localhost:5173`
-  - `credentials: true`
-- Frontend must send requests with credentials to receive/set cookies.
-
-### Local development notes
-- Ensure PostgreSQL is running and `DATABASE_URL` is valid.
-- Start backend server on `PORT` (default 8080).
-- The frontend should run at `http://localhost:5173` for cookie-based auth to work.
-
----
-
-## 7. Join Request APIs
+## 4. Join Request APIs
 
 ### POST /api/join-request
 
-**Purpose**
-- Create a join request for a trainer or member to join a gym using a gym code.
+- Purpose: Create gym join request.
+- Role: TRAINER, MEMBER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- TRAINER or MEMBER
-
-**Request Headers**
 - `Content-Type: application/json`
 - Cookie: `token=<jwt>`
 
 **Request Body**
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| gymCode | string | Yes | Unique gym code from the owner. |
+| Field | Type | Required |
+| --- | --- | --- |
+| gymCode | string | Yes |
 
-**Example Request Body**
+**Example Request**
+
 ```json
 {
-  "gymCode": "ABC12345"
+  "gymCode": "AB12CD"
 }
 ```
 
-**Success Response (200)**
+**Success (200)**
+
 ```json
 {
   "success": true,
@@ -412,790 +305,35 @@ All error responses follow a consistent shape:
 ```
 
 **Error Responses**
-- **400 Bad Request** (missing gym code)
-```json
-{
-  "success": false,
-  "message": "Gym code is required"
-}
-```
 
-- **400 Bad Request** (already requested or joined)
-```json
-{
-  "success": false,
-  "message": "You have already requested to join a gym or are part of a gym"
-}
-```
+| Status | Message |
+| --- | --- |
+| 400 | `Gym code is required` |
+| 400 | `You have already requested to join a gym or are part of a gym` |
+| 403 | `Only trainers and members can request to join` |
+| 404 | `Profile not found` |
+| 404 | `Invalid Gym Code` |
+| 409 | `You have already requested to join this gym.` |
 
-- **403 Forbidden** (role not allowed)
-```json
-{
-  "success": false,
-  "message": "Only trainers and members can request to join"
-}
-```
+**Notes**
 
-- **404 Not Found** (invalid gym code)
-```json
-{
-  "success": false,
-  "message": "Invalid Gym Code"
-}
-```
-
-- **404 Not Found** (profile not found)
-```json
-{
-  "success": false,
-  "message": "Profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal Server Error"
-}
-```
-
-**Notes / Edge Cases**
-- User's `gymStatus` is updated to `PENDING` after creating a join request.
-- Only users with `gymStatus: NONE` can send join requests.
-- OWNER role cannot create join requests.
+- On success, profile `gymStatus` becomes `PENDING`.
+- Owner role is not allowed.
 
 ---
-
-## 8. Trainer Management APIs
-
-### GET /api/trainer/members
-
-**Purpose**
-- Retrieve the list of members assigned to the current trainer.
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- Cookie: `token=<jwt>`
-
-**Request Body**
-- None
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "uuid",
-      "userId": "uuid",
-      "ownerId": "uuid",
-      "dateOfBirth": "1995-05-15T00:00:00.000Z",
-      "gender": "MALE",
-      "heightCm": 180,
-      "weightKg": 75,
-      "goal": "MUSCLE_GAIN",
-      "experienceLevel": "INTERMEDIATE",
-      "gymStatus": "ACTIVE",
-      "createdAt": "2026-02-12T10:30:00.000Z",
-      "updatedAt": "2026-02-12T10:30:00.000Z",
-      "user": {
-        "id": "uuid",
-        "name": "John Doe",
-        "email": "john@example.com"
-      }
-    }
-  ],
-  "message": "Assigned members retrieved successfully"
-}
-```
-
-**Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve assigned members"
-}
-```
-
-**Notes / Edge Cases**
-- Returns all members currently assigned to this trainer.
-- Includes user details (name, email) with each member.
-
----
-
-### POST /api/trainer/programs
-
-**Purpose**
-- Create a new workout program for the trainer.
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- `Content-Type: application/json`
-- Cookie: `token=<jwt>`
-
-**Request Body**
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| title | string | Yes | Workout program title. |
-| description | string | No | Program description. |
-| days | array | Yes | Array of workout days (see below). |
-
-**Days array structure**
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| name | string | Yes | Day name (e.g., "Monday", "Rest Day"). |
-| orderIndex | number | Yes | Order of the day in the program. |
-| isRestDay | boolean | No | Whether this is a rest day (default: false). |
-| exercises | array | Conditional | Array of exercises (required if not a rest day). |
-
-**Exercises array structure**
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| name | string | Yes | Exercise name. |
-| sets | number | Yes | Number of sets. |
-| reps | string | Yes | Number of reps (e.g., "8-12", "10"). |
-| restSeconds | number | Yes | Rest time in seconds between sets. |
-| notes | string | No | Additional exercise notes. |
-| orderIndex | number | Yes | Order of the exercise in the day. |
-
-**Example Request Body**
-```json
-{
-  "title": "Upper Body Strength",
-  "description": "4-week upper body program",
-  "days": [
-    {
-      "name": "Chest & Triceps",
-      "orderIndex": 1,
-      "isRestDay": false,
-      "exercises": [
-        {
-          "name": "Bench Press",
-          "sets": 4,
-          "reps": "6-8",
-          "restSeconds": 120,
-          "orderIndex": 1
-        },
-        {
-          "name": "Barbell Rows",
-          "sets": 4,
-          "reps": "8-10",
-          "restSeconds": 90,
-          "orderIndex": 2
-        }
-      ]
-    },
-    {
-      "name": "Rest Day",
-      "orderIndex": 2,
-      "isRestDay": true
-    }
-  ]
-}
-```
-
-**Success Response (201)**
-```json
-{
-  "success": true,
-  "data": {
-    "id": "uuid",
-    "trainerId": "uuid",
-    "title": "Upper Body Strength",
-    "description": "4-week upper body program",
-    "createdAt": "2026-03-04T12:00:00.000Z",
-    "updatedAt": "2026-03-04T12:00:00.000Z"
-  },
-  "message": "Workout program created successfully"
-}
-```
-
-**Error Responses**
-- **400 Bad Request** (invalid data)
-```json
-{
-  "success": false,
-  "message": "Failed to create workout program"
-}
-```
-
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal Server Error"
-}
-```
-
-**Notes / Edge Cases**
-- Program is created with related days and exercises in a nested structure.
-- Days must have unique `orderIndex` values within the program.
-- Exercises must have unique `orderIndex` values within each day.
-
----
-
-### GET /api/trainer/programs
-
-**Purpose**
-- Retrieve all workout programs created by the current trainer.
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- Cookie: `token=<jwt>`
-
-**Request Body**
-- None
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "uuid",
-      "trainerId": "uuid",
-      "title": "Upper Body Strength",
-      "description": "4-week upper body program",
-      "createdAt": "2026-03-04T12:00:00.000Z",
-      "updatedAt": "2026-03-04T12:00:00.000Z"
-    }
-  ],
-  "message": "Workout programs retrieved successfully"
-}
-```
-
-**Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve workout programs"
-}
-```
-
-**Notes / Edge Cases**
-- Returns all programs created by the trainer.
-- Does not include detailed day/exercise information (use program details endpoint if needed).
-
----
-
-### POST /api/trainer/assign-program
-
-**Purpose**
-- Assign a workout program to a member, creating daily workout assignments.
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- `Content-Type: application/json`
-- Cookie: `token=<jwt>`
-
-**Request Body**
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| memberId | string | Yes | UUID of the member to assign the program to. |
-| programId | string | Yes | UUID of the workout program to assign. |
-| startDate | string | Yes | Start date in ISO format (YYYY-MM-DD). |
-
-**Example Request Body**
-```json
-{
-  "memberId": "uuid-of-member",
-  "programId": "uuid-of-program",
-  "startDate": "2026-03-05"
-}
-```
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "message": "Program assigned to member successfully"
-}
-```
-
-**Error Responses**
-- **400 Bad Request** (missing required fields)
-```json
-{
-  "success": false,
-  "message": "Missing required fields: memberId, programId, startDate"
-}
-```
-
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to assign program to member"
-}
-```
-
-**Notes / Edge Cases**
-- Creates individual `WorkoutAssignment` records for each day of the program.
-- Assignments are created for the member starting from the provided date.
-- Trainer must have the member assigned before assigning a program.
-
----
-
-### GET /api/trainer/member/:memberId/calendar
-
-**Purpose**
-- Retrieve a member's workout calendar for a specific month (trainer view).
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- Cookie: `token=<jwt>`
-
-**URL Parameters**
-
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| memberId | string | Yes | UUID of the member. |
-
-**Query Parameters**
-
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| month | string | Yes | Month in YYYY-MM format (e.g., "2026-03"). |
-
-**Example Request**
-```
-GET /api/trainer/member/uuid-of-member/calendar?month=2026-03
-```
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "date": "2026-03-05",
-      "dayName": "Monday",
-      "isRestDay": false,
-      "status": "PENDING",
-      "exercises": [
-        {
-          "name": "Bench Press",
-          "sets": 4,
-          "reps": "6-8",
-          "restSeconds": 120
-        }
-      ]
-    },
-    {
-      "date": "2026-03-06",
-      "dayName": "Rest Day",
-      "isRestDay": true,
-      "status": "PENDING"
-    }
-  ],
-  "message": "Trainer member calendar fetched successfully"
-}
-```
-
-**Error Responses**
-- **400 Bad Request** (missing month parameter)
-```json
-{
-  "success": false,
-  "message": "Month query parameter is required in YYYY-MM format"
-}
-```
-
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "An error occurred while fetching trainer member calendar"
-}
-```
-
-**Notes / Edge Cases**
-- Returns all workout assignments for the member in the specified month.
-- Includes exercise details for non-rest days.
-- Status can be `PENDING` or `COMPLETED`.
-
----
-
-### GET /api/trainer/member/:memberId/assignment-window
-
-**Purpose**
-- Retrieve the member's current assignment window (active and upcoming assignments).
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- TRAINER
-
-**Request Headers**
-- Cookie: `token=<jwt>`
-
-**URL Parameters**
-
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| memberId | string | Yes | UUID of the member. |
-
-**Request Body**
-- None
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "data": {
-    "currentAssignment": {
-      "id": "uuid",
-      "memberId": "uuid",
-      "programId": "uuid",
-      "assignedDate": "2026-03-05T00:00:00.000Z",
-      "dayName": "Monday",
-      "isRestDay": false,
-      "status": "PENDING",
-      "exercises": [
-        {
-          "id": "uuid",
-          "name": "Bench Press",
-          "sets": 4,
-          "reps": "6-8",
-          "restSeconds": 120,
-          "orderIndex": 1
-        }
-      ]
-    },
-    "upcomingAssignments": [
-      {
-        "id": "uuid",
-        "assignedDate": "2026-03-06T00:00:00.000Z",
-        "dayName": "Rest Day",
-        "isRestDay": true
-      }
-    ]
-  },
-  "message": "Trainer assignment window retrieved successfully"
-}
-```
-
-**Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a trainer)
-```json
-{
-  "success": false,
-  "message": "Trainer access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve trainer assignment window"
-}
-```
-
-**Notes / Edge Cases**
-- Returns the current pending assignment and upcoming assignments.
-- Useful for trainers to track member progress and upcoming workouts.
-
----
-
-## 9. Member Workout APIs
-
-### GET /api/member/schedule
-
-**Purpose**
-- Retrieve the member's complete workout schedule (all assigned workouts).
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- MEMBER
-
-**Request Headers**
-- Cookie: `token=<jwt>`
-
-**Request Body**
-- None
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "data": [
-    {
-      "id": "uuid",
-      "memberId": "uuid",
-      "programId": "uuid",
-      "assignedDate": "2026-03-05T00:00:00.000Z",
-      "dayName": "Monday",
-      "isRestDay": false,
-      "status": "PENDING",
-      "completedDate": null,
-      "exercises": [
-        {
-          "id": "uuid",
-          "name": "Bench Press",
-          "sets": 4,
-          "reps": "6-8",
-          "restSeconds": 120,
-          "notes": "Control the descent",
-          "orderIndex": 1
-        }
-      ]
-    }
-  ],
-  "message": "Member schedule retrieved successfully"
-}
-```
-
-**Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a member)
-```json
-{
-  "success": false,
-  "message": "Member access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve member schedule"
-}
-```
-
-**Notes / Edge Cases**
-- Returns all assigned workouts (past, current, and future).
-- Includes detailed exercise information for each assignment.
-- Status is either `PENDING` or `COMPLETED`.
-
----
-
-### POST /api/member/complete-workout
-
-**Purpose**
-- Mark a workout assignment as completed.
-
-**Authentication Required**
-- Yes (JWT cookie)
-
-**Required Role**
-- MEMBER
-
-**Request Headers**
-- `Content-Type: application/json`
-- Cookie: `token=<jwt>`
-
-**Request Body**
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| assignmentId | string | Yes | UUID of the workout assignment to complete. |
-
-**Example Request Body**
-```json
-{
-  "assignmentId": "uuid-of-assignment"
-}
-```
-
-**Success Response (200)**
-```json
-{
-  "success": true,
-  "message": "Workout completed successfully"
-}
-```
-
-**Error Responses**
-- **400 Bad Request** (missing assignmentId)
-```json
-{
-  "success": false,
-  "message": "assignmentId is required"
-}
-```
-
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not a member)
-```json
-{
-  "success": false,
-  "message": "Member access required"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to complete workout"
-}
-```
-
-**Notes / Edge Cases**
-- Sets the assignment status to `COMPLETED` and records the completion date.
-- Member can only complete their own assignments.
-
----
-
-## 10. Owner Management APIs
 
 ### GET /api/owner/join-requests
 
-**Purpose**
-- Retrieve all pending join requests for the owner's gym.
+- Purpose: List pending join requests for owner.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - Cookie: `token=<jwt>`
 
-**Request Body**
-- None
+**Success (200)**
 
-**Success Response (200)**
 ```json
 {
   "success": true,
@@ -1206,10 +344,10 @@ GET /api/trainer/member/uuid-of-member/calendar?month=2026-03
       "userId": "uuid",
       "role": "TRAINER",
       "status": "PENDING",
-      "createdAt": "2026-02-12T10:30:00.000Z",
+      "createdAt": "2026-03-25T10:00:00.000Z",
       "user": {
-        "name": "John Doe",
-        "email": "john@example.com"
+        "name": "Rohit Kumar",
+        "email": "rohit@example.com"
       }
     }
   ]
@@ -1217,79 +355,48 @@ GET /api/trainer/member/uuid-of-member/calendar?month=2026-03
 ```
 
 **Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
 
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
-
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal server error"
-}
-```
-
-**Notes / Edge Cases**
-- Only returns join requests with `status: PENDING`.
-- Includes basic user details (name and email) with each request.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Owners only` |
+| 403 | `Owner profile not found` |
 
 ---
 
 ### PATCH /api/owner/join-request/:id
 
-**Purpose**
-- Accept or reject a pending join request.
+- Purpose: Accept/reject join request.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - `Content-Type: application/json`
 - Cookie: `token=<jwt>`
 
-**URL Parameters**
+**Path Params**
 
-| Parameter | Type | Required | Description |
-| --- | --- | --- | --- |
-| id | string | Yes | Join request ID (UUID). |
+| Param | Type | Required |
+| --- | --- | --- |
+| id | string | Yes |
 
 **Request Body**
 
-| Field | Type | Required | Description |
+| Field | Type | Required | Allowed |
 | --- | --- | --- | --- |
-| action | string | Yes | One of: `ACCEPT`, `REJECT`. |
+| action | string | Yes | `ACCEPT`, `REJECT` |
 
-**Example Request Body**
+**Example Request**
+
 ```json
 {
   "action": "ACCEPT"
 }
 ```
 
-**Success Response (200)**
+**Success (200)**
+
 ```json
 {
   "success": true,
@@ -1307,80 +414,35 @@ or
 ```
 
 **Error Responses**
-- **400 Bad Request** (invalid action)
-```json
-{
-  "success": false,
-  "message": "Invalid action"
-}
-```
 
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
+| Status | Message |
+| --- | --- |
+| 400 | `Invalid action` |
+| 403 | `Access denied: Owners only` |
+| 403 | `Owner profile not found` |
+| 404 | `Join request not found` |
 
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
+**Notes**
 
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **404 Not Found** (join request not found)
-```json
-{
-  "success": false,
-  "message": "Join request not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Internal server error"
-}
-```
-
-**Notes / Edge Cases**
-- `ACCEPT`: Sets user's `gymStatus` to `ACTIVE` and links them to the owner's gym.
-- `REJECT`: Sets user's `gymStatus` to `NONE` (allows them to request again).
-- Join request status is updated to `ACCEPTED` or `REJECTED` accordingly.
-- Owner can only manage join requests belonging to their gym.
+- Accept: sets profile `gymStatus` to `ACTIVE`, links `ownerId`.
+- Reject: sets profile `gymStatus` to `NONE`.
 
 ---
 
+## 5. Owner APIs
+
 ### GET /api/owner/members/unassigned
 
-**Purpose**
-- Retrieve all active members in the gym who are not assigned to any trainer.
+- Purpose: Get active members without trainer assignment.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - Cookie: `token=<jwt>`
 
-**Request Body**
-- None
+**Success (200)**
 
-**Success Response (200)**
 ```json
 {
   "success": true,
@@ -1389,19 +451,11 @@ or
       "id": "uuid",
       "userId": "uuid",
       "ownerId": "uuid",
-      "dateOfBirth": "1995-05-15T00:00:00.000Z",
-      "gender": "MALE",
-      "heightCm": 180,
-      "weightKg": 75,
-      "goal": "MUSCLE_GAIN",
-      "experienceLevel": "INTERMEDIATE",
       "gymStatus": "ACTIVE",
-      "createdAt": "2026-02-12T10:30:00.000Z",
-      "updatedAt": "2026-02-12T10:30:00.000Z",
       "user": {
         "id": "uuid",
-        "name": "Jane Smith",
-        "email": "jane@example.com"
+        "name": "Aditya Verma",
+        "email": "aditya@example.com"
       }
     }
   ],
@@ -1410,87 +464,37 @@ or
 ```
 
 **Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
 
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
-
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve unassigned members"
-}
-```
-
-**Notes / Edge Cases**
-- Returns only members with `gymStatus: ACTIVE` who have no trainer assigned.
-- Includes user details (name, email) with each member.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Owners only` |
+| 404 | `Owner profile not found` |
 
 ---
 
 ### GET /api/owner/trainers
 
-**Purpose**
-- Retrieve all active trainers in the gym.
+- Purpose: Get active trainers in owner's gym.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - Cookie: `token=<jwt>`
 
-**Request Body**
-- None
+**Success (200)**
 
-**Success Response (200)**
 ```json
 {
   "success": true,
   "data": [
     {
       "id": "uuid",
-      "userId": "uuid",
-      "ownerId": "uuid",
-      "specialization": "Strength Training",
-      "experienceYears": 5,
-      "preferredDays": ["Monday", "Wednesday", "Friday"],
-      "startTime": "09:00",
-      "endTime": "17:00",
-      "bio": "Certified Personal Trainer",
+      "specialization": "Strength",
       "gymStatus": "ACTIVE",
-      "createdAt": "2026-02-12T10:30:00.000Z",
-      "updatedAt": "2026-02-12T10:30:00.000Z",
-      "user": {
-        "id": "uuid",
-        "name": "Mike Johnson",
-        "email": "mike@example.com"
-      },
-      "_count": {
-        "trainerMembers": 5
-      }
+      "user": { "name": "Rahul Singh", "email": "rahul@example.com" },
+      "_count": { "trainerMembers": 4 }
     }
   ],
   "message": "Trainers retrieved successfully"
@@ -1498,76 +502,44 @@ or
 ```
 
 **Error Responses**
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
 
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
-
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to retrieve trainers"
-}
-```
-
-**Notes / Edge Cases**
-- Returns only trainers with `gymStatus: ACTIVE`.
-- Includes count of assigned members (`_count.trainerMembers`).
-- Includes user details (name, email) with each trainer.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Owners only` |
+| 404 | `Owner profile not found` |
 
 ---
 
 ### POST /api/owner/assign-trainer
 
-**Purpose**
-- Assign a trainer to a member.
+- Purpose: Assign trainer to member.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - `Content-Type: application/json`
 - Cookie: `token=<jwt>`
 
 **Request Body**
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| trainerId | string | Yes | UUID of the trainer. |
-| memberId | string | Yes | UUID of the member. |
+| Field | Type | Required |
+| --- | --- | --- |
+| trainerId | string | Yes |
+| memberId | string | Yes |
 
-**Example Request Body**
+**Example Request**
+
 ```json
 {
-  "trainerId": "uuid-of-trainer",
-  "memberId": "uuid-of-member"
+  "trainerId": "uuid-trainer",
+  "memberId": "uuid-member"
 }
 ```
 
-**Success Response (200)**
+**Success (200)**
+
 ```json
 {
   "success": true,
@@ -1576,82 +548,46 @@ or
 ```
 
 **Error Responses**
-- **400 Bad Request** (missing required fields)
-```json
-{
-  "success": false,
-  "message": "Missing required fields"
-}
-```
 
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
-
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to assign trainer to members"
-}
-```
-
-**Notes / Edge Cases**
-- Creates a relationship between trainer and member.
-- Both trainer and member must belong to the same gym.
-- Constraint: Each member can only have one trainer assigned.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Owners only` |
+| 404 | `Owner profile not found` |
+| 404 | `Trainer or Member not found` |
+| 400 | `Trainer and Member must belong to your gym` |
+| 400 | `Trainer or Member not active` |
+| 400 | `Member is already assigned to a trainer` |
 
 ---
 
 ### DELETE /api/owner/unassign-trainer
 
-**Purpose**
-- Remove the trainer assignment from a member.
+- Purpose: Remove trainer assignment from member.
+- Role: OWNER
+- Authentication Required: Yes
 
-**Authentication Required**
-- Yes (JWT cookie)
+**Headers**
 
-**Required Role**
-- OWNER
-
-**Request Headers**
 - `Content-Type: application/json`
 - Cookie: `token=<jwt>`
 
 **Request Body**
 
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| memberId | string | Yes | UUID of the member. |
+| Field | Type | Required |
+| --- | --- | --- |
+| memberId | string | Yes |
 
-**Example Request Body**
+**Example Request**
+
 ```json
 {
-  "memberId": "uuid-of-member"
+  "memberId": "uuid-member"
 }
 ```
 
-**Success Response (200)**
+**Success (200)**
+
 ```json
 {
   "success": true,
@@ -1660,102 +596,597 @@ or
 ```
 
 **Error Responses**
-- **400 Bad Request** (missing memberId)
-```json
-{
-  "success": false,
-  "message": "Missing required fields"
-}
-```
 
-- **401 Unauthorized** (missing or invalid token)
-```json
-{
-  "success": false,
-  "message": "Authentication required"
-}
-```
-
-- **403 Forbidden** (not an owner)
-```json
-{
-  "success": false,
-  "message": "Owner access required"
-}
-```
-
-- **403 Forbidden** (owner profile not found)
-```json
-{
-  "success": false,
-  "message": "Owner profile not found"
-}
-```
-
-- **500 Internal Server Error**
-```json
-{
-  "success": false,
-  "message": "Failed to unassign trainer from members"
-}
-```
-
-**Notes / Edge Cases**
-- Removes the trainer-member relationship.
-- Member remains in the gym but has no assigned trainer.
-- Can be used to reassign a member to a different trainer.
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Owners only` |
+| 404 | `Owner profile not found` |
+| 404 | `Member not found` |
+| 400 | `Member must belong to your gym` |
+| 400 | `Member not active` |
+| 400 | `Member is not assigned to any trainer` |
 
 ---
 
-## 11. Additional Middleware
+## 6. Trainer APIs
 
-### `requireGymActive`
-- Ensures that trainers and members have an `ACTIVE` gym status before accessing certain routes.
-- OWNER role bypasses this check.
-- On failure:
-  - **403** for TRAINER: `"Trainer is not associated with an active gym."`
-  - **403** for MEMBER: `"Member is not associated with an active gym."`
-- **Planned / Not Implemented** on routes yet, but available for future use.
+### GET /api/trainer/members
+
+- Purpose: Get members assigned to current trainer.
+- Role: TRAINER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "userId": "uuid",
+      "ownerId": "uuid",
+      "gymStatus": "ACTIVE",
+      "user": {
+        "id": "uuid",
+        "name": "Sahil Gupta",
+        "email": "sahil@example.com"
+      }
+    }
+  ],
+  "message": "Assigned members retrieved successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 404 | `Trainer profile not found` |
 
 ---
 
-## 12. API Summary by Role
+### POST /api/trainer/programs
 
-### Public Routes (No authentication required)
-| Endpoint | Method | Purpose |
-| --- | --- | --- |
-| `/api/auth/signup` | POST | User registration |
-| `/api/auth/login` | POST | User login |
+- Purpose: Create workout program with days and exercises.
+- Role: TRAINER
+- Authentication Required: Yes
 
-### Trainer Routes (Authentication + TRAINER role required)
-| Endpoint | Method | Purpose |
-| --- | --- | --- |
-| `/api/trainer/members` | GET | List assigned members |
-| `/api/trainer/programs` | GET | List created programs |
-| `/api/trainer/programs` | POST | Create new program |
-| `/api/trainer/assign-program` | POST | Assign program to member |
-| `/api/trainer/member/:memberId/calendar` | GET | View member calendar |
-| `/api/trainer/member/:memberId/assignment-window` | GET | View member assignment window |
+**Headers**
 
-### Member Routes (Authentication + MEMBER role required)
-| Endpoint | Method | Purpose |
-| --- | --- | --- |
-| `/api/member/schedule` | GET | View workout schedule |
-| `/api/member/complete-workout` | POST | Mark workout as completed |
+- `Content-Type: application/json`
+- Cookie: `token=<jwt>`
 
-### Owner Routes (Authentication + OWNER role required)
-| Endpoint | Method | Purpose |
-| --- | --- | --- |
-| `/api/owner/join-requests` | GET | View pending join requests |
-| `/api/owner/join-request/:id` | PATCH | Accept/reject join request |
-| `/api/owner/members/unassigned` | GET | View unassigned members |
-| `/api/owner/trainers` | GET | View trainers in gym |
-| `/api/owner/assign-trainer` | POST | Assign trainer to member |
-| `/api/owner/unassign-trainer` | DELETE | Remove trainer from member |
+**Request Body**
 
-### Trainer/Member Routes (Authentication required, flexible role)
-| Endpoint | Method | Purpose |
+| Field | Type | Required | Notes |
+| --- | --- | --- | --- |
+| title | string | Yes | Required |
+| description | string | No | Optional |
+| days | array | Yes | Non-empty |
+
+**Day Item**
+
+| Field | Type | Required | Notes |
+| --- | --- | --- | --- |
+| name | string | Yes | Day label |
+| orderIndex | number | Yes | Day order |
+| isRestDay | boolean | Yes | Rest flag |
+| exercises | array | Yes | Must be array |
+
+**Exercise Item**
+
+| Field | Type | Required |
 | --- | --- | --- |
-| `/api/join-request` | POST | Request to join a gym |
-| `/api/auth/logout` | POST | User logout |
-| `/api/auth/me` | GET | Get current user info |
+| name | string | Yes |
+| sets | number | Yes |
+| reps | string | Yes |
+| restSeconds | number | Yes |
+| notes | string | No |
+| orderIndex | number | Yes |
+
+**Example Request**
+
+```json
+{
+  "title": "Upper Body Strength",
+  "days": [
+    {
+      "name": "Push Day",
+      "orderIndex": 1,
+      "isRestDay": false,
+      "exercises": [
+        { "name": "Bench Press", "sets": 4, "reps": "6-8", "restSeconds": 120, "orderIndex": 1 }
+      ]
+    }
+  ]
+}
+```
+
+**Success (201)**
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "uuid",
+    "trainerId": "uuid",
+    "title": "Upper Body Strength",
+    "days": [{ "name": "Push Day", "orderIndex": 1, "isRestDay": false, "exercises": [{ "name": "Bench Press" }] }]
+  },
+  "message": "Workout program created successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 404 | `Trainer profile not found` |
+| 400 | `Program must have title and at least one day` |
+| 400 | `Invalid workout program structure` |
+| 400 | `Rest day cannot have exercises` |
+| 400 | `Non-rest day must have exercises` |
+
+---
+
+### GET /api/trainer/programs
+
+- Purpose: List trainer programs.
+- Role: TRAINER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "title": "Upper Body Strength",
+      "days": [{ "name": "Push Day", "orderIndex": 1, "isRestDay": false, "exercises": [{ "name": "Bench Press" }] }]
+    }
+  ],
+  "message": "Workout programs retrieved successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 404 | `Trainer profile not found` |
+
+---
+
+### POST /api/trainer/assign-program
+
+- Purpose: Assign a program to member from start date.
+- Role: TRAINER
+- Authentication Required: Yes
+
+**Headers**
+
+- `Content-Type: application/json`
+- Cookie: `token=<jwt>`
+
+**Request Body**
+
+| Field | Type | Required | Notes |
+| --- | --- | --- | --- |
+| memberId | string | Yes | Member ID |
+| programId | string | Yes | Program ID |
+| startDate | string | Yes | `YYYY-MM-DD` |
+
+**Example Request**
+
+```json
+{
+  "memberId": "uuid-member",
+  "programId": "uuid-program",
+  "startDate": "2026-03-28"
+}
+```
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "message": "Program assigned successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 400 | `Missing required fields: memberId, programId, startDate` |
+| 404 | `Trainer profile not found` |
+| 400 | `Member is not assigned to this trainer` |
+| 404 | `Workout program not found` |
+| 400 | `Cannot assign program in the past` |
+| 400 | `Assignment overlaps with existing schedule` |
+
+**Notes**
+
+- Assignment creation is transactional.
+- Rest days are auto-marked completed.
+
+---
+
+### GET /api/trainer/member/:memberId/calendar
+
+- Purpose: Monthly calendar view for trainer.
+- Role: TRAINER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Path Params**
+
+| Param | Type | Required |
+| --- | --- | --- |
+| memberId | string | Yes |
+
+**Query Params**
+
+| Param | Type | Required | Notes |
+| --- | --- | --- | --- |
+| month | string | Yes | `YYYY-MM` |
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "date": "2026-03-01",
+      "dayName": null,
+      "status": null
+    },
+    {
+      "date": "2026-03-02",
+      "dayName": "Push Day",
+      "status": "PENDING"
+    }
+  ],
+  "message": "Trainer member calendar fetched successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 400 | `Month must be in YYYY-MM format` |
+| 400 | `Invalid month value` |
+| 404 | `Trainer profile not found` |
+| 404 | `Member not assigned to this trainer` |
+
+**Notes**
+
+- Full month array is returned.
+- Past `PENDING` days are returned as `MISSED`.
+
+---
+
+### GET /api/trainer/member/:memberId/assignment-window
+
+- Purpose: 7-day trainer assignment window.
+- Role: TRAINER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Path Params**
+
+| Param | Type | Required |
+| --- | --- | --- |
+| memberId | string | Yes |
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "date": "2026-03-26",
+      "dayName": "Push Day",
+      "status": "PENDING"
+    },
+    {
+      "date": "2026-03-27",
+      "dayName": null,
+      "status": null
+    }
+  ],
+  "message": "Trainer assignment window retrieved successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Trainers only` |
+| 404 | `Trainer profile not found` |
+| 400 | `Member not assigned to this trainer` |
+
+**Notes**
+
+- Exactly 7 days returned (today + next 6).
+
+---
+
+## 7. Member APIs
+
+### GET /api/member/schedule
+
+- Purpose: Member 7-day workout schedule.
+- Role: MEMBER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "date": "2026-03-26",
+      "assignmentId": "uuid",
+      "dayName": "Push Day",
+      "isRestDay": false,
+      "status": "PENDING",
+      "exercises": [{ "name": "Bench Press", "sets": 4, "reps": "6-8", "restSeconds": 120 }]
+    },
+    {
+      "date": "2026-03-27",
+      "assignmentId": null,
+      "dayName": null,
+      "isRestDay": null,
+      "status": null,
+      "exercises": []
+    }
+  ],
+  "message": "Member schedule retrieved successfully"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Members only` |
+| 404 | `Member profile not found` |
+
+---
+
+### POST /api/member/complete-workout
+
+- Purpose: Complete today's workout assignment.
+- Role: MEMBER
+- Authentication Required: Yes
+
+**Headers**
+
+- `Content-Type: application/json`
+- Cookie: `token=<jwt>`
+
+**Request Body**
+
+| Field | Type | Required |
+| --- | --- | --- |
+| assignmentId | string | Yes |
+
+**Example Request**
+
+```json
+{
+  "assignmentId": "uuid-assignment"
+}
+```
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "message": "Workout assignment marked as completed"
+}
+```
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 403 | `Access denied: Members only` |
+| 400 | `assignmentId is required` |
+| 404 | `Member profile not found` |
+| 404 | `Workout assignment not found for this member` |
+| 400 | `You can only complete today's workout assignment` |
+| 400 | `Rest day does not require completion` |
+| 400 | `Workout assignment already completed` |
+
+---
+
+## 8. Additional Implemented APIs
+
+### GET /
+
+- Purpose: Health check
+- Role: Public
+- Authentication Required: No
+
+**Success (200)**
+
+```json
+{
+  "status": "Server is running 🚀"
+}
+```
+
+---
+
+### GET /api/user/gym-info
+
+- Purpose: Role-based gym info summary.
+- Role: OWNER, TRAINER, MEMBER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": {
+    "gymName": "Iron Core Fitness",
+    "gymCode": "AB12CD",
+    "name": "Aarav Sharma"
+  },
+  "message": "Gym info fetched successfully"
+}
+```
+
+Trainer/member response includes:
+
+- `gymName` (nullable)
+- `name`
+
+**Error Responses**
+
+| Status | Message |
+| --- | --- |
+| 401 | `Authentication required` / `Invalid or expired token` |
+| 404 | `Owner not found` / `Trainer not found` / `Member not found` |
+| 400 | `Invalid role` |
+
+---
+
+## 9. Common Response Format
+
+### Standard Success (Most Endpoints)
+
+```json
+{
+  "success": true,
+  "data": {},
+  "message": "..."
+}
+```
+
+### Standard Error
+
+```json
+{
+  "success": false,
+  "message": "..."
+}
+```
+
+### Validation Error
+
+```json
+{
+  "success": false,
+  "message": "Validation error",
+  "errors": {
+    "field": "Error message"
+  }
+}
+```
+
+`GET /` returns `{ "status": "Server is running 🚀" }` as a health-check response.
+
+---
+
+## 10. Error Handling
+
+- Global middleware returns `{ success: false, message }`.
+- HTTP status uses `AppError.statusCode` or defaults to `500`.
+- Common auth messages: `Authentication required`, `Invalid or expired token`.
+- Common role messages: `Access denied: Owners only`, `Access denied: Trainers only`, `Access denied: Members only`.
+- Validation source: Zod for signup/login, service-level validation for other routes.
+
+---
+
+## 11. Notes & Edge Cases
+
+1. Duplicate join requests are blocked by owner-user pair.
+2. Invalid `gymCode` returns `404`.
+3. Join request allowed only when profile `gymStatus` is `NONE`.
+4. Owner cannot use join-request endpoint.
+5. Trainer/member assignment must belong to same owner gym.
+6. Member can only have one trainer assignment.
+7. Program assignment blocks past dates.
+8. Program assignment blocks overlapping schedules.
+9. Rest day assignments are auto-created as completed.
+10. Trainer calendar derives `MISSED` for past pending dates.
+11. Member completion is allowed only for today's assignment.
+12. Rest days cannot be completed manually.
+13. Already completed assignments cannot be completed again.
+14. `requireGymActive` middleware exists but is not mounted.
+
+---
+
+## 12. Environment Notes
+
+### Required Variables
+
+| Variable | Purpose |
+| --- | --- |
+| PORT | Express port |
+| DATABASE_URL | PostgreSQL connection string |
+| JWT_SECRET | JWT signing secret |
+
+### Runtime Configuration
+
+- CORS origin: `http://localhost:5173`
+- CORS credentials: `true`
+- Cookie `secure: false` (development)
+
+### Auth Cookie
+
+- Name: `token`
+- `httpOnly: true`
+- `sameSite: lax`
+- `secure: false`
+- Login uses 7-day `maxAge`
