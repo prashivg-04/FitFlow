@@ -3,6 +3,7 @@ import gymImg from '../../media/gymSignup.jpeg'
 import api from '../../api/axios'
 import { toast } from 'sonner';
 import { useSelector } from 'react-redux';
+import { generateWorkoutPDF } from '../../utils/generateWorkoutPDF';
 
 const MemberWorkout = () => {
 
@@ -139,7 +140,7 @@ const MemberWorkout = () => {
 
                   <div className='space-y-3'>
                     {acitveDay?.exercises.map((exercise, idx) => (
-                      <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-4 hover:shadow-md transition-all'>
+                      <div key={idx} className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-4 hover:shadow-md transition-all'>
                         <div className='flex gap-5'>
                           <img className='w-28 rounded-lg bg-gray-200 bg-cover bg-center shrink-0 object-cover' src={gymImg} alt="" />
                           <div className='flex-1 '>
@@ -182,7 +183,10 @@ const MemberWorkout = () => {
                     {/* CTA Action buttons */}
                     <h3 className='text-lg font-bold mb-4'>Take Actions</h3>
                     <div className='flex flex-col'>
-                      <button className='w-full border border-[#dbe6df] bg-[#f7f8f6] py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all'>
+                      <button 
+                        onClick={() => generateWorkoutPDF(acitveDay)}
+                        className='w-full border border-[#dbe6df] bg-[#f7f8f6] py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all'
+                      >
                         Download Mobile View
                       </button>
 
