@@ -22,13 +22,6 @@ const MemberSignup = () => {
     }
   }, []);
 
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [gender, setGender] = useState('');
-  const [heightCm, setHeightCm] = useState('');
-  const [weightKg, setWeightKg] = useState('');
-  const [goal, setGoal] = useState('');
-  const [experienceLevel, setExperienceLevel] = useState('BEGINNER');
-
   const [formData, setFormData] = useState({
     dateOfBirth: '',
     gender: '',
@@ -44,12 +37,12 @@ const MemberSignup = () => {
     e.preventDefault();
 
     const parsedData = {
-      dateOfBirth,
-      gender,
-      heightCm: parseFloat(heightCm) || 0,
-      weightKg: parseFloat(weightKg) || 0,
-      goal,
-      experienceLevel
+      dateOfBirth: formData.dateOfBirth,
+      gender: formData.gender,
+      heightCm: formData.heightCm ? parseInt(formData.heightCm) : undefined,
+      weightKg: formData.weightKg ? parseInt(formData.weightKg) : undefined,
+      goal: formData.goal,
+      experienceLevel: formData.experienceLevel
     }
 
     const result = memberSchema.safeParse(parsedData);
@@ -67,22 +60,15 @@ const MemberSignup = () => {
       ...signupData,
       roleData: parsedData
     });
-    
+
     const updatedData = {
       ...signupData,
-      roleData: {
-        dateOfBirth: parsedData.dateOfBirth,
-        gender: parsedData.gender,
-        heightCm: parsedData.heightCm,
-        weightKg: parsedData.weightKg,
-        goal: parsedData.goal,
-        experienceLevel: parsedData.experienceLevel
-      }
+      roleData: parsedData
     };
 
     try {
-      const response = await api.post('/auth/signup', updatedData)
-      dispatch(loginSuccess(response.data));
+      const response = await api.post('/auth/signup', updatedData);
+      dispatch(loginSuccess(response.data.data));
       toast.success('Member Account Created Successfully!');
       navigate('/member/join');
     } catch(err) {

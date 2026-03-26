@@ -61,20 +61,8 @@ const OwnerSignup = () => {
       roleData: formData
     }));
 
-    const updatedData = {
-      ...signupData,
-      roleData: {
-        gymName,
-        city,
-        address,
-        phone,
-        openingTime,
-        closingTime
-      }
-    };
-
     try {
-      const response = await api.post('/auth/signup', updatedData);
+      const response = await api.post('/auth/signup', signupData);
       dispatch(loginSuccess(response.data.data));
       toast.success('Owner Account Created Successfully!');
       navigate('/owner/dashboard');

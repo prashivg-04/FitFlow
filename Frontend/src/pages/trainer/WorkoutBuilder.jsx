@@ -11,14 +11,14 @@ const WorkoutBuilder = () => {
     description: '',
     days: [
       {
-        name: '',
+        name: 'Push Day',
         isRestDay: false,
         exercises: [
           {
-            name: '',
-            sets: '',
-            reps: '',
-            rest: ''
+            name: 'Bench Press',
+            sets: '3',
+            reps: '10',
+            rest: '120'
           }
         ]
       }

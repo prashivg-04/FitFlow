@@ -1,26 +1,15 @@
+import { ZodError } from 'zod';
+import AppError from '../utils/AppError.js';
+
 export const validate = (schema) => (req, res, next) => {
     try {
         schema.parse(req.body);
         next();
     } catch(err) {
-        if(err.name === 'ZodError') {
-            const formattedErrors = {};
-
-            err.issues.forEach((e) => {
-                const field = e.path.join('.');
-                formattedErrors[field] = e.message;
-            });
-
-            return res.status(400).json({
-                success: false,
-                message: 'Validation failed',
-                errors: formattedErrors
-            });
+        if(err instanceof ZodError) {
+            const message = err.issues.map(e => e.message).join(', ');
+            throw new AppError(message, 400);
         }
-
-        return res.status(500).json({
-            success: false,
-            message: 'Internal server error'
-        });
+        return next(err);
     }
 }
