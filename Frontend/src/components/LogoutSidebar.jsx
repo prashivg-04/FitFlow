@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../store/authSlice'
 import { useNavigate } from 'react-router-dom'
 import api from '../api/axios'
+import { toast } from 'sonner'
 
 const LogoutSidebar = () => {
 
@@ -16,6 +17,7 @@ const LogoutSidebar = () => {
             console.error('Logout failed:', err);
         } finally {
             dispatch(logout())
+            toast.success('Logged out successfully!');
             navigate('/login', { replace: true });
         }
     }

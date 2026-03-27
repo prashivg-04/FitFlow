@@ -3,6 +3,7 @@ import icon from '../../assets/icon.svg'
 import navjot from '../../media/navjotImg.jpeg'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
+import FeedbackButton from '../FeedbackButton'
 
 const TrainerSidebar = ({ username }) => {
 
@@ -15,7 +16,7 @@ const TrainerSidebar = ({ username }) => {
                     <img className='rounded-lg' src={icon} alt="" />
                 </div>
                 <div className='flex flex-col'>
-                    <h1 className='text-xl font-bold tracking-tight leading-none'>GymFlow</h1>
+                    <h1 className='text-xl font-bold tracking-tight leading-none'>FitFlow</h1>
                     <p className='text-xs font-medium text-[#61896f] mt-1'>Gym Trainer</p>
                 </div>
             </div>
@@ -125,6 +126,9 @@ const TrainerSidebar = ({ username }) => {
                     <i class="text-lg fa-regular fa-circle-question"></i>
                     <span className='font-medium'>Support</span>
                 </NavLink>
+
+                <br />
+                <FeedbackButton />
             </div>
         </div>
 

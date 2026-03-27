@@ -1,8 +1,8 @@
-# GymSaaS Backend API Documentation
+# FitFlow Backend API Documentation
 
 ## 1. Project Overview
 
-GymSaaS backend is a Node.js + Express REST API with Prisma + PostgreSQL.
+FitFlow backend is a Node.js + Express REST API with Prisma + PostgreSQL.
 
 - Local base URL: `http://localhost:8080`
 - API prefix: `/api`

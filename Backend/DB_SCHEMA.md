@@ -1,8 +1,8 @@
-# Database Schema Documentation - GymSaaS
+# Database Schema Documentation - FitFlow
 
 ## 1. Overview
 
-This document describes the current database design for GymSaaS, based on Prisma + PostgreSQL.
+This document describes the current database design for FitFlow, based on Prisma + PostgreSQL.
 
 Primary source of truth:
 - `prisma/schema.prisma` (authoritative)

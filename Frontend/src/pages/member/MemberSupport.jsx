@@ -143,7 +143,7 @@ const MemberSupport = () => {
                     <i class="fa-regular fa-envelope text-[#15ec5b] text-xl mt-0.5"></i>
                     <div>
                       <p className='text-xs text-gray-400 font-medium uppercase tracking-wide'>Email Us</p>
-                      <a className='text-sm font-semibold hover:text-[#15ec5b] transition-colors' href="">support@gymsaas.com</a>
+                      <a className='text-sm font-semibold hover:text-[#15ec5b] transition-colors' href="">support@FitFlow.com</a>
                     </div>
                   </div>
 

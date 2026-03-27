@@ -50,7 +50,7 @@ const TrainerJoin = () => {
                     <img className='rounded-lg' src={icon} alt="" />
                 </div>
                 <div className='flex flex-col'>
-                    <h1 className='text-xl font-bold tracking-tight leading-none'>GymFlow</h1>
+                    <h1 className='text-xl font-bold tracking-tight leading-none'>FitFlow</h1>
                     <p className='text-xs font-medium text-[#61896f] mt-1'>Gym Trainer</p>
                 </div>
             </div>

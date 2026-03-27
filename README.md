@@ -1,12 +1,12 @@
-# GymSaaS - Role-Based Gym Management Platform
+# FitFlow - Role-Based Gym Management Platform
 
-GymSaaS is a full-stack SaaS application for gym operations across three roles: Owner, Trainer, and Member.
+FitFlow is a full-stack SaaS application for gym operations across three roles: Owner, Trainer, and Member.
 
 It focuses on a complete workout lifecycle, from member onboarding and trainer assignment to day-wise workout execution and completion tracking.
 
 ## Overview
 
-GymSaaS replaces manual coordination with role-scoped workflows:
+FitFlow replaces manual coordination with role-scoped workflows:
 
 - Owners review join requests and map trainers to members.
 - Trainers create reusable workout programs and assign schedules.
@@ -92,7 +92,7 @@ React UI (role routes + guards)
 ## Repository Structure
 
 ```text
-GymSaaS/
+FitFlow/
    Backend/
       prisma/
          schema.prisma
@@ -129,8 +129,8 @@ GymSaaS/
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/prashivg-04/GymSaaS.git
-cd GymSaaS
+git clone https://github.com/prashivg-04/FitFlow.git
+cd FitFlow
 ```
 
 ### 2. Backend
@@ -194,6 +194,19 @@ Note: current Axios client is configured with a hardcoded base URL (`http://loca
 - Add realtime notifications for assignment/join-request events.
 - Add billing/subscription and attendance modules.
 - Add analytics and reporting dashboards.
+
+## 📝 Feedback & Support
+
+We welcome feedback from users and testers.
+
+If you encounter bugs, have suggestions, or want to share your experience, please use the form below:
+
+👉 Submit Feedback: https://forms.gle/ezHRjruEpLTuVUY57
+
+Alternatively, you can:
+
+- Open an issue on GitHub
+- Contact via LinkedIn
 
 ## Author
 

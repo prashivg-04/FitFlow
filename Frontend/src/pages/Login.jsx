@@ -100,9 +100,9 @@ const Login = () => {
                 <img 
                     className='h-10 w-10 rounded-xl'
                     src={icon} 
-                    alt="GymFlow Icon" 
+                    alt="FitFlow Icon" 
                 />
-                <p className='text-2xl font-bold text-white tracking-tight'>GymFlow</p>
+                <p className='text-2xl font-bold text-white tracking-tight'>FitFlow</p>
               </div>
 
               <h2 className='text-5xl font-bold leading-tight text-white mb-4'>

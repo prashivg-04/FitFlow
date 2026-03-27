@@ -55,7 +55,7 @@ const Signup = () => {
         <div className='w-2/5 flex flex-col justify-between p-6 h-full min-h-screen relative z-10 '>
           <div className='flex items-center gap-3 my-4 max-w-md w-full mx-auto'>
             <img className='h-8 w-8 rounded-xl shadow-sm' src={icon} alt="Icon" />
-            <h1 className=' text-2xl font-bold tracking-tight text-slate-900'>GymFLow</h1>
+            <h1 className=' text-2xl font-bold tracking-tight text-slate-900'>FitFlow</h1>
           </div>
 
           <div className='flex-1 flex flex-col justify-center max-w-md w-full mx-auto space-y-8 mt-8'> 
@@ -220,7 +220,7 @@ const Signup = () => {
 
           <div className='mt-12'>
             <p className='text-xs text-center text-[#61896f]'>
-              © 2024 GymFlow Inc. All rights reserved.
+              © 2024 FitFlow Inc. All rights reserved.
             </p>
           </div>
         </div>

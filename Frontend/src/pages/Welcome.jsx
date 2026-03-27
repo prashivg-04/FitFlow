@@ -7,7 +7,7 @@ import navjot from '../media/navjotImg.jpeg'
 import shivam from '../media/shivamImg.jpeg'
 import vaibhav from '../media/vaibhavImg.PNG'
 import { Link, Links } from 'react-router-dom'
-
+import FeedbackButton from '../components/FeedbackButton'
 
 const Welcome = () => {
     
@@ -20,14 +20,15 @@ const Welcome = () => {
                     <img 
                         className='h-8'
                         src={icon} 
-                        alt="GymFlow Icon" 
+                        alt="FitFlow Icon" 
                     />
-                    <p className='text-xl font-bold'>GymFlow</p>
+                    <p className='text-xl font-bold'>FitFlow</p>
                 </div>
                 <div className='flex items-center gap-8'>
                     <p className='text-sm font-medium text-slate-600 hover:text-[#15ec5b]'>Features</p>
                     <p className='text-sm font-medium text-slate-600 hover:text-[#15ec5b]'>Solutions</p>
                     <p className='text-sm font-medium text-slate-600 hover:text-[#15ec5b]'>Pricing</p>
+                    <FeedbackButton></FeedbackButton>
                 </div>
                 <div className='flex items-center gap-4'>
                     <Link to="/login" className='text-sm font-bold text-slate-900 hover:text-[#15ec5b]'>Login</Link>
@@ -219,7 +220,7 @@ const Welcome = () => {
                             <i class="ri-star-line text-sm"></i>
                         </div>
                         <p className='text-slate-600 mb-6 italic'>
-                            "GymFlow completely transformed how we manage our studio. The automated billing alone saved us 10 hours a week."
+                            "FitFlow completely transformed how we manage our studio. The automated billing alone saved us 10 hours a week."
                         </p>
                         <div className='flex items-center gap-4 overflow-hidden'>
                             <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={navjot} alt="" />
@@ -278,7 +279,7 @@ const Welcome = () => {
             <div className='absolute top-0 right-0 -mr-20 -mt-20 h-75 w-75 rounded-full bg-[#15ec5b]/25 blur-[80px]'></div>
             <div className='relative mx-auto max-w-4xl text-center px-4'>
                 <h2 className='text-3xl font-bold tracking-tight text-white mb-6'>Ready to transform your gym?</h2>
-                <p className='text-lg text-slate-300 mb-10'>Join 500+ gym owners who are scaling their business with GymFlow. Start your 14-day free trial today.</p>
+                <p className='text-lg text-slate-300 mb-10'>Join 500+ gym owners who are scaling their business with FitFlow. Start your 14-day free trial today.</p>
                 <div className='flex items-center justify-center gap-4'>
                     <Link to="/signup" className='h-12 px-8 flex items-center rounded-lg bg-[#15ec5b] font-bold text-base hover:bg-emerald-400 transition-colors'>Get Started for Free</Link>
                     <button className='h-12 px-8 rounded-lg bg-transparent border border-slate-600 text-white font-bold text-base hover:bg-white/10 transition-colors'>Schedule a Call</button>
@@ -294,9 +295,9 @@ const Welcome = () => {
                             <img 
                                 className='h-6'
                                 src={icon} 
-                                alt="GymFlow Icon" 
+                                alt="FitFlow Icon" 
                             />
-                            <p className='text-xl font-bold text-slate-900'>GymFlow</p>
+                            <p className='text-xl font-bold text-slate-900'>FitFlow</p>
                         </div>
                         <p className='text-sm text-slate-500'>
                             Empowering fitness businesses with modern tools for modern growth.
@@ -337,7 +338,7 @@ const Welcome = () => {
                 </div>
 
                 <div className='border-t border-slate-200 flex justify-between items-center pt-8'>
-                    <p className='text-xs text-slate-500'>© 2023 GymFlow Inc. All rights reserved.</p>
+                    <p className='text-xs text-slate-500'>© 2023 FitFlow Inc. All rights reserved.</p>
                     <div className='flex items-center gap-6 text-xs text-slate-500'>
                         <a className='hover:text-[#15ec5b]' href="">Privacy Policy</a>
                         <a className='hover:text-[#15ec5b]' href="">Terms of Service</a>
