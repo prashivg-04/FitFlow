@@ -15,7 +15,6 @@ const AssignTrainerModal = ({member, onClose}) => {
                 const response = await api.get('/owner/trainers');
                 setTrainers(response.data.data);
             } catch(err) {
-                console.log('Failed to fetch trainers: ', err);
             }
         }
 
@@ -31,7 +30,6 @@ const AssignTrainerModal = ({member, onClose}) => {
             toast.success('Trainer assigned successfully!');
             onClose();
         } catch(err) {
-            console.log('Failed to assign trainer: ', err);
         }
     }
 
@@ -40,7 +38,7 @@ const AssignTrainerModal = ({member, onClose}) => {
       <div onClick={(e) => e.stopPropagation()} className='bg-[#f7f8f6] rounded-lg w-105 p-6 relative'>
         <div className='flex items-center justify-between'>
             <h2 className='text-lg font-bold'>Assign Trainer to {member?.user?.name}</h2>
-            <button onClick={onClose} className='text-[20px] cursor-pointer'><i class="fa-solid fa-xmark"></i></button>
+            <button onClick={onClose} className='text-[20px] cursor-pointer'><i className="fa-solid fa-xmark"></i></button>
         </div>
 
         <div className='space-y-2 mt-6 overflow-y-auto max-h-72'>

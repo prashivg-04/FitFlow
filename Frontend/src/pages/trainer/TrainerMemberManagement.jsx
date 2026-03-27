@@ -16,7 +16,7 @@ const TrainerMemberManagement = () => {
                         </div>
                         <div>
                             <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                            <i class="ri-user-add-line text-[20px]"></i>
+                            <i className="ri-user-add-line text-[20px]"></i>
                             Add New Member
                             </button>
                         </div>
@@ -82,7 +82,7 @@ const TrainerMemberManagement = () => {
                         {/* Toolbar */}
                         <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
                             <div className='relative max-w-md w-full'>
-                            <i class="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
+                            <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                             <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search by name, email, or ID...' />
                             </div>
 
@@ -160,10 +160,10 @@ const TrainerMemberManagement = () => {
                                     <td className='px-6 py-4 text-right'>
                                         <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-eye-line text-[20px]"></i>
+                                                <i className="ri-eye-line text-[20px]"></i>
                                             </button>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-check-line text-[20px]"></i>
+                                                <i className="ri-check-line text-[20px]"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -209,10 +209,10 @@ const TrainerMemberManagement = () => {
                                     <td className='px-6 py-4 text-right'>
                                         <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-eye-line text-[20px]"></i>
+                                                <i className="ri-eye-line text-[20px]"></i>
                                             </button>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-check-line text-[20px]"></i>
+                                                <i className="ri-check-line text-[20px]"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -258,10 +258,10 @@ const TrainerMemberManagement = () => {
                                     <td className='px-6 py-4 text-right'>
                                         <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-eye-line text-[20px]"></i>
+                                                <i className="ri-eye-line text-[20px]"></i>
                                             </button>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-check-line text-[20px]"></i>
+                                                <i className="ri-check-line text-[20px]"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -307,10 +307,10 @@ const TrainerMemberManagement = () => {
                                     <td className='px-6 py-4 text-right'>
                                         <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-eye-line text-[20px]"></i>
+                                                <i className="ri-eye-line text-[20px]"></i>
                                             </button>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-check-line text-[20px]"></i>
+                                                <i className="ri-check-line text-[20px]"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -356,10 +356,10 @@ const TrainerMemberManagement = () => {
                                     <td className='px-6 py-4 text-right'>
                                         <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-eye-line text-[20px]"></i>
+                                                <i className="ri-eye-line text-[20px]"></i>
                                             </button>
                                             <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i class="ri-check-line text-[20px]"></i>
+                                                <i className="ri-check-line text-[20px]"></i>
                                             </button>
                                         </div>
                                     </td>
@@ -402,7 +402,7 @@ const TrainerMemberManagement = () => {
                                 </div>
                             </div>
                         </div>
-                        <button><i class="ri-close-fill text-[24px] text-[#61896f] hover:text-slate-900 cursor-pointer"></i></button>
+                        <button><i className="ri-close-fill text-[24px] text-[#61896f] hover:text-slate-900 cursor-pointer"></i></button>
                     </div> 
 
                     {/* Tabs */}
@@ -416,11 +416,11 @@ const TrainerMemberManagement = () => {
                     <div className='flex-1 overflow-y-auto p-6 flex flex-col gap-6'>
                         <div className='grid grid-cols-2 gap-3'>
                             <button className='flex items-center justify-center gap-2 py-2.5 rounded-lg border border-[#dbe6df] hover:bg-gray-100 text-sm font-bold'>
-                                <i class="ri-message-3-line text-[18px]"></i>
+                                <i className="ri-message-3-line text-[18px]"></i>
                                 Message
                             </button>
                             <button className='flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#15ec5b] hover:bg-[#15ec5b]/90 text-sm font-bold shadow-lg shadow-[#15ec5b]/25'>
-                                <i class="ri-checkbox-circle-line text-[18px]"></i>
+                                <i className="ri-checkbox-circle-line text-[18px]"></i>
                                 Log Session
                             </button>
                         </div>
@@ -428,11 +428,11 @@ const TrainerMemberManagement = () => {
                         <div className='flex flex-col items-start gap-3'>
                             <h4 className='text-xs font-bold uppercase text-[#61896f] tracking-wider'>Contact Information</h4>
                             <div className='flex items-center gap-2 text-sm font-medium'>
-                                <i class="ri-phone-line text-[16px] text-[#61896f]"></i>
+                                <i className="ri-phone-line text-[16px] text-[#61896f]"></i>
                                 +1 (555) 012-3456
                             </div>
                             <div className='flex items-center gap-2 text-sm font-medium'>
-                                <i class="fa-regular fa-envelope text-[16px] text-[#61896f]"></i>
+                                <i className="fa-regular fa-envelope text-[16px] text-[#61896f]"></i>
                                 m.chen@example.com
                             </div>
                         </div>
@@ -492,13 +492,13 @@ const TrainerMemberManagement = () => {
                             </div>
 
                             <div className='bg-yellow-50 rounded-xl p-4 border border-yellow-200 text-sm relative'>
-                                <i class="fa-regular fa-note-sticky absolute top-3 right-3 text-yellow-400 text-[16px]"></i>
+                                <i className="fa-regular fa-note-sticky absolute top-3 right-3 text-yellow-400 text-[16px]"></i>
                                 <p className='leading-relaxed mt-2'>"Client struggled with knee pain during squats today. Recommended rest and ice. Adjusted plan to focus on upper body for next session."</p>
                                 <p className='text-xs font-medium text-[#61896f] mt-2'>- Added 3 days ago</p>
                             </div>
 
                             <div className='bg-yellow-50 rounded-xl p-4 border border-yellow-200 text-sm relative'>
-                                <i class="fa-regular fa-note-sticky absolute top-3 right-3 text-yellow-400 text-[16px]"></i>
+                                <i className="fa-regular fa-note-sticky absolute top-3 right-3 text-yellow-400 text-[16px]"></i>
                                 <p className='leading-relaxed mt-2'>"Client struggled with knee pain during squats today. Recommended rest and ice. Adjusted plan to focus on upper body for next session."</p>
                                 <p className='text-xs font-medium text-[#61896f] mt-2'>- Added 3 days ago</p>
                             </div>
@@ -508,7 +508,7 @@ const TrainerMemberManagement = () => {
                     {/* Footer */}
                     <div className='p-4 border-t border-[#dbe6df] bg-[#f5f8f8] shrink-0'>
                         <button className='w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 text-sm font-bold shadow-sm shadow-red-200/50'>
-                            <i class="ri-flag-line"></i>
+                            <i className="ri-flag-line"></i>
                             Report Issue
                         </button>
                     </div>

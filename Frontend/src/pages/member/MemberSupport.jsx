@@ -15,7 +15,7 @@ const MemberSupport = () => {
             </div>
             <div className='w-96 relative group'>
               <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
-                <i class="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                <i className="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-[#15ec5b] transition-colors"></i>
               </div>
               <input className='block w-full pl-10 pr-3 py-3 rounded-xl bg-white shadow-sm ring ring-gray-200 placeholder:text-gray-400 focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] text-sm leading-6 transition-shadow' type="text" placeholder='Search articles, guides, or FAQs...' />
             </div>
@@ -34,7 +34,7 @@ const MemberSupport = () => {
                 <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group'>
                   <button className='w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none'>
                     <span className='text-lg font-semibold'>How do I add a new trainer?</span>
-                    <i class="ri-arrow-up-s-line text-gray-400 text-[24px]"></i>
+                    <i className="ri-arrow-up-s-line text-gray-400 text-[24px]"></i>
                   </button>
                   <div className='px-6 pb-6 pt-2 border-t border-gray-100'>
                     <p className='text-gray-600 leading-relaxed'>
@@ -48,21 +48,21 @@ const MemberSupport = () => {
                 <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group'>
                   <button className='w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none'>
                     <span className='text-lg font-semibold'>How do I update my billing information?</span>
-                    <i class="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
+                    <i className="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
                   </button>
                 </div>
 
                 <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group'>
                   <button className='w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none'>
                     <span className='text-lg font-semibold'>Can I export member data to CSV?</span>
-                    <i class="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
+                    <i className="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
                   </button>
                 </div>
 
                 <div className='bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden group'>
                   <button className='w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none'>
                     <span className='text-lg font-semibold'>How do I create a recurring class schedule?</span>
-                    <i class="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
+                    <i className="ri-arrow-down-s-line text-gray-400 text-[24px]"></i>
                   </button>
                 </div>
               </div>
@@ -72,21 +72,21 @@ const MemberSupport = () => {
               <div className='grid grid-cols-3 gap-4'>
                 <a className='bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3 hover:shadow-md hover:-translate-y-1 transition-all group' href="">
                   <div className='size-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-120 transition-transform'>
-                    <i class="fa-solid fa-money-bills text-[20px]"></i>
+                    <i className="fa-solid fa-money-bills text-[20px]"></i>
                   </div>
                   <span className='text-sm font-semibold '>Billing & Plans</span>
                 </a>
 
                 <a className='bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3 hover:shadow-md hover:-translate-y-1 transition-all group' href="">
                   <div className='size-10 rounded-full bg-green-50 flex items-center justify-center text-green-600 group-hover:scale-120 transition-transform'>
-                    <i class="ri-user-settings-line text-[20px]"></i>
+                    <i className="ri-user-settings-line text-[20px]"></i>
                   </div>
                   <span className='text-sm font-semibold '>Account Management</span>
                 </a>
 
                 <a className='bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3 hover:shadow-md hover:-translate-y-1 transition-all group' href="">
                   <div className='size-10 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 group-hover:scale-120 transition-transform'>
-                    <i class="ri-webhook-line text-[20px]"></i>
+                    <i className="ri-webhook-line text-[20px]"></i>
                   </div>
                   <span className='text-sm font-semibold '>Integrations</span>
                 </a>
@@ -99,7 +99,7 @@ const MemberSupport = () => {
               <div className='bg-white rounded-2xl shadow-lg shadow-gray-200/50 border border-gray-100 p-8'>
                 <div className='flex items-center gap-3 mb-6'>
                   <div className='p-2 bg-[#15ec5b]/20 rounded-lg text-green-800'>
-                    <i class="fa-regular fa-envelope text-[20px]"></i>
+                    <i className="fa-regular fa-envelope text-[20px]"></i>
                   </div>
                   <h3 className='text-xl font-bold '>Send us a message</h3>
                 </div>
@@ -120,7 +120,7 @@ const MemberSupport = () => {
                     <div className='flex items-center justify-center w-full'>
                       <label className='flex flex-col items-center justify-center w-full h-24 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors' for='dropzone-file'>
                         <div className='flex flex-col items-center justify-center pt-5 pb-6'>
-                          <i class="fa-solid fa-cloud-arrow-up text-gray-500 mb-1"></i>
+                          <i className="fa-solid fa-cloud-arrow-up text-gray-500 mb-1"></i>
                           <p className='text-xs text-gray-500 '>Click to upload or drag and drop</p>
                         </div>
                         <input className='hidden' id='dropzone-file' type="file" />
@@ -140,7 +140,7 @@ const MemberSupport = () => {
 
                 <div className='flex flex-col gap-10 relative z-10'>
                   <div className='flex items-start gap-3'>
-                    <i class="fa-regular fa-envelope text-[#15ec5b] text-xl mt-0.5"></i>
+                    <i className="fa-regular fa-envelope text-[#15ec5b] text-xl mt-0.5"></i>
                     <div>
                       <p className='text-xs text-gray-400 font-medium uppercase tracking-wide'>Email Us</p>
                       <a className='text-sm font-semibold hover:text-[#15ec5b] transition-colors' href="">support@FitFlow.com</a>
@@ -148,7 +148,7 @@ const MemberSupport = () => {
                   </div>
 
                   <div className='flex items-start gap-3'>
-                    <i class="fa-regular fa-clock text-[#15ec5b] text-xl mt-0.5"></i>
+                    <i className="fa-regular fa-clock text-[#15ec5b] text-xl mt-0.5"></i>
                     <div>
                       <p className='text-xs text-gray-400 font-medium uppercase tracking-wide'>Response Time</p>
                       <p className='text-sm font-medium'>Usually replies within 24 hours.</p>

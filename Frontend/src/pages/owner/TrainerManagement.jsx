@@ -17,7 +17,6 @@ const TrainerManagement = () => {
         const response = await api.get('/owner/members/unassigned');
         setUnassignedMembers(response.data.data);
       } catch(err) {
-        console.log('Failed to fetch unassigned members: ', err);
       }
     }
 
@@ -47,7 +46,7 @@ const TrainerManagement = () => {
                   return (
                     <div key={member.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
                       <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
-                        <i class="fa-solid fa-user-plus text-slate-500"></i>
+                        <i className="fa-solid fa-user-plus text-slate-500"></i>
                     </div>
                     <div className='flex-1 min-w-0'>
                       <h4 className='text-sm font-bold truncate'>Name : {member.user.name}</h4>
@@ -80,7 +79,7 @@ const TrainerManagement = () => {
               <div className='flex items-center gap-3 z-10'>
                 <span className='text-3xl font-bold'>12</span>
                 <span className='text-sm font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center'>
-                  <i class="ri-add-line"></i>
+                  <i className="ri-add-line"></i>
                   5
                 </span>
               </div>
@@ -100,13 +99,13 @@ const TrainerManagement = () => {
 
             <div className='bg-white p-6 rounded-xl border border-[#dbe6df] shadow-soft flex flex-col justify-between h-32 relative overflow-hidden group'>
               <div className='absolute top-0 right-0 p-4 opacity-10  group-hover:opacity-20 transition-opacity'>
-                <i class="fa-solid fa-triangle-exclamation text-orange-400 text-6xl"></i>
+                <i className="fa-solid fa-triangle-exclamation text-orange-400 text-6xl"></i>
               </div>
               <span className='text-[#61896f] font-medium z-10'>Active Sessions</span>
               <div className='flex items-center gap-3 z-10'>
                 <span className='text-3xl font-bold'>342</span>
                 <span className='text-sm font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center'>
-                  <i class="ri-add-line"></i>
+                  <i className="ri-add-line"></i>
                   15%
                 </span>
               </div>
@@ -121,7 +120,7 @@ const TrainerManagement = () => {
                 <span className='text-3xl font-bold'>$12.4k</span>
                 <span className='text-sm font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center'>
                   10k
-                  <i class="ri-check-line"></i>
+                  <i className="ri-check-line"></i>
                 </span>
               </div>
             </div>
@@ -132,18 +131,18 @@ const TrainerManagement = () => {
             {/* Toolbar */}
             <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
               <div className='relative max-w-md w-full'>
-                <i class="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
+                <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                 <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search by name, email, or specialty...' />
               </div>
 
               <div className='flex items-center gap-3 w-auto'>
                 <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="ri-filter-3-line text-xl"></i>
+                  <i className="ri-filter-3-line text-xl"></i>
                   Filters
                 </button>
 
                 <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="fa-solid fa-download text-xl"></i>
+                  <i className="fa-solid fa-download text-xl"></i>
                   Export
                 </button>
               </div>
@@ -189,7 +188,7 @@ const TrainerManagement = () => {
                       <div className='flex flex-col gap-1 max-w-35'>
                         <div className='flex items-center text-xs'>
                           <span className='flex items-center gap-1 text-slate-600'>
-                            <i class="ri-star-fill text-[14px] text-yellow-500 "></i>
+                            <i className="ri-star-fill text-[14px] text-yellow-500 "></i>
                             4.8
                           </span>
                         </div>
@@ -209,7 +208,7 @@ const TrainerManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -239,7 +238,7 @@ const TrainerManagement = () => {
                       <div className='flex flex-col gap-1 max-w-35'>
                         <div className='flex items-center text-xs'>
                           <span className='flex items-center gap-1 text-slate-600'>
-                            <i class="ri-star-fill text-[14px] text-yellow-500 "></i>
+                            <i className="ri-star-fill text-[14px] text-yellow-500 "></i>
                             4.5
                           </span>
                         </div>
@@ -258,7 +257,7 @@ const TrainerManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -288,7 +287,7 @@ const TrainerManagement = () => {
                       <div className='flex flex-col gap-1 max-w-35'>
                         <div className='flex items-center text-xs'>
                           <span className='flex items-center gap-1 text-slate-600'>
-                            <i class="ri-star-fill text-[14px] text-yellow-500 "></i>
+                            <i className="ri-star-fill text-[14px] text-yellow-500 "></i>
                             5.0
                           </span>
                         </div>
@@ -307,7 +306,7 @@ const TrainerManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -337,7 +336,7 @@ const TrainerManagement = () => {
                       <div className='flex flex-col gap-1 max-w-35'>
                         <div className='flex items-center text-xs'>
                           <span className='flex items-center gap-1 text-slate-600'>
-                            <i class="ri-star-fill text-[14px] text-yellow-500 "></i>
+                            <i className="ri-star-fill text-[14px] text-yellow-500 "></i>
                             3.9
                           </span>
                         </div>
@@ -356,7 +355,7 @@ const TrainerManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -386,7 +385,7 @@ const TrainerManagement = () => {
                       <div className='flex flex-col gap-1 max-w-35'>
                         <div className='flex items-center text-xs'>
                           <span className='flex items-center gap-1 text-slate-600'>
-                            <i class="ri-star-fill text-[14px] text-yellow-500 "></i>
+                            <i className="ri-star-fill text-[14px] text-yellow-500 "></i>
                             5
                           </span>
                         </div>
@@ -405,7 +404,7 @@ const TrainerManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>

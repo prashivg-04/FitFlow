@@ -79,10 +79,8 @@ const Login = () => {
         password: formData.password
       });
       dispatch(loginSuccess(response.data.data));
-      console.log("Login successfull", response.data);
       toast.success('Login successful!');
     } catch(err) {
-      console.error("Login failed", err);
       dispatch(loginFailure(err.response?.data?.message || 'Login failed. Please try again.'));
     }
   }
@@ -125,11 +123,11 @@ const Login = () => {
 
               <div>
                 <div className='flex gap-1 mb-1'>
-                  <i class="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
-                  <i class="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
-                  <i class="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
-                  <i class="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
-                  <i class="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
+                  <i className="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
+                  <i className="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
+                  <i className="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
+                  <i className="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
+                  <i className="ri-star-line text-[#15ec5b] text-14px leading-none"></i>
                 </div>
                 <p className='text-sm font-medium text-slate-300 italic'>
                   "Changed how we run our business."
@@ -160,7 +158,7 @@ const Login = () => {
                     placeholder='john.doe@example.com'
                   />
                   {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
-                  <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <i className="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 
@@ -175,7 +173,7 @@ const Login = () => {
                     placeholder='Enter your password' 
                   />
                   {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
-                  <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <i className="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 

@@ -20,7 +20,7 @@ const PaymentDashboard = () => {
             </div>
             <div>
               <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                <i class="ri-add-line text-[20px]"></i>
+                <i className="ri-add-line text-[20px]"></i>
                 Add Payment
               </button>
             </div>
@@ -36,7 +36,7 @@ const PaymentDashboard = () => {
               <span className='text-[#61896f] font-medium z-10'>Total Revenue (This Month)</span>
               <span className='text-3xl font-bold'>$12,450</span>
               <span className='text-sm font-semibold text-green-600 px-2 py-0.5 rounded-full flex items-center gap-1'>
-                <i class="fa-solid fa-arrow-trend-up"></i>
+                <i className="fa-solid fa-arrow-trend-up"></i>
                 +12% vs last month
               </span>
             </div>
@@ -50,7 +50,7 @@ const PaymentDashboard = () => {
               <span className='text-3xl font-bold'>$840</span>
               <span className='text-sm font-semibold text-amber-600 px-2 py-0.5 rounded-full flex items-center gap-1 group-hover:underline cursor-pointer'>
                 View details
-                <i class="fa-solid fa-arrow-right text-sm"></i>
+                <i className="fa-solid fa-arrow-right text-sm"></i>
               </span>
             </div>
 
@@ -145,23 +145,23 @@ const PaymentDashboard = () => {
             {/* Toolbar */}
             <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
               <div className='relative max-w-md w-full'>
-                <i class="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
+                <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                 <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search by name, email, or ID...' />
               </div>
 
               <div className='flex items-center gap-3 w-auto'>
                 <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="ri-filter-3-line text-xl"></i>
+                  <i className="ri-filter-3-line text-xl"></i>
                   Filters
                 </button>
 
                 <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="fa-regular fa-calendar"></i>
+                  <i className="fa-regular fa-calendar"></i>
                   Oct 1 - Oct 31
                 </button>
 
                 <button className='px-3 py-2 text-[#15ec5b] text-sm font-bold border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="fa-solid fa-download"></i>
+                  <i className="fa-solid fa-download"></i>
                   Export CSV
                 </button>
               </div>
@@ -214,7 +214,7 @@ const PaymentDashboard = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -251,7 +251,7 @@ const PaymentDashboard = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -289,7 +289,7 @@ const PaymentDashboard = () => {
                     <td className='px-6 py-4 text-right'>
                       <button className='text-green-600 hover:text-green-800 text-sm font-bold mr-2'>Remind</button>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -327,7 +327,7 @@ const PaymentDashboard = () => {
                     <td className='px-6 py-4 text-right'>
                       <button className='text-red-600 hover:text-red-800 text-sm font-bold mr-2'>Retry</button>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -364,7 +364,7 @@ const PaymentDashboard = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -384,10 +384,10 @@ const PaymentDashboard = () => {
 
               <div className='flex items-center gap-2'>
                 <button className='px-3 py-1.5 border border-[#dbe6df] rounded-md hover:bg-gray-50 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors disabled:opacity-50'>
-                  <i class="ri-arrow-left-s-fill"></i>
+                  <i className="ri-arrow-left-s-fill"></i>
                 </button>
                 <button className='px-3 py-1.5 border border-[#dbe6df] rounded-md hover:bg-gray-50 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors'>
-                  <i class="ri-arrow-right-s-fill"></i>
+                  <i className="ri-arrow-right-s-fill"></i>
                 </button>
               </div>
             </div>

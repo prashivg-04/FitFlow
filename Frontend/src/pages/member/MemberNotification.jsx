@@ -23,7 +23,7 @@ const MemberNotification = () => {
             <button className='px-4 py-2 rounded-full bg-white border border-[#dbe6df] text-[#61896f] text-sm font-medium hover:bg-slate-50 transition-colors'>Payments</button>
           </div>
           <button className='text-sm font-semibold text-[#61896f] hover:text-[#15ec5b] transition-colors flex items-center gap-1'>
-            <i class="ri-check-double-line text-[18px]"></i>
+            <i className="ri-check-double-line text-[18px]"></i>
             Mark all as read
           </button>
         </div>

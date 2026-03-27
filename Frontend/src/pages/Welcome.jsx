@@ -9,6 +9,7 @@ import vaibhav from '../media/vaibhavImg.PNG'
 import { Link, Links } from 'react-router-dom'
 import FeedbackButton from '../components/FeedbackButton'
 
+
 const Welcome = () => {
     
   return (
@@ -71,27 +72,27 @@ const Welcome = () => {
                 <p className='text-sm font-semibold text-slate-500 mb-8 uppercase tracking-widest'>Trusted by 500+ Gyms & Fitness Centers</p>
                 <div className='flex items-center justify-center gap-20 opacity-60'>
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
-                        <i class="ri-flashlight-line"></i>
+                        <i className="ri-flashlight-line"></i>
                         PowerFit
                     </div>
 
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
-                        <i class="ri-heart-2-line"></i>
+                        <i className="ri-heart-2-line"></i>
                         CardioPulse
                     </div>
 
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
-                        <i class="ri-flower-line"></i>
+                        <i className="ri-flower-line"></i>
                         ZenYoga
                     </div>
 
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
-                        <i class="fa-solid fa-person-running"></i>
+                        <i className="fa-solid fa-person-running"></i>
                         IronDojo
                     </div>
 
                     <div className='flex items-center gap-2 text-xl font-bold text-slate-700'>
-                        <i class="fa-solid fa-person-swimming"></i>
+                        <i className="fa-solid fa-person-swimming"></i>
                         AquaLife
                     </div>
                 </div>
@@ -107,37 +108,37 @@ const Welcome = () => {
                 </div>
                 <div className='grid grid-cols-3 gap-8'>
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-calendar-2-line text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="ri-calendar-2-line text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Smart Scheduling</h3>
                         <p className='text-slate-600'>Drag-and-drop calendar for classes and PT sessions. Syncs in real-time with member apps to prevent double bookings.</p>
                     </div>
 
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="fa-solid fa-money-bills text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="fa-solid fa-money-bills text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Automated Billing</h3>
                         <p className='text-slate-600'>Never chase a payment again. Automated invoicing, recurring memberships, and failed payment retries.</p>
                     </div>
 
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-group-line text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="ri-group-line text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Member Portal</h3>
                         <p className='text-slate-600'>Give members control. They can book classes, track progress, and update payment info from a dedicated app.</p>
                     </div>
 
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-bar-chart-2-fill text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="ri-bar-chart-2-fill text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Insightful Reporting</h3>
                         <p className='text-slate-600'>Know your numbers. Track attendance, retention rates, and revenue growth with beautiful visual reports.</p>
                     </div>
 
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-store-3-line text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="ri-store-3-line text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Inventory Management</h3>
                         <p className='text-slate-600'>Sell supplements and gear easily. Track stock levels and get alerts when it's time to reorder.</p>
                     </div>
                     
                     <div className='group relative rounded-2xl bg-white p-8 shadow-sm hover:shadow-xl hover:shadow-[#15ec5b]/5 transition-all duration-300 border border-slate-100'>
-                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i class="ri-megaphone-line text-3xl"></i></div>
+                        <div className='inline-flex items-center justify-center bg-[#15ec5b]/10 p-3 rounded-lg text-[#15ec5b] mb-6 group-hover:bg-[#15ec5b] group-hover:text-slate-900 transition-colors'><i className="ri-megaphone-line text-3xl"></i></div>
                         <h3 className='text-xl font-bold text-slate-900 mb-3'>Marketing Tools</h3>
                         <p className='text-slate-600'>Built-in email and SMS marketing automation to keep your members engaged and motivated.</p>
                     </div>
@@ -159,19 +160,19 @@ const Welcome = () => {
                             <p className='text-lg text-slate-600 mb-6'>Stop juggling spreadsheets. Get a bird's eye view of your business health, revenue streams, and staff performance in one dashboard.</p>
                             <ul className='space-y-3 mb-8'>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Real-time revenue tracking
                                 </li>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Staff payroll management
                                 </li>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Automated retention workflows
                                 </li>
                             </ul>
-                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i class="ri-arrow-right-line text-sm"></i></a>
+                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i className="ri-arrow-right-line text-sm"></i></a>
                         </div>
                         <div className='w-1/2 bg-slate-100 rounded-2xl p-6 aspect-video flex items-center justify-center overflow-hidden'>
                             <img className='w-full h-full bg-cover bg-center rounded-lg shadow-lg' src={trainer1} alt="" />
@@ -184,19 +185,19 @@ const Welcome = () => {
                             <p className='text-lg text-slate-600 mb-6'>Empower your trainers with tools to manage their schedules and clients without the back-and-forth messaging.</p>
                             <ul className='space-y-3 mb-8'>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Mobile schedule management
                                 </li>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Client progress tracking
                                 </li>
                                 <li className='flex items-center gap-3 text-slate-700'>
-                                    <i class="ri-checkbox-circle-line text-[#15ec5b]"></i>
+                                    <i className="ri-checkbox-circle-line text-[#15ec5b]"></i>
                                     Easy availability setting
                                 </li>
                             </ul>
-                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i class="ri-arrow-right-line text-sm"></i></a>
+                            <a className='text-[#15ec5b] font-bold hover:underline inline-flex items-center gap-1' href="">Learn more<i className="ri-arrow-right-line text-sm"></i></a>
                         </div>
                         <div className='w-1/2 bg-slate-100 rounded-2xl p-6 aspect-video flex items-center justify-center overflow-hidden'>
                             <img className='w-full h-full bg-cover bg-center rounded-lg shadow-lg' src={trainer2} alt="" />
@@ -213,11 +214,11 @@ const Welcome = () => {
                 <div className='grid grid-cols-3 gap-8'>
                     <div className='bg-[#f7f8f6] p-6 rounded-xl'>
                         <div className='flex text-[#15ec5b] mb-4'>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
                         </div>
                         <p className='text-slate-600 mb-6 italic'>
                             "FitFlow completely transformed how we manage our studio. The automated billing alone saved us 10 hours a week."
@@ -233,11 +234,11 @@ const Welcome = () => {
 
                     <div className='bg-[#f7f8f6] p-6 rounded-xl'>
                         <div className='flex text-[#15ec5b] mb-4'>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
                         </div>
                         <p className='text-slate-600 mb-6 italic'>
                             "The member app is fantastic. Our clients love being able to book their spots instantly. Retention is up 20%."
@@ -253,11 +254,11 @@ const Welcome = () => {
 
                     <div className='bg-[#f7f8f6] p-6 rounded-xl'>
                         <div className='flex text-[#15ec5b] mb-4'>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
-                            <i class="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
+                            <i className="ri-star-line text-sm"></i>
                         </div>
                         <p className='text-slate-600 mb-6 italic'>
                             "Finally, a software that doesn't feel like it was built in the 90s. Clean, fast, and does exactly what we need." 

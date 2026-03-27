@@ -235,7 +235,6 @@ const WorkoutBuilder = () => {
       toast.success('Workout plan saved successfully!');
       navigate('/trainer/workouts');
     } catch(err) {
-      console.error("Error saving program: ", err);
     }
   }
 
@@ -253,7 +252,7 @@ const WorkoutBuilder = () => {
                 className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'
                 onClick={saveProgram}
               >
-                <i class="ri-save-2-line text-[20px]"></i>
+                <i className="ri-save-2-line text-[20px]"></i>
                 Save & Publish Plan
               </button>
             </div>
@@ -295,7 +294,7 @@ const WorkoutBuilder = () => {
               ))}
 
               <button onClick={addDay} className='min-w-12.5 flex items-center justify-center rounded-lg text-[#61896f] hover:text-[#15ec5b] hover:bg-[#15ec5b]/10'>
-                <i class="ri-add-circle-line"></i>
+                <i className="ri-add-circle-line"></i>
               </button>
             </div>
 
@@ -347,7 +346,7 @@ const WorkoutBuilder = () => {
                         </div>
                         <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                           <button onClick={() => deleteExercise(idx)} className='p-1.5 text-[#61896f] hover:text-red-500 hover:bg-white'>
-                            <i class="fa-solid fa-trash text-[18px]"></i>
+                            <i className="fa-solid fa-trash text-[18px]"></i>
                           </button>
                         </div>
                       </div>
@@ -398,7 +397,7 @@ const WorkoutBuilder = () => {
                     onClick={addExercise}
                     className='w-full py-4 rounded-xl border-2 border-slate-300 border-dashed text-[#61896f] hover:border-[#15ec5b] hover:text-[#15ec5b] hover:bg-[#15ec5b]/5 transition-all flex items-center justify-center gap-2 group'
                   >
-                    <i class="ri-add-circle-line text-[20px] group-hover:scale-110 transition-transform"></i>
+                    <i className="ri-add-circle-line text-[20px] group-hover:scale-110 transition-transform"></i>
                     <span className='font-semibold'>Add Exercise</span>
                   </button>
                 </div>
@@ -420,7 +419,7 @@ const WorkoutBuilder = () => {
             {/* Plan Settings */}
             <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-5'>
               <div className='flex items-center gap-3 mb-4'>
-                <i class="ri-equalizer-line text-[#15ec5b] text-[20px]"></i>
+                <i className="ri-equalizer-line text-[#15ec5b] text-[20px]"></i>
                 <h3 className='text-lg font-bold'>Plan Settings</h3>
               </div>
               <div className='space-y-5'>

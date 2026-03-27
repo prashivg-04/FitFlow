@@ -16,7 +16,7 @@ const TrainerWorkspace = () => {
                 <p className='text-[#61896f] text-base'>Manage your daily tasks, member notes, and system notifications in one place.</p>
               </div>
               <div className='flex items-center gap-2 bg-white p-2 rounded-lg border border-[#dbe6df] shadow-sm hover:bg-gray-50 transition-colors'>
-                <i class="fa-regular fa-calendar text-slate-600 text-[24px]"></i>
+                <i className="fa-regular fa-calendar text-slate-600 text-[24px]"></i>
                 <span className='text-lg font-semibold'>Today, Oct 24</span>
               </div>
             </div>
@@ -78,7 +78,7 @@ const TrainerWorkspace = () => {
 
                   <div className=''>
                     <button className='pb-3 flex items-center gap-2 text-md font-medium text-[#61896f] hover:text-[#15ec5b]'>
-                      <i class="ri-filter-3-line text-[18px]"></i>
+                      <i className="ri-filter-3-line text-[18px]"></i>
                       Filter
                     </button>
                   </div>
@@ -101,10 +101,10 @@ const TrainerWorkspace = () => {
                         </div>
                         <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
-                            <i class="ri-pencil-line text-[20px]"></i>
+                            <i className="ri-pencil-line text-[20px]"></i>
                           </button>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#e74545]'>
-                            <i class="fa-regular fa-trash-can text-[17px]"></i>
+                            <i className="fa-regular fa-trash-can text-[17px]"></i>
                           </button>
                         </div>
                       </div>
@@ -130,7 +130,7 @@ const TrainerWorkspace = () => {
                   <article className='flex gap-4 group'>
                     <div className='flex flex-col items-center pt-1 min-w-10'>
                       <div className='size-10 rounded-full flex items-center justify-center bg-orange-100 border border-orange-200 text-orange-600 shadow-sm object-cover'>
-                        <i class="fa-solid fa-square-poll-horizontal"></i>
+                        <i className="fa-solid fa-square-poll-horizontal"></i>
                       </div>
                       <div className='w-px h-full bg-gray-300 mb-6'></div>
                     </div>
@@ -144,10 +144,10 @@ const TrainerWorkspace = () => {
                         </div>
                         <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
-                            <i class="ri-pencil-line text-[20px]"></i>
+                            <i className="ri-pencil-line text-[20px]"></i>
                           </button>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#e74545]'>
-                            <i class="fa-regular fa-trash-can text-[17px]"></i>
+                            <i className="fa-regular fa-trash-can text-[17px]"></i>
                           </button>
                         </div>
                       </div>
@@ -175,10 +175,10 @@ const TrainerWorkspace = () => {
                         </div>
                         <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
-                            <i class="ri-pencil-line text-[20px]"></i>
+                            <i className="ri-pencil-line text-[20px]"></i>
                           </button>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#e74545]'>
-                            <i class="fa-regular fa-trash-can text-[17px]"></i>
+                            <i className="fa-regular fa-trash-can text-[17px]"></i>
                           </button>
                         </div>
                       </div>
@@ -237,7 +237,7 @@ const TrainerWorkspace = () => {
                       </div>
                       <div className='shrink-0 mt-1'>
                         <div className='size-8 rounded-full bg-red-100 flex items-center justify-center text-red-600'>
-                          <i class="fa-regular fa-calendar-xmark text-[18px]"></i>
+                          <i className="fa-regular fa-calendar-xmark text-[18px]"></i>
                         </div>
                       </div>
                       <div className='flex-1 pr-6'>
@@ -254,7 +254,7 @@ const TrainerWorkspace = () => {
                     <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 opacity-70 hover:opacity-100 transition-all cursor-pointer relative'>
                       <div className='shrink-0 mt-1'>
                         <div className='size-8 rounded-full bg-green-100 flex items-center justify-center text-green-600'>
-                          <i class="fa-solid fa-money-bills text-[18px]"></i>
+                          <i className="fa-solid fa-money-bills text-[18px]"></i>
                         </div>
                       </div>
                       <div className='flex-1 pr-6'>
@@ -269,7 +269,7 @@ const TrainerWorkspace = () => {
                     <div className='group flex gap-3 p-3 rounded-lg hover:bg-gray-50 opacity-70 hover:opacity-100 transition-all cursor-pointer relative'>
                       <div className='shrink-0 mt-1'>
                         <div className='size-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600'>
-                          <i class="ri-information-line text-[18px]"></i>
+                          <i className="ri-information-line text-[18px]"></i>
                         </div>
                       </div>
                       <div className='flex-1 pr-6'>
@@ -286,7 +286,7 @@ const TrainerWorkspace = () => {
                   <div className='p-3 border-t border-gray-100 text-center'>
                     <button className='text-sm font-medium text-[#61896f] hover:text-[#15ec5b] transition-colors flex items-center justify-center w-full gap-1 py-1'>
                       View archived
-                      <i class="ri-arrow-right-line text-[16px]"></i>
+                      <i className="ri-arrow-right-line text-[16px]"></i>
                     </button>
                   </div>
                 </div>

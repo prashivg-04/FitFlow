@@ -34,7 +34,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`}
                 >
-                    <i class="text-lg ri-dashboard-line"></i>
+                    <i className="text-lg ri-dashboard-line"></i>
                     <span className='font-medium'>Dashboard</span>
                 </NavLink>
 
@@ -46,7 +46,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-group-line"></i>
+                    <i className="text-lg ri-group-line"></i>
                     <span className='font-medium'>Members</span>
                 </NavLink>
 
@@ -58,7 +58,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-group-3-line"></i>
+                    <i className="text-lg ri-group-3-line"></i>
                     <span className='font-medium'>Trainers</span>
                 </NavLink>
 
@@ -70,7 +70,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-money-check"></i>
+                    <i className="text-lg fa-solid fa-money-check"></i>
                     <span className='font-medium'>Payments</span>
                 </NavLink>
 
@@ -82,7 +82,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg fa-solid fa-bell"></i>
+                    <i className="text-lg fa-solid fa-bell"></i>
                     <span className='font-medium'>Notifications</span>
                 </NavLink>
             </div>
@@ -98,7 +98,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >
-                    <i class="text-lg ri-settings-4-line"></i>
+                    <i className="text-lg ri-settings-4-line"></i>
                     <span className='font-medium'>Settings</span>
                 </NavLink>
 
@@ -110,7 +110,7 @@ const OwnerSidebar = ({ username }) => {
                         : 'text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b]' 
                     }`} 
                 >                    
-                    <i class="text-lg fa-regular fa-circle-question"></i>
+                    <i className="text-lg fa-regular fa-circle-question"></i>
                     <span className='font-medium'>Support</span>
                 </NavLink>
                 

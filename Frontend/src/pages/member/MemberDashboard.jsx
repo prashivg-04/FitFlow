@@ -67,7 +67,7 @@ const MemberDashboard = () => {
                 <div className='relative'>
                   <img className='size-12 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="" />
                   <div className='absolute bottom-11 -right-1 w-5 h-5 flex items-center justify-center  bg-blue-500 text-white rounded-full p-0.5 border-2 border-white'>
-                    <i class="ri-message-2-line text-[10px] block"></i>
+                    <i className="ri-message-2-line text-[10px] block"></i>
                   </div>
                 </div>
 
@@ -133,7 +133,7 @@ const MemberDashboard = () => {
               <div className='absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-[#15ec5b]/40 rounded-full blur-2xl'></div>
               <div className='relative z-10 flex flex-col items-center text-center'>
                 <div className='w-20 h-20 rounded-full border-4 border-[#15ec5b]/30 flex items-center justify-center relative'>
-                  <i class="ri-fire-fill text-4xl text-[#15ec5b]"></i>
+                  <i className="ri-fire-fill text-4xl text-[#15ec5b]"></i>
                   <svg className='absolute inset-0 w-full h-full -rotate-90 transform' viewBox='0 0 36 36'>
                     <path class='text-transparent' d='M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831' fill='none' stroke='currentColor' stroke-dasharray='100, 100' stroke-width='2'></path>
                     <path class='text-[#15ec5b]' d='M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831' fill='none' stroke='currentColor' stroke-dasharray='75, 100' stroke-width='2'></path>
@@ -149,7 +149,7 @@ const MemberDashboard = () => {
             <div className='bg-white rounded-2xl p-6 shadow-sm border border-[#dbe6df]'>
               <div className='flex items-center gap-3 mb-4'>
                 <div className='p-2 bg-yellow-100 rounded-lg text-yellow-600'>
-                  <i class="fa-solid fa-trophy text-[20px]"></i>
+                  <i className="fa-solid fa-trophy text-[20px]"></i>
                 </div>
                 <h3 className='text-lg font-bold'>New Record!</h3>
               </div>

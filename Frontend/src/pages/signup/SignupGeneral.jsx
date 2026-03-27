@@ -144,7 +144,7 @@ const Signup = () => {
                     placeholder='John Doe' 
                   />
                   {errors.name && <p className='text-red-500 text-sm mt-1'>{errors.name}</p>}
-                  <i class="ri-user-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <i className="ri-user-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
               
@@ -160,7 +160,7 @@ const Signup = () => {
                     placeholder='john.doe@example.com' 
                   />
                   {errors.email && <p className='text-red-500 text-sm mt-1'>{errors.email}</p>}
-                  <i class="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <i className="ri-mail-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 
@@ -176,7 +176,7 @@ const Signup = () => {
                     placeholder='Create a strong password' 
                   />
                   {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
-                  <i class="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <i className="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
                 </div>
               </div>
 
@@ -235,11 +235,11 @@ const Signup = () => {
           <div className='text-white relative z-10 flex flex-col justify-end p-16 h-full w-full'>
             <div className='max-w-xl space-y-8'>
               <div className='flex gap-1.5'>
-                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
-                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
-                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
-                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
-                <i class="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i className="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i className="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i className="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i className="ri-star-line text-[#15ec5b] fill-current"></i>
+                <i className="ri-star-line text-[#15ec5b] fill-current"></i>
               </div>
 
               <p className='text-3xl font-semibold leading-tight tracking-tight italic'>
@@ -256,11 +256,11 @@ const Signup = () => {
 
               <div className='flex items-center gap-8 pt-4 opacity-70'>
                 <div className='flex items-center gap-2'>
-                  <i class="ri-shield-user-fill text-xl"></i>
+                  <i className="ri-shield-user-fill text-xl"></i>
                   <p className='text-xs font-semibold uppercase tracking-wider'>Enterprise Security</p>
                 </div>
                 <div className='flex items-center gap-2'>
-                  <i class="ri-verified-badge-line text-xl"></i>
+                  <i className="ri-verified-badge-line text-xl"></i>
                   <p className='text-xs font-semibold uppercase tracking-wider'>Verified Partner</p>
                 </div>
               </div>

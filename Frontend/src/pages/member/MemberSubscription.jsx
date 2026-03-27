@@ -67,7 +67,7 @@ const MemberSubscription = () => {
                 <h3 className='text-xl font-bold'>Visa •••• 4242</h3>
               </div>
               <span className='inline-flex items-center justify-center p-2 rounded-lg bg-slate-50 text-[#61896f] text-xs font-bold'>
-                <i class="fa-regular fa-credit-card text-[20px]"></i>
+                <i className="fa-regular fa-credit-card text-[20px]"></i>
               </span>
             </div>
             <div className='flex items-end justify-between'>
@@ -84,17 +84,17 @@ const MemberSubscription = () => {
             <h2 className='text-2xl font-bold'>Payment History</h2>
             <div className='flex items-center gap-3 w-auto'>
               <div className='relative'>
-                <i class="ri-filter-3-line absolute left-2 top-1/2 transform -translate-y-1/2 text-xl"></i>
+                <i className="ri-filter-3-line absolute left-2 top-1/2 transform -translate-y-1/2 text-xl"></i>
                 <select className='appearance-none pl-10 pr-8 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#15ec5b] cursor-pointer transition-all'>
                   <option>All Time</option>
                   <option>This Year</option>
                   <option>Last Year</option>
                 </select>
-                <i class='ri-arrow-down-s-line absolute right-2 top-1/2 transform -translate-y-1/2 text-xl pointer-events-none'></i>
+                <i className='ri-arrow-down-s-line absolute right-2 top-1/2 transform -translate-y-1/2 text-xl pointer-events-none'></i>
               </div>
 
               <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                <i class="fa-solid fa-download text-xl"></i>
+                <i className="fa-solid fa-download text-xl"></i>
                 Export
               </button>
             </div>
@@ -140,7 +140,7 @@ const MemberSubscription = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-regular fa-file-lines text-[20px]"></i>
+                      <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -171,7 +171,7 @@ const MemberSubscription = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-regular fa-file-lines text-[20px]"></i>
+                      <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -202,7 +202,7 @@ const MemberSubscription = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-regular fa-file-lines text-[20px]"></i>
+                      <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -233,7 +233,7 @@ const MemberSubscription = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-regular fa-file-lines text-[20px]"></i>
+                      <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
                   </td>
                 </tr>

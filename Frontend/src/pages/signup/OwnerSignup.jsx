@@ -67,7 +67,6 @@ const OwnerSignup = () => {
       toast.success('Owner Account Created Successfully!');
       navigate('/owner/dashboard');
     } catch(err) {
-      console.error('Signup failed:', err);
     }
 
     setFormData({
@@ -121,7 +120,7 @@ const OwnerSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center '>
-                  <i class="fa-solid fa-dumbbell text-lg text-[#15ec5b]"></i>
+                  <i className="fa-solid fa-dumbbell text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Gym Information</h2>
               </div>
@@ -147,7 +146,7 @@ const OwnerSignup = () => {
                   <label className='flex flex-col gap-1 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Gym Address</p>
                     <div className='relative'>
-                      <i class="ri-map-pin-2-line absolute left-4 mt-7 -translate-y-1/2 text-[20px] text-[#61896f]"></i>
+                      <i className="ri-map-pin-2-line absolute left-4 mt-7 -translate-y-1/2 text-[20px] text-[#61896f]"></i>
                       <input 
                         value={formData.address}
                         onChange={(e) => setFormData({...formData, address: e.target.value})}
@@ -197,7 +196,7 @@ const OwnerSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-building-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-building-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Business Details</h2>
               </div>
@@ -241,7 +240,7 @@ const OwnerSignup = () => {
             <div className='flex items-center justify-end gap-4 pt-4 mt-2'>
               <button disabled={loading} type='submit' className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
                 <span>{loading ? 'Creating Gym...' : 'Create Gym & Continue'}</span>
-                <i class="ri-arrow-right-line text-[20px] font-bold"></i>
+                <i className="ri-arrow-right-line text-[20px] font-bold"></i>
               </button>
             </div>
           </form>

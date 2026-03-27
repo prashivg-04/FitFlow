@@ -368,11 +368,11 @@ const MemberAttendance = () => {
 
             <div className='flex items-center gap-3 w-auto'>
               <div className='relative max-w-md w-full'>
-                <i class="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
+                <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                 <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search...' />
               </div>
               <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
-                <i class="ri-filter-3-line text-xl"></i>
+                <i className="ri-filter-3-line text-xl"></i>
               </button>
             </div>
           </div>
@@ -403,7 +403,7 @@ const MemberAttendance = () => {
                   <td className='px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div className='h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center'>
-                        <i class="fa-solid fa-person-running text-[18px]"></i>
+                        <i className="fa-solid fa-person-running text-[18px]"></i>
                       </div>
                       <span className='text-sm font-medium text-slate-700'>HIIT Cardio</span>
                     </div>
@@ -426,7 +426,7 @@ const MemberAttendance = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -442,7 +442,7 @@ const MemberAttendance = () => {
                   <td className='px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div className='h-8 w-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center'>
-                        <i class="fa-solid fa-dumbbell text-[18px]"></i>
+                        <i className="fa-solid fa-dumbbell text-[18px]"></i>
                       </div>
                       <span className='text-sm font-medium text-slate-700'>Hypertrophy</span>
                     </div>
@@ -465,7 +465,7 @@ const MemberAttendance = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -481,7 +481,7 @@ const MemberAttendance = () => {
                   <td className='px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div className='h-8 w-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center'>
-                        <i class="fa-solid fa-person-praying text-[18px]"></i>
+                        <i className="fa-solid fa-person-praying text-[18px]"></i>
                       </div>
                       <span className='text-sm font-medium text-slate-700'>Vinyasa Yoga</span>
                     </div>
@@ -504,7 +504,7 @@ const MemberAttendance = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -520,7 +520,7 @@ const MemberAttendance = () => {
                   <td className='px-6 py-4'>
                     <div className='flex items-center gap-3'>
                       <div className='h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center'>
-                        <i class="fa-solid fa-person-running text-[18px]"></i>
+                        <i className="fa-solid fa-person-running text-[18px]"></i>
                       </div>
                       <span className='text-sm font-medium text-slate-700'>HIIT Cardio</span>
                     </div>
@@ -543,7 +543,7 @@ const MemberAttendance = () => {
 
                   <td className='px-6 py-4 text-right'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                     </button>
                   </td>
                 </tr>

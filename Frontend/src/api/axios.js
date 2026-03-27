@@ -9,7 +9,7 @@ export const setUnauthorizedHandler = (handler) => {
 };
 
 const api = axios.create({
-    baseURL: 'http://localhost:8080/api',
+    baseURL: import.meta.env.VITE_NODE_SERVER_URL,
     withCredentials: true,
 });
 

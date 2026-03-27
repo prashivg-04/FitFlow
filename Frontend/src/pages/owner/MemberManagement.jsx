@@ -17,7 +17,7 @@ const MemberManagement = () => {
             </div>
             <div>
               <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                <i class="ri-add-line text-[20px]"></i>
+                <i className="ri-add-line text-[20px]"></i>
                 Add New Member
               </button>
             </div>
@@ -33,7 +33,7 @@ const MemberManagement = () => {
               <div className='flex items-center gap-3 z-10'>
                 <span className='text-3xl font-bold'>1240</span>
                 <span className='text-sm font-semibold text-green-600 bg-green-100 px-2 py-0.5 rounded-full flex items-center'>
-                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <i className="fa-solid fa-arrow-trend-up"></i>
                   5%
                 </span>
               </div>
@@ -47,7 +47,7 @@ const MemberManagement = () => {
               <div className='flex items-center gap-3 z-10'>
                 <span className='text-3xl font-bold'>980</span>
                 <span className='text-sm font-semibold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full flex items-center'>
-                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <i className="fa-solid fa-arrow-trend-up"></i>
                   2%
                 </span>
               </div>
@@ -55,13 +55,13 @@ const MemberManagement = () => {
 
             <div className='bg-white p-6 rounded-xl border border-[#dbe6df] shadow-soft flex flex-col justify-between h-32 relative overflow-hidden group'>
               <div className='absolute -top-2.5 -right-2.5 p-6 bg-orange-50 rounded-full group-hover:bg-orange-100 transition-all'>
-                <i class="fa-solid fa-triangle-exclamation text-orange-400 text-4xl opacity-50"></i>
+                <i className="fa-solid fa-triangle-exclamation text-orange-400 text-4xl opacity-50"></i>
               </div>
               <span className='text-[#61896f] font-medium z-10'>Expiring Soon</span>
               <div className='flex items-center gap-3 z-10'>
                 <span className='text-3xl font-bold'>12</span>
                 <span className='text-sm font-semibold text-orange-600 bg-orange-100 px-2 py-0.5 rounded-full flex items-center'>
-                  <i class="fa-solid fa-exclamation"></i>
+                  <i className="fa-solid fa-exclamation"></i>
                   1%
                 </span>
               </div>
@@ -73,7 +73,7 @@ const MemberManagement = () => {
             {/* Toolbar */}
             <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
               <div className='relative max-w-md w-full'>
-                <i class="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
+                <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                 <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search by name, email, or ID...' />
               </div>
 
@@ -85,7 +85,7 @@ const MemberManagement = () => {
                     <option>Inactive</option>
                     <option>Pending</option>
                   </select>
-                  <i class="absolute right-2 top-2 text-[#61896f] pointer-events-none ri-arrow-down-s-fill"></i>
+                  <i className="absolute right-2 top-2 text-[#61896f] pointer-events-none ri-arrow-down-s-fill"></i>
                 </div>
 
                 <div className='relative min-w-30'>
@@ -95,11 +95,11 @@ const MemberManagement = () => {
                     <option>Standard</option>
                     <option>Basic</option>
                   </select>
-                  <i class="absolute right-2 top-2 text-[#61896f] pointer-events-none ri-arrow-down-s-fill"></i>
+                  <i className="absolute right-2 top-2 text-[#61896f] pointer-events-none ri-arrow-down-s-fill"></i>
                 </div>
 
                 <button className='px-3 py-1 border border-[#dbe6df] rounded-lg text-[#61896f] hover:bg-gray-50 transition-all flex items-center gap-2'>
-                  <i class="ri-filter-3-line text-xl"></i>
+                  <i className="ri-filter-3-line text-xl"></i>
                 </button>
               </div>
             </div>
@@ -133,12 +133,12 @@ const MemberManagement = () => {
                     <td className='px-6 py-4'>
                       <div className='flex flex-col items-start gap-0.5'>
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="fa-regular fa-envelope text-[14px]"></i>
+                          <i className="fa-regular fa-envelope text-[14px]"></i>
                           eleanor@example.com
                         </div>
 
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="ri-phone-line text-[14px]"></i>
+                          <i className="ri-phone-line text-[14px]"></i>
                           (205) 555-0100
                         </div>
                       </div>
@@ -146,7 +146,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4'>
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-700 border border-purple-200 '>
-                        <i class="fa-regular fa-gem text-[14px]"></i>
+                        <i className="fa-regular fa-gem text-[14px]"></i>
                         Premium
                       </span>
                     </td>
@@ -164,7 +164,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -183,12 +183,12 @@ const MemberManagement = () => {
                     <td className='px-6 py-4'>
                       <div className='flex flex-col items-start gap-0.5'>
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="fa-regular fa-envelope text-[14px]"></i>
+                          <i className="fa-regular fa-envelope text-[14px]"></i>
                           eleanor@example.com
                         </div>
 
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="ri-phone-line text-[14px]"></i>
+                          <i className="ri-phone-line text-[14px]"></i>
                           (205) 555-0100
                         </div>
                       </div>
@@ -196,7 +196,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4'>
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200 '>
-                        <i class="fa-solid fa-dumbbell text-[14px]"></i>
+                        <i className="fa-solid fa-dumbbell text-[14px]"></i>
                         Standard
                       </span>
                     </td>
@@ -214,7 +214,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -233,12 +233,12 @@ const MemberManagement = () => {
                     <td className='px-6 py-4'>
                       <div className='flex flex-col items-start gap-0.5'>
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="fa-regular fa-envelope text-[14px]"></i>
+                          <i className="fa-regular fa-envelope text-[14px]"></i>
                           eleanor@example.com
                         </div>
 
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="ri-phone-line text-[14px]"></i>
+                          <i className="ri-phone-line text-[14px]"></i>
                           (205) 555-0100
                         </div>
                       </div>
@@ -246,7 +246,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4'>
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200 '>
-                        <i class="fa-solid fa-person-running text-[14px]"></i>
+                        <i className="fa-solid fa-person-running text-[14px]"></i>
                         Basic
                       </span>
                     </td>
@@ -264,7 +264,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -283,12 +283,12 @@ const MemberManagement = () => {
                     <td className='px-6 py-4'>
                       <div className='flex flex-col items-start gap-0.5'>
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="fa-regular fa-envelope text-[14px]"></i>
+                          <i className="fa-regular fa-envelope text-[14px]"></i>
                           eleanor@example.com
                         </div>
 
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="ri-phone-line text-[14px]"></i>
+                          <i className="ri-phone-line text-[14px]"></i>
                           (205) 555-0100
                         </div>
                       </div>
@@ -296,7 +296,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4'>
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-purple-100 text-purple-700 border border-purple-200 '>
-                        <i class="fa-regular fa-gem text-[14px]"></i>
+                        <i className="fa-regular fa-gem text-[14px]"></i>
                         Premium
                       </span>
                     </td>
@@ -314,7 +314,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>
@@ -333,12 +333,12 @@ const MemberManagement = () => {
                     <td className='px-6 py-4'>
                       <div className='flex flex-col items-start gap-0.5'>
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="fa-regular fa-envelope text-[14px]"></i>
+                          <i className="fa-regular fa-envelope text-[14px]"></i>
                           eleanor@example.com
                         </div>
 
                         <div className='flex items-center gap-1.5 text-[#61896f] text-sm'>
-                          <i class="ri-phone-line text-[14px]"></i>
+                          <i className="ri-phone-line text-[14px]"></i>
                           (205) 555-0100
                         </div>
                       </div>
@@ -346,7 +346,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4'>
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium bg-blue-100 text-blue-700 border border-blue-200 '>
-                        <i class="fa-solid fa-dumbbell text-[14px]"></i>
+                        <i className="fa-solid fa-dumbbell text-[14px]"></i>
                         Standard
                       </span>
                     </td>
@@ -364,7 +364,7 @@ const MemberManagement = () => {
 
                     <td className='px-6 py-4 text-right'>
                       <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i class="fa-solid fa-ellipsis-vertical text-[20px]"></i>
+                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
                       </button>
                     </td>
                   </tr>

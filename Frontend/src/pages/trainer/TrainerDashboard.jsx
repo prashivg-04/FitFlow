@@ -14,7 +14,6 @@ const TrainerDashboard = () => {
         const response = await api.get('/trainer/members');
         setAssignedMembers(response.data.data);
       } catch(err) {
-        console.error('Error fetching assigned members:', err);
       }
     }
 
@@ -67,7 +66,7 @@ const TrainerDashboard = () => {
       <div className='grid grid-cols-3 gap-6'>
         <div className='relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200'>
           <div className='absolute top-5 right-8 bg-blue-50 size-12 flex items-center justify-center rounded-full text-blue-600'>
-            <i class="ri-group-line text-[24px]"></i>
+            <i className="ri-group-line text-[24px]"></i>
           </div>
 
           <div className='flex flex-col items-start gap-2'>
@@ -77,7 +76,7 @@ const TrainerDashboard = () => {
 
           <div className='mt-4 flex items-center gap-2 text-sm'>
             <span className='flex items-center gap-1 font-medium text-green-600'>
-              <i class="fa-solid fa-arrow-trend-up text-base"></i>
+              <i className="fa-solid fa-arrow-trend-up text-base"></i>
               +12%
             </span>
             <span className='text-slate-400'>vs last month</span>
@@ -86,7 +85,7 @@ const TrainerDashboard = () => {
 
         <div className='relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200'>
           <div className='absolute top-5 right-8 bg-green-50 size-12 flex items-center justify-center rounded-full text-green-600'>
-            <i class="fa-solid fa-dumbbell text-[24px]"></i>
+            <i className="fa-solid fa-dumbbell text-[24px]"></i>
           </div>
 
           <div className='flex flex-col items-start gap-2'>
@@ -105,7 +104,7 @@ const TrainerDashboard = () => {
 
         <div className='relative overflow-hidden rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-200'>
           <div className='absolute top-5 right-8 bg-purple-50 size-12 flex items-center justify-center rounded-full text-purple-600'>
-            <i class="fa-solid fa-chart-simple text-[24px]"></i>
+            <i className="fa-solid fa-chart-simple text-[24px]"></i>
           </div>
 
           <div className='flex flex-col items-start gap-2'>
@@ -115,7 +114,7 @@ const TrainerDashboard = () => {
 
           <div className='mt-4 flex items-center gap-2 text-sm'>
             <span className='flex items-center gap-1 font-medium text-green-600'>
-              <i class="fa-solid fa-arrow-up text-base"></i>
+              <i className="fa-solid fa-arrow-up text-base"></i>
               +2.4%
             </span>
             <span className='text-slate-400'>this week</span>
@@ -133,7 +132,7 @@ const TrainerDashboard = () => {
             <h3 className='text-lg font-bold'>Today's Schedule</h3>
             <button className='flex items-center gap-1 text-sm font-medium text-[#15ec5b] hover:underline transition-all'>
               View Calendar
-              <i class="ri-arrow-right-line"></i>
+              <i className="ri-arrow-right-line"></i>
             </button>
           </div>
 
@@ -260,7 +259,7 @@ const TrainerDashboard = () => {
             <div className='space-y-4'>
               <div className='flex items-start gap-5 border border-slate-100 p-3 rounded-lg hover:border-slate-200 transition-all'>
                 <div className='flex size-8 shring-0 items-center justify-center rounded-full bg-orange-100 text-orange-600'>
-                  <i class="fa-solid fa-exclamation text-sm"></i>
+                  <i className="fa-solid fa-exclamation text-sm"></i>
                 </div>
                 <div className='flex-1'>
                   <p className='text-sm font-medium'>New Dietary Plan</p>
@@ -274,7 +273,7 @@ const TrainerDashboard = () => {
 
               <div className='flex items-start gap-5 border border-slate-100 p-3 rounded-lg hover:border-slate-200 transition-all'>
                 <div className='flex size-8 shring-0 items-center justify-center rounded-full bg-blue-100 text-blue-600'>
-                  <i class="ri-calendar-todo-fill text-sm"></i>
+                  <i className="ri-calendar-todo-fill text-sm"></i>
                 </div>
                 <div className='flex-1'>
                   <p className='text-sm font-medium'>Reschedule Session</p>

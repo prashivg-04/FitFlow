@@ -16,7 +16,6 @@ const AssignmentWindow = ({member, program, onBack, onAssign}) => {
                 const res = await api.get(`/trainer/member/${member.id}/assignment-window`);
                 setAssignmenetWindow(res.data.data);
             } catch(err) {  
-                console.error("Error fetching assignment window data: ", err);
             }
         }
 
@@ -29,7 +28,7 @@ const AssignmentWindow = ({member, program, onBack, onAssign}) => {
         onClick={onBack}
         className='text-sm text-[#61896f] mb-4 flex items-center gap-1'
       >
-        <i class="ri-arrow-left-s-line text-[18px]"></i>
+        <i className="ri-arrow-left-s-line text-[18px]"></i>
         Back
       </button>
 

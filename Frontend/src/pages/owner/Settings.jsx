@@ -21,7 +21,7 @@ const Settings = () => {
             <div className='flex items-center gap-4'>
               <button className='px-5 py-2.5 bg-white rounded-lg hover:bg-gray-50 font-medium border border-[#dbe6df] transition-all'>Discard</button>
               <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                <i class="fa-regular fa-floppy-disk text-[20px]"></i>
+                <i className="fa-regular fa-floppy-disk text-[20px]"></i>
                 Save Changes
               </button>
             </div>
@@ -36,7 +36,7 @@ const Settings = () => {
                 {/* Heading */}
                 <div className='p-8 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-semibold'>Account Settings</h3>
-                  <i class="ri-user-settings-line text-[#61896f] text-[20px]"></i>
+                  <i className="ri-user-settings-line text-[#61896f] text-[20px]"></i>
                 </div>
 
                 {/* Info */}
@@ -81,7 +81,7 @@ const Settings = () => {
                 {/* Heading */}
                 <div className='p-8 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-semibold'>Gym Details</h3>
-                  <i class="ri-building-line text-[#61896f] text-[20px]"></i>
+                  <i className="ri-building-line text-[#61896f] text-[20px]"></i>
                 </div>
 
                 {/* Info */}
@@ -94,7 +94,7 @@ const Settings = () => {
                   <div className='flex flex-col gap-1.5'>
                     <label className='text-sm font-medium'>Contact Number</label>
                     <div className='relative'>
-                      <i class="ri-phone-line absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-400 "></i>
+                      <i className="ri-phone-line absolute left-3 top-1/2 -translate-y-1/2 text-lg text-gray-400 "></i>
                       <input className='w-full h-12 pl-10 pr-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="tel" placeholder="Enter contact number" value='+1 (555) 000-1234' />
                     </div>
                   </div>
@@ -123,7 +123,7 @@ const Settings = () => {
                 {/* Heading */}
                 <div className='p-6 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-semibold'>Preferences</h3>
-                  <i class="ri-equalizer-line text-[#61896f] text-[20px]"></i>
+                  <i className="ri-equalizer-line text-[#61896f] text-[20px]"></i>
                 </div>
 
                 {/* Preferences */}
@@ -205,7 +205,7 @@ const Settings = () => {
                   <div>
                     <p className='text-xs font-bold text-red-500 uppercase tracking-wider mb-4'>Danger Zone</p>
                     <button className='w-full py-2 px-4 border border-red-200 rounded-lg text-red-600 hover:bg-red-50 text-sm font-medium transition-colors flex items-center justify-center gap-2'>
-                      <i class="fa-solid fa-trash-can text-md"></i>
+                      <i className="fa-solid fa-trash-can text-md"></i>
                       Deactivate Account
                     </button>
                   </div>

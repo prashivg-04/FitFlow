@@ -57,7 +57,7 @@ const MemberJoin = () => {
 
         <div className='flex items-center gap-4'>
           <button className='p-2 rounded-full hover:bg-slate-100 transition-colors'>
-            <i class="text-lg fa-solid fa-bell text-slate-600"></i>
+            <i className="text-lg fa-solid fa-bell text-slate-600"></i>
           </button>
           <div>
             <img className='size-12 bg-gray-50 bg-center bg-cover rounded-full object-cover border-2 border-[#15ec5b]/20 aspect-square' src={navjot} alt="" />
@@ -93,7 +93,7 @@ const MemberJoin = () => {
                             user?.gymStatus === 'NONE' && 
                             <form className='space-y-4' onSubmit={handleJoin}>
                                 <div className='relative'>
-                                    <i class="ri-key-fill absolute left-4 top-1/2 -translate-y-1/2 text-[24px] text-slate-400"></i>
+                                    <i className="ri-key-fill absolute left-4 top-1/2 -translate-y-1/2 text-[24px] text-slate-400"></i>
                                     <input 
                                         value={gymCode}
                                         onChange={(e) => setGymCode(e.target.value)}
@@ -121,7 +121,7 @@ const MemberJoin = () => {
         <section className='grid grid-cols-3 gap-6'>
             <div className='bg-white p-6 rounded-2xl border border-slate-100 hover:border-[#15ec5b]/50 transition-colors'>
                 <div className='size-12 rounded-xl bg-[#15ec5b]/10 flex items-center justify-center text-[#15ec5b] mb-4'>
-                    <i class="ri-file-text-line text-[24px]"></i>
+                    <i className="ri-file-text-line text-[24px]"></i>
                 </div>
                 <h4 className='text-lg font-bold mb-2 font-display'>Personalized Plans</h4>
                 <p className='text-sm text-slate-500'>Tailored workout routines synced directly from your trainer.</p>
@@ -129,7 +129,7 @@ const MemberJoin = () => {
 
             <div className='bg-white p-6 rounded-2xl border border-slate-100 hover:border-[#15ec5b]/50 transition-colors'>
                 <div className='size-12 rounded-xl bg-[#15ec5b]/10 flex items-center justify-center text-[#15ec5b] mb-4'>
-                    <i class="ri-bar-chart-grouped-fill text-[24px]"></i>
+                    <i className="ri-bar-chart-grouped-fill text-[24px]"></i>
                 </div>
                 <h4 className='text-lg font-bold mb-2 font-display'>Visual Tracking</h4>
                 <p className='text-sm text-slate-500'>See your progress through intuitive charts and achievement badges.</p>
@@ -138,13 +138,13 @@ const MemberJoin = () => {
             <div className='bg-[#15ec5b]/5 p-6 rounded-2xl border-2 border-dashed border-[#15ec5b]/30 flex flex-col justify-between'>
                 <div>
                     <h4 className='text-slate-900 font-bold mb-2 flex items-center gap-2 font-display'>
-                        <i class="ri-question-line text-[#15ec5b] text-xl"></i>
+                        <i className="ri-question-line text-[#15ec5b] text-xl"></i>
                         How it works
                     </h4>
                     <p className='text-xs text-[#61896f] leading-relaxed'>Your gym generates a unique code that links your personal profile to their facility management system. This ensures your privacy while allowing trainers to assign programs.</p>
                 </div>
                 <a className='text-xs font-bold text-[#15ec5b] mt-4 hover:underline flex items-center gap-1 p-1' href="">
-                    Learn More <i class="ri-arrow-right-line"></i>
+                    Learn More <i className="ri-arrow-right-line"></i>
                 </a>
             </div>
         </section>
@@ -153,10 +153,10 @@ const MemberJoin = () => {
             <div className='rounded-3xl bg-linear-to-r from-[#15ec5b]/10 via-[#f6f8f6] to-[#15ec5b]/10 p-8 text-center border border-[#15ec5b]/10'>
                 <p className='text-2xl italic font-medium text-slate-700 font-display'>"Small steps every day lead to big results."</p>
                 <div className='mt-6 flex justify-center gap-8 grayscale opacity-50 contrast-125'>
-                    <i class="fa-solid fa-dumbbell text-2xl"></i>
-                    <i class="fa-regular fa-clock text-2xl"></i>
-                    <i class="fa-regular fa-heart text-2xl"></i>
-                    <i class="fa-solid fa-child-reaching text-2xl"></i>
+                    <i className="fa-solid fa-dumbbell text-2xl"></i>
+                    <i className="fa-regular fa-clock text-2xl"></i>
+                    <i className="fa-regular fa-heart text-2xl"></i>
+                    <i className="fa-solid fa-child-reaching text-2xl"></i>
                 </div>
             </div>
             <div className='mt-8 text-center space-y-4'>

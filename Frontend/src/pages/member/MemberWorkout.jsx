@@ -16,9 +16,7 @@ const MemberWorkout = () => {
       try {
         const res = await api.get('/member/schedule');
         setProgram(res.data.data);
-        console.log("Program details:", res.data.data);
       } catch(err) {
-        console.log("Error fetching program details:", err);
       }
     }
 
@@ -43,7 +41,6 @@ const MemberWorkout = () => {
         })
       )
     } catch(err) {
-      console.log("Error marking workout as complete:", err);
     }
   }
 

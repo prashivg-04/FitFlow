@@ -84,7 +84,6 @@ const TrainerSignup = () => {
       toast.success('Trainer Account Created Successfully!');
       navigate('/trainer/join');
     } catch(err) {
-      console.error('Signup failed:', err);
     }
 
     setFormData({
@@ -138,7 +137,7 @@ const TrainerSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center '>
-                  <i class="ri-id-card-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-id-card-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Professional Information</h2>
               </div>
@@ -163,7 +162,7 @@ const TrainerSignup = () => {
                         <option>Rehabilitation</option>
                       </select>
                       <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
-                        <i class="ri-arrow-down-s-fill text-m"></i>
+                        <i className="ri-arrow-down-s-fill text-m"></i>
                       </div>
                       {errors.specialization && <p className='text-red-500 text-sm mt-1'>{errors.specialization}</p>}
                     </div>
@@ -194,7 +193,7 @@ const TrainerSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-calendar-schedule-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-calendar-schedule-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Availability</h2>
               </div>
@@ -293,7 +292,7 @@ const TrainerSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-user-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-user-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Tell me about yourself</h2>
               </div>
@@ -319,7 +318,7 @@ const TrainerSignup = () => {
             <div className='flex items-center justify-between gap-4 pt-3'>
               <button disabled={loading} type='submit' className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'>
                 <span>{loading ? 'Completing Signup...' : 'Join Gym & Continue'}</span>
-                <i class="ri-arrow-right-line text-[20px] font-bold"></i>
+                <i className="ri-arrow-right-line text-[20px] font-bold"></i>
               </button>
             </div>
           </form>

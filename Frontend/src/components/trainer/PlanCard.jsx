@@ -15,7 +15,7 @@ const PlanCard = (props) => {
         <div className='relative h-40 bg-gray-400'>
             <div className='absolute inset-0 bg-linear-to-br from-slate-600 to-zinc-900 opacity-90'></div>
             <div className='absolute inset-0 flex items-center justify-center'>
-                <i class="fa-solid fa-hand-fist text-6xl text-white/50"></i>
+                <i className="fa-solid fa-hand-fist text-6xl text-white/50"></i>
             </div>
         </div>
 

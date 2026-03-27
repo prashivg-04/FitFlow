@@ -17,7 +17,7 @@ const TrainerSettings = () => {
             <div className='flex items-center gap-4'>
               <button className='px-5 py-2.5 bg-white rounded-lg hover:bg-gray-50 font-medium border border-[#dbe6df] transition-all'>Discard</button>
               <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
-                <i class="fa-regular fa-floppy-disk text-[20px]"></i>
+                <i className="fa-regular fa-floppy-disk text-[20px]"></i>
                 Save Changes
               </button>
             </div>
@@ -36,11 +36,11 @@ const TrainerSettings = () => {
               <p className='text-[#61896f] max-w-xl'>Certified Personal Trainer specializing in HIIT and Strength Training. Helping members achieve their fitness goals since 2018.</p>
               <div className='flex flex-wrap justify-start items-center gap-4 mt-4'>
                 <span className='inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-medium'>
-                  <i class="ri-map-pin-2-line text-[16px]"></i>
+                  <i className="ri-map-pin-2-line text-[16px]"></i>
                   San Francisco, CA
                 </span>
                 <span className='inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-sm font-medium'>
-                  <i class="ri-time-line text-[16px]"></i>
+                  <i className="ri-time-line text-[16px]"></i>
                   Joined Sep 2018
                 </span>
               </div>
@@ -79,7 +79,7 @@ const TrainerSettings = () => {
                       <div className='col-span-2 flex flex-col gap-1.5'>
                         <label className='text-sm font-medium'>Email Address</label>
                         <div className='relative'>
-                          <i class="fa-regular fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-[#61896f] text-[20px]"></i>
+                          <i className="fa-regular fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-[#61896f] text-[20px]"></i>
                           <input className='w-full h-12 pl-12 pr-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="email" placeholder='name@example.com' value='alex.j@fitpulse.com' />
                         </div>
                       </div>
@@ -125,26 +125,26 @@ const TrainerSettings = () => {
                           <div className='flex items-center gap-1 px-3 py-1.5 bg-[#15ec5b]/10 border border-[#15ec5b]/30 rounded-md text-sm font-medium group cursor-pointer hover:bg-[#15ec5b]/30 transition-colors'>
                             HIIT
                             <button className='text-[#61896f] hover:text-red-500'>
-                              <i class="ri-close-fill text-[16px]"></i>
+                              <i className="ri-close-fill text-[16px]"></i>
                             </button>
                           </div>
 
                           <div className='flex items-center gap-1 px-3 py-1.5 bg-[#15ec5b]/10 border border-[#15ec5b]/30 rounded-md text-sm font-medium group cursor-pointer hover:bg-[#15ec5b]/30 transition-colors'>
                             Strength Training
                             <button className='text-[#61896f] hover:text-red-500'>
-                              <i class="ri-close-fill text-[16px]"></i>
+                              <i className="ri-close-fill text-[16px]"></i>
                             </button>
                           </div>
 
                           <div className='flex items-center gap-1 px-3 py-1.5 bg-[#15ec5b]/10 border border-[#15ec5b]/30 rounded-md text-sm font-medium group cursor-pointer hover:bg-[#15ec5b]/30 transition-colors'>
                             Cardio
                             <button className='text-[#61896f] hover:text-red-500'>
-                              <i class="ri-close-fill text-[16px]"></i>
+                              <i className="ri-close-fill text-[16px]"></i>
                             </button>
                           </div>
 
                           <button className='flex items-center gap-1 px-3 py-1.5 bg-slate-50 border border-slate-300 border-dashed rounded-md text-sm font-medium group cursor-pointer hover:text-[#15ec5b] hover:border-[#15ec5b] transition-colors'>
-                            <i class="ri-add-fill text-[16px]"></i>
+                            <i className="ri-add-fill text-[16px]"></i>
                             Add Specialty
                           </button>
                         </div>
@@ -161,7 +161,7 @@ const TrainerSettings = () => {
                 {/* Heading */}
                 <div className='p-6 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-bold flex items-center gap-3'>
-                    <i class="fa-regular fa-bell text-[#15ec5b] text-[20px]"></i>
+                    <i className="fa-regular fa-bell text-[#15ec5b] text-[20px]"></i>
                     Notifications
                   </h3>
                 </div>

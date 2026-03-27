@@ -72,7 +72,6 @@ const MemberSignup = () => {
       toast.success('Member Account Created Successfully!');
       navigate('/member/join');
     } catch(err) {
-      console.error('Signup failed:', err);
     }
 
     setFormData({
@@ -126,7 +125,7 @@ const MemberSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center '>
-                  <i class="ri-user-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-user-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Basic Fitness Details</h2>
               </div>
@@ -163,7 +162,7 @@ const MemberSignup = () => {
                         <option value='OTHER'>Prefer not to say</option>
                       </select>
                       <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
-                        <i class="ri-arrow-down-s-fill text-m"></i>
+                        <i className="ri-arrow-down-s-fill text-m"></i>
                       </div>
                       {errors?.gender && <span className='text-xs text-red-500 mt-1'>{errors.gender}</span>}
                     </div>
@@ -215,7 +214,7 @@ const MemberSignup = () => {
               {/* Heading */}
               <div className='flex items-center gap-3 border-b border-gray-100 pb-3'>
                 <div className='size-8 rounded-full bg-[#15ec5b]/20 flex items-center justify-center'>
-                  <i class="ri-flag-line text-lg text-[#15ec5b]"></i>
+                  <i className="ri-flag-line text-lg text-[#15ec5b]"></i>
                 </div>
                 <h2 className='text-lg font-bold leading-tight'>Fitness Goals</h2>
               </div>
@@ -240,7 +239,7 @@ const MemberSignup = () => {
                         <option value="GENERAL_FITNESS">General Fitness</option>
                       </select>
                       <div className='pointer-events-none absolute inset-y-0 right-0 top-1/2 flex items-center -translate-y-1/2 px-4'>
-                        <i class="ri-arrow-down-s-fill text-m"></i>
+                        <i className="ri-arrow-down-s-fill text-m"></i>
                       </div>
                       {errors?.goal && <span className='text-xs text-red-500 mt-1'>{errors.goal}</span>}
                     </div>
@@ -320,7 +319,7 @@ const MemberSignup = () => {
                 className='bg-[#15ec5b] w-full py-3.5 px-8 rounded-lg shadow-lg shadow-[#15ec5b]/25 text-base font-bold transition-all flex items-center justify-center gap-2 hover:bg-[#11d450]'
               >
                 <span>{loading ? 'Completing Signup...' : 'Complete Signup'}</span>
-                <i class="ri-arrow-right-line text-[20px] font-bold"></i>
+                <i className="ri-arrow-right-line text-[20px] font-bold"></i>
               </button>
             </div>
           </form>

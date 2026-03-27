@@ -16,7 +16,6 @@ const TrainerAssignWorkout = () => {
         const response = await api.get('/trainer/members');
         setMembers(response.data.data);
       } catch(err) {
-        console.error("Error fetching members:", err);
       }
     }
 
@@ -74,7 +73,7 @@ const TrainerAssignWorkout = () => {
                     }}
                     className='border border-[#dbe6df] bg-gray-50 px-5 py-2 rounded-lg group-hover:bg-[#15ec5b] text-md font-bold flex items-center gap-2 transition-all'
                   >
-                    <i class="ri-add-circle-line text-[18px]"></i>
+                    <i className="ri-add-circle-line text-[18px]"></i>
                     Assign Workout
                   </button>
                 </div>

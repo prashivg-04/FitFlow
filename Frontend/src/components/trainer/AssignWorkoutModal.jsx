@@ -14,7 +14,6 @@ const AssignWorkoutModal = ({onClose, member}) => {
                 const response = await api.get('/trainer/programs');
                 setPrograms(response.data.data);
             } catch(err) {
-                console.error("Error fetching programs: ", err);
             }
         }
 
@@ -37,7 +36,6 @@ const AssignWorkoutModal = ({onClose, member}) => {
             toast.success('Workout assigned successfully!');
             onClose();
         } catch(err) {
-            console.error("Error assigning program: ", err);
         }
     }
 
@@ -46,7 +44,7 @@ const AssignWorkoutModal = ({onClose, member}) => {
       <div onClick={(e) => e.stopPropagation()} className='bg-[#f7f8f6] rounded-lg w-120 p-6 relative'>
         <div className='flex items-center justify-between'>
             <h2 className='text-lg font-bold'>Assign Workout to {member?.user?.name}</h2>
-            <button onClick={onClose} className='text-[20px] cursor-pointer'><i class="fa-solid fa-xmark"></i></button>
+            <button onClick={onClose} className='text-[20px] cursor-pointer'><i className="fa-solid fa-xmark"></i></button>
         </div>
 
         <div className='space-y-2 mt-6 overflow-y-auto max-h-72'>

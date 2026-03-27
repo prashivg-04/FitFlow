@@ -30,10 +30,10 @@ const MemberProgress = () => {
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex items-start justify-between mb-4'>
               <div className='p-2 bg-blue-50 rounded-lg text-blue-600'>
-                <i class="fa-solid fa-weight-scale text-[20px]"></i>
+                <i className="fa-solid fa-weight-scale text-[20px]"></i>
               </div>
               <span className='flex items-center gap-1 text-xs font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full'>
-                <i class="fa-solid fa-arrow-trend-down text-[14px]"></i>
+                <i className="fa-solid fa-arrow-trend-down text-[14px]"></i>
                 2%
               </span>
             </div>
@@ -47,7 +47,7 @@ const MemberProgress = () => {
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex items-start justify-between mb-4'>
               <div className='p-2 bg-green-50 rounded-lg text-green-600'>
-                <i class="fa-solid fa-dumbbell text-[20px]"></i>
+                <i className="fa-solid fa-dumbbell text-[20px]"></i>
               </div>
               <span className='flex items-center gap-1 text-xs font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full'>
                 -12 lbs
@@ -63,7 +63,7 @@ const MemberProgress = () => {
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex items-start justify-between mb-4'>
               <div className='p-2 bg-purple-50 rounded-lg text-purple-600'>
-                <i class="fa-regular fa-flag text-[18px]"></i>
+                <i className="fa-regular fa-flag text-[18px]"></i>
               </div>
               <span className='flex items-center gap-1 text-xs font-bold bg-gray-50 text-gray-600 px-2 py-1 rounded-full'>
                 11 lbs to go
@@ -82,7 +82,7 @@ const MemberProgress = () => {
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex items-start justify-between mb-4'>
               <div className='p-2 bg-orange-50 rounded-lg text-orange-600'>
-                <i class="fa-solid fa-person text-[20px]"></i>
+                <i className="fa-solid fa-person text-[20px]"></i>
               </div>
               <span className='flex items-center gap-1 text-xs font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full'>
                 Normal
@@ -322,7 +322,7 @@ const MemberProgress = () => {
                   <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Feeling stronger, increased protein intake.</td>
                   <td className='px-6 py-4 text-right'>
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i class="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-pencil-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -335,7 +335,7 @@ const MemberProgress = () => {
                   <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Routine check-in.</td>
                   <td className='px-6 py-4 text-right'>
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i class="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-pencil-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -348,7 +348,7 @@ const MemberProgress = () => {
                   <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Cheat week, back on track now.</td>
                   <td className='px-6 py-4 text-right'>
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i class="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-pencil-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>
@@ -361,7 +361,7 @@ const MemberProgress = () => {
                   <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Great workout week.</td>
                   <td className='px-6 py-4 text-right'>
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i class="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-pencil-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>

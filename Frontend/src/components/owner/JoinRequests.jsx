@@ -14,10 +14,8 @@ const JoinRequests = () => {
         const fetchRequests = async () => {
             try {
                 const response = await api.get('/owner/join-requests');
-                console.log(response.data.data);
                 setRequests(response.data.data);
             } catch(err) {
-                console.log('Failed to fetch join requests: ', err);
             } finally {
                 setLoadingRequests(false);
             }
@@ -34,7 +32,6 @@ const JoinRequests = () => {
                 prev.filter((req) => req.id !== id)
             );
         } catch(err) {
-            console.log(`Failed to ${action} join request: `, err);
         }
     }
 
@@ -49,7 +46,7 @@ const JoinRequests = () => {
             {requests.map((req) => (
                 <div key={req.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
                     <div className='size-12 h-full rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
-                        <i class="fa-solid fa-user-plus text-slate-500"></i>
+                        <i className="fa-solid fa-user-plus text-slate-500"></i>
                     </div>
                     <div className='flex-1 min-w-0'>
                         <h4 className='text-md font-bold truncate capitalize'>New {(req.role).toLowerCase()}: {req.user.name}</h4>

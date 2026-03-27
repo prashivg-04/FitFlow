@@ -25,7 +25,7 @@ const NotificationDashboard = () => {
               <span className='text-[#61896f] font-medium z-10'>Scheduled This Week</span>
               <span className='text-3xl font-bold'>3</span>
               <span className='text-sm font-semibold text-green-600 px-2 py-0.5 rounded-full flex items-center gap-1'>
-                <i class="fa-solid fa-arrow-trend-up"></i>
+                <i className="fa-solid fa-arrow-trend-up"></i>
                  +2% vs last week
               </span>
             </div>
@@ -37,7 +37,7 @@ const NotificationDashboard = () => {
               <span className='text-[#61896f] font-medium z-10'>Avg Open Rate</span>
               <span className='text-3xl font-bold'>94%</span>
               <span className='text-sm font-semibold text-green-600 px-2 py-0.5 rounded-full flex items-center gap-1'>
-                <i class="fa-solid fa-arrow-trend-up"></i>
+                <i className="fa-solid fa-arrow-trend-up"></i>
                 +5% vs last month
               </span>
             </div>
@@ -68,7 +68,7 @@ const NotificationDashboard = () => {
                   <div className='flex flex-col gap-1.5'>
                     <label className='text-xs font-bold uppercase tracking-wide'>Subject Line</label>
                     <div className='flex items-center gap-2 px-3 py-2 rounded-lg bg-[#f0f4f2] focus-within:ring-2 ring-[#15ec5b]/50 transition-all'>
-                      <i class="fa-regular fa-pen-to-square text-[#61896f] text-[20px]"></i>
+                      <i className="fa-regular fa-pen-to-square text-[#61896f] text-[20px]"></i>
                       <input className='bg-transparent border-none text-sm w-full focus:outline-0 placeholder:text-gray-400' type="text" placeholder='e.g. Holiday Hours Update' />
                     </div>
                   </div>
@@ -76,7 +76,7 @@ const NotificationDashboard = () => {
                   <div className='flex flex-col gap-1.5'>
                     <label className='text-xs font-bold uppercase tracking-wide'>Audience</label>
                     <div className='flex items-center gap-2 px-3 py-2 rounded-lg bg-[#f0f4f2] focus-within:ring-2 ring-[#15ec5b]/50 transition-all'>
-                      <i class="ri-user-add-line text-[#61896f] text-[20px]"></i>
+                      <i className="ri-user-add-line text-[#61896f] text-[20px]"></i>
                       <select className='bg-transparent border-none text-sm w-full focus:outline-0'>
                         <option>All Active Members</option>
                         <option>Trainers Only</option>
@@ -88,7 +88,7 @@ const NotificationDashboard = () => {
                   <div className='flex flex-col gap-1.5'>
                     <label className='text-xs font-bold uppercase tracking-wide'>Schedule</label>
                     <div className='flex items-center gap-2 px-3 py-2 rounded-lg bg-[#f0f4f2] focus-within:ring-2 ring-[#15ec5b]/50 transition-all'>
-                      <i class="fa-regular fa-calendar-check text-[#61896f] text-[20px]"></i>
+                      <i className="fa-regular fa-calendar-check text-[#61896f] text-[20px]"></i>
                       <input className='bg-transparent border-none text-sm w-full focus:outline-0 placeholder:text-gray-400' type='datetime-local'/>
                     </div>
                   </div>
@@ -140,7 +140,7 @@ const NotificationDashboard = () => {
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-yellow-100 text-yellow-700 text-xs font-bold uppercase tracking-wider'>Scheduled</span>
                       <span className='text-[#61896f] text-xs flex items-center gap-1'>
-                        <i class="ri-error-warning-line text-[14px]"></i>
+                        <i className="ri-error-warning-line text-[14px]"></i>
                         Tomorrow, 9:00 AM
                       </span>
                     </div>
@@ -150,11 +150,11 @@ const NotificationDashboard = () => {
                     </p>
                     <div className='flex items-center gap-4 mt-2'>
                       <div className='flex items-center gap-1.5 text-xs font-medium bg-[#f0f4f2] px-2 py-1 rounded'>
-                        <i class="ri-group-line text-[14px]"></i>
+                        <i className="ri-group-line text-[14px]"></i>
                         All Members
                       </div>
                       <div className='flex items-center gap-1.5 text-xs font-medium '>
-                        <i class="ri-user-3-line text-[14px]"></i>
+                        <i className="ri-user-3-line text-[14px]"></i>
                         By Admin
                       </div>
                     </div>
@@ -162,7 +162,7 @@ const NotificationDashboard = () => {
 
                   <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
-                      <i class="fa-solid fa-ellipsis text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
                     <button className='text-sm font-bold text-[#15ec5b] hover:underline'>Edit</button>
                   </div>
@@ -173,7 +173,7 @@ const NotificationDashboard = () => {
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider'>Sent</span>
                       <span className='text-[#61896f] text-xs flex items-center gap-1'>
-                        <i class="ri-checkbox-circle-line text-[14px]"></i>
+                        <i className="ri-checkbox-circle-line text-[14px]"></i>
                         Tomorrow, 9:00 AM
                       </span>
                     </div>
@@ -183,11 +183,11 @@ const NotificationDashboard = () => {
                     </p>
                     <div className='flex items-center gap-4 mt-2'>
                       <div className='flex items-center gap-1.5 text-xs font-medium bg-[#f0f4f2] px-2 py-1 rounded'>
-                        <i class="ri-group-line text-[14px]"></i>
+                        <i className="ri-group-line text-[14px]"></i>
                         All Members
                       </div>
                       <div className='flex items-center gap-1.5 text-xs text-green-600 font-bold'>
-                        <i class="ri-eye-line text-[14px]"></i>
+                        <i className="ri-eye-line text-[14px]"></i>
                         68% Open Rate
                       </div>
                     </div>
@@ -195,7 +195,7 @@ const NotificationDashboard = () => {
 
                   <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
-                      <i class="fa-solid fa-ellipsis text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
                     <button className='text-sm font-bold hover:text-[#15ec5b]'>Details</button>
                   </div>
@@ -206,7 +206,7 @@ const NotificationDashboard = () => {
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-wider'>Draft</span>
                       <span className='text-[#61896f] text-xs flex items-center gap-1'>
-                        <i class="ri-pencil-line text-[14px]"></i>
+                        <i className="ri-pencil-line text-[14px]"></i>
                         Last edited 2h ago
                       </span>
                     </div>
@@ -216,7 +216,7 @@ const NotificationDashboard = () => {
                     </p>
                     <div className='flex items-center gap-4 mt-2'>
                       <div className='flex items-center gap-1.5 text-xs font-medium bg-[#f0f4f2] px-2 py-1 rounded'>
-                        <i class="fa-solid fa-dumbbell text-[14px]"></i>
+                        <i className="fa-solid fa-dumbbell text-[14px]"></i>
                         Yoga Class Members
                       </div>
                     </div>
@@ -224,7 +224,7 @@ const NotificationDashboard = () => {
 
                   <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
-                      <i class="fa-solid fa-trash-can text-[20px]"></i>
+                      <i className="fa-solid fa-trash-can text-[20px]"></i>
                     </button>
                     <button className='text-sm font-bold text-[#15ec5b] hover:underline'>Resume</button>
                   </div>
@@ -235,7 +235,7 @@ const NotificationDashboard = () => {
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider'>Sent</span>
                       <span className='text-[#61896f] text-xs flex items-center gap-1'>
-                        <i class="ri-checkbox-circle-line text-[14px]"></i>
+                        <i className="ri-checkbox-circle-line text-[14px]"></i>
                         3 Days Ago
                       </span>
                     </div>
@@ -245,11 +245,11 @@ const NotificationDashboard = () => {
                     </p>
                     <div className='flex items-center gap-4 mt-2'>
                       <div className='flex items-center gap-1.5 text-xs font-medium bg-[#f0f4f2] px-2 py-1 rounded'>
-                        <i class="ri-group-line text-[14px]"></i>
+                        <i className="ri-group-line text-[14px]"></i>
                         All Members
                       </div>
                       <div className='flex items-center gap-1.5 text-xs text-green-600 font-bold'>
-                        <i class="ri-eye-line text-[14px]"></i>
+                        <i className="ri-eye-line text-[14px]"></i>
                         42% Open Rate
                       </div>
                     </div>
@@ -257,7 +257,7 @@ const NotificationDashboard = () => {
 
                   <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
-                      <i class="fa-solid fa-ellipsis text-[20px]"></i>
+                      <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
                     <button className='text-sm font-bold hover:text-[#15ec5b]'>Details</button>
                   </div>

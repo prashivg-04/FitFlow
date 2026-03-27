@@ -11,10 +11,9 @@ const TrainerLayout = () => {
   useEffect(() => {
       const fetchGymInfo = async () => {
       try {
-          const res = await api.get('/user/gym-info');
-          setGym(res.data.data);
+        const res = await api.get('/user/gym-info');
+        setGym(res.data.data);
       } catch (error) {
-          console.error('Failed to fetch gym info:', error);
       }
       };
 
