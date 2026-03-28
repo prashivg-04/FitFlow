@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import icon from '../../assets/icon.svg'
-import navjot from '../../media/navjotImg.jpeg'
+import ownerDp from '../../media/O.png'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
 import FeedbackButton from '../FeedbackButton'
@@ -124,7 +124,7 @@ const OwnerSidebar = ({ username }) => {
             <LogoutSidebar />
             <a className='flex items-center gap-3 p-2 rounded-lg hover:bg-[#f7f8f6] transition-colors' href=''>
                 <div className='flex items-center justify-center bg-cover bg-center'> 
-                    <img className='rounded-full w-12 h-12 object-cover border-2 border-[#15ec5b]' src={navjot} alt="" />
+                    <img className='rounded-full w-12 h-12 object-cover border-2 border-[#15ec5b]' src={ownerDp} alt="" />
                 </div>
                 <div className='flex flex-col'>
                     <h1 className='text-sm font-bold truncate tracking-tight leading-none'>{username || 'User'}</h1>

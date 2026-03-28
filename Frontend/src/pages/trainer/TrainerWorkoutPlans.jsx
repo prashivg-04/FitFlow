@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import navjot from '../../media/navjotImg.jpeg'
 import { useNavigate } from 'react-router-dom'
 import api from '../../api/axios'
 import PlanCard from '../../components/trainer/PlanCard'

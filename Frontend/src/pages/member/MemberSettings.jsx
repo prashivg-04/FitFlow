@@ -1,5 +1,5 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberSettings = () => {
@@ -30,7 +30,7 @@ const MemberSettings = () => {
 
               <div className='flex gap-8'>
                 <div className='flex flex-col items-center gap-4'>
-                  <img className='w-32 h-32 rounded-full border-4 border-[#f0f4f5] bg-gray-100 bg-cover bg-center shadow-md object-cover' src={navjot} alt="Profile" />
+                  <img className='w-32 h-32 rounded-full border-4 border-[#f0f4f5] bg-gray-100 bg-cover bg-center shadow-md object-cover' src={memberDp} alt="Profile" />
                   <button className='text-sm font-semibold text-[#15ec5b] hover:text-[#0fd651] transition-colors'>Change Photo</button>
                 </div>
 

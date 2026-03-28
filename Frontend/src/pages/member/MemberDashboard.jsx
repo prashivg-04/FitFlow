@@ -1,6 +1,6 @@
 import React from 'react'
 import gymImg from '../../media/gymSignup.jpeg'
-import navjot from '../../media/navjotImg.jpeg'
+import trainerDp from '../../media/T.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberDashboard = () => {
@@ -65,7 +65,7 @@ const MemberDashboard = () => {
             <div className='bg-blue-50 border border-blue-100 rounded-2xl p-6'>
               <div className='flex  gap-4'>
                 <div className='relative'>
-                  <img className='size-12 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="" />
+                  <img className='size-12 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={trainerDp} alt="" />
                   <div className='absolute bottom-11 -right-1 w-5 h-5 flex items-center justify-center  bg-blue-500 text-white rounded-full p-0.5 border-2 border-white'>
                     <i className="ri-message-2-line text-[10px] block"></i>
                   </div>

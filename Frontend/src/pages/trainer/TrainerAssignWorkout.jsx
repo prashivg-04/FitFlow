@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import api from '../../api/axios'
 import AssignWorkoutModal from '../../components/trainer/AssignWorkoutModal';
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
@@ -41,7 +41,7 @@ const TrainerAssignWorkout = () => {
               <div key={member.id} className='group flex items-center justify-between gap-4 px-8 py-6 bg-white border border-[#dbe6df] rounded-xl shadow-sm hover:shadow-md hover:bg-gray-50 transition-all'>
                 <div className='flex items-center gap-6 flex-1'>
                   <div className='relative'>
-                    <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={navjot} alt="Navjot" />
+                    <img className='size-14 rounded-full bg-gray-100 bg-cover bg-center bg-no-repeat border border-slate-100 object-cover' src={memberDp} alt="Member" />
                   </div>
                   <div className='flex flex-col gap-1'>
                     <div className='flex items-center gap-2'>

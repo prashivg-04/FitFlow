@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import ownerDp from '../../media/O.png'
 import icon from '../../media/icon.png'
 import googleLogo from '../../media/googleLogo.png'
 import appleLogo from '../../media/appleLogo.svg'
@@ -58,7 +58,7 @@ const Signup = () => {
             <h1 className=' text-2xl font-bold tracking-tight text-slate-900'>FitFlow</h1>
           </div>
 
-          <div className='flex-1 flex flex-col justify-center max-w-md w-full mx-auto space-y-8 mt-8'> 
+          <div className='flex-1 flex flex-col justify-center max-w-md w-full mx-auto space-y-8 mt-4'> 
             <div className='space-y-2'>
               <h2 className='text-4xl font-bold tracking-tight leading-tight'>Create your account</h2>
               <p className='text-[#61896f] text-base font-normal leading-normal'>
@@ -197,31 +197,7 @@ const Signup = () => {
               <button type='submit' className='w-full h-14 bg-[#15ec5b] px-4 text-base font-bold rounded-lg shadow-md hover:bg-[#0fd650] hover:shadow-lg hover:-translate-y-0.5 focus:ring-2 focus:outline-none focus:ring-[#15ec5b] focus:ring-offset-2 transition-all transform'>
                 Create Account
               </button>
-
-              <div className='relative flex items-center py-2 mt-2'>
-                <div className='grow border-t border-[#dbe6df] '></div>
-                <span className='shrink-0 mx-4 font-medium tracking-wider text-[#61896f]'>Or sign up with</span>
-                <div className='grow border-t border-[#dbe6df] '></div>
-              </div>
-
-              <div className='grid grid-cols-2 gap-4'>
-                <button className='flex items-center justify-center bg-white w-full h-14 gap-3 rounded-lg border border-[#dbe6df] px-5 text-[#111813] text-base font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors'>
-                  <img className='size-6' src={googleLogo} alt="Google Logo" />
-                  Google
-                </button>
-
-                <button className='flex items-center justify-center bg-white w-full h-14 gap-3 rounded-lg border border-[#dbe6df] px-5 text-[#111813] text-base font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors'>
-                  <img className='h-8 w-8' src={appleLogo} alt="Apple Logo" />
-                  Apple
-                </button>
-              </div>
             </form>
-          </div>
-
-          <div className='mt-12'>
-            <p className='text-xs text-center text-[#61896f]'>
-              © 2024 FitFlow Inc. All rights reserved.
-            </p>
           </div>
         </div>
 
@@ -243,11 +219,11 @@ const Signup = () => {
               </div>
 
               <p className='text-3xl font-semibold leading-tight tracking-tight italic'>
-                "GymManager has centralized our operations. Member retention is up 40% and our trainers love the simplified scheduling."
+                "FitFlow has centralized our operations. Member retention is up 40% and our trainers love the simplified scheduling."
               </p>
 
               <div className='flex items-center gap-4 pt-4 border-t border-white/20'>
-                <img className='size-14 rounded-full object-cover border-2 border-[#15ec5b] shadow-lg shadow-[#15ec5b]/30' src={navjot} alt="" />
+                <img className='size-14 rounded-full object-cover border-2 border-[#15ec5b] shadow-lg shadow-[#15ec5b]/30' src={ownerDp} alt="" />
                 <div className='flex flex-col gap-0.7'>
                   <p className='text-lg font-bold'>Alex Morgan</p>
                   <p className='text-sm font-medium text-gray-300'>Owner, IronFit Studio</p>

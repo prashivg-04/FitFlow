@@ -1,5 +1,5 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import trainerDp from '../../media/T.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberAttendance = () => {
@@ -413,7 +413,7 @@ const MemberAttendance = () => {
                   
                   <td className='px-6 py-4'>
                     <div className='flex items-center gap-3'>
-                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
+                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={trainerDp} alt="Member" />
                       <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
                     </div>
                   </td>
@@ -421,123 +421,6 @@ const MemberAttendance = () => {
                   <td className='px-6 py-4'>
                     <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
                       Completed
-                    </span>
-                  </td>
-
-                  <td className='px-6 py-4 text-right'>
-                    <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4'>
-                    <div className='flex flex-col'>
-                      <span className='text-sm font-medium'>Sep 22, 2023</span>
-                      <span className='text-xs text-slate-500'>06:30 PM</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <div className='h-8 w-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center'>
-                        <i className="fa-solid fa-dumbbell text-[18px]"></i>
-                      </div>
-                      <span className='text-sm font-medium text-slate-700'>Hypertrophy</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4 text-sm text-slate-600'>60 mins</td>
-                  
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                      <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Mike Ross</p>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
-                      Completed
-                    </span>
-                  </td>
-
-                  <td className='px-6 py-4 text-right'>
-                    <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4'>
-                    <div className='flex flex-col'>
-                      <span className='text-sm font-medium'>Sep 20, 2023</span>
-                      <span className='text-xs text-slate-500'>05:15 AM</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <div className='h-8 w-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center'>
-                        <i className="fa-solid fa-person-praying text-[18px]"></i>
-                      </div>
-                      <span className='text-sm font-medium text-slate-700'>Vinyasa Yoga</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4 text-sm text-slate-600'>50 mins</td>
-                  
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                      <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Emma Stone</p>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
-                      Completed
-                    </span>
-                  </td>
-
-                  <td className='px-6 py-4 text-right'>
-                    <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4'>
-                    <div className='flex flex-col'>
-                      <span className='text-sm font-medium'>Sep 18, 2023</span>
-                      <span className='text-xs text-slate-500'>06:00 PM</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <div className='h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center'>
-                        <i className="fa-solid fa-person-running text-[18px]"></i>
-                      </div>
-                      <span className='text-sm font-medium text-slate-700'>HIIT Cardio</span>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4 text-sm text-slate-600'>60 mins</td>
-                  
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                      <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Mike Ross</p>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200 '>
-                      Late Cancel
                     </span>
                   </td>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import bgImg from '../media/gymLogin.jpg'
-import navjot from '../media/navjotImg.jpeg'
+import ownerDp from '../media/O.png'
 import icon from '../media/icon.png'
 import googleLogo from '../media/googleLogo.png'
 import api from '../api/axios'
@@ -118,7 +118,7 @@ const Login = () => {
 
             <div className='flex items-center gap-4 mt-4 bg-white/5 backdrop-blur-md p-4 rounded-xl border border-white/10 max-w-sm'>
               <div className='overflow-hidden  '>
-                <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover border border-[#15ec5b]/50' src={navjot} alt="" />
+                <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover border border-[#15ec5b]/50' src={ownerDp} alt="" />
               </div>
 
               <div>
@@ -187,17 +187,6 @@ const Login = () => {
               >
                 {loading ? 'Logging in...' : 'Login'}
               </button>
-
-              <div className='relative flex items-center py-2 mt-2'>
-                <div className='grow border-t border-[#dbe6df] '></div>
-                <span className='shrink-0 mx-4 text-xs font-medium uppercase tracking-wider text-[#61896f]'>OR</span>
-                <div className='grow border-t border-[#dbe6df] '></div>
-              </div>
-
-              <div className='flex items-center justify-center bg-white w-full h-14 gap-3 rounded-lg border border-[#dbe6df] px-5 text-[#111813] text-base font-medium hover:bg-gray-50 hover:border-gray-300 transition-colors'>
-                <img className='size-6' src={googleLogo} alt="Google Logo" />
-                Login with Google
-              </div>
             </form>
 
             <div className='text-center mt-4'>
@@ -210,7 +199,7 @@ const Login = () => {
             <div className='mt-8 p-4 bg-[#15ec5b]/10 rounded-lg border border-[#15ec5b]/20 text-center'>
               <p className='text-xs text-[#61896f] '>
                 <span className='text-[#111813] font-bold mr-1'>Note:</span>
-                Supports Admin, Trainer, and Member login.
+                Supports Owner, Trainer, and Member login.
               </p>
             </div>
           </div>

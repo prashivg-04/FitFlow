@@ -1,6 +1,5 @@
 import React from 'react'
-import OwnerHeader from '../../components/owner/OwnerHeader'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import JoinRequests from '../../components/owner/JoinRequests'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
@@ -196,7 +195,7 @@ const OwnerDashboard = () => {
                     <tr className='hover:bg-gray-50 transition-colors'>
                       <td className='py-4 px-6'>
                         <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
+                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={memberDp} alt="" />
                           <span>Sarah Jenkins</span>
                         </div>
                       </td>
@@ -207,101 +206,6 @@ const OwnerDashboard = () => {
                         </div>
                       </td>
                       <td className='py-4 px-6 text-sm text-[#61896f]'>Just now</td>
-                      <td className='py-4 px-6 text-right'>
-                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
-                      </td>
-                    </tr>
-
-                    <tr className='hover:bg-gray-50 transition-colors'>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                          <span>Michael Chen</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-2'>
-                          <i className="ri-bank-card-2-line text-gray-400"></i>
-                          <span className='text-sm'>Monthly Subscription</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6 text-sm text-[#61896f]'>24 mins ago</td>
-                      <td className='py-4 px-6 text-right'>
-                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Success</span>
-                      </td>
-                    </tr>
-
-                    <tr className='hover:bg-gray-50 transition-colors'>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                          <span>Emma Wilson</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-2'>
-                          <i className="ri-user-add-line text-gray-400"></i>
-                          <span className='text-sm'>New Registration</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6 text-sm text-[#61896f]'>1 hour ago</td>
-                      <td className='py-4 px-6 text-right'>
-                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800'>Pending Review</span>
-                      </td>
-                    </tr>
-
-                    <tr className='hover:bg-gray-50 transition-colors'>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                          <span>James Rodriguez</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-2'>
-                          <i className="ri-login-box-line text-gray-400"></i>
-                          <span className='text-sm'>Gym Check-in</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6 text-sm text-[#61896f]'>2 hours ago</td>
-                      <td className='py-4 px-6 text-right'>
-                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800'>Denied</span>
-                      </td>
-                    </tr>
-
-                    <tr className='hover:bg-gray-50 transition-colors'>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                          <span>Sarah Jenkins</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-2'>
-                          <i className="ri-login-box-line text-gray-400"></i>
-                          <span className='text-sm'>Gym Check-in</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6 text-sm text-[#61896f]'>Just now</td>
-                      <td className='py-4 px-6 text-right'>
-                        <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
-                      </td>
-                    </tr>
-
-                    <tr className='hover:bg-gray-50 transition-colors'>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-3'>
-                          <img className='size-8 rounded-full bg-gray-200 bg-center bg-cover object-cover' src={navjot} alt="" />
-                          <span>Another Person</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6'>
-                        <div className='flex items-center gap-2'>
-                          <i className="ri-login-box-line text-gray-400"></i>
-                          <span className='text-sm'>Gym Check-in</span>
-                        </div>
-                      </td>
-                      <td className='py-4 px-6 text-sm text-[#61896f]'>3 hours ago</td>
                       <td className='py-4 px-6 text-right'>
                         <span className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800'>Confirmed</span>
                       </td>

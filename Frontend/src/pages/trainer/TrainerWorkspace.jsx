@@ -1,5 +1,5 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import trainerDp from '../../media/T.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerWorkspace = () => {
@@ -88,7 +88,7 @@ const TrainerWorkspace = () => {
                 <div className='space-y-6'>
                   <article className='flex gap-4 group'>
                     <div className='flex flex-col items-center pt-1 min-w-10'>
-                      <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="Navjot" />
+                      <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={trainerDp} alt="Trainer" />
                       <div className='w-px h-full bg-gray-300 mb-6'></div>
                     </div>
 
@@ -162,7 +162,7 @@ const TrainerWorkspace = () => {
 
                   <article className='flex gap-4 group'>
                     <div className='flex flex-col items-center pt-1 min-w-10'>
-                      <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={navjot} alt="Navjot" />
+                      <img className='size-10 rounded-full bg-cover bg-center border-2 border-white shadow-sm object-cover' src={trainerDp} alt="Trainer" />
                       <div className='w-px h-full bg-gray-300 mb-6'></div>
                     </div>
 

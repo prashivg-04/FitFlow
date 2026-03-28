@@ -1,5 +1,4 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const MemberSubscription = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import icon from '../../assets/icon.svg'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import gym from '../../media/gymJoin.png'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -60,7 +60,7 @@ const MemberJoin = () => {
             <i className="text-lg fa-solid fa-bell text-slate-600"></i>
           </button>
           <div>
-            <img className='size-12 bg-gray-50 bg-center bg-cover rounded-full object-cover border-2 border-[#15ec5b]/20 aspect-square' src={navjot} alt="" />
+            <img className='size-12 bg-gray-50 bg-center bg-cover rounded-full object-cover border-2 border-[#15ec5b]/20 aspect-square' src={memberDp} alt="" />
           </div>
         </div>
       </header>

@@ -1,5 +1,5 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerMemberManagement = () => {
@@ -123,7 +123,7 @@ const TrainerMemberManagement = () => {
                                 <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
                                     <td className='px-6 py-4'>
                                         <div className='flex items-center gap-3'>
-                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
+                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={memberDp} alt="Member" />
                                         <div className='flex flex-col items-start'>
                                             <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
                                             <p className='text-xs text-[#61896f]'>eleanor.pena@example.com</p>
@@ -168,202 +168,6 @@ const TrainerMemberManagement = () => {
                                         </div>
                                     </td>
                                 </tr>
-
-                                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                                    <td className='px-6 py-4'>
-                                        <div className='flex items-center gap-3'>
-                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                                        <div className='flex flex-col items-start'>
-                                            <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Michael Chen</p>
-                                            <p className='text-xs text-[#61896f]'>m.chen@example.com</p>
-                                        </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 border border-yellow-200 '>
-                                        <span className='size-1.5 rounded-full bg-yellow-500'></span>
-                                        Review
-                                        </span>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <div className='flex flex-col gap-1 w-24'>
-                                            <div className='flex justify-between text-xs font-bold text-[#61896f]'>
-                                                <span>45%</span>
-                                            </div>
-                                            <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
-                                                <div className='h-1.5 bg-yellow-400 rounded-full w-[45%]'></div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm'>
-                                        Oct 18, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm text-[#61896f]'>
-                                        Nov 15, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-right'>
-                                        <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-eye-line text-[20px]"></i>
-                                            </button>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-check-line text-[20px]"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                                    <td className='px-6 py-4'>
-                                        <div className='flex items-center gap-3'>
-                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                                        <div className='flex flex-col items-start'>
-                                            <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Emma Wilson</p>
-                                            <p className='text-xs text-[#61896f]'>emma.w@example.com</p>
-                                        </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700 border border-red-200 '>
-                                        <span className='size-1.5 rounded-full bg-red-500'></span>
-                                        Expired
-                                        </span>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <div className='flex flex-col gap-1 w-24'>
-                                            <div className='flex justify-between text-xs font-bold text-[#61896f]'>
-                                                <span>12%</span>
-                                            </div>
-                                            <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
-                                                <div className='h-1.5 bg-red-400 rounded-full w-[12%]'></div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm'>
-                                        Sep 2, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm text-[#61896f]'>
-                                        Oct 1, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-right'>
-                                        <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-eye-line text-[20px]"></i>
-                                            </button>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-check-line text-[20px]"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                                    <td className='px-6 py-4'>
-                                        <div className='flex items-center gap-3'>
-                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                                        <div className='flex flex-col items-start'>
-                                            <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>John Doe</p>
-                                            <p className='text-xs text-[#61896f]'>john.doe@example.com</p>
-                                        </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
-                                        <span className='size-1.5 rounded-full bg-green-500'></span>
-                                        Active
-                                        </span>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <div className='flex flex-col gap-1 w-24'>
-                                            <div className='flex justify-between text-xs font-bold text-[#61896f]'>
-                                                <span>79%</span>
-                                            </div>
-                                            <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
-                                                <div className='h-1.5 bg-green-400 rounded-full w-[79%]'></div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm'>
-                                        Oct 23, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm text-[#61896f]'>
-                                        Jan 15, 2024
-                                    </td>
-
-                                    <td className='px-6 py-4 text-right'>
-                                        <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-eye-line text-[20px]"></i>
-                                            </button>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-check-line text-[20px]"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                                    <td className='px-6 py-4'>
-                                        <div className='flex items-center gap-3'>
-                                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                                        <div className='flex flex-col items-start'>
-                                            <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Alice Smith</p>
-                                            <p className='text-xs text-[#61896f]'>alice.s@example.com</p>
-                                        </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
-                                        <span className='size-1.5 rounded-full bg-green-500'></span>
-                                        Active
-                                        </span>
-                                    </td>
-
-                                    <td className='px-6 py-4'>
-                                        <div className='flex flex-col gap-1 w-24'>
-                                            <div className='flex justify-between text-xs font-bold text-[#61896f]'>
-                                                <span>88%</span>
-                                            </div>
-                                            <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
-                                                <div className='h-1.5 bg-green-400 rounded-full w-[88%]'></div>
-                                            </div>
-                                        </div>
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm'>
-                                        Oct 21, 2023
-                                    </td>
-
-                                    <td className='px-6 py-4 text-sm text-[#61896f]'>
-                                        Feb 18, 2024
-                                    </td>
-
-                                    <td className='px-6 py-4 text-right'>
-                                        <div className='flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-eye-line text-[20px]"></i>
-                                            </button>
-                                            <button className='size-10 flex items-center justify-center rounded-lg border border-[#dbe6df] hover:bg-[#15ec5b] text-[#61896f] hover:text-white transition-all'>
-                                                <i className="ri-check-line text-[20px]"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
                             </tbody>
                             </table>
                         </div>
@@ -392,7 +196,7 @@ const TrainerMemberManagement = () => {
                     {/* Header */}
                     <div className='w-full p-6 border-y border-[#dbe6df] flex items-start justify-between bg-[#f5f8f8] shrink-0'>
                         <div className='flex gap-4'>
-                            <img className='size-16 rounded-full bg-cover bg-center bg-[#61896f] border-2 border-white shadow-lg object-cover' src={navjot} alt="" />
+                            <img className='size-16 rounded-full bg-cover bg-center bg-[#61896f] border-2 border-white shadow-lg object-cover' src={memberDp} alt="" />
                             <div className='flex flex-col items-start pt-1'>
                                 <h3 className='text-xl font-bold leading-tight'>Michael Chen</h3>
                                 <p className='text-sm text-[#61896f]'>Member since 2021</p>

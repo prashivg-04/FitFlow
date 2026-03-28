@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import navjot from '../../media/navjotImg.jpeg'
 import api from '../../api/axios'
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';

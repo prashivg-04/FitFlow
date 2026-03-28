@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import OwnerHeader from '../../components/owner/OwnerHeader'
-import navjot from '../../media/navjotImg.jpeg'
+import ownerDp from '../../media/O.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const Settings = () => {
@@ -44,7 +43,7 @@ const Settings = () => {
                   <div className='flex items-start gap-8'>
                     {/* Profile Photo */}
                     <div className='flex flex-col items-center gap-3'>
-                      <img className='size-24 rounded-full bg-gray-200 bg-cover bg-center border-4 border-white shadow-xl object-cover' src={navjot} alt="Profile" />
+                      <img className='size-24 rounded-full bg-gray-200 bg-cover bg-center border-4 border-white shadow-xl object-cover' src={ownerDp} alt="Profile" />
                       <button className='text-xs font-semibold text-[#15ec5b] uppercase tracking-wider hover:text-green-400'>Change Photo</button>
                     </div>
 

@@ -1,6 +1,4 @@
 import React from 'react'
-import OwnerHeader from '../../components/owner/OwnerHeader'
-import navjot from '../../media/navjotImg.jpeg'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const Support = () => {

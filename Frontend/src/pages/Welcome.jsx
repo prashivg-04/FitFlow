@@ -1,11 +1,10 @@
 import React from 'react'
 import icon from '../media/icon.png'
-import heroImg from '../media/intro.webp'
 import trainer1 from '../media/trainer1.png'
 import trainer2 from '../media/trainer2.jpg'
-import navjot from '../media/navjotImg.jpeg'
-import shivam from '../media/shivamImg.jpeg'
-import vaibhav from '../media/vaibhavImg.PNG'
+import ownerDp from '../media/O.png'
+import trainerDp from '../media/T.png'
+import memberDp from '../media/M.png'
 import { Link, Links } from 'react-router-dom'
 import FeedbackButton from '../components/FeedbackButton'
 
@@ -39,7 +38,7 @@ const Welcome = () => {
         </header>
 
         {/* Hero Section */}
-        <section className='bg-[#f7f8f6] h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px] pt-24 pb-28'>
+        <section className='bg-[#f7f8f6] h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-size-[14px_24px] pt-24 pb-20'>
             <div className='px-48'>
                 <div className='mx-auto max-w-7xl px-8 text-center'>
                     <h1 className='max-w-4xl mx-auto text-7xl font-extrabold text-slate-900 tracking-tight mb-6'>
@@ -52,15 +51,9 @@ const Welcome = () => {
                         The all-in-one platform for scheduling, billing, and member engagement. Bridge the gap between a professional business tool and the energetic atmosphere of fitness.
                     </p>
 
-                    <div className='flex items-center justify-center gap-4 mb-16'>
-                        <Link to="/signup" className='h-12 px-8 flex items-center bg-[#15ec5b] rounded-lg text-slate-900 text-base font-bold shadow-lg shadow-primary/25 hover:bg-emerald-400 transitions-color'>Start Free Trial</Link>
+                    <div className='flex items-center justify-center gap-4 mb-8'>
+                        <Link to="/signup" className='h-12 px-8 flex items-center bg-[#15ec5b] rounded-lg text-slate-900 text-base font-bold shadow-lg shadow-primary/25 hover:bg-green-500 transitions-color'>Start Free Trial</Link>
                         <button className='h-12 px-8 bg-white rounded-lg border border-slate-200 text-slate-900 text-base font-bold hover:bg-slate-100 transition-colors flex items-center justify-center gap-2'><i className="ri-play-circle-line text-xl"></i>Watch Demo</button>
-                    </div>
-
-                    <div className='relative mx-auto max-w-5xl rounded-2xl bg-slate-900/5 p-4 ring-1 ring-inset ring-slate-900/10 shadow-2xl'> 
-                        <div className='bg-slate-800 rounded-lg overflow-hidden shadow-2xl'>
-                            <img className='h-160 aspect-video bg-cover bg-center' src={heroImg} alt="Hero" />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -224,9 +217,9 @@ const Welcome = () => {
                             "FitFlow completely transformed how we manage our studio. The automated billing alone saved us 10 hours a week."
                         </p>
                         <div className='flex items-center gap-4 overflow-hidden'>
-                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={navjot} alt="" />
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={ownerDp} alt="" />
                             <div className='ml-1'>
-                                <h4 className='text-sm font-bold text-slate-900'>Navjot Singh</h4>
+                                <h4 className='text-sm font-bold text-slate-900'>John Doe</h4>
                                 <p className='text-xs text-slate-500'>Owner, MotionX Calisthenics</p>
                             </div>
                         </div>
@@ -244,9 +237,9 @@ const Welcome = () => {
                             "The member app is fantastic. Our clients love being able to book their spots instantly. Retention is up 20%."
                         </p>
                         <div className='flex items-center gap-4 overflow-hidden'>
-                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={shivam} alt="" />
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={trainerDp} alt="" />
                             <div className='ml-1'>
-                                <h4 className='text-sm font-bold text-slate-900'>Shivam Thakral</h4>
+                                <h4 className='text-sm font-bold text-slate-900'>Jane Smith</h4>
                                 <p className='text-xs text-slate-500'>Director, InnerStill Studio</p>
                             </div>
                         </div>
@@ -264,9 +257,9 @@ const Welcome = () => {
                             "Finally, a software that doesn't feel like it was built in the 90s. Clean, fast, and does exactly what we need." 
                         </p>
                         <div className='flex items-center gap-4 overflow-hidden'>
-                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={vaibhav} alt="" />
+                            <img className='size-10 rounded-full bg-slate-300 bg-cover bg-center object-cover' src={memberDp} alt="" />
                             <div className='ml-1'>
-                                <h4 className='text-sm font-bold text-slate-900'>Vaibhav Mangla</h4>
+                                <h4 className='text-sm font-bold text-slate-900'>John Doe</h4>
                                 <p className='text-xs text-slate-500'>Founder, Atlas Strength Club</p>
                             </div>
                         </div>

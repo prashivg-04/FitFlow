@@ -1,5 +1,5 @@
 import React from 'react'
-import navjot from '../../media/navjotImg.jpeg'
+import trainerDp from '../../media/T.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 
 const TrainerSettings = () => {
@@ -26,7 +26,7 @@ const TrainerSettings = () => {
           {/* Profile Header Card */}
           <div className='bg-white rounded-2xl border border-[#dbe6df] shadow-sm p-8 flex gap-6 items-center'>
             <div className='group'>
-              <img className='size-32 bg-cover bg-center rounded-full border-4 border-white shadow-md object-cover' src={navjot} alt="Profile" />
+              <img className='size-32 bg-cover bg-center rounded-full border-4 border-white shadow-md object-cover' src={trainerDp} alt="Profile" />
             </div>
             <div className='flex-1 text-left space-y-2'>
               <div className='flex items-center gap-4'>

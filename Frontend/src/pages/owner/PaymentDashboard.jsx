@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import OwnerHeader from '../../components/owner/OwnerHeader'
-import navjot from '../../media/navjotImg.jpeg'
+import memberDp from '../../media/M.png'
 import ComingSoonWrapper from '../../components/ComingSoonWrapper';
 
 const PaymentDashboard = () => {
@@ -185,7 +184,7 @@ const PaymentDashboard = () => {
                   <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
                     <td className='px-6 py-4'>
                       <div className='flex items-center gap-3'>
-                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
+                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={memberDp} alt="Member" />
                         <div className='flex flex-col items-start'>
                           <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
                           <p className='text-xs text-[#61896f]'>ID: #4321</p>
@@ -209,156 +208,6 @@ const PaymentDashboard = () => {
                       <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200 '>
                         <span className='size-1.5 rounded-full bg-green-500'></span>
                         Paid
-                      </span>
-                    </td>
-
-                    <td className='px-6 py-4 text-right'>
-                      <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                    <td className='px-6 py-4'>
-                      <div className='flex items-center gap-3'>
-                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                        <div className='flex flex-col items-start'>
-                          <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
-                          <p className='text-xs text-[#61896f]'>ID: #4321</p>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Oct 24, 2023
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Personal Training (5 Pack)
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-900 font-medium font-mono'>
-                      $250.00
-                    </td>
-
-                    <td className='px-6 py-4'>
-                      <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200 '>
-                        <span className='size-1.5 rounded-full bg-green-500'></span>
-                        Paid
-                      </span>
-                    </td>
-
-                    <td className='px-6 py-4 text-right'>
-                      <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                    <td className='px-6 py-4'>
-                      <div className='flex items-center gap-3'>
-                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                        <div className='flex flex-col items-start'>
-                          <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
-                          <p className='text-xs text-[#61896f]'>ID: #4321</p>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Oct 24, 2023
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Silver Membership
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-900 font-medium font-mono'>
-                      $35.00
-                    </td>
-
-                    <td className='px-6 py-4'>
-                      <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-yellow-100 text-yellow-700 border border-yellow-200 '>
-                        <span className='size-1.5 rounded-full bg-yellow-500'></span>
-                        Pending
-                      </span>
-                    </td>
-
-                    <td className='px-6 py-4 text-right'>
-                      <button className='text-green-600 hover:text-green-800 text-sm font-bold mr-2'>Remind</button>
-                      <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                    <td className='px-6 py-4'>
-                      <div className='flex items-center gap-3'>
-                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                        <div className='flex flex-col items-start'>
-                          <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
-                          <p className='text-xs text-[#61896f]'>ID: #4321</p>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Oct 24, 2023
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Drop-in Classes
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-900 font-medium font-mono'>
-                      $20.00
-                    </td>
-
-                    <td className='px-6 py-4'>
-                      <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200 '>
-                        <span className='size-1.5 rounded-full bg-red-500'></span>
-                        Failed
-                      </span>
-                    </td>
-
-                    <td className='px-6 py-4 text-right'>
-                      <button className='text-red-600 hover:text-red-800 text-sm font-bold mr-2'>Retry</button>
-                      <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                        <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                      </button>
-                    </td>
-                  </tr>
-
-                  <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                    <td className='px-6 py-4'>
-                      <div className='flex items-center gap-3'>
-                        <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={navjot} alt="Navjot" />
-                        <div className='flex flex-col items-start'>
-                          <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
-                          <p className='text-xs text-[#61896f]'>ID: #4321</p>
-                        </div>
-                      </div>
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Oct 24, 2023
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-600'>
-                      Platinum Membership
-                    </td>
-
-                    <td className='px-6 py-4 text-sm text-slate-900 font-medium font-mono'>
-                      $800.00
-                    </td>
-
-                    <td className='px-6 py-4'>
-                      <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200 '>
-                        <span className='size-1.5 rounded-full bg-green-500'></span>
-                        Active
                       </span>
                     </td>
 
