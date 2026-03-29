@@ -150,13 +150,38 @@ JWT_SECRET=replace_with_strong_secret
 JWT_EXPIRES_IN=7d
 ```
 
+### 3. Database Setup (Prisma)
+
+After setting up your `.env`, run the following commands:
+
+```bash
+npx prisma generate
+npx prisma migrate deploy
+```
+
+#### For development (optional):
+
+If you're running locally and want to apply migrations:
+
+```bash
+npx prisma migrate dev
+```
+
+#### Verify database:
+
+You can open Prisma Studio to inspect data:
+
+```bash
+npx prisma studio
+```
+
 Start backend:
 
 ```bash
 npm run dev
 ```
 
-### 3. Frontend
+### 4. Frontend
 
 Open a new terminal:
 
