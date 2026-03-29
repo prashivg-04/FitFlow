@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { signupService, loginService, getMeService } from "../services/auth.service.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const signup = async (req, res, next) => {
     const user = await signupService(req.body);
@@ -12,8 +14,9 @@ export const signup = async (req, res, next) => {
 
     res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
-        secure: false
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
     })
 
     return res.status(201).json({
@@ -28,9 +31,9 @@ export const login = async (req, res, next) => {
 
     res.cookie('token', token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
     });
 
     return res.status(200).json({
@@ -43,8 +46,8 @@ export const login = async (req, res, next) => {
 export const logout = (req, res, next) => {
     res.clearCookie('token', {
         httpOnly: true,
-        sameSite: 'lax',
-        secure: false,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === 'production',
     });
 
     return res.status(200).json({

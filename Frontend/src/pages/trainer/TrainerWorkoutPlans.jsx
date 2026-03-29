@@ -75,17 +75,6 @@ const TrainerWorkoutPlans = () => {
                     <PlanCard key={program.id} program={program} />
                 ))}
             </div>
-
-            {/* Pagination */}
-            <div className='flex justify-center pt-4'>
-                <nav className='flex gap-2'>
-                    <button className='size-8 flex items-center justify-center h-10 w-10 rounded-lg border border-[#dbe6df] text-[#61896f] hover:bg-gray-200 transition-all'><i className="fa-solid fa-chevron-left text-sm"></i></button>
-                    <button className='size-8 flex items-center justify-center h-10 w-10 rounded-lg bg-[#15ec5b] text-lg font-bold transition-all'>1</button>
-                    <button className='size-8 flex items-center justify-center h-10 w-10 rounded-lg border border-[#dbe6df] text-lg text-[#61896f] hover:bg-gray-200 transition-all'>2</button>
-                    <button className='size-8 flex items-center justify-center h-10 w-10 rounded-lg border border-[#dbe6df] text-lg text-[#61896f] hover:bg-gray-200 transition-all'>3</button>
-                    <button className='size-8 flex items-center justify-center h-10 w-10 rounded-lg border border-[#dbe6df] text-[#61896f] hover:bg-gray-200 transition-all'><i className="fa-solid fa-chevron-right text-sm"></i></button>
-                </nav>
-            </div>
         </div>
       </div>
     </div>
