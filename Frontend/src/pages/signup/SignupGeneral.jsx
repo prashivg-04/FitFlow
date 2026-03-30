@@ -180,20 +180,6 @@ const Signup = () => {
                 </div>
               </div>
 
-              {/* Terms */}
-              <div className='flex items-center justify-start gap-3 pt-2'>
-                <div className='flex h-6 items-center'>
-                  <input className='h-5 w-5 rounded border-[#dbe6df] bg-white accent-[#15ec5b] focus:ring-[#15ec5b] focus:ring-offset-0 cursor-pointer' type="checkbox" />
-                </div>
-                <label className='text-sm text-[#61896f] leading-relaxed' htmlFor="">
-                  I agree to the 
-                  <a className='underline decoration-1 underline-offset-2 hover:text-slate-900 transition-all mx-1' href="">Terms of Service</a>
-                  and 
-                  <a className='underline decoration-1 underline-offset-2 hover:text-slate-900 transition-all ml-1' href="">Privacy Policy</a>
-                  .
-                </label>
-              </div>
-
               <button type='submit' className='w-full h-14 bg-[#15ec5b] px-4 text-base font-bold rounded-lg shadow-md hover:bg-[#0fd650] hover:shadow-lg hover:-translate-y-0.5 focus:ring-2 focus:outline-none focus:ring-[#15ec5b] focus:ring-offset-2 transition-all transform'>
                 Create Account
               </button>

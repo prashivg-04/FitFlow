@@ -61,8 +61,13 @@ const OwnerSignup = () => {
       roleData: formData
     }));
 
+    const updatedData = {
+      ...signupData,
+      roleData: formData
+    }
+
     try {
-      const response = await api.post('/auth/signup', signupData);
+      const response = await api.post('/auth/signup', updatedData);
       dispatch(loginSuccess(response.data.data));
       toast.success('Owner Account Created Successfully!');
       navigate('/owner/dashboard');
