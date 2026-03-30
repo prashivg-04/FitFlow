@@ -26,9 +26,12 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow Postman / mobile apps
+    if (!origin) return callback(null, true);
 
-    if (allowedOrigins.includes(origin)) {
+    // Allow specific origins or any *.vercel.app domain
+    const isAllowed = allowedOrigins.includes(origin) || /^https:\/\/fit-flow-[a-z0-9]+-prashiv-goyals-projects\.vercel\.app$/.test(origin);
+
+    if (isAllowed) {
       return callback(null, true);
     }
 
