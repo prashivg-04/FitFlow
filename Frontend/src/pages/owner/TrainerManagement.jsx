@@ -42,6 +42,10 @@ const TrainerManagement = () => {
                 <p className='text-slate-500'>No pending assignments.</p>
               ) : (
                 unassignedMembers.map(member => {
+                  const goalText = member.goal 
+                    ? member.goal.split('_').map(word => word.toLowerCase()).join(' ')
+                    : 'Not specified';
+
                   return (
                     <div key={member.id} className='bg-white p-4 rounded-xl border border-[#dbe6df] shadow-sm flex items-start gap-4'>
                       <div className='size-12 rounded-lg bg-slate-100 flex items-center justify-center shrink-0'>
@@ -49,7 +53,7 @@ const TrainerManagement = () => {
                     </div>
                     <div className='flex-1 min-w-0'>
                       <h4 className='text-sm font-bold truncate'>Name : {member.user.name}</h4>
-                      <p className='text-xs text-slate-500 mt-1 capitalize'>Goal : {(member.goal).split('_')[0].toLowerCase() + ' ' + (member.goal).split('_')[1].toLowerCase()}</p>
+                      <p className='text-xs text-slate-500 mt-1 capitalize'>Goal : {goalText}</p>
                       <p className='text-xs text-slate-500 mt-1 mb-3'>Weight : {member.weightKg} kg</p>
                       <button 
                         onClick={() => {
