@@ -37,7 +37,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.options('*', cors());
+app.options('/*', cors());
 
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running 🚀'})
