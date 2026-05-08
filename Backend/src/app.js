@@ -24,23 +24,24 @@ const allowedOrigins = [
   'http://localhost:4173'
 ].filter(Boolean);
 
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
 
-    // Allow specific origins or any *.vercel.app domain
-    const isAllowed = allowedOrigins.includes(origin) || /^https:\/\/fit-flow-[a-z0-9]+-prashiv-goyals-projects\.vercel\.app$/.test(origin);
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/fit-flow-[a-z0-9-]+\.vercel\.app$/.test(origin);
 
-    if (isAllowed) {
-      return callback(null, true);
-    }
-
+    if (isAllowed) return callback(null, true);
     return callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
-}));
+};
 
-app.options('/*splat', cors());
+console.log('Allowed origins:', allowedOrigins);
+
+app.use(cors(corsOptions));
+app.options('/*splat', cors(corsOptions)); 
 
 app.get('/', (req, res) => {
   res.json({ status: 'Server is running 🚀'})
