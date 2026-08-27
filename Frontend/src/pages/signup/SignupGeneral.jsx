@@ -17,6 +17,7 @@ const Signup = () => {
     role: 'OWNER',
   });
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const { signupData, setSignupData } = useContext(SignupContext);
   const navigate = useNavigate();
@@ -52,7 +53,7 @@ const Signup = () => {
     <div className='font-display bg-[#f7f8f6] text-slate-900 antialiased'> 
       <div className='flex min-h-screen w-full'>
         {/* left */}
-        <div className='w-2/5 flex flex-col justify-between p-6 h-full min-h-screen relative z-10 '>
+        <div className='w-full lg:w-2/5 flex flex-col justify-between p-6 h-full min-h-screen relative z-10 '>
           <div className='flex items-center gap-3 my-4 max-w-md w-full mx-auto'>
             <img className='h-8 w-8 rounded-xl shadow-sm' src={icon} alt="Icon" />
             <h1 className=' text-2xl font-bold tracking-tight text-slate-900'>FitFlow</h1>
@@ -171,13 +172,19 @@ const Signup = () => {
                   <input 
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
-                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
-                    type="password"  
+                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 pr-12 text-base font-normal leading-none transition-all' 
+                    type={showPassword ? "text" : "password"}
                     placeholder='Create a strong password' 
                   />
-                  {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
-                  <i className="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <button 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-4 hover:text-[#15ec5b] group-focus-within:text-[#15ec5b] focus:outline-none transition-colors"
+                  >
+                    <i className={`text-xl ${showPassword ? 'ri-eye-off-line' : 'ri-eye-line'} material-symbol-outlined`}></i>
+                  </button>
                 </div>
+                {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
               </div>
 
               <button type='submit' className='w-full h-14 bg-[#15ec5b] px-4 text-base font-bold rounded-lg shadow-md hover:bg-[#0fd650] hover:shadow-lg hover:-translate-y-0.5 focus:ring-2 focus:outline-none focus:ring-[#15ec5b] focus:ring-offset-2 transition-all transform'>
@@ -188,7 +195,7 @@ const Signup = () => {
         </div>
 
         {/* right */}
-        <div className='relative flex w-3/5 bg-[#122317]'>
+        <div className='relative hidden lg:flex w-3/5 bg-[#122317]'>
           <div className='absolute h-full'>  
             <img className="w-full h-full object-cover opacity-50 bg-cover bg-center " src={gymSignup} alt="Gym Signup"  />
           </div>

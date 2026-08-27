@@ -1,4 +1,4 @@
-import jspdf, { jsPDF } from 'jspdf';
+import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
 export const generateWorkoutPDF = (dayData) => {
@@ -12,49 +12,155 @@ export const generateWorkoutPDF = (dayData) => {
         exercises
     } = dayData;
 
+    // Formatting date
+    const formattedDate = new Date(date).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    // --- Header Section ---
+    // Dark Background for Header
+    doc.setFillColor(15, 23, 42); // slate-900 equivalent
+    doc.rect(0, 0, 210, 45, 'F');
+
+    // FitFlow Title
+    doc.setTextColor(21, 236, 91); // #15ec5b
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(26);
+    doc.text("FitFlow", 14, 26);
+
+    // Document Type Label
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(16);
+    doc.setFont("helvetica", "normal");
+    doc.text("WORKOUT PLAN", 210 - 14, 26, { align: "right" });
+
+    // --- Meta Info Section ---
+    doc.setTextColor(51, 78, 60); // #334e3c
+    doc.setFont("helvetica", "bold");
     doc.setFontSize(18);
-    doc.text(`Workout Plan for ${date}`, 14, 20);
-
+    doc.text(dayName || 'Daily Routine', 14, 62);
+    
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(97, 137, 111); // #61896f
     doc.setFontSize(12);
-    doc.text(`Date: ${date}`, 14, 30);
-    doc.text(`Day: ${dayName || 'N/A'}`, 14, 36);
-    doc.text(`Status: ${status || 'N/A'}`, 14, 42);
+    doc.text(formattedDate, 14, 70);
+    
+    // Status Pill
+    if (status) {
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        if (status === 'COMPLETED') {
+            doc.setTextColor(21, 128, 61); // Green 700
+            doc.setFillColor(220, 252, 231); // Green 100
+        } else {
+            doc.setTextColor(202, 138, 4); // Yellow 600
+            doc.setFillColor(254, 252, 232); // Yellow 50
+        }
+        const statusText = status.toUpperCase();
+        const statusWidth = doc.getTextWidth(statusText) + 12;
+        doc.roundedRect(210 - 14 - statusWidth, 59, statusWidth, 9, 4, 4, 'F');
+        doc.text(statusText, 210 - 14 - statusWidth + 6, 65.5);
+    }
 
+    // --- Content Section ---
     if(isRestDay) {
-        doc.setFontSize(14);
-        doc.text('Rest Day 🛌', 14, 55);
+        doc.setFontSize(22);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(51, 78, 60);
+        doc.text('Rest Day', 105, 130, { align: 'center' });
+        
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(97, 137, 111);
+        doc.text('Today is for recovery. Rest well and get ready for your next session.', 105, 140, { align: 'center' });
 
+        addFooter(doc);
         doc.save(`Workout_Plan_${date}.pdf`);
         return;
     }
 
     if(!exercises || exercises.length === 0) {
-        doc.setFontSize(14);
-        doc.text('No exercises planned for this day.', 14, 55);
+        doc.setFontSize(18);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(51, 78, 60);
+        doc.text('No exercises planned for this day.', 105, 130, { align: 'center' });
 
+        addFooter(doc);
         doc.save(`Workout_Plan_${date}.pdf`);
         return;
     }
 
-    exercises.sort((a, b) => a.orderIndex - b.orderIndex);
+    // Sort exercises by orderIndex
+    const sortedExercises = [...exercises].sort((a, b) => a.orderIndex - b.orderIndex);
 
-    const tableData = exercises.map((ex, idx) => [
-        idx + 1,
-        ex.name || 'N/A',
-        ex.sets || 'N/A',
-        ex.reps || 'N/A',
-        `${ex.restSeconds} sec`,
+    const tableData = sortedExercises.map((ex, idx) => [
+        `A${idx + 1}`,
+        ex.name || '-',
+        ex.sets || '-',
+        ex.reps || '-',
+        ex.restSeconds ? `${ex.restSeconds}s` : '-',
         ex.notes || '-'
     ]);
 
     autoTable(doc, {
-        startY: 55,
-        head: [['#', 'Exercise', 'Sets', 'Reps', 'Rest', 'Notes']],
+        startY: 85,
+        head: [['Order', 'Exercise', 'Sets', 'Reps', 'Rest', 'Notes']],
         body: tableData,
-        styles: { fontSize: 10 },
-        headStyles: { fillColor: [22, 160, 133] },
-        theme: 'striped',
-    })
+        theme: 'grid',
+        styles: { 
+            font: 'helvetica',
+            fontSize: 10,
+            cellPadding: 7,
+            textColor: [51, 78, 60],
+            lineColor: [219, 230, 223],
+            lineWidth: 0.1,
+            valign: 'middle'
+        },
+        headStyles: { 
+            fillColor: [247, 248, 246], // #f7f8f6
+            textColor: [97, 137, 111], // #61896f
+            fontStyle: 'bold',
+            halign: 'left'
+        },
+        alternateRowStyles: { 
+            fillColor: [253, 254, 253] 
+        },
+        columnStyles: {
+            0: { fontStyle: 'bold', textColor: [45, 200, 100], halign: 'center', cellWidth: 22 },
+            2: { halign: 'center', cellWidth: 22 },
+            3: { halign: 'center', cellWidth: 22 },
+            4: { halign: 'center', cellWidth: 22 },
+        }
+    });
 
+    addFooter(doc);
     doc.save(`Workout_Plan_${date}.pdf`);
+}
+
+const addFooter = (doc) => {
+    const pageCount = doc.internal.getNumberOfPages();
+    const pageHeight = doc.internal.pageSize.height || 297;
+    
+    for (let i = 1; i <= pageCount; i++) {
+        doc.setPage(i);
+        
+        // Footer line separator
+        doc.setDrawColor(219, 230, 223);
+        doc.setLineWidth(0.5);
+        doc.line(14, pageHeight - 15, 210 - 14, pageHeight - 15);
+
+        // Footer text
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(150, 150, 150);
+        doc.text(
+            `Generated by FitFlow - Your Ultimate Fitness Companion`, 
+            105, 
+            pageHeight - 8, 
+            { align: 'center' }
+        );
+    }
 }

@@ -4,13 +4,13 @@ import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 const MemberProgress = () => {
   return (
     <ComingSoonWrapper>
-    <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-      <div className='max-w-7xl mx-auto space-y-8'>
+    <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+      <div className='max-w-7xl mx-auto space-y-6 sm:space-y-8'>
         {/* Heading */}
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
           <div className='flex flex-col items-start'>
-            <h1 className='text-4xl font-bold tracking-tight'>My Progress</h1>
-            <p className='text-[#61896f] text-lg mt-1'>Track your body measurements and visualize your journey.</p>
+            <h1 className='text-3xl sm:text-4xl font-bold tracking-tight'>My Progress</h1>
+            <p className='text-[#61896f] text-base sm:text-lg mt-1'>Track your body measurements and visualize your journey.</p>
           </div>
           <div className='flex items-end gap-2'>
             <button className='flex items-center gap-2 px-4 py-2 bg-white border border-[#dbe6df] rounded-xl text-sm font-semibold hover:bg-slate-50'>
@@ -26,7 +26,7 @@ const MemberProgress = () => {
         </div>
 
         {/* KPI Cards */}
-        <div className='grid grid-cols-4 gap-4'>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow'>
             <div className='flex items-start justify-between mb-4'>
               <div className='p-2 bg-blue-50 rounded-lg text-blue-600'>
@@ -96,9 +96,9 @@ const MemberProgress = () => {
         </div>
 
         {/* Charts */}
-        <div className='grid grid-cols-3 gap-6'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
           {/* Left - Wave Style Weight Chart */}
-          <div className='col-span-2 bg-linear-to-br from-white to-green-50 p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
+          <div className='col-span-1 lg:col-span-2 bg-linear-to-br from-white to-green-50 p-4 sm:p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
             {/* Decorative circles */}
             <div className='absolute -top-10 -right-10 size-32 bg-[#15ec5b]/10 rounded-full blur-2xl'></div>
             <div className='absolute -bottom-10 -left-10 size-40 bg-blue-500/5 rounded-full blur-3xl'></div>
@@ -207,9 +207,9 @@ const MemberProgress = () => {
 
           {/* Right - Creative Cards */}
           <div className='flex flex-col gap-6'>
-            {/* Circular Progress Card */}
-            <div className='bg-white p-6 rounded-xl border border-[#dbe6df] shadow-sm flex-1'>
-              <div className='flex items-center justify-between mb-4'>
+            {/* Right - Latest Body Metrics */}
+            <div className='col-span-1 bg-white rounded-xl border border-[#dbe6df] shadow-sm flex flex-col'>
+              <div className='p-4 sm:p-6 border-b border-[#dbe6df] flex items-center justify-between'>
                 <h3 className='text-lg font-bold'>Body Fat</h3>
                 <span className='text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full'>↓ 1.2%</span>
               </div>
@@ -218,26 +218,8 @@ const MemberProgress = () => {
               <div className='flex items-center justify-center my-6'>
                 <div className='relative size-32'>
                   <svg className='transform -rotate-90 w-full h-full'>
-                    <circle 
-                      cx='64' 
-                      cy='64' 
-                      r='56' 
-                      stroke='#f0f4f2' 
-                      strokeWidth='8' 
-                      fill='none'
-                    />
-                    <circle 
-                      cx='64' 
-                      cy='64' 
-                      r='56' 
-                      stroke='#15ec5b' 
-                      strokeWidth='8' 
-                      fill='none'
-                      strokeDasharray='351.86'
-                      strokeDashoffset='70'
-                      strokeLinecap='round'
-                      className='transition-all duration-1000'
-                    />
+                    <circle cx='64' cy='64' r='56' stroke='#f0f4f2' strokeWidth='8' fill='none' />
+                    <circle cx='64' cy='64' r='56' stroke='#15ec5b' strokeWidth='8' fill='none' strokeDasharray='351.86' strokeDashoffset='70' strokeLinecap='round' className='transition-all duration-1000' />
                   </svg>
                   <div className='absolute inset-0 flex flex-col items-center justify-center'>
                     <span className='text-2xl font-bold'>18.5%</span>
@@ -247,7 +229,7 @@ const MemberProgress = () => {
               </div>
 
               {/* Progress indicators */}
-              <div className='space-y-2'>
+              <div className='space-y-2 p-6 pt-0'>
                 <div className='flex items-center justify-between text-xs'>
                   <span className='text-[#61896f]'>Start: 20.5%</span>
                   <span className='font-bold text-green-600'>↓ 2.0%</span>
@@ -294,74 +276,58 @@ const MemberProgress = () => {
           </div>
         </div>
 
-        {/* Table */}
+        {/* Measurement Logs List */}
         <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
-          <div className='flex items-center justify-between p-6 border-b border-gray-100 gap-4'>
+          <div className='p-4 sm:p-6 border-b border-[#dbe6df] flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
             <h3 className='text-lg font-bold'>Recent Measurements</h3>
             <button className='text-sm font-bold text-[#15ec5b] hover:underline transition'>View All History</button>
           </div>
           <div className='overflow-x-auto'>
-            <table className='w-full text-left border-collapse'>
-              <thead>
-                <tr className='bg-gray-50 text-xs text-[#61896f] uppercase font-semibold tracking-wider'>
-                  <th className='px-6 py-4 '>Date</th>
-                  <th className='px-6 py-4 '>Weight</th>
-                  <th className='px-6 py-4 '>Change</th>
-                  <th className='px-6 py-4 '>Body Fat %</th>
-                  <th className='px-6 py-4 '>Notes</th>
-                  <th className='px-6 py-4 text-right'>Actions</th>
+            <table className='w-full text-left responsive-table'>
+              <thead className='bg-[#f7f8f6] border-b border-[#dbe6df]'>
+                <tr>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Date</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Weight</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Body Fat</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Muscle Mass</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>BMI</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider text-right'>Photos</th>
                 </tr>
               </thead>
-
-              <tbody className='divide-y divide-[#dbe6df] text-sm'>
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='px-6 py-4 font-medium'>Feb 24, 2024</td>
-                  <td className='px-6 py-4 text-slate-700'>176.0 lbs</td>
-                  <td className='px-6 py-4 font-medium text-green-600'>-1.2 lbs</td>
-                  <td className='px-6 py-4 text-slate-700'>18.5%</td>
-                  <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Feeling stronger, increased protein intake.</td>
-                  <td className='px-6 py-4 text-right'>
+              <tbody className='divide-y divide-gray-100'>
+                <tr className='hover:bg-gray-50 transition-colors group'>
+                  <td className='px-6 py-4 font-medium' data-label="Date">Oct 24, 2023</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Weight">78.5 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Body Fat">14.2%</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Muscle Mass">36.1 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="BMI">23.8</td>
+                  <td className='px-6 py-4 text-right' data-label="Photos">
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i className="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-image-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>
-
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='px-6 py-4 font-medium'>Feb 17, 2024</td>
-                  <td className='px-6 py-4 text-slate-700'>177.2 lbs</td>
-                  <td className='px-6 py-4 font-medium text-green-600'>-0.8 lbs</td>
-                  <td className='px-6 py-4 text-slate-700'>18.8%</td>
-                  <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Routine check-in.</td>
-                  <td className='px-6 py-4 text-right'>
+                <tr className='hover:bg-gray-50 transition-colors group'>
+                  <td className='px-6 py-4 font-medium' data-label="Date">Sep 24, 2023</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Weight">79.2 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Body Fat">14.8%</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Muscle Mass">35.8 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="BMI">24.0</td>
+                  <td className='px-6 py-4 text-right' data-label="Photos">
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i className="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-image-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>
-
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='px-6 py-4 font-medium'>Feb 10, 2024</td>
-                  <td className='px-6 py-4 text-slate-700'>178.0 lbs</td>
-                  <td className='px-6 py-4 font-medium text-red-600'>+0.5 lbs</td>
-                  <td className='px-6 py-4 text-slate-700'>19.0%</td>
-                  <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Cheat week, back on track now.</td>
-                  <td className='px-6 py-4 text-right'>
+                <tr className='hover:bg-gray-50 transition-colors group'>
+                  <td className='px-6 py-4 font-medium' data-label="Date">Aug 24, 2023</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Weight">80.5 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Body Fat">15.5%</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="Muscle Mass">35.2 kg</td>
+                  <td className='px-6 py-4 text-slate-700' data-label="BMI">24.4</td>
+                  <td className='px-6 py-4 text-right' data-label="Photos">
                     <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i className="ri-pencil-line text-[18px]"></i>
-                    </button>
-                  </td>
-                </tr>
-
-                <tr className='hover:bg-gray-50 transition-colors'>
-                  <td className='px-6 py-4 font-medium'>Feb 03, 2024</td>
-                  <td className='px-6 py-4 text-slate-700'>177.5 lbs</td>
-                  <td className='px-6 py-4 font-medium text-green-600'>-2.0 lbs</td>
-                  <td className='px-6 py-4 text-slate-700'>19.2%</td>
-                  <td className='px-6 py-4 text-slate-500 truncate max-w-50'>Great workout week.</td>
-                  <td className='px-6 py-4 text-right'>
-                    <button className='text-slate-400 p-1 hover:text-[#15ec5b] transition-colors'>
-                      <i className="ri-pencil-line text-[18px]"></i>
+                      <i className="ri-image-line text-[18px]"></i>
                     </button>
                   </td>
                 </tr>

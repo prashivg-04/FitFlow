@@ -65,11 +65,11 @@ const MemberJoin = () => {
         </div>
       </header>
       
-      <div className='flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-12'>
+      <div className='flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12'>
         <section className='text-center space-y-6'>
             <div className='space-y-2'>
-                <h1 className='text-slate-900 tracking-tight leading-tight text-5xl font-extrabold font-display'>Welcome to Your Fitness Journey 💪</h1>
-                <p className='text-slate-500 text-lg max-w-2xl mx-auto'>We're excited to help you reach your goals. Let's get your profile connected to your local gym.</p>
+                <h1 className='text-slate-900 tracking-tight leading-tight text-3xl sm:text-4xl md:text-5xl font-extrabold font-display'>Welcome to Your Fitness Journey 💪</h1>
+                <p className='text-slate-500 text-base sm:text-lg max-w-2xl mx-auto'>We're excited to help you reach your goals. Let's get your profile connected to your local gym.</p>
             </div>
             <div className='inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200'>
                 <span className='size-2 rounded-full bg-amber-400 animate-pulse'></span>
@@ -80,9 +80,9 @@ const MemberJoin = () => {
         <section className='relative group'>
             <div className='absolute -inset-1 bg-linear-to-r from-[#15ec5b] to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000'></div>
             <div className='relative bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100'>
-                <div className='flex'>
-                    <img className='w-1/2 bg-center bg-cover bg-no-repeat min-h-75' src={gym} alt="" />
-                    <div className='w-1/2 p-12 flex flex-col justify-center space-y-6'>
+                <div className='flex flex-col md:flex-row'>
+                    <img className='w-full md:w-1/2 bg-center bg-cover bg-no-repeat min-h-60 md:min-h-75 object-cover' src={gym} alt="" />
+                    <div className='w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center space-y-6'>
                         <div className='space-y-2'>
                             <h3 className='text-2xl font-bold text-slate-900 font-display'>Join Your Gym</h3>
                             <p className='text-slate-500 '>Enter the unique access code provided by your fitness center to sync your training plans and track your progress.</p>
@@ -118,7 +118,7 @@ const MemberJoin = () => {
             </div>
         </section>
 
-        <section className='grid grid-cols-3 gap-6'>
+        <section className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6'>
             <div className='bg-white p-6 rounded-2xl border border-slate-100 hover:border-[#15ec5b]/50 transition-colors'>
                 <div className='size-12 rounded-xl bg-[#15ec5b]/10 flex items-center justify-center text-[#15ec5b] mb-4'>
                     <i className="ri-file-text-line text-[24px]"></i>

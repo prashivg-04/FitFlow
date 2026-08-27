@@ -230,18 +230,18 @@ const WorkoutBuilder = () => {
         }))
       }
 
-      const response = await api.post('/trainer/programs', payload);
-      toast.success('Workout plan saved successfully!');
-      navigate('/trainer/workouts');
-    } catch(err) {
+      await api.post('/trainer/programs', payload);
+      toast.success("Workout Plan Created!");
+      navigate('/trainer/workout-plans');
+    } catch(_) {
     }
   }
 
   return (
-    <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
+    <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
       <div className='max-w-300 mx-auto space-y-8 pb-10'>
         {/* Heading */}
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
             <div className='flex flex-col items-start justify-center gap-2'>
                 <h1 className='text-4xl font-black tracking-tight'>Create a Workout Plan</h1>
                 <p className='text-[#61896f] text-base'>Design a custom workout plan for your clients.</p>
@@ -257,10 +257,9 @@ const WorkoutBuilder = () => {
             </div>
         </div>
 
-        {/* grid grid-cols-3 gap-8 */}
-        <div className='grid grid-cols-3 gap-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8'>
           {/* Workout Builder */}
-          <div className='col-span-2 flex flex-col gap-6'>
+          <div className='col-span-1 lg:col-span-2 flex flex-col gap-6'>
             {/* Days */}
             <div className='bg-white rounded-xl p-1 border border-[#dbe6df] shadow-sm flex overflow-x-auto no-scrollbar gap-1'>
               {program.days.map((day, idx) => (
@@ -300,7 +299,7 @@ const WorkoutBuilder = () => {
             {/* Exercises */}
             <div className='flex flex-col gap-4'>
               {/* Heading */}
-              <div className='flex items-center justify-between px-1'>
+              <div className='flex flex-col sm:flex-row sm:items-center justify-between px-1 gap-2'>
                 <div className='flex items-center gap-1'>
                   <h2 className='text-xl font-bold'>Day {activeDayIndex+1} -</h2>
                   <input 
@@ -350,7 +349,7 @@ const WorkoutBuilder = () => {
                         </div>
                       </div>
 
-                      <div className='p-4 grid grid-cols-3 gap-4'>
+                      <div className='p-4 grid grid-cols-1 sm:grid-cols-3 gap-4'>
                         <div className='space-y-1'>
                           <label className='text-[10px] text-[#61896f] font-bold uppercase tracking-wide'>Sets</label>
                           <div className='flex items-center bg-slate-50 rounded-lg border border-[#dbe6df] overflow-hidden focus-within:outline-none focus-within:ring-1 focus-within:ring-[#15ec5b] focus-within:border-[#15ec5b]'>
@@ -414,7 +413,7 @@ const WorkoutBuilder = () => {
           </div>
 
           {/* Context */}
-          <div className='col-span-1 flex flex-col gap-6 sticky top-24'>
+          <div className='col-span-1 flex flex-col gap-6 lg:sticky lg:top-24'>
             {/* Plan Settings */}
             <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-5'>
               <div className='flex items-center gap-3 mb-4'>

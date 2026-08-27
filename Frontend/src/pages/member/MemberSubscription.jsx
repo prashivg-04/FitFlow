@@ -4,13 +4,13 @@ import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 const MemberSubscription = () => {
   return (
     <ComingSoonWrapper>
-    <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-      <div className='max-w-7xl mx-auto space-y-8'>
+    <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+      <div className='max-w-7xl mx-auto space-y-6 sm:space-y-8'>
         {/* Heading */}
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
           <div className='flex flex-col items-start'>
-            <h1 className='text-4xl font-bold tracking-tight'>Your Subscription</h1>
-            <p className='text-[#61896f] text-lg mt-1'>Manage your plan details, payment methods, and billing history.</p>
+            <h1 className='text-3xl sm:text-4xl font-bold tracking-tight'>Your Subscription</h1>
+            <p className='text-[#61896f] text-base sm:text-lg mt-1'>Manage your plan details, payment methods, and billing history.</p>
           </div>
           <div className='flex items-end gap-2'>
             <button className='flex items-center gap-2 px-4 py-2 bg-white border border-[#dbe6df] rounded-xl text-sm font-semibold hover:bg-slate-50'>
@@ -25,7 +25,7 @@ const MemberSubscription = () => {
         </div>
 
         {/* KPI Cards */}
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow relative group flex flex-col gap-1 overflow-hidden'>
             <div className='flex items-start justify-between mb-4'>
               <div className='flex flex-col gap-1'>
@@ -79,9 +79,9 @@ const MemberSubscription = () => {
         {/* Payment History Table */}
         <div className='bg-white border border-[#dbe6df] rounded-xl shadow-soft overflow-hidden flex flex-col'>
           {/* Toolbar */}
-          <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
+          <div className='p-4 sm:p-5 border-b border-[#f0f4f2] flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
             <h2 className='text-2xl font-bold'>Payment History</h2>
-            <div className='flex items-center gap-3 w-auto'>
+            <div className='flex items-center gap-3 w-full sm:w-auto'>
               <div className='relative'>
                 <i className="ri-filter-3-line absolute left-2 top-1/2 transform -translate-y-1/2 text-xl"></i>
                 <select className='appearance-none pl-10 pr-8 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#15ec5b] cursor-pointer transition-all'>
@@ -101,8 +101,8 @@ const MemberSubscription = () => {
 
           {/* Members Table */}
           <div className='overflow-x-auto'>
-            <table className='w-full text-left border-collapse'>
-              <thead className='bg-[#f7f8f6] text-[#61896f] text-xs font-semibold uppercase tracking-wider'>
+            <table className='w-full text-left responsive-table'>
+              <thead className='bg-[#f7f8f6] border-b border-[#dbe6df]'>
                 <tr>
                   <th className='px-6 py-4'>Date</th>
                   <th className='px-6 py-4'>Description</th>
@@ -114,30 +114,29 @@ const MemberSubscription = () => {
 
               <tbody className='divide-y divide-[#f0f4f2]'>
                 <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]' data-label="Date">
                     Oct 24, 2023
                   </td>
 
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Description">
                     <div className='flex flex-col'>
                       <span className='text-sm font-medium text-[#334e3c]'>Monthly Subscription - Gold</span>
                       <span className='text-xs text-[#61896f]'>Ref: #INV-2023-001</span>
                     </div>
                   </td>
 
-                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]' data-label="Amount">
                     $59.00
                   </td>
                   
-
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Status">
                     <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
                       <span className='size-1.5 rounded-full bg-green-500'></span>
                       Paid
                     </span>
                   </td>
 
-                  <td className='px-6 py-4 text-right'>
+                  <td className='px-6 py-4 text-right' data-label="Invoice">
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
                       <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
@@ -145,30 +144,30 @@ const MemberSubscription = () => {
                 </tr>
 
                 <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]' data-label="Date">
                     Sep 24, 2023
                   </td>
 
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Description">
                     <div className='flex flex-col'>
                       <span className='text-sm font-medium text-[#334e3c]'>Monthly Subscription - Gold</span>
                       <span className='text-xs text-[#61896f]'>Ref: #INV-2023-002</span>
                     </div>
                   </td>
 
-                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]' data-label="Amount">
                     $59.00
                   </td>
                   
 
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Status">
                     <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
                       <span className='size-1.5 rounded-full bg-green-500'></span>
                       Paid
                     </span>
                   </td>
 
-                  <td className='px-6 py-4 text-right'>
+                  <td className='px-6 py-4 text-right' data-label="Invoice">
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
                       <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
@@ -176,30 +175,29 @@ const MemberSubscription = () => {
                 </tr>
 
                 <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]' data-label="Date">
                     Aug 24, 2023
                   </td>
 
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Description">
                     <div className='flex flex-col'>
                       <span className='text-sm font-medium text-[#334e3c]'>Monthly Subscription - Gold</span>
                       <span className='text-xs text-[#61896f]'>Ref: #INV-2023-003</span>
                     </div>
                   </td>
 
-                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]' data-label="Amount">
                     $59.00
                   </td>
                   
-
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Status">
                     <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
                       <span className='size-1.5 rounded-full bg-green-500'></span>
                       Paid
                     </span>
                   </td>
 
-                  <td className='px-6 py-4 text-right'>
+                  <td className='px-6 py-4 text-right' data-label="Invoice">
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
                       <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>
@@ -207,30 +205,29 @@ const MemberSubscription = () => {
                 </tr>
 
                 <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium text-[#334e3c]' data-label="Date">
                     Jul 10, 2023
                   </td>
 
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Description">
                     <div className='flex flex-col'>
                       <span className='text-sm font-medium text-[#334e3c]'>Personal Training (1hr)</span>
                       <span className='text-xs text-[#61896f]'>Add-on Service</span>
                     </div>
                   </td>
 
-                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]'>
+                  <td className='px-6 py-4 text-sm font-medium font-mono text-[#334e3c]' data-label="Amount">
                     $45.00
                   </td>
                   
-
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4' data-label="Status">
                     <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700 border border-gray-200 '>
                       <span className='size-1.5 rounded-full bg-gray-500'></span>
                       Refunded
                     </span>
                   </td>
 
-                  <td className='px-6 py-4 text-right'>
+                  <td className='px-6 py-4 text-right' data-label="Invoice">
                     <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
                       <i className="fa-regular fa-file-lines text-[20px]"></i>
                     </button>

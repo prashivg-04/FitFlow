@@ -6,19 +6,19 @@ const NotificationDashboard = () => {
   return (
     <ComingSoonWrapper>
     <div className=''>
-      <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-        <div className='max-w-300 mx-auto space-y-8 pb-10'>
+      <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+        <div className='max-w-300 mx-auto space-y-6 sm:space-y-8 pb-10'>
           {/* Heading */}
-          <div className='flex items-center justify-between gap-4'>
-            <div className='flex flex-col items-start justify-center gap-2'>
-              <h1 className='text-4xl font-black tracking-tight'>Communications</h1>
-              <p className='text-[#61896f] text-base'>Manage announcements & member alerts</p>
+          <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
+            <div className='flex flex-col items-start justify-center gap-1 sm:gap-2'>
+              <h1 className='text-3xl sm:text-4xl font-black tracking-tight'>Communications</h1>
+              <p className='text-[#61896f] text-sm sm:text-base'>Manage announcements & member alerts</p>
             </div>
           </div>
 
           {/* KPI Cards */}
-          <div className='grid grid-cols-3 gap-6'>
-            <div className='bg-white p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6'>
+            <div className='bg-white p-4 sm:p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
               <div className='absolute top-4 right-5 p-1.5 rounded-lg transition-all'>
                 <i className='ri-calendar-view text-[#15ec5b] text-2xl'></i>
               </div>
@@ -30,7 +30,7 @@ const NotificationDashboard = () => {
               </span>
             </div>
 
-            <div className='bg-white p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
+            <div className='bg-white p-4 sm:p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
               <div className='absolute top-4 right-5 p-1.5 rounded-lg transition-all'>
                 <i className='fa-regular fa-envelope text-[#15ec5b] text-2xl'></i>
               </div>
@@ -42,7 +42,7 @@ const NotificationDashboard = () => {
               </span>
             </div>
 
-            <div className='bg-white p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
+            <div className='bg-white p-4 sm:p-6 rounded-lg border border-[#dbe6df] shadow-sm hover:shadow-md flex flex-col justify-between gap-3 relative overflow-hidden group'>
               <div className='absolute top-4 right-5 p-1.5 rounded-lg transition-all'>
                 <i className='ri-send-plane-2-line text-[#15ec5b] text-2xl'></i>
               </div>
@@ -55,10 +55,10 @@ const NotificationDashboard = () => {
           </div>
 
           {/* Main Content */}
-          <div className='grid grid-cols-3 gap-4'>
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6'>
             {/* Compose Message */}
-            <div className='col-span-1 flex flex-col gap-6'>
-              <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-6 flex flex-col h-fit sticky gap-6'>
+            <div className='col-span-1 flex flex-col gap-6 order-last lg:order-first'>
+              <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm p-4 sm:p-6 flex flex-col h-fit sticky gap-6'>
                 <div>
                   <h3 className='text-lg font-bold'>Quick Compose</h3>
                   <p className='text-[#61896f] text-sm'>Draft a new announcement.</p>
@@ -109,7 +109,7 @@ const NotificationDashboard = () => {
             </div>
 
             {/* Message List */}
-            <div className='col-span-2 flex flex-col gap-6'>
+            <div className='col-span-1 lg:col-span-2 flex flex-col gap-6'>
               {/* Tabs */}
               <div className='border-b border-[#dbe6df] '>
                 <div className='flex gap-6 overflow-x-auto'>
@@ -135,7 +135,7 @@ const NotificationDashboard = () => {
 
               {/* Cards */}
               <div className='flex flex-col gap-3'>
-                <div className='group flex gap-4 p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
+                <div className='group flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
                   <div className='flex-1 flex flex-col gap-2'>
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-yellow-100 text-yellow-700 text-xs font-bold uppercase tracking-wider'>Scheduled</span>
@@ -160,7 +160,7 @@ const NotificationDashboard = () => {
                     </div>
                   </div>
 
-                  <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
+                  <div className='flex flex-row sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 sm:border-l border-[#dbe6df] pt-3 sm:pt-0 sm:pl-4 mt-2 sm:mt-0 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
                       <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
@@ -168,7 +168,7 @@ const NotificationDashboard = () => {
                   </div>
                 </div>
 
-                <div className='group flex gap-4 p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
+                <div className='group flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
                   <div className='flex-1 flex flex-col gap-2'>
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider'>Sent</span>
@@ -193,7 +193,7 @@ const NotificationDashboard = () => {
                     </div>
                   </div>
 
-                  <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
+                  <div className='flex flex-row sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 sm:border-l border-[#dbe6df] pt-3 sm:pt-0 sm:pl-4 mt-2 sm:mt-0 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
                       <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
@@ -201,7 +201,7 @@ const NotificationDashboard = () => {
                   </div>
                 </div>
 
-                <div className='group flex gap-4 p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
+                <div className='group flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
                   <div className='flex-1 flex flex-col gap-2'>
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-gray-100 text-gray-700 text-xs font-bold uppercase tracking-wider'>Draft</span>
@@ -222,7 +222,7 @@ const NotificationDashboard = () => {
                     </div>
                   </div>
 
-                  <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
+                  <div className='flex flex-row sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 sm:border-l border-[#dbe6df] pt-3 sm:pt-0 sm:pl-4 mt-2 sm:mt-0 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
                       <i className="fa-solid fa-trash-can text-[20px]"></i>
                     </button>
@@ -230,7 +230,7 @@ const NotificationDashboard = () => {
                   </div>
                 </div>
 
-                <div className='group flex gap-4 p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
+                <div className='group flex flex-col sm:flex-row gap-4 p-4 sm:p-5 bg-white rounded-xl border border-[#dbe6df] hover:shadow-md transition-shadow'>
                   <div className='flex-1 flex flex-col gap-2'>
                     <div className='flex items-center gap-3 mb-1'>
                       <span className='px-2.5 py-1 rounded-md bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wider'>Sent</span>
@@ -255,7 +255,7 @@ const NotificationDashboard = () => {
                     </div>
                   </div>
 
-                  <div className='flex flex-col items-end justify-between gap-2 border-l border-[#dbe6df] pt-3 pl-4 min-w-30'>
+                  <div className='flex flex-row sm:flex-col items-center sm:items-end justify-between gap-2 border-t sm:border-t-0 sm:border-l border-[#dbe6df] pt-3 sm:pt-0 sm:pl-4 mt-2 sm:mt-0 min-w-30'>
                     <button className='text-[#61896f] hover:text-[#15ec5b] cursor-pointer'>
                       <i className="fa-solid fa-ellipsis text-[20px]"></i>
                     </button>
@@ -265,7 +265,7 @@ const NotificationDashboard = () => {
               </div>
 
               {/* Pagination */}
-              <div className='flex items-center justify-between pt-4 border-t border-[#dbe6df]'>
+              <div className='flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-[#dbe6df] gap-4'>
                 <p className='text-sm text-[#61896f]'>Showing 1 to 4 of 24 results</p>
                 <div className='flex items-center gap-2'>
                   <button className='px-3 py-1 text-sm font-medium bg-white rounded-md border border-[#dbe6df] hover:bg-gray-50'>Previous</button>

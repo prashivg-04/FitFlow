@@ -29,7 +29,13 @@ export const getGymInfoService = async ({userId, role}) => {
                 userId,
             },
             include: {
-                owner: true,
+                owner: {
+                    include: {
+                        user: {
+                            select: { name: true, email: true }
+                        }
+                    }
+                },
                 user: true,
             },
         });
@@ -39,6 +45,11 @@ export const getGymInfoService = async ({userId, role}) => {
 
         return {
             gymName: trainer.owner?.gymName || null,
+            ownerName: trainer.owner?.user?.name || null,
+            ownerEmail: trainer.owner?.user?.email || null,
+            ownerPhone: trainer.owner?.phone || null,
+            address: trainer.owner?.address || null,
+            city: trainer.owner?.city || null,
             name: trainer.user.name,
         }
     }
@@ -49,17 +60,44 @@ export const getGymInfoService = async ({userId, role}) => {
                 userId,
             },
             include: {
-                owner: true,
+                owner: {
+                    include: {
+                        user: {
+                            select: { name: true, email: true }
+                        }
+                    }
+                },
                 user: true,
+                trainerMembers: {
+                    include: {
+                        trainer: {
+                            include: {
+                                user: {
+                                    select: { name: true, email: true }
+                                }
+                            }
+                        }
+                    }
+                }
             },
         });
         if(!member) {
             throw new AppError('Member not found', 404);
         }
 
+        const assignedTrainer = member.trainerMembers.length > 0 ? member.trainerMembers[0].trainer : null;
+
         return {
             gymName: member.owner?.gymName || null,
+            ownerName: member.owner?.user?.name || null,
+            ownerEmail: member.owner?.user?.email || null,
+            ownerPhone: member.owner?.phone || null,
+            address: member.owner?.address || null,
+            city: member.owner?.city || null,
             name: member.user.name,
+            trainerName: assignedTrainer?.user?.name || null,
+            trainerEmail: assignedTrainer?.user?.email || null,
+            trainerSpecialization: assignedTrainer?.specialization || null,
         }
     }
 

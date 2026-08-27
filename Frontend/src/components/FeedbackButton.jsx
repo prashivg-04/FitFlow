@@ -8,10 +8,10 @@ const FeedbackButton = ({ className = '' }) => {
   return (
     <button
       onClick={handleClick}
-      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium 
-      bg-slate-200 hover:bg-slate-300 transition-colors ${className}`}
+      className={`w-full px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer text-[#61896f] hover:bg-[#f7f8f6] hover:text-[#15ec5b] ${className}`}
     >
-      📝 Feedback
+      <i className="text-lg ri-chat-smile-3-line"></i>
+      <span className='font-medium text-base'>Feedback</span>
     </button>
   );
 };

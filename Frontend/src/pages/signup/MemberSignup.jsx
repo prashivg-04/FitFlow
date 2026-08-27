@@ -131,7 +131,7 @@ const MemberSignup = () => {
               </div>
 
               {/* Form */}
-              <div className='grid grid-cols-2 gap-5'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
                 <div>
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Date of Birth</p>
@@ -248,10 +248,10 @@ const MemberSignup = () => {
 
                 <div className='flex flex-col gap-2 w-full'>
                     <p className='text-sm font-medium leading-normal'>Experience Level</p>
-                    <div className='flex w-full h-14 rounded-lg bg-[#f0f4f2] p-1 relative'>
+                    <div className='flex flex-col sm:flex-row w-full sm:h-14 rounded-lg bg-[#f0f4f2] p-1 relative gap-1 sm:gap-0'>
                         {/* Sliding Background */}
                         <div 
-                        className='absolute h-[calc(100%-8px)] rounded-md bg-white shadow-[0_0_4px_#0000001a] transition-all duration-300 ease-in-out top-1'
+                        className='hidden sm:block absolute h-[calc(100%-8px)] rounded-md bg-white shadow-[0_0_4px_#0000001a] transition-all duration-300 ease-in-out top-1'
                         style={{
                             width: 'calc(33.333% - 5.33px)',
                             left: formData.experienceLevel === 'BEGINNER' ? '4px' : formData.experienceLevel === 'INTERMEDIATE' ? 'calc(33.333% + 1.33px)' : 'calc(66.666% - 1.33px)'
@@ -267,8 +267,8 @@ const MemberSignup = () => {
                             value="BEGINNER"
                             onChange={(e) => setFormData({...formData, experienceLevel: e.target.value})}
                         />
-                        <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            formData.experienceLevel === 'BEGINNER' ? 'text-slate-900' : 'text-[#61896f]'
+                        <div className={`flex h-12 sm:h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
+                            formData.experienceLevel === 'BEGINNER' ? 'text-slate-900 bg-white sm:bg-transparent shadow-sm sm:shadow-none' : 'text-[#61896f]'
                         }`}>
                             Beginner
                         </div>
@@ -283,8 +283,8 @@ const MemberSignup = () => {
                             value="INTERMEDIATE" 
                             onChange={(e) => setFormData({...formData, experienceLevel: e.target.value})}
                         />
-                        <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            formData.experienceLevel === 'INTERMEDIATE' ? 'text-slate-900' : 'text-[#61896f]'
+                        <div className={`flex h-12 sm:h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
+                            formData.experienceLevel === 'INTERMEDIATE' ? 'text-slate-900 bg-white sm:bg-transparent shadow-sm sm:shadow-none' : 'text-[#61896f]'
                         }`}>
                             Intermediate
                         </div>
@@ -299,8 +299,8 @@ const MemberSignup = () => {
                             value="ADVANCED" 
                             onChange={(e) => setFormData({...formData, experienceLevel: e.target.value})}
                         />
-                        <div className={`flex h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
-                            formData.experienceLevel === 'ADVANCED' ? 'text-slate-900' : 'text-[#61896f]'
+                        <div className={`flex h-12 sm:h-full w-full items-center justify-center rounded-md text-sm font-medium transition-colors duration-300 ${
+                            formData.experienceLevel === 'ADVANCED' ? 'text-slate-900 bg-white sm:bg-transparent shadow-sm sm:shadow-none' : 'text-[#61896f]'
                         }`}>
                             Advanced
                         </div>

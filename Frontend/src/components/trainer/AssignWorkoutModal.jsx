@@ -13,7 +13,7 @@ const AssignWorkoutModal = ({onClose, member}) => {
             try {
                 const response = await api.get('/trainer/programs');
                 setPrograms(response.data.data);
-            } catch(err) {
+            } catch(_) {
             }
         }
 
@@ -35,44 +35,63 @@ const AssignWorkoutModal = ({onClose, member}) => {
             });
             toast.success('Workout assigned successfully!');
             onClose();
-        } catch(err) {
+        } catch(_) {
         }
     }
 
   return (
-    <div onClick={onClose} className='fixed inset-0 bg-black/40 z-20 backdrop-blur-xs flex items-center justify-center'>
-      <div onClick={(e) => e.stopPropagation()} className='bg-[#f7f8f6] rounded-lg w-120 p-6 relative'>
-        <div className='flex items-center justify-between'>
-            <h2 className='text-lg font-bold'>Assign Workout to {member?.user?.name}</h2>
-            <button onClick={onClose} className='text-[20px] cursor-pointer'><i className="fa-solid fa-xmark"></i></button>
+    <div onClick={onClose} className='fixed inset-0 bg-slate-900/40 z-50 backdrop-blur-sm flex items-center justify-center p-4 sm:p-0'>
+      <div onClick={(e) => e.stopPropagation()} className='bg-white rounded-2xl w-full max-w-2xl shadow-2xl relative flex flex-col max-h-[85vh]'>
+        {/* Header */}
+        <div className='flex items-center justify-between p-6 border-b border-[#dbe6df] shrink-0'>
+            <div>
+              <h2 className='text-xl font-bold text-slate-800'>Assign Workout</h2>
+              <p className='text-sm text-slate-500 mt-1'>Select a program for <span className='font-semibold text-slate-700 capitalize'>{member?.user?.name}</span></p>
+            </div>
+            <button onClick={onClose} className='size-8 flex items-center justify-center rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors'>
+              <i className="ri-close-line text-xl"></i>
+            </button>
         </div>
 
-        <div className='space-y-2 mt-6 overflow-y-auto max-h-72'>
+        {/* Content */}
+        <div className='p-6 overflow-y-auto space-y-4 bg-[#f7f8f6] rounded-b-2xl'>
             {!selectedProgram ? ( 
-                programs?.map(program => {
-                    return (
-                        <div key={program.id} className='flex items-center justify-between bg-white p-3 rounded-lg border border-[#dbe6df] hover:border-[#15ec5b]/50 shadow-sm hover:shadow-md transition-all'>
-                            <div className='flex flex-col items-start gap-1'>
-                                <div className='flex flex-col items-start'>
-                                    <p className='font-bold text-lg leading-relaxed'>{program.title}</p>
-                                    <p className='text-xs font-medium'>{program.description}</p>
+                programs.length === 0 ? (
+                    <div className='text-center py-12'>
+                        <i className="ri-folder-open-line text-5xl text-slate-300 mb-3 block"></i>
+                        <h4 className='text-lg font-bold text-slate-700 mb-1'>No Programs Available</h4>
+                        <p className='text-sm text-slate-500'>Create a workout program first before assigning.</p>
+                    </div>
+                ) : (
+                    programs?.map(program => {
+                        return (
+                            <div key={program.id} className='flex flex-col sm:flex-row sm:items-center justify-between bg-white p-5 rounded-xl border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow gap-4'>
+                                <div className='flex items-start gap-4'>
+                                    <div className='size-12 rounded-xl bg-green-50 text-green-600 flex items-center justify-center shrink-0 border border-green-100'>
+                                        <i className="ri-file-list-3-line text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p className='font-bold text-slate-800 text-lg leading-tight'>{program.title}</p>
+                                        <p className='text-xs text-slate-500 mt-1 line-clamp-2 max-w-sm'>{program.description || "No description provided."}</p>
+                                        
+                                        <div className='flex flex-wrap items-center gap-2 mt-3'>
+                                            <span className='px-2.5 py-1 rounded-md bg-[#f7f8f6] border border-[#eef2f0] text-[10px] font-bold text-[#61896f] uppercase tracking-wider'>{program.days.length} Days</span>
+                                            <span className='px-2.5 py-1 rounded-md bg-[#f7f8f6] border border-[#eef2f0] text-[10px] font-bold text-[#61896f] uppercase tracking-wider'>{restDays(program)} Rest</span>
+                                            <span className='px-2.5 py-1 rounded-md bg-[#f7f8f6] border border-[#eef2f0] text-[10px] font-bold text-[#61896f] uppercase tracking-wider'>{exerciseCount(program)} Exercises</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                {/* use inline styles */}
-                                <div className='flex flex-col items-start gap-1 mt-2'>
-                                    <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-light items-center justify-center text-green-800'>Total Days : {program.days.length}</div>
-                                    <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-light items-center justify-center text-green-800'>No. of Rest Days : {restDays(program)}</div>
-                                    <div className='inline-flex border border-green-200 bg-green-100 px-2 py-0.5 rounded-full text-xs font-light items-center justify-center text-green-800'>Total Exercises : {exerciseCount(program)}</div>
-                                </div>
+                                <button
+                                    onClick={() => setSelectedProgram(program)}
+                                    className='w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 bg-white border border-slate-200 hover:bg-slate-50 hover:border-slate-300 text-slate-700 hover:text-slate-900 text-sm font-bold rounded-lg transition-all shrink-0 shadow-sm'
+                                >
+                                    Select
+                                    <i className="ri-arrow-right-line"></i>
+                                </button>
                             </div>
-                            <button
-                                onClick={() => setSelectedProgram(program)}
-                                className='bg-[#15ec5b] text-black px-4 py-2 rounded-lg hover:bg-green-500 transition-colors text-sm font-medium flex items-center gap-1'
-                            >
-                                Select
-                            </button>
-                        </div>
-                    )
-                })
+                        )
+                    })
+                )
             ) : (
                 <AssignmentWindow  
                     member={member} 

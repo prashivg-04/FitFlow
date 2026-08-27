@@ -7,6 +7,22 @@ It focuses on a complete workout lifecycle, from member onboarding and trainer a
 <!-- App Link -->
 Live App : [FitFlow](https://fit-flow-ten.vercel.app/)
 
+## Demo Credentials
+
+Pre-seeded accounts to explore all three roles.
+
+**Owner**
+- Email: rajesh.kumar@fitflow.com
+- Password: FitFlow@2024
+
+**Trainer**
+- Email: arjun.mehta@fitflow.com
+- Password: Trainer@2024
+
+**Member**
+- Email: aditya.bansal@fitflow.com
+- Password: Member@2024
+
 ## Overview
 
 FitFlow replaces manual coordination with role-scoped workflows:

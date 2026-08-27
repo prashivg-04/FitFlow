@@ -7,10 +7,10 @@ const TrainerWorkspace = () => {
     <ComingSoonWrapper>
       <div className='relative flex flex-col min-h-screen bg-[#f7f8f6]'>
         {/* Member Selection */}
-        <div className='flex-1 overflow-y-auto py-8 px-12 scroll-smooth'>
+        <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
           <div className='max-w-300 mx-auto space-y-8 pb-10'>
             {/* Heading */}
-            <div className='flex items-center justify-between gap-4'>
+            <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
               <div className='flex flex-col items-start justify-center gap-2'>
                 <h1 className='text-4xl font-black tracking-tight'>Workspace</h1>
                 <p className='text-[#61896f] text-base'>Manage your daily tasks, member notes, and system notifications in one place.</p>
@@ -21,9 +21,9 @@ const TrainerWorkspace = () => {
               </div>
             </div>
 
-            <div className='grid grid-cols-3 gap-8 items-start'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start'>
               {/* Left */}
-              <div className='col-span-2 flex flex-col gap-8'>
+              <div className='col-span-1 lg:col-span-2 flex flex-col gap-6 lg:gap-8'>
                 {/* Entry */}
                 <div className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden group focus-within:ring-2 focus-within:ring-[#15ec5b]/20 focus-within:border-[#15ec5b] transition-all'>
                   <div className='p-5 space-y-5'>
@@ -99,7 +99,7 @@ const TrainerWorkspace = () => {
                           <span className='inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase border border-blue-200'>Session Log</span>
                           <span className='text-xs text-[#61896f]'>• 2 hours ago</span>
                         </div>
-                        <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
+                        <div className='flex items-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
                             <i className="ri-pencil-line text-[20px]"></i>
                           </button>
@@ -142,7 +142,7 @@ const TrainerWorkspace = () => {
                           <span className='inline-flex px-2 py-0.5 rounded-full bg-orange-50 text-orange-600 text-[10px] font-bold uppercase border border-orange-200'>Reminder</span>
                           <span className='text-xs text-[#61896f]'>• Yesterday</span>
                         </div>
-                        <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
+                        <div className='flex items-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
                             <i className="ri-pencil-line text-[20px]"></i>
                           </button>
@@ -173,7 +173,7 @@ const TrainerWorkspace = () => {
                           <span className='inline-flex px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-bold uppercase border border-blue-200'>Dietary</span>
                           <span className='text-xs text-[#61896f]'>• Oct 22</span>
                         </div>
-                        <div className='flex items-center gap-2 opacity-0 group-hover:opacity-100'>
+                        <div className='flex items-center gap-2 opacity-100 md:opacity-0 md:group-hover:opacity-100'>
                           <button className='p-1 rounded text-[#61896f] hover:text-[#15ec5b]'>
                             <i className="ri-pencil-line text-[20px]"></i>
                           </button>

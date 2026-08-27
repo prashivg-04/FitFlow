@@ -39,7 +39,7 @@ const TrainerSidebar = ({ username }) => {
                     <span className='font-medium'>Dashboard</span>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     to='/trainer/members'
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
@@ -49,7 +49,7 @@ const TrainerSidebar = ({ username }) => {
                 >
                     <i className="text-lg ri-group-line"></i>
                     <span className='font-medium'>Members</span>
-                </NavLink>
+                </NavLink> */}
 
                 <NavLink
                     to='/trainer/workouts'
@@ -87,7 +87,7 @@ const TrainerSidebar = ({ username }) => {
                     <span className='font-medium'>Assign Workout</span>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     to='/trainer/workspace'
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
@@ -97,12 +97,12 @@ const TrainerSidebar = ({ username }) => {
                 >
                     <i className="text-lg ri-booklet-line"></i>
                     <span className='font-medium'>Workspace</span>
-                </NavLink>
+                </NavLink> */}
             </div>
 
             {/* System Menu */}
             <div className='flex flex-col pt-4 mt-4 border-t border-[#f0f4f2]'>
-                <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
+                {/* <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
                 <NavLink
                     to='/trainer/settings'
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
@@ -127,7 +127,7 @@ const TrainerSidebar = ({ username }) => {
                     <span className='font-medium'>Support</span>
                 </NavLink>
 
-                <br />
+                <br /> */}
                 <FeedbackButton />
             </div>
         </div>

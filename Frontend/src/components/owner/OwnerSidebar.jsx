@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import icon from '../../assets/icon.svg'
 import ownerDp from '../../media/O.png'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
 import FeedbackButton from '../FeedbackButton'
 
-const OwnerSidebar = ({ username }) => {
+const OwnerSidebar = ({ username, setIsSidebarOpen }) => {
   return (
     <div className='flex flex-col min-h-screen h-full w-64 bg-white border-r border-[#f0f4f2] z-10'>
         {/* Logo */}
-        <div className='h-20 flex items-center px-8 border-b border-[#f0f4f2]'>
+        <div className='h-20 flex items-center justify-between px-8 border-b border-[#f0f4f2]'>
             <div className='flex items-center gap-3'>
                 <div className='size-10 flex items-center justify-center'> 
                     <img className='rounded-lg' src={icon} alt="" />
@@ -19,6 +19,12 @@ const OwnerSidebar = ({ username }) => {
                     <p className='text-xs font-medium text-[#61896f] mt-1'>Gym Owner</p>
                 </div>
             </div>
+            <button 
+              className='lg:hidden text-gray-400 hover:text-gray-700'
+              onClick={() => setIsSidebarOpen?.(false)}
+            >
+              <i className="ri-close-line text-2xl"></i>
+            </button>
         </div>
 
         {/* Navigation */}
@@ -62,7 +68,7 @@ const OwnerSidebar = ({ username }) => {
                     <span className='font-medium'>Trainers</span>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     to='/owner/payments'
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
@@ -84,13 +90,14 @@ const OwnerSidebar = ({ username }) => {
                 >
                     <i className="text-lg fa-solid fa-bell"></i>
                     <span className='font-medium'>Notifications</span>
-                </NavLink>
+                </NavLink> */}
+
             </div>
 
             {/* System Menu */}
             <div className='flex flex-col pt-4 mt-4 border-t border-[#f0f4f2]'>
-                <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
-                <NavLink
+                {/* <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div> */}
+                {/* <NavLink
                     to='/owner/settings'
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
@@ -114,7 +121,7 @@ const OwnerSidebar = ({ username }) => {
                     <span className='font-medium'>Support</span>
                 </NavLink>
                 
-                <br />
+                <br /> */}
                 <FeedbackButton />
             </div>
         </div>

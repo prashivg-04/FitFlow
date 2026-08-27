@@ -5,13 +5,13 @@ import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 const MemberAttendance = () => {
   return (
     <ComingSoonWrapper>
-    <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-      <div className='max-w-7xl mx-auto space-y-8'>
+    <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+      <div className='max-w-7xl mx-auto space-y-6 sm:space-y-8'>
         {/* Heading */}
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
           <div className='flex flex-col items-start'>
-            <h1 className='text-4xl font-bold tracking-tight'>Attendance History</h1>
-            <p className='text-[#61896f] text-lg mt-1'>Track your consistency and keep the streak alive.</p>
+            <h1 className='text-3xl sm:text-4xl font-bold tracking-tight'>Attendance History</h1>
+            <p className='text-[#61896f] text-base sm:text-lg mt-1'>Track your consistency and keep the streak alive.</p>
           </div>
           <div className='flex items-end gap-2'>
             <button className='flex items-center gap-2 px-4 py-2 bg-white border border-[#dbe6df] rounded-xl text-sm font-semibold hover:bg-slate-50'>
@@ -27,7 +27,7 @@ const MemberAttendance = () => {
         </div>
 
         {/* KPI Cards */}
-        <div className='grid grid-cols-4 gap-4'>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-4'>
           <div className='bg-white rounded-xl p-6 border border-[#dbe6df] shadow-sm hover:shadow-md transition-shadow relative group flex flex-col gap-1 overflow-hidden'>
             <div className='absolute -right-4 -top-4 opacity-5 group-hover:scale-110 transition-transform duration-500'>
               <i className='fa-solid fa-dumbbell text-[100px]'></i>
@@ -84,9 +84,9 @@ const MemberAttendance = () => {
         </div>
 
         {/* Charts */}
-        <div className='grid grid-cols-3 gap-6'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
           {/* Left - Creative Liquid Bar Chart */}
-          <div className='col-span-2 bg-linear-to-br from-slate-50 via-white to-green-50/30 p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
+          <div className='col-span-1 lg:col-span-2 bg-linear-to-br from-slate-50 via-white to-green-50/30 p-4 sm:p-6 rounded-xl border border-[#dbe6df] shadow-sm flex flex-col relative overflow-hidden'>
             {/* Animated Background Blobs */}
             <div className='absolute -right-20 -top-20 size-40 bg-[#15ec5b]/10 rounded-full blur-3xl animate-pulse'></div>
             <div className='absolute -left-16 -bottom-16 size-32 bg-blue-500/5 rounded-full blur-2xl'></div>
@@ -109,9 +109,9 @@ const MemberAttendance = () => {
             </div>
 
             {/* Creative Liquid Fill Chart */}
-            <div className='relative flex-1 flex items-end justify-between gap-8 px-6 pb-8'>
+            <div className='relative flex-1 flex items-end justify-between gap-4 sm:gap-8 px-2 sm:px-6 pb-8 overflow-x-auto scrollbar-hide'>
               {/* Connecting trend line */}
-              <svg className='absolute inset-0 w-full h-full pointer-events-none' style={{top: '20px'}}>
+              <svg className='absolute inset-0 w-full h-full pointer-events-none min-w-125' style={{top: '20px'}}>
                 <defs>
                   <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" style={{stopColor: '#15ec5b', stopOpacity: 0.3}} />
@@ -356,22 +356,22 @@ const MemberAttendance = () => {
           </div>
         </div>
 
-        {/* Table */}
-        <div className='bg-white border border-[#dbe6df] rounded-xl shadow-soft overflow-hidden flex flex-col'>
+        {/* Attendance History Table */}
+        <div className='bg-white border border-[#dbe6df] rounded-xl shadow-soft overflow-hidden flex flex-col mt-8'>
           {/* Toolbar */}
-          <div className='p-5 border-b border-[#f0f4f2] flex items-center justify-between gap-4'>
+          <div className='p-4 sm:p-5 border-b border-[#f0f4f2] flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
             <div className='flex items-center gap-2'>
               <button className='px-4 py-2 text-sm font-medium bg-slate-100 rounded-lg'>All History</button>
               <button className='px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors'>Classes</button>
               <button className='px-4 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition-colors'>Gym Visits</button>
             </div>
 
-            <div className='flex items-center gap-3 w-auto'>
+            <div className='flex items-center gap-3 w-full sm:w-auto'>
               <div className='relative max-w-md w-full'>
                 <i className="ri-search-line absolute left-0 top-0 pl-3 pt-2 text-[#61896f] pointer-events-none"></i>
                 <input className='bg-[#f7f8f6] h-10 pl-9 pr-4 py-2 w-full rounded-lg border border-[#dbe6df] text-sm placeholder:text-[#61896f] focus:border-[#15ec5b] focus:outline-0 focus:ring-1 focus:ring-[#15ec5b] transition-all' type="text" placeholder='Search...' />
               </div>
-              <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2'>
+              <button className='px-3 py-1 border border-[#dbe6df] rounded-lg hover:bg-gray-50 transition-all flex items-center gap-2 h-10'>
                 <i className="ri-filter-3-line text-xl"></i>
               </button>
             </div>
@@ -379,55 +379,67 @@ const MemberAttendance = () => {
 
           {/* Members Table */}
           <div className='overflow-x-auto'>
-            <table className='w-full text-left border-collapse'>
-              <thead className='bg-[#f7f8f6] text-[#61896f] text-xs font-semibold uppercase tracking-wider'>
+            <table className='w-full text-left responsive-table'>
+              <thead className='bg-[#f7f8f6] border-b border-[#dbe6df]'>
                 <tr>
-                  <th className='px-6 py-4'>Date & Time</th>
-                  <th className='px-6 py-4'>Activity</th>
-                  <th className='px-6 py-4'>Duration</th>
-                  <th className='px-6 py-4'>Instructor</th>
-                  <th className='px-6 py-4'>Status</th>
-                  <th className='px-6 py-4 text-right'>Actions</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Date & Time</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Duration</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Workout</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider'>Trainer</th>
+                  <th className='py-3 px-6 text-xs font-bold text-[#61896f] uppercase tracking-wider text-right'>Status</th>
                 </tr>
               </thead>
-
-              <tbody className='divide-y divide-[#f0f4f2]'>
-                <tr className='hover:bg-[#f7f8f6] transitions-color group cursor-pointer'>
-                  <td className='px-6 py-4'>
+              <tbody className='divide-y divide-[#f0f4f2] text-slate-800'>
+                <tr className='hover:bg-[#f7f8f6] transition-colors group cursor-pointer'>
+                  <td className='px-6 py-4' data-label="Date & Time">
                     <div className='flex flex-col'>
-                      <span className='text-sm font-medium'>Sep 24, 2023</span>
-                      <span className='text-xs text-slate-500'>07:00 AM</span>
+                      <span className='font-bold text-[#334e3c]'>Oct 24, 2023</span>
+                      <span className='text-xs text-[#61896f]'>10:00 AM</span>
                     </div>
                   </td>
-
-                  <td className='px-6 py-4'>
+                  <td className='px-6 py-4 text-sm font-medium' data-label="Duration">60 min</td>
+                  <td className='px-6 py-4' data-label="Workout">
+                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100'>
+                      Strength
+                    </span>
+                  </td>
+                  <td className='px-6 py-4' data-label="Trainer">
                     <div className='flex items-center gap-3'>
-                      <div className='h-8 w-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center'>
-                        <i className="fa-solid fa-person-running text-[18px]"></i>
-                      </div>
-                      <span className='text-sm font-medium text-slate-700'>HIIT Cardio</span>
+                      <img className='size-8 rounded-full border-2 border-white shadow-sm' src={trainerDp} alt="" />
+                      <span className='text-sm font-bold'>Mike T.</span>
                     </div>
                   </td>
-
-                  <td className='px-6 py-4 text-sm text-slate-600'>45 mins</td>
-                  
-                  <td className='px-6 py-4'>
-                    <div className='flex items-center gap-3'>
-                      <img className='size-10 rounded-full bg-gray-200 bg-center border border-[#dbe6df] object-cover' src={trainerDp} alt="Member" />
-                      <p className='text-sm font-semibold group-hover:text-[#15ec5b] transition-colors'>Eleanor Pena</p>
-                    </div>
-                  </td>
-
-                  <td className='px-6 py-4'>
-                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200 '>
+                  <td className='px-6 py-4 text-right' data-label="Status">
+                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200'>
+                      <span className='size-1.5 rounded-full bg-green-500'></span>
                       Completed
                     </span>
                   </td>
-
-                  <td className='px-6 py-4 text-right'>
-                    <button className='text-[#61896f] hover:text-[#15ec5b] p-1.5 rounded-lg transition-all'>
-                      <i className="fa-solid fa-ellipsis-vertical text-[20px]"></i>
-                    </button>
+                </tr>
+                <tr className='hover:bg-[#f7f8f6] transition-colors group cursor-pointer'>
+                  <td className='px-6 py-4' data-label="Date & Time">
+                    <div className='flex flex-col'>
+                      <span className='font-bold text-[#334e3c]'>Oct 22, 2023</span>
+                      <span className='text-xs text-[#61896f]'>09:00 AM</span>
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 text-sm font-medium' data-label="Duration">45 min</td>
+                  <td className='px-6 py-4' data-label="Workout">
+                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-orange-50 text-orange-700 border border-orange-100'>
+                      Cardio
+                    </span>
+                  </td>
+                  <td className='px-6 py-4' data-label="Trainer">
+                    <div className='flex items-center gap-3'>
+                      <img className='size-8 rounded-full border-2 border-white shadow-sm' src={trainerDp} alt="" />
+                      <span className='text-sm font-bold'>Sarah J.</span>
+                    </div>
+                  </td>
+                  <td className='px-6 py-4 text-right' data-label="Status">
+                    <span className='inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200'>
+                      <span className='size-1.5 rounded-full bg-green-500'></span>
+                      Completed
+                    </span>
                   </td>
                 </tr>
               </tbody>
@@ -437,7 +449,7 @@ const MemberAttendance = () => {
           {/* Pagination */}
           <div className='p-4 border-t border-[#dbe6df] flex items-center justify-between gap-4'>
             <span className='text-sm text-[#61896f] '>
-              Showing 1 to 4 of 124 results
+              Showing 1 to 2 of 124 results
             </span>
 
             <div className='flex items-center gap-2'>

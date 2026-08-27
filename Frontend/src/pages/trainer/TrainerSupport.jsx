@@ -5,15 +5,15 @@ const TrainerSupport = () => {
   return (
     <ComingSoonWrapper>
     <div className=''>
-      <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
+      <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
         <div className='max-w-300 mx-auto space-y-8 pb-10'>
           {/* Heading */}
-          <div className='flex items-center justify-between gap-4'>
+          <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
             <div className='flex flex-col items-start justify-center gap-2'>
               <h1 className='text-4xl font-black tracking-tight'>Support Center</h1>
               <p className='text-[#61896f] text-base'>Find answers quickly or get in touch with our team.</p>
             </div>
-            <div className='w-96 relative group'>
+            <div className='w-full sm:w-96 relative group'>
               <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
                 <i className="fa-solid fa-magnifying-glass text-gray-400 group-focus-within:text-[#15ec5b] transition-colors"></i>
               </div>
@@ -22,9 +22,9 @@ const TrainerSupport = () => {
           </div>
 
           {/* FAQs and Contact */}
-          <div className='grid grid-cols-3 gap-8 items-start'>
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start'>
             {/* Left */}
-            <div className='col-span-2 flex flex-col gap-6'>
+            <div className='col-span-1 lg:col-span-2 flex flex-col gap-6'>
               <div className='flex items-center justify-between'>
                 <h3 className='text-xl font-bold'>Common Questions</h3>
                 <a className='text-sm font-semibold text-[#15ec5b] hover:underline' href="">View all articles</a>
@@ -69,7 +69,7 @@ const TrainerSupport = () => {
 
               <h3 className='text-lg font-bold mt-4'>Browse Topics</h3>
 
-              <div className='grid grid-cols-3 gap-4'>
+              <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
                 <a className='bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3 hover:shadow-md hover:-translate-y-1 transition-all group' href="">
                   <div className='size-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 group-hover:scale-120 transition-transform'>
                     <i className="fa-solid fa-money-bills text-[20px]"></i>

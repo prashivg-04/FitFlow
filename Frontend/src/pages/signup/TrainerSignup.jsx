@@ -204,7 +204,7 @@ const TrainerSignup = () => {
                 <div className='flex flex-col gap-2'>
                   <label className='flex flex-col gap-2 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Preferred Working Days</p>
-                    <div className='flex items-center gap-3'>
+                    <div className='flex flex-wrap items-center gap-2 sm:gap-3'>
                         <label className='cursor-pointer'>
                             <input className='peer sr-only' type="checkbox" name="days" value="Monday" checked={selectedDays.includes("Monday")} onChange={() => toggleDay("Monday")} />
                             <div className='flex flex-col items-center justify-center w-10 h-10 rounded-full border-2 border-[#dbe6df] bg-white peer-checked:border-[#15ec5b] peer-checked:border-2 peer-checked:bg-[#15ec5b] peer-hover:peer-not-checked:bg-gray-50 transition-all'>
@@ -261,8 +261,8 @@ const TrainerSignup = () => {
                 <div className='col-span-2'>
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Operating Hours</p>
-                    <div className='flex items-center gap-3'>
-                      <div className='relative flex-1'>
+                    <div className='flex flex-col sm:flex-row sm:items-center gap-3'>
+                      <div className='relative flex-1 w-full'>
                         <input 
                           value={formData.startTime}
                           onChange={(e) => setFormData({...formData, startTime: e.target.value})}
@@ -271,8 +271,8 @@ const TrainerSignup = () => {
                         />
                         {errors.startTime && <p className='text-red-500 text-sm mt-1'>{errors.startTime}</p>}
                       </div>
-                      <span className='text-[#61896f]'>to</span>
-                      <div className='relative flex-1'>
+                      <span className='text-[#61896f] hidden sm:block'>to</span>
+                      <div className='relative flex-1 w-full'>
                         <input 
                           value={formData.endTime}
                           onChange={(e) => setFormData({...formData, endTime: e.target.value})}

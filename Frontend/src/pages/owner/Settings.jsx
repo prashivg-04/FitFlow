@@ -9,17 +9,17 @@ const Settings = () => {
   return (
     <ComingSoonWrapper>
     <div className=''>
-      <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-        <div className='max-w-300 mx-auto space-y-8 pb-10'>
+      <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+        <div className='max-w-300 mx-auto space-y-6 sm:space-y-8 pb-10'>
           {/* Heading */}
-          <div className='flex items-center justify-between gap-4'>
-            <div className='flex flex-col items-start justify-center gap-2'>
-              <h1 className='text-4xl font-black tracking-tight'>Admin Settings</h1>
-              <p className='text-[#61896f] text-base'>Manage your account, gym details, and application preferences.</p>
+          <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
+            <div className='flex flex-col items-start justify-center gap-1 sm:gap-2'>
+              <h1 className='text-3xl sm:text-4xl font-black tracking-tight'>Admin Settings</h1>
+              <p className='text-[#61896f] text-sm sm:text-base'>Manage your account, gym details, and application preferences.</p>
             </div>
-            <div className='flex items-center gap-4'>
-              <button className='px-5 py-2.5 bg-white rounded-lg hover:bg-gray-50 font-medium border border-[#dbe6df] transition-all'>Discard</button>
-              <button className='flex items-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all'>
+            <div className='flex items-center gap-3 sm:gap-4 w-full sm:w-auto'>
+              <button className='flex-1 sm:flex-none px-5 py-2.5 bg-white rounded-lg hover:bg-gray-50 font-medium border border-[#dbe6df] transition-all whitespace-nowrap text-center'>Discard</button>
+              <button className='flex-1 sm:flex-none flex items-center justify-center gap-2 px-5 py-2.5 bg-[#15ec5b] rounded-lg hover:bg-green-500 font-bold shadow-lg shadow-[#15ec5b]/25 transition-all whitespace-nowrap'>
                 <i className="fa-regular fa-floppy-disk text-[20px]"></i>
                 Save Changes
               </button>
@@ -27,20 +27,20 @@ const Settings = () => {
           </div>
 
           {/* Settings Sections */}
-          <div className='grid grid-cols-3 gap-6 items-start'>
+          <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 items-start'>
             {/* Left */}
-            <div className='col-span-2 flex flex-col gap-6'>
+            <div className='col-span-1 lg:col-span-2 flex flex-col gap-6'>
               {/* Personal Information */}
               <section className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
                 {/* Heading */}
-                <div className='p-8 border-b border-[#dbe6df] flex items-center justify-between'>
+                <div className='p-6 sm:p-8 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-semibold'>Account Settings</h3>
                   <i className="ri-user-settings-line text-[#61896f] text-[20px]"></i>
                 </div>
 
                 {/* Info */}
-                <div className='p-8'>
-                  <div className='flex items-start gap-8'>
+                <div className='p-4 sm:p-8'>
+                  <div className='flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8'>
                     {/* Profile Photo */}
                     <div className='flex flex-col items-center gap-3'>
                       <img className='size-24 rounded-full bg-gray-200 bg-cover bg-center border-4 border-white shadow-xl object-cover' src={ownerDp} alt="Profile" />
@@ -48,7 +48,7 @@ const Settings = () => {
                     </div>
 
                     {/* Info Form */}
-                    <div className='flex-1 w-full grid grid-cols-2 gap-6'>
+                    <div className='flex-1 w-full grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                       <div className='flex flex-col gap-1.5'>
                         <label className='text-sm font-medium'>Full Name</label>
                         <input className='w-full h-12 px-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="text" placeholder='Enter full name' value='Alex Johnson' />
@@ -59,7 +59,7 @@ const Settings = () => {
                         <input className='w-full h-12 px-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="email" placeholder='name@example.com' value='alex.j@fitpulse.com' />
                       </div>
 
-                      <div className='col-span-2 border-t border-[#dbe6df] my-2'></div>
+                      <div className='col-span-1 sm:col-span-2 border-t border-[#dbe6df] my-2'></div>
                       
                       <div className='flex flex-col gap-1.5'>
                         <label className='text-sm font-medium'>New Password</label>
@@ -78,13 +78,13 @@ const Settings = () => {
               {/* Gym Details */}
               <section className='bg-white rounded-xl border border-[#dbe6df] shadow-sm overflow-hidden'>
                 {/* Heading */}
-                <div className='p-8 border-b border-[#dbe6df] flex items-center justify-between'>
+                <div className='p-6 sm:p-8 border-b border-[#dbe6df] flex items-center justify-between'>
                   <h3 className='text-lg font-semibold'>Gym Details</h3>
                   <i className="ri-building-line text-[#61896f] text-[20px]"></i>
                 </div>
 
                 {/* Info */}
-                <div className='p-8 grid grid-cols-2 gap-6'>
+                <div className='p-4 sm:p-8 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                   <div className='flex flex-col gap-1.5'>
                     <label className='text-sm font-medium'>Gym Name</label>
                     <input className='w-full h-12 px-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="text" placeholder="Enter gym name" value='FitPulse Downtown' />
@@ -108,7 +108,7 @@ const Settings = () => {
                     <input className='w-full h-12 px-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg' type="time" placeholder="Enter closing time" value='22:00' />
                   </div>
 
-                  <div className='col-span-2 flex flex-col gap-1.5'>
+                  <div className='col-span-1 sm:col-span-2 flex flex-col gap-1.5'>
                     <label className='text-sm font-medium'>Address</label>
                     <textarea className='w-full px-3 py-3 rounded-lg border border-[#dbe6df] bg-white focus:outline-0 focus:ring-2 focus:ring-[#15ec5b] focus:border-transparent text-sm transition-all placeholder:text-lg resize-none' placeholder='123 Fitness Blvd, Gym City, GC 90210' rows='3'>123 Fitness Blvd, Suite 100, Metro City, ST 54321</textarea>
                   </div>
@@ -160,7 +160,7 @@ const Settings = () => {
 
                   <div>
                     <p className='text-xs font-bold text-[#61896f] uppercase tracking-wider mb-4'>Interface Theme</p>
-                    <div className='grid grid-cols-3 gap-2'>
+                    <div className='grid grid-cols-1 sm:grid-cols-3 gap-2'>
                       <button 
                         onClick={() => setTheme('light')}
                         className={`flex flex-col items-center gap-2 p-3 rounded-lg transition-all ${

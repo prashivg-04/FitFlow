@@ -1,5 +1,48 @@
 # FitFlow Backend API Documentation
 
+## Table of Contents
+- [1. Project Overview](#1-project-overview)
+- [2. System Flow](#2-system-flow)
+  - [gymStatus Values](#gymstatus-values)
+- [3. Authentication APIs](#3-authentication-apis)
+  - [POST /api/auth/signup](#post-apiauthsignup)
+  - [POST /api/auth/login](#post-apiauthlogin)
+  - [POST /api/auth/logout](#post-apiauthlogout)
+  - [GET /api/auth/me](#get-apiauthme)
+- [4. Join Request APIs](#4-join-request-apis)
+  - [POST /api/join-request](#post-apijoin-request)
+  - [GET /api/owner/join-requests](#get-apiownerjoin-requests)
+  - [PATCH /api/owner/join-request/:id](#patch-apiownerjoin-requestid)
+- [5. Owner APIs](#5-owner-apis)
+  - [GET /api/owner/members](#get-apiownermembers)
+  - [GET /api/owner/members/unassigned](#get-apiownermembersunassigned)
+  - [GET /api/owner/trainers](#get-apiownertrainers)
+  - [POST /api/owner/assign-trainer](#post-apiownerassign-trainer)
+  - [DELETE /api/owner/unassign-trainer](#delete-apiownerunassign-trainer)
+- [6. Trainer APIs](#6-trainer-apis)
+  - [GET /api/trainer/members](#get-apitrainermembers)
+  - [POST /api/trainer/programs](#post-apitrainerprograms)
+  - [GET /api/trainer/programs](#get-apitrainerprograms)
+  - [POST /api/trainer/assign-program](#post-apitrainerassign-program)
+  - [GET /api/trainer/member/:memberId/calendar](#get-apitrainermembermemberidcalendar)
+  - [GET /api/trainer/member/:memberId/assignment-window](#get-apitrainermembermemberidassignment-window)
+- [7. Member APIs](#7-member-apis)
+  - [GET /api/member/schedule](#get-apimemberschedule)
+  - [POST /api/member/complete-workout](#post-apimembercomplete-workout)
+- [8. Additional Implemented APIs](#8-additional-implemented-apis)
+  - [GET /](#get-)
+  - [GET /api/user/gym-info](#get-apiusergym-info)
+- [9. Common Response Format](#9-common-response-format)
+  - [Standard Success (Most Endpoints)](#standard-success-most-endpoints)
+  - [Standard Error](#standard-error)
+  - [Validation Error](#validation-error)
+- [10. Error Handling](#10-error-handling)
+- [11. Notes & Edge Cases](#11-notes--edge-cases)
+- [12. Environment Notes](#12-environment-notes)
+  - [Required Variables](#required-variables)
+  - [Runtime Configuration](#runtime-configuration)
+  - [Auth Cookie](#auth-cookie)
+
 ## 1. Project Overview
 
 FitFlow backend is a Node.js + Express REST API with Prisma + PostgreSQL.
@@ -431,6 +474,49 @@ or
 
 ## 5. Owner APIs
 
+### GET /api/owner/members
+
+- Purpose: Get all active members for this gym, including their trainer assignments.
+- Role: OWNER
+- Authentication Required: Yes
+
+**Headers**
+
+- Cookie: `token=<jwt>`
+
+**Success (200)**
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "uuid",
+      "userId": "uuid",
+      "ownerId": "uuid",
+      "gymStatus": "ACTIVE",
+      "user": {
+        "id": "uuid",
+        "name": "John Doe",
+        "email": "john@example.com"
+      },
+      "trainerMembers": [
+        {
+          "trainerId": "uuid",
+          "memberId": "uuid",
+          "trainer": {
+            "user": {
+              "name": "Trainer Bob"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+---
 ### GET /api/owner/members/unassigned
 
 - Purpose: Get active members without trainer assignment.
@@ -1089,7 +1175,17 @@ or
 Trainer/member response includes:
 
 - `gymName` (nullable)
-- `name`
+- `ownerName` (nullable)
+- `ownerEmail` (nullable)
+- `ownerPhone` (nullable)
+- `address` (nullable)
+- `city` (nullable)
+- `name` (the trainer/member's own name)
+
+And exclusively for Members:
+- `trainerName` (nullable, only if assigned)
+- `trainerEmail` (nullable, only if assigned)
+- `trainerSpecialization` (nullable, only if assigned)
 
 **Error Responses**
 

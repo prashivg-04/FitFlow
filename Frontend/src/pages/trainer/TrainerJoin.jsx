@@ -22,29 +22,27 @@ const TrainerJoin = () => {
     }, [user, navigate]);
 
     const [gymCode, setGymCode] = useState('');
-    const [message, setMessage] = useState('');
 
     const handleJoin = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await api.post('/join-request', {
+            await api.post('/join-request', {
                 gymCode: gymCode
             });
             toast.success('Join request sent successfully! Waiting for approval.');
-            setMessage('Join request sent successfully! Waiting for approval.');
 
             const meResponse = await api.get('/auth/me');
             dispatch(loginSuccess(meResponse.data.data));
         } catch(err) {
-            setMessage(err.response?.data?.message || "Something went wrong");
+            toast.error(err.response?.data?.message || "Something went wrong");
         }
     }
 
   return (
     <div className='bg-[#f7f8f6] min-h-screen'>
-        <header className='flex items-center justify-between h-20 px-6 py-4 bg-white border-b border-[#f0f4f2]'>
-        <div className='h-20 flex items-center px-8 border-b border-[#f0f4f2]'>
+        <header className='flex items-center justify-between h-20 px-4 sm:px-6 py-4 bg-white border-b border-[#f0f4f2]'>
+        <div className='h-20 flex items-center px-2 sm:px-8 border-b border-[#f0f4f2]'>
             <div className='flex items-center gap-3'>
                 <div className='size-10 flex items-center justify-center'> 
                     <img className='rounded-lg' src={icon} alt="" />
@@ -66,11 +64,11 @@ const TrainerJoin = () => {
         </div>
         </header>
         
-        <div className='flex-1 max-w-5xl mx-auto w-full px-6 py-12 space-y-12'>
-            <section className='text-center space-y-6'>
+        <div className='flex-1 max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-12'>
+            <section className='text-center space-y-4 sm:space-y-6'>
                 <div className='space-y-2'>
-                    <h1 className='text-slate-900 tracking-tight leading-tight text-5xl font-extrabold font-display'>Welcome Alex 👋</h1>
-                    <p className='text-slate-500 text-lg max-w-2xl mx-auto'>Your profile is ready. Now, let's get you connected to your training facility to unlock all management tools.</p>
+                    <h1 className='text-slate-900 tracking-tight leading-tight text-3xl sm:text-5xl font-extrabold font-display'>Welcome Alex 👋</h1>
+                    <p className='text-slate-500 text-base sm:text-lg max-w-2xl mx-auto'>Your profile is ready. Now, let's get you connected to your training facility to unlock all management tools.</p>
                 </div>
                 <div className='inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200'>
                     <span className='size-2 rounded-full bg-amber-400 animate-pulse'></span>
@@ -81,9 +79,9 @@ const TrainerJoin = () => {
             <section className='relative group'>
                 <div className='absolute -inset-1 bg-linear-to-r from-[#15ec5b] to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000'></div>
                 <div className='relative bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100'>
-                    <div className='flex'>
-                        <img className='w-1/2 bg-center bg-cover bg-no-repeat min-h-75' src={gym} alt="" />
-                        <div className='w-1/2 p-12 flex flex-col justify-center space-y-6'>
+                    <div className='flex flex-col lg:flex-row'>
+                        <img className='w-full lg:w-1/2 bg-center bg-cover bg-no-repeat min-h-62.5 lg:min-h-75 object-cover' src={gym} alt="" />
+                        <div className='w-full lg:w-1/2 p-6 sm:p-12 flex flex-col justify-center space-y-6'>
                             <div className='space-y-2'>
                                 <h3 className='text-2xl font-bold text-slate-900 font-display'>Join Your Gym</h3>
                                 <p className='text-slate-500 '>Enter the unique access code provided by your fitness center to sync your training plans and track your progress.</p>
@@ -120,7 +118,7 @@ const TrainerJoin = () => {
                 </div>
             </section>
 
-            <section className='grid grid-cols-3 gap-6'>
+            <section className='grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6'>
                 <div className='bg-white p-6 rounded-2xl border border-slate-100 hover:border-[#15ec5b]/50 transition-colors'>
                     <div className='size-12 rounded-xl bg-[#15ec5b]/10 flex items-center justify-center text-[#15ec5b] mb-4'>
                         <i className="ri-file-text-line text-[24px]"></i>

@@ -4,19 +4,19 @@ import ComingSoonWrapper from '../../components/ComingSoonWrapper'
 const MemberNotification = () => {
   return (
     <ComingSoonWrapper>
-    <div className='flex-1 overflow-y-auto p-8 scroll-smooth'>
-      <div className='max-w-4xl mx-auto space-y-8'>
+    <div className='flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 scroll-smooth'>
+      <div className='max-w-4xl mx-auto space-y-6 sm:space-y-8'>
         {/* Heading */}
-        <div className='flex items-center justify-between gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4'>
           <div className='flex flex-col items-start'>
-            <h1 className='text-4xl font-bold tracking-tight'>Activity Feed</h1>
-            <p className='text-[#61896f] text-lg mt-1'>Stay updated with your gym activity, class reminders, and announcements.</p>
+            <h1 className='text-3xl sm:text-4xl font-bold tracking-tight'>Activity Feed</h1>
+            <p className='text-[#61896f] text-base sm:text-lg mt-1'>Stay updated with your gym activity, class reminders, and announcements.</p>
           </div>
         </div>
 
         {/* Filters */}
-        <div className='flex items-center justify-between gap-4 border-b border-slate-200 pb-4 px-2'>
-          <div className='flex flex-wrap gap-4'>
+        <div className='flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4 px-2'>
+          <div className='flex flex-wrap gap-3 sm:gap-4'>
             <button className='px-4 py-2 rounded-full bg-slate-900 text-white text-sm font-medium shadow-sm transition-transform hover:scale-105'>All</button>
             <button className='px-4 py-2 rounded-full bg-white border border-[#dbe6df] text-[#61896f] text-sm font-medium hover:bg-slate-50 transition-colors'>Announcements</button>
             <button className='px-4 py-2 rounded-full bg-white border border-[#dbe6df] text-[#61896f] text-sm font-medium hover:bg-slate-50 transition-colors'>Reminders</button>

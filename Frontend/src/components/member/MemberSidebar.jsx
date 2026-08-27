@@ -5,7 +5,13 @@ import { NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
 import FeedbackButton from '../FeedbackButton'
 
-const MemberSidebar = ({ username }) => {
+const MemberSidebar = ({ username, setIsSidebarOpen }) => {
+
+  const handleNavClick = () => {
+    if (setIsSidebarOpen) {
+      setTimeout(() => setIsSidebarOpen(false), 150);
+    }
+  };
 
   return (
     <div className='flex flex-col min-h-screen h-full w-64 bg-white border-r border-[#f0f4f2] z-10'>
@@ -29,6 +35,7 @@ const MemberSidebar = ({ username }) => {
                 <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>Main Menu</div>
                 <NavLink
                     to='/member/dashboard'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -41,6 +48,7 @@ const MemberSidebar = ({ username }) => {
 
                 <NavLink
                     to='/member/workout'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -51,8 +59,9 @@ const MemberSidebar = ({ username }) => {
                     <span className='font-medium'>Workout Plan</span>
                 </NavLink>
 
-                <NavLink
+                {/* <NavLink
                     to='/member/progress'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -65,6 +74,7 @@ const MemberSidebar = ({ username }) => {
 
                 <NavLink
                     to='/member/attendance'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -77,6 +87,7 @@ const MemberSidebar = ({ username }) => {
 
                 <NavLink
                     to='/member/subscription'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -85,10 +96,11 @@ const MemberSidebar = ({ username }) => {
                 >
                     <i className="text-lg fa-solid fa-money-check"></i>
                     <span className='font-medium'>Subscription</span>
-                </NavLink>
+                </NavLink> */}
 
-                <NavLink
+                {/* <NavLink
                     to='/member/notifications'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -97,14 +109,15 @@ const MemberSidebar = ({ username }) => {
                 >
                     <i className="text-lg fa-solid fa-bell"></i>
                     <span className='font-medium'>Notifications</span>
-                </NavLink>
+                </NavLink> */}
             </div>
 
             {/* System Menu */}
             <div className='flex flex-col pt-4 mt-4 border-t border-[#f0f4f2]'>
-                <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
+                {/* <div className='px-4 py-2 text-xs font-semibold text-[#61896f] uppercase tracking-wider'>System</div>
                 <NavLink
                     to='/member/settings'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -117,6 +130,7 @@ const MemberSidebar = ({ username }) => {
 
                 <NavLink
                     to='/member/support'
+                    onClick={handleNavClick}
                     className={({ isActive }) => `px-4 py-2 flex items-center gap-3 rounded-lg transition-all cursor-pointer ${
                         isActive
                         ? 'bg-[#edfdef] text-[#15ec5b] border-l-4 border-[#15ec5b]' 
@@ -127,7 +141,7 @@ const MemberSidebar = ({ username }) => {
                     <span className='font-medium'>Support</span>
                 </NavLink>
 
-                <br />
+                <br /> */}
                 <FeedbackButton />
             </div>
         </div>

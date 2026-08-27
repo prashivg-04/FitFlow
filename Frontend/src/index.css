@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+@layer base {
+  button {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  button:active:not(:disabled) {
+    transform: scale(0.96);
+  }
+
+  button:hover:not(:disabled) {
+    filter: brightness(0.95);
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    filter: none;
+  }
+}
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  @media (max-width: 768px) {
+    .responsive-table {
+      display: block;
+      width: 100%;
+    }
+    .responsive-table thead {
+      display: none;
+    }
+    .responsive-table tbody, .responsive-table tr, .responsive-table td {
+      display: block;
+      width: 100%;
+    }
+    .responsive-table tr {
+      margin-bottom: 1.25rem;
+      border: 1px solid #dbe6df;
+      border-radius: 0.75rem;
+      background-color: white;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    }
+    .responsive-table td {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.875rem 1rem !important;
+      border-bottom: 1px solid #f0f4f2;
+      text-align: right;
+    }
+    .responsive-table td:first-child {
+      background-color: #fbfdfc;
+      border-bottom: 2px solid #f0f4f2;
+    }
+    .responsive-table td:last-child {
+      border-bottom: none;
+    }
+    .responsive-table td::before {
+      content: attr(data-label);
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #61896f;
+      text-align: left;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+    .responsive-table td > * {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

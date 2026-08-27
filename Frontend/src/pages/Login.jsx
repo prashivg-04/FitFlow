@@ -19,6 +19,7 @@ const Login = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -89,7 +90,7 @@ const Login = () => {
     <div className='bg-[#f7f8f6] font-display antialiased min-h-screen'>
       <div className='flex w-full'>
         {/* Left */}
-        <div className='flex w-1/2 min-h-screen relative overflow-hidden'>
+        <div className='hidden lg:flex w-1/2 min-h-screen relative overflow-hidden'>
           <img className='absolute inset-0 w-full h-full bg-cover bg-center ' src={bgImg} alt="" />
 
           <div className='relative z-10 flex flex-col justify-end p-16 w-full h-full'>
@@ -139,7 +140,7 @@ const Login = () => {
         </div>
 
         {/* Right */}
-        <div className='w-1/2 p-6 relative flex items-center justify-center'>
+        <div className='w-full lg:w-1/2 p-6 relative flex items-center justify-center'>
           <div className='w-full flex flex-col max-w-110 gap-6'>
             <div className='flex flex-col gap-2 mb-2'>
               <h1 className='text-slate-900 text-[32px] font-bold leading-tight tracking-tight'>Welcome back</h1>
@@ -168,17 +169,23 @@ const Login = () => {
                   <input 
                     value={formData.password}
                     onChange={(e) => setFormData({...formData, password: e.target.value})}
-                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 text-base font-normal leading-none transition-all' 
-                    type="password"  
+                    className='form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg border border-[#dbe6df] focus:outline-0 focus:ring-2 focus:ring-[#15ec5b]/50 focus:border-[#15ec5b] h-14 p-4 pr-12 text-base font-normal leading-none transition-all' 
+                    type={showPassword ? "text" : "password"}
                     placeholder='Enter your password' 
                   />
-                  {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
-                  <i className="ri-eye-line material-symbol-outlined absolute right-4 top-4 group-focus-within:text-[#15ec5b] transition-colors"></i>
+                  <button 
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-4 hover:text-[#15ec5b] group-focus-within:text-[#15ec5b] focus:outline-none transition-colors"
+                  >
+                    <i className={`text-xl ${showPassword ? 'ri-eye-off-line' : 'ri-eye-line'} material-symbol-outlined`}></i>
+                  </button>
                 </div>
+                {errors.password && <p className='text-red-500 text-sm mt-1'>{errors.password}</p>}
               </div>
 
               <div className='flex justify-end'>
-                <a className='text-sm font-medium text-[#111813] hover:text-[#15ec5b]' href="">Forgot password?</a>
+                {/* <a className='text-sm font-medium text-[#111813] hover:text-[#15ec5b]' href="">Forgot password?</a> */}
               </div>
 
               <button 

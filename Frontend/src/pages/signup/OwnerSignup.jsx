@@ -130,9 +130,9 @@ const OwnerSignup = () => {
                 <h2 className='text-lg font-bold leading-tight'>Gym Information</h2>
               </div>
 
-              <div className='grid grid-cols-2 gap-5'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
                 {/* Gym Name */}
-                <div className='col-span-2'>
+                <div className='col-span-1 sm:col-span-2'>
                   <label className='flex flex-col gap-1 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Gym Name</p>
                     <input 
@@ -147,7 +147,7 @@ const OwnerSignup = () => {
                 </div>
 
                 {/* Address */}
-                <div className='col-span-2'>
+                <div className='col-span-1 sm:col-span-2'>
                   <label className='flex flex-col gap-1 flex-1'>
                     <p className='text-sm font-medium leading-normal'>Gym Address</p>
                     <div className='relative'>
@@ -207,13 +207,13 @@ const OwnerSignup = () => {
               </div>
 
               {/* Form */}
-              <div className='grid grid-cols-2 gap-5'>
-                <div className='col-span-2'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-5'>
+                <div className='col-span-1 sm:col-span-2'>
                   <label className='flex flex-col flex-1 gap-2'>
                     <p className='text-sm font-medium leading-normal'>Operating Hours</p>
-                    <div className='flex items-center gap-3'>
+                    <div className='flex flex-col sm:flex-row sm:items-center gap-3'>
                       {/* Opening Time */}
-                      <div className='flex-1'>
+                      <div className='flex-1 w-full'>
                         <div className='text-[#61896f] text-xs font-semibold uppercase pl-1 pb-1'>Open</div>
                         <input 
                           value={formData.openingTime}
@@ -223,9 +223,9 @@ const OwnerSignup = () => {
                         />
                         {errors?.openingTime && <span className='text-xs text-red-500 mt-1'>{errors.openingTime}</span>}
                       </div>
-                      <span>-</span>
+                      <span className='hidden sm:block'>-</span>
                       {/* Closing Time */}
-                      <div className='flex-1'>
+                      <div className='flex-1 w-full'>
                         <div className='text-[#61896f] text-xs font-semibold uppercase pl-1 pb-1'>Close</div>
                         <input 
                           value={formData.closingTime}
