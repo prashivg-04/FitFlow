@@ -3,7 +3,6 @@ import icon from '../../assets/icon.svg'
 import memberDp from '../../media/M.png'
 import { NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
-import FeedbackButton from '../FeedbackButton'
 
 const MemberSidebar = ({ username, setIsSidebarOpen }) => {
 
@@ -142,7 +141,6 @@ const MemberSidebar = ({ username, setIsSidebarOpen }) => {
                 </NavLink>
 
                 <br /> */}
-                <FeedbackButton />
             </div>
         </div>
 

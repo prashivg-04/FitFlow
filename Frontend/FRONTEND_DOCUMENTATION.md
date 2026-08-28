@@ -488,4 +488,3 @@ Implications:
   - Feature suggestions
   - General feedback
 
-The feedback form URL is managed through the environment variable `VITE_FEEDBACK_FORM_URL`.

@@ -3,7 +3,6 @@ import icon from '../../assets/icon.svg'
 import trainerDp from '../../media/T.png'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
-import FeedbackButton from '../FeedbackButton'
 
 const TrainerSidebar = ({ username }) => {
 
@@ -128,7 +127,6 @@ const TrainerSidebar = ({ username }) => {
                 </NavLink>
 
                 <br /> */}
-                <FeedbackButton />
             </div>
         </div>
 

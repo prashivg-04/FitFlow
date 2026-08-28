@@ -3,7 +3,6 @@ import icon from '../../assets/icon.svg'
 import ownerDp from '../../media/O.png'
 import { Link, NavLink } from 'react-router-dom'
 import LogoutSidebar from '../LogoutSidebar'
-import FeedbackButton from '../FeedbackButton'
 
 const OwnerSidebar = ({ username, setIsSidebarOpen }) => {
   return (
@@ -122,7 +121,6 @@ const OwnerSidebar = ({ username, setIsSidebarOpen }) => {
                 </NavLink>
                 
                 <br /> */}
-                <FeedbackButton />
             </div>
         </div>
 
