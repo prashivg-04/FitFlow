@@ -476,15 +476,3 @@ Implications:
 4. No centralized loading overlay for app bootstrap or layout-level data fetches.
 5. Many feature pages are scaffolded with `ComingSoonWrapper`, so navigation breadth is greater than functional depth.
 6. ErrorBoundary fallback is global and generic; no route-scoped recovery UX yet.
-
----
-
-## 13. Feedback Integration
-
-- A reusable `FeedbackButton` component is added to the sidebar UI.
-- Clicking the button opens a Google Form in a new browser tab.
-- The form collects:
-  - Bug reports
-  - Feature suggestions
-  - General feedback
-

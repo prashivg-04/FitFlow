@@ -26,7 +26,9 @@ The application consists of three containers:
 2. Install dependencies using `npm ci`
 3. Copy source code
 4. Generate Prisma Client
-5. Start Express server
+5. Copy and configure the Docker entrypoint script
+6. Run Prisma migrations on container startup
+7. Start Express server
 
 ### Port
 

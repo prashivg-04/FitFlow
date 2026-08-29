@@ -258,15 +258,73 @@ The existing Prisma migrations are included in the backend project:
 Backend/prisma/migrations/
 ```
 
-After the containers are running, migrations can be applied using:
+### Automatic Migration on Container Startup
+
+The backend container automatically applies pending Prisma migrations before starting the Express server.
+
+A startup script is used as the Docker entrypoint:
+
+```text
+Backend/docker-entrypoint.sh
+```
+
+The script runs:
+
+```sh
+#!/bin/sh
+
+set -e
+
+echo "Running Prisma migrations..."
+npx prisma migrate deploy
+
+echo "Starting server..."
+exec node src/server.js
+```
+
+Startup flow:
+
+```text
+Backend container starts
+        ↓
+docker-entrypoint.sh
+        ↓
+Prisma migrations are deployed
+        ↓
+If successful, Express server starts
+```
+
+`set -e` ensures that the script exits immediately if the Prisma migration command fails. This prevents the backend server from starting against a database where required migrations could not be applied.
+
+`exec` replaces the shell process with the Node.js process, allowing the application to properly receive container signals.
+
+The backend Dockerfile configures the script as the container entrypoint:
+
+```dockerfile
+COPY docker-entrypoint.sh ./
+
+RUN chmod +x docker-entrypoint.sh
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
+```
+
+The script uses:
+
+```sh
+#!/bin/sh
+```
+
+because the backend image uses Alpine Linux (`node:22-alpine`), which provides `/bin/sh` by default and does not include Bash (`/bin/bash`) by default.
+
+### Previous Manual Approach
+
+Previously, migrations were manually applied using:
 
 ```bash
 docker exec -it fitflow-backend npx prisma migrate deploy
 ```
 
-This applies all pending migrations to the PostgreSQL container.
-
-The complete set of existing migrations was successfully applied during the Compose setup.
+This is no longer required during normal container startup because pending migrations are automatically applied by the backend entrypoint.
 
 ---
 

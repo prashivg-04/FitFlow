@@ -10,6 +10,9 @@ COPY . .
 
 RUN npx prisma generate
 
+COPY docker-entrypoint.sh ./
+RUN chmod +x docker-entrypoint.sh
+
 EXPOSE 8080
 
-CMD ["npm", "start"]
+ENTRYPOINT ["./docker-entrypoint.sh"]

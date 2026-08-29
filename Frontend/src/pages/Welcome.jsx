@@ -6,7 +6,6 @@ import ownerDp from '../media/O.png'
 import trainerDp from '../media/T.png'
 import memberDp from '../media/M.png'
 import { Link, Links } from 'react-router-dom'
-import FeedbackButton from '../components/FeedbackButton'
 
 
 const Welcome = () => {
@@ -51,9 +50,6 @@ const Welcome = () => {
                     <p className='block px-3 py-2 text-base font-medium text-slate-700 hover:text-[#15ec5b] hover:bg-slate-50 rounded-md cursor-pointer'>Features</p>
                     <p className='block px-3 py-2 text-base font-medium text-slate-700 hover:text-[#15ec5b] hover:bg-slate-50 rounded-md cursor-pointer'>Solutions</p>
                     <p className='block px-3 py-2 text-base font-medium text-slate-700 hover:text-[#15ec5b] hover:bg-slate-50 rounded-md cursor-pointer'>Pricing</p>
-                    <div className='px-3 py-2'>
-                        <FeedbackButton></FeedbackButton>
-                    </div>
                     <Link to="/login" className='block px-3 py-2 text-base font-bold text-slate-900 hover:bg-slate-50 rounded-md'>Login</Link>
                     <Link to='/signup' className='block px-3 py-2 text-base font-bold text-white bg-[#15ec5b] hover:bg-emerald-500 rounded-md text-center mt-4'>Get Started</Link>
                 </div>
