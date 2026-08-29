@@ -30,6 +30,26 @@ The application consists of three containers:
 6. Run Prisma migrations on container startup
 7. Start Express server
 
+### Container Startup
+
+The backend uses a Docker entrypoint script to automatically apply pending Prisma migrations before starting the server.
+
+Startup flow:
+
+```text
+Backend container starts
+        ↓
+docker-entrypoint.sh
+        ↓
+Prisma migrations are deployed
+        ↓
+Express server starts
+```
+
+The entrypoint script uses `set -e` so the container exits if database migrations fail.
+
+The Node.js server is started using `exec` to ensure proper signal handling inside the container.
+
 ### Port
 
 8080
@@ -39,6 +59,7 @@ The application consists of three containers:
 * ✅ Docker image builds successfully.
 * ✅ Container starts successfully.
 * ✅ Backend accessible on port 8080.
+* ✅ Prisma migrations automatically applied on startup.
 
 ---
 
@@ -64,6 +85,7 @@ Docker build arguments are used to provide these values during the image build:
 
 ```dockerfile
 ARG VITE_NODE_SERVER_URL
+
 ENV VITE_NODE_SERVER_URL=$VITE_NODE_SERVER_URL
 
 RUN npm run build
@@ -107,12 +129,124 @@ try_files $uri $uri/ /index.html;
 
 ---
 
-## Next Step
+## Docker Compose
 
-Create `docker-compose.yml` to orchestrate:
+Docker Compose is used to run the complete application locally.
+
+The Compose setup includes:
 
 * Frontend
 * Backend
 * PostgreSQL
 
-on a shared Docker network.
+Docker Compose automatically creates a shared network for the services, allowing containers to communicate using service names.
+
+The PostgreSQL database uses a named Docker volume to persist database data.
+
+### Service Communication
+
+```text
+Browser
+   │
+   ▼
+Frontend (port 3000)
+   │
+   ▼
+Backend (port 8080)
+   │
+   ▼
+PostgreSQL (port 5432)
+```
+
+### Status
+
+* ✅ All services start successfully with Docker Compose.
+* ✅ Frontend communicates with backend.
+* ✅ Backend communicates with PostgreSQL.
+* ✅ PostgreSQL data is persisted using a Docker volume.
+* ✅ Prisma migrations run automatically during backend startup.
+
+---
+
+## Amazon ECR
+
+The Docker images are pushed to Amazon Elastic Container Registry (ECR) so they can later be pulled by Kubernetes.
+
+### Region
+
+`ap-south-1`
+
+### Repositories
+
+* `prashivgoyal/fitflow-frontend`
+* `prashivgoyal/fitflow-backend`
+
+### Repository URIs
+
+```text
+492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-frontend
+
+492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend
+```
+
+### ECR Authentication
+
+Docker was authenticated with Amazon ECR using:
+
+```bash
+aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 492094933457.dkr.ecr.ap-south-1.amazonaws.com
+```
+
+### Image Tagging
+
+Local Docker images were tagged with their corresponding ECR repository URIs.
+
+Backend:
+
+```bash
+docker tag fitflow-backend:latest 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend:latest
+```
+
+Frontend:
+
+```bash
+docker tag fitflow-frontend:latest 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-frontend:latest
+```
+
+### Image Push
+
+Backend:
+
+```bash
+docker push 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend:latest
+```
+
+Frontend:
+
+```bash
+docker push 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-frontend:latest
+```
+
+### Status
+
+* ✅ Backend image pushed successfully to Amazon ECR.
+* ✅ Frontend image pushed successfully to Amazon ECR.
+* ✅ Both images verified in the AWS Console.
+* ✅ Images are available with the `latest` tag.
+
+---
+
+## Phase 1 Status
+
+Dockerization is complete.
+
+The application can:
+
+* Run locally using Docker Compose.
+* Run frontend, backend, and PostgreSQL as separate containers.
+* Persist PostgreSQL data using Docker volumes.
+* Automatically apply Prisma migrations during backend startup.
+* Use build-time environment variables for the Vite frontend.
+* Store application Docker images in Amazon ECR.
+
+The next phase focuses on Kubernetes deployment and infrastructure.
