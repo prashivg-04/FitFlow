@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: backend-config
+  namespace: fitflow
+
+data:
+  # This deployment is used for Kubernetes demonstration/testing over HTTP.
+  # NODE_ENV is intentionally set to development because the EC2 setup
+  # does not include HTTPS/TLS, and secure cookies would not work over HTTP.
+  NODE_ENV: development
+  PORT: "8080"
+
+  # EC2 deployment — replace with actual Elastic IP
+  CORS_ORIGIN: http://<your-elastic-ip>
+
+  # Local Mac testing via Ingress port-forward:
+  # CORS_ORIGIN: http://localhost:8081

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: frontend
+  namespace: fitflow
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      labels:
+        app: frontend
+
+    spec:
+      containers:
+      - name: frontend
+        image: 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-frontend:latest
+        # EC2 deployment: always pull the latest image from ECR
+        imagePullPolicy: Always
+
+        # Local Minikube testing could use IfNotPresent after manually loading images
+        # imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 3000

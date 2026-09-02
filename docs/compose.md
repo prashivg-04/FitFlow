@@ -246,6 +246,22 @@ The frontend API URL is a Vite build-time variable.
 
 Because Vite embeds `VITE_*` variables into the production JavaScript bundle during `npm run build`, the value must be supplied during the Docker image build rather than only when the container starts.
 
+In Docker Compose, the value is set to:
+
+```text
+http://localhost:8080/api
+```
+
+This differs from a Kubernetes + Ingress deployment, which uses:
+
+```text
+/api
+```
+
+The reason for this difference is:
+* **Docker Compose**: The frontend running in the browser accesses the backend directly through the locally exposed backend port (`http://localhost:8080/api`).
+* **Kubernetes + Ingress**: NGINX Ingress handles path-based routing, routing `/api` requests internally to the backend service.
+
 ---
 
 ## Prisma Database Migration

@@ -91,6 +91,9 @@ ENV VITE_NODE_SERVER_URL=$VITE_NODE_SERVER_URL
 RUN npm run build
 ```
 
+The value is supplied differently depending on the deployment environment.
+
+**For Docker Compose (Local Development):**
 The value is supplied from Docker Compose using:
 
 ```yaml
@@ -98,6 +101,18 @@ build:
   args:
     VITE_NODE_SERVER_URL: http://localhost:8080/api
 ```
+
+**For Kubernetes (Production/Remote):**
+The frontend image is built separately using:
+
+```bash
+docker build \
+  --build-arg VITE_NODE_SERVER_URL=/api \
+  -t <ECR_FRONTEND_IMAGE_URI>:latest \
+  ./Frontend
+```
+
+This uses `/api` as a relative path because Kubernetes uses NGINX Ingress to route `/api` requests internally to the backend service.
 
 `ARG` provides the value during the Docker image build, while `ENV` makes it available as an environment variable to the Vite build process.
 
