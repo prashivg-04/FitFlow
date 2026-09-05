@@ -23,7 +23,9 @@ The deployment uses:
 ```
 Browser
     ↓
-EC2 Public IP (port 80)
+EC2 Elastic/Public IP (port 80)
+    ↓
+Minikube (--ports=80:80)
     ↓
 NGINX Ingress Controller
     ↓
@@ -36,6 +38,9 @@ NGINX Ingress Controller
                                                     ↓
                                         PersistentVolume (/mnt/data/postgres)
 ```
+
+Traffic enters EC2 on port 80, which is mapped directly into Minikube via `--ports=80:80`.
+The NGINX Ingress Controller receives it and routes by path.
 
 ---
 
@@ -69,17 +74,20 @@ Latest tag is overwritten on every push.
 |---|---|
 | Role name | fitflow-ec2-role |
 | Policy | AmazonEC2ContainerRegistryReadOnly |
-| Purpose | Allows EC2 to pull images from ECR |
+| Purpose | Allows EC2 to authenticate with ECR via IAM role |
+
+> Note: The IAM role alone is not sufficient for Minikube to pull private ECR images. A Kubernetes `ecr-secret` is also required. See Section 7.2.
 
 ### 3.4 Security Group
 
 | Port | Protocol | Purpose |
 |---|---|---|
 | 22 | TCP | SSH access |
-| 80 | TCP | HTTP / Ingress |
-| 443 | TCP | HTTPS (future) |
+| 80 | TCP | HTTP / Application access via Minikube port mapping |
+| 443 | TCP | HTTPS (future use) |
 | 8443 | TCP | Minikube API server |
-| 30000-32767 | TCP | Kubernetes NodePort range |
+
+> The NodePort range (30000-32767) does not need to be exposed publicly. The final architecture uses `--ports=80:80` Minikube mapping instead of exposing NodePorts directly.
 
 ---
 
@@ -88,11 +96,11 @@ Latest tag is overwritten on every push.
 ### 4.1 Backend Image
 
 ```bash
-# Build
-docker build -t 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend:latest ./Backend
-
 # Login to ECR
 aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 492094933457.dkr.ecr.ap-south-1.amazonaws.com
+
+# Build
+docker build -t 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend:latest ./Backend
 
 # Push
 docker push 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-backend:latest
@@ -136,7 +144,17 @@ sudo usermod -aG docker ubuntu
 newgrp docker
 ```
 
-### 5.3 Install kubectl
+### 5.3 Install AWS CLI
+
+```bash
+sudo apt install -y awscli
+aws --version
+
+# Verify IAM role is attached
+aws sts get-caller-identity
+```
+
+### 5.4 Install kubectl
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -144,7 +162,7 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
-### 5.4 Install Minikube
+### 5.5 Install Minikube
 
 ```bash
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
@@ -152,15 +170,17 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 minikube version
 ```
 
-### 5.5 Start Minikube
+### 5.6 Start Minikube
 
 ```bash
-minikube start --driver=docker --memory=3000 --cpus=2
+minikube start --driver=docker --memory=3000 --cpus=2 --ports=80:80
 minikube status
 kubectl get nodes
 ```
 
-### 5.6 Enable NGINX Ingress
+> `--ports=80:80` maps EC2 port 80 directly into Minikube so the application is accessible via the EC2 public/Elastic IP without exposing NodePorts publicly.
+
+### 5.7 Enable NGINX Ingress
 
 ```bash
 minikube addons enable ingress
@@ -221,13 +241,18 @@ CORS_ORIGIN: http://<your-elastic-ip>
 
 ### 6.4 Verify Container Image Configuration
 
-Confirm both deployments use `imagePullPolicy: Always`:
+Confirm both deployments use `imagePullPolicy: Always` and include `imagePullSecrets`:
 
 ```yaml
 imagePullPolicy: Always
 ```
 
-This ensures EC2 always pulls the latest image from ECR on deployment.
+```yaml
+imagePullSecrets:
+  - name: ecr-secret
+```
+
+This ensures EC2 always pulls the latest image from ECR using the K8s ECR secret for authentication.
 
 ### 6.5 Verify Persistent Storage Path
 
@@ -259,14 +284,28 @@ This ensures cookies work correctly over HTTP since EC2 deployment does not use 
 kubectl apply -f k8s/namespace.yaml
 ```
 
-### 7.2 Kubernetes Secrets
+### 7.2 ECR Pull Secret
+
+Because ECR repositories are private, Kubernetes cannot pull images using the EC2 IAM role alone. A Kubernetes docker-registry secret must be created in the `fitflow` namespace:
+
+```bash
+kubectl create secret docker-registry ecr-secret \
+  --docker-server=492094933457.dkr.ecr.ap-south-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region ap-south-1) \
+  --namespace=fitflow
+```
+
+> This secret expires after 12 hours because ECR tokens expire. Recreate it before each deployment session or automate it in the CI/CD pipeline.
+
+### 7.3 Kubernetes App Secrets
 
 ```bash
 kubectl apply -f k8s/database/secret.yaml
 kubectl apply -f k8s/backend/secret.yaml
 ```
 
-### 7.3 PostgreSQL
+### 7.4 PostgreSQL
 
 ```bash
 kubectl apply -f k8s/database/pv.yaml
@@ -281,7 +320,7 @@ Wait for PostgreSQL pod to be running before deploying backend:
 kubectl get pods -n fitflow -w
 ```
 
-### 7.4 Backend
+### 7.5 Backend
 
 ```bash
 kubectl apply -f k8s/backend/configmap.yaml
@@ -290,40 +329,35 @@ kubectl apply -f k8s/backend/deployment.yaml
 kubectl apply -f k8s/backend/service.yaml
 ```
 
-### 7.5 Frontend
+### 7.6 Frontend
 
 ```bash
 kubectl apply -f k8s/frontend/deployment.yaml
 kubectl apply -f k8s/frontend/service.yaml
 ```
 
-### 7.6 Ingress
+### 7.7 Ingress
 
 ```bash
 kubectl apply -f k8s/ingress.yaml
 ```
 
+> Always apply Ingress last — after all services are running. If Minikube is recreated, Ingress must be reapplied.
+
 ---
 
 ## 8. Accessing the Application
 
-Once all pods are running, get the Minikube IP:
+Once all pods are running, access FitFlow directly via the EC2 Elastic IP:
 
-```bash
-minikube ip
+```
+http://<your-elastic-ip>
 ```
 
-Access the application at:
-```
-http://<minikube-ip>
-```
+No `minikube tunnel` or NodePort exposure needed. The `--ports=80:80` flag on Minikube startup handles the port mapping from EC2 to Ingress.
 
-Or use tunnel for clean localhost access:
-```bash
-minikube tunnel
-```
-
-Then access at `http://localhost`
+> `minikube tunnel` is for LoadBalancer type services and is not used in this deployment.
+> `socat` was tested during troubleshooting but is not part of the final architecture.
 
 ---
 
@@ -360,22 +394,33 @@ kubectl describe pod <pod-name> -n fitflow
 | NODE_ENV | development | development |
 | imagePullPolicy | IfNotPresent | Always |
 | PV hostPath | N/A | /mnt/data/postgres |
+| Image auth | N/A | ecr-secret (K8s docker-registry secret) |
+| Minikube ports | N/A | --ports=80:80 |
 
 ---
 
 ## 11. Important Deployment Decisions
 
-**1. VITE_NODE_SERVER_URL as relative path for K8s**
+**1. Minikube started with `--ports=80:80`**
+This maps EC2 port 80 directly into Minikube, allowing the application to be accessed via the EC2 public/Elastic IP without exposing NodePorts publicly. The NodePort range (30000-32767) does not need to be open in the security group.
+
+**2. ECR authentication via Kubernetes ecr-secret**
+The EC2 IAM role alone is not sufficient for Minikube to pull private ECR images. A Kubernetes `docker-registry` secret (`ecr-secret`) must be created in the `fitflow` namespace and referenced in both frontend and backend deployments via `imagePullSecrets`. The ECR token expires every 12 hours so the secret must be recreated before each deployment session or automated in CI/CD.
+
+**3. VITE_NODE_SERVER_URL as relative path**
 Frontend uses `/api` as base URL instead of an absolute URL. This allows Ingress to route API calls correctly regardless of host or port. Absolute URLs like `http://localhost:8080/api` bypass Ingress and break in K8s.
 
-**2. NODE_ENV set to development despite K8s deployment**
+**4. NODE_ENV set to development despite K8s deployment**
 The backend cookie configuration uses `NODE_ENV` to decide `secure` and `sameSite` values. Since EC2 deployment uses HTTP (no SSL), `NODE_ENV=development` is used to avoid secure cookie issues. This is a deliberate decision for this testing deployment.
 
-**3. Secrets not committed to Git**
+**5. Secrets not committed to Git**
 `secret.yaml` files contain sensitive credentials and are excluded from version control via `.gitignore`. Template files (`secret.template.yaml`) are committed instead with placeholder values.
 
-**4. entrypoint.sh handles database migrations**
+**6. entrypoint.sh handles database migrations**
 The backend container runs `npx prisma migrate deploy` via `entrypoint.sh` before starting the server. No init containers or manual migration steps needed.
+
+**7. socat is NOT part of the final architecture**
+`socat` was tested during troubleshooting to verify Ingress routing. It is not required and should not be used in the final deployment.
 
 ---
 

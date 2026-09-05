@@ -18,6 +18,9 @@ spec:
         app: frontend
 
     spec:
+      imagePullSecrets:
+      - name: ecr-secret
+
       containers:
       - name: frontend
         image: 492094933457.dkr.ecr.ap-south-1.amazonaws.com/prashivgoyal/fitflow-frontend:latest
