@@ -1,10 +1,7 @@
 name: FitFlow K8s CI/CD
 
 on:
-    push:
-        branches:
-            - main
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
     # ─────────────────────────────────────────────
