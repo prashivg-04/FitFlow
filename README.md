@@ -1,11 +1,12 @@
-# FitFlow - Role-Based Gym Management Platform
+# FitFlow — Role-Based Gym Management Platform
 
 FitFlow is a full-stack SaaS application for gym operations across three roles: Owner, Trainer, and Member.
 
 It focuses on a complete workout lifecycle, from member onboarding and trainer assignment to day-wise workout execution and completion tracking.
 
-<!-- App Link -->
-Live App : [FitFlow](https://fit-flow-ten.vercel.app/)
+Live App: [fit-flow-ten.vercel.app](https://fit-flow-ten.vercel.app/)
+
+---
 
 ## Demo Credentials
 
@@ -23,6 +24,8 @@ Pre-seeded accounts to explore all three roles.
 - Email: aditya.bansal@fitflow.com
 - Password: Member@2024
 
+---
+
 ## Overview
 
 FitFlow replaces manual coordination with role-scoped workflows:
@@ -30,6 +33,8 @@ FitFlow replaces manual coordination with role-scoped workflows:
 - Owners review join requests and map trainers to members.
 - Trainers create reusable workout programs and assign schedules.
 - Members consume assigned plans, mark workouts complete, and export mobile-friendly PDFs.
+
+---
 
 ## Tech Stack
 
@@ -52,9 +57,23 @@ FitFlow replaces manual coordination with role-scoped workflows:
 - JWT (cookie-based auth)
 - Cookie Parser + CORS
 
+### DevOps
+
+- Docker — containerized frontend and backend
+- Docker Compose — local multi-service development
+- AWS ECR — private container image registry
+- AWS EC2 — Kubernetes deployment target
+- Kubernetes (Minikube) — container orchestration
+- NGINX Ingress Controller — path-based routing
+- GitHub Actions — CI/CD pipeline
+
+---
+
 ## Architecture
 
-```text
+### Application
+
+```
 React UI (role routes + guards)
    -> Axios client (withCredentials + response interceptor)
    -> Express routes (/api/*)
@@ -63,6 +82,35 @@ React UI (role routes + guards)
    -> Prisma
    -> PostgreSQL
 ```
+
+### Kubernetes Deployment
+
+```
+Git push to main
+      ↓
+GitHub Actions (Test → Build → Deploy)
+      ↓
+Docker images pushed to AWS ECR
+      ↓
+SSH into EC2
+      ↓
+Kubernetes pulls latest images
+      ↓
+EC2 Elastic IP (port 80)
+      ↓
+Minikube (--ports=80:80)
+      ↓
+NGINX Ingress Controller
+      ↓
+/api/*  →  Backend Service  →  Backend Pod (Node.js)
+/       →  Frontend Service →  Frontend Pod (React/Nginx)
+                                        ↓
+                              PostgreSQL StatefulSet
+                                        ↓
+                              PersistentVolume (/mnt/data/postgres)
+```
+
+---
 
 ## Implemented Features
 
@@ -93,24 +141,33 @@ React UI (role routes + guards)
 - Mark workout complete (`/api/member/complete-workout`).
 - Download day workout as PDF.
 
-## Engineering Decisions (Implementation-Based)
+---
+
+## Engineering Decisions
 
 - Cookie auth + `withCredentials: true` to keep auth tokens out of JS-readable storage.
 - Service-layer business logic to keep controllers thin and testable.
 - Snapshot-based assignment schema so program edits do not mutate already-assigned workouts.
 - Global backend error middleware with structured app errors.
 - Axios response interceptor for centralized frontend API error handling.
+- `entrypoint.sh` runs `prisma migrate deploy` before server start — no manual migration needed in containers.
+- `VITE_NODE_SERVER_URL=/api` for K8s so API calls route through Ingress regardless of host or port.
 
-## API and Runtime Defaults
+---
 
-- Frontend dev server: `http://localhost:5173`
-- Backend API: `http://localhost:8080/api`
-- Backend CORS origin (current config): `http://localhost:5173`
-- Backend server fallback port (if `PORT` is missing): `8000`
+## Versioning
+
+| Version | Description |
+|---|---|
+| v0.1.0 | Baseline — original Vercel/Render deployment |
+| v1.0.0 | Production ready — cleanup, responsiveness, seed data |
+| v2.0.0 | DevOps — Docker, Kubernetes, GitHub Actions CI/CD |
+
+---
 
 ## Repository Structure
 
-```text
+```
 FitFlow/
    Backend/
       prisma/
@@ -125,6 +182,8 @@ FitFlow/
          validations/
          app.js
          server.js
+      Dockerfile
+      entrypoint.sh
       package.json
 
    Frontend/
@@ -138,14 +197,33 @@ FitFlow/
          validations/
          App.jsx
          main.jsx
+      Dockerfile
+      nginx.conf
       package.json
 
+   k8s/
+      namespace.yaml
+      backend/
+      frontend/
+      database/
+      ingress.yaml
+
+   docs/
+      docker.md
+      compose.md
+      aws-setup.md
+      cicd.md
+      screenshots/
+
+   docker-compose.yml
    README.md
 ```
 
-## Setup
+---
 
-### 1. Clone and install
+## Local Setup
+
+### 1. Clone
 
 ```bash
 git clone https://github.com/prashivg-04/FitFlow.git
@@ -169,40 +247,13 @@ JWT_SECRET=replace_with_strong_secret
 JWT_EXPIRES_IN=7d
 ```
 
-### 3. Database Setup (Prisma)
-
-After setting up your `.env`, run the following commands:
-
 ```bash
 npx prisma generate
 npx prisma migrate deploy
-```
-
-#### For development (optional):
-
-If you're running locally and want to apply migrations:
-
-```bash
-npx prisma migrate dev
-```
-
-#### Verify database:
-
-You can open Prisma Studio to inspect data:
-
-```bash
-npx prisma studio
-```
-
-Start backend:
-
-```bash
 npm run dev
 ```
 
-### 4. Frontend
-
-Open a new terminal:
+### 3. Frontend
 
 ```bash
 cd Frontend
@@ -210,50 +261,95 @@ npm install
 npm run dev
 ```
 
-Optional `Frontend/.env` value currently present:
+Create `Frontend/.env`:
 
 ```env
-NODE_SERVER_URL=http://localhost:8080/api
+VITE_NODE_SERVER_URL=http://localhost:8080/api
 ```
 
-Note: current Axios client is configured with a hardcoded base URL (`http://localhost:8080/api`) in source.
+### 4. Docker Compose (recommended)
+
+Run the full stack locally with a single command:
+
+```bash
+docker-compose up --build
+```
+
+This starts PostgreSQL, backend, and frontend together. See `docs/compose.md` for details.
+
+---
+
+## Kubernetes Deployment
+
+Full setup documented in `docs/aws-setup.md`.
+
+Quick reference:
+
+```bash
+# Start Minikube
+minikube start --driver=docker --memory=3000 --cpus=2 --ports=80:80
+minikube addons enable ingress
+
+# Create ECR pull secret
+kubectl create secret docker-registry ecr-secret \
+  --docker-server=<ECR_REGISTRY> \
+  --docker-username=AWS \
+  --docker-password=$(aws ecr get-login-password --region ap-south-1) \
+  --namespace=fitflow
+
+# Deploy
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/database/
+kubectl apply -f k8s/backend/
+kubectl apply -f k8s/frontend/
+kubectl apply -f k8s/ingress.yaml
+
+# Verify
+kubectl get pods -n fitflow
+```
+
+Access at `http://<ec2-elastic-ip>`
+
+---
+
+## CI/CD Pipeline
+
+Documented in `docs/cicd.md`.
+
+Every push to `main` triggers:
+1. **Test** — install dependencies and run tests
+2. **Build** — build Docker images and push to AWS ECR
+3. **Deploy** — SSH into EC2, refresh ECR secret, restart Kubernetes deployments
+
+---
 
 ## Documentation
 
-- API reference: `Backend/API_DOCUMENTATION.md`
-- Database schema: `Backend/DB_SCHEMA.md`
-- Frontend architecture: `Frontend/FRONTEND_DOCUMENTATION.md`
+| Doc | Description |
+|---|---|
+| `docs/docker.md` | Dockerfile setup and build instructions |
+| `docs/compose.md` | Docker Compose local development guide |
+| `docs/aws-setup.md` | AWS infrastructure and Kubernetes deployment |
+| `docs/cicd.md` | GitHub Actions CI/CD pipeline |
+| `Backend/API_DOCUMENTATION.md` | Full API reference |
+| `Backend/DB_SCHEMA.md` | Database schema |
+| `Frontend/FRONTEND_DOCUMENTATION.md` | Frontend architecture |
 
-## Current Limitations
+---
 
-- No automated test suite yet (manual verification in place).
-- No pagination/caching for list-heavy endpoints.
-- No websocket-based realtime updates.
-- Some dashboard sections are intentionally marked as coming soon in UI.
+## Feedback
 
-## Future Improvements
+If you encounter bugs or have suggestions:
 
-- Add integration and unit tests.
-- Move frontend API base URL fully to environment configuration.
-- Add realtime notifications for assignment/join-request events.
-- Add billing/subscription and attendance modules.
-- Add analytics and reporting dashboards.
+👉 [Submit Feedback](https://forms.gle/ezHRjruEpLTuVUY57)
 
-## 📝 Feedback & Support
+Or open an issue on GitHub.
 
-We welcome feedback from users and testers.
-
-If you encounter bugs, have suggestions, or want to share your experience, please use the form below:
-
-👉 Submit Feedback: https://forms.gle/ezHRjruEpLTuVUY57
-
-Alternatively, you can:
-
-- Open an issue on GitHub
-- Contact via LinkedIn
+---
 
 ## Author
 
-- Name: Prashiv Goyal
-- GitHub: https://github.com/prashivg-04
+**Prashiv Goyal**
+
+- GitHub: [prashivg-04](https://github.com/prashivg-04)
 - Email: prashivgoyal1504@gmail.com
