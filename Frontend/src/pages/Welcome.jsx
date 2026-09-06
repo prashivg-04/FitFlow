@@ -81,7 +81,7 @@ const Welcome = () => {
         {/* Social Proof */}
         <section className='bg-white py-10 border-y border-slate-200'>
             <div className='mx-auto max-w-7xl px-4 text-center'>
-                <p className='text-sm font-semibold text-slate-500 mb-8 uppercase tracking-widest'>Trusted by 500+ Gyms & Fitness Centers</p>
+                <p className='text-sm font-semibold text-slate-500 mb-8 uppercase tracking-widest'>Trusted by Gyms & Fitness Centers</p>
                 <div className='flex flex-wrap items-center justify-center gap-8 md:gap-20 opacity-60'>
                     <div className='flex items-center gap-2 text-lg md:text-xl font-bold text-slate-700'>
                         <i className="ri-flashlight-line"></i>
